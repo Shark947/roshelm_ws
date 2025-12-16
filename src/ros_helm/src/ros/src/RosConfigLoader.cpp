@@ -1,6 +1,7 @@
 #include "RosConfigLoader.h"
 
 #include <set>
+#include <sys/stat.h>
 #include <XmlRpcException.h>
 #include <XmlRpcValue.h>
 #include <ros/package.h>
@@ -8,6 +9,39 @@
 namespace
 {
 const char *kNavDefaultsNamespace = "nav_defaults";
+
+bool fileExists(const std::string &path)
+{
+  struct stat sb;
+  return stat(path.c_str(), &sb) == 0;
+}
+
+bool isAbsolutePath(const std::string &path)
+{
+  return !path.empty() && path.front() == '/';
+}
+
+std::string resolvePath(const std::string &path,
+                        const std::string &package_path)
+{
+  if (path.empty())
+    return path;
+
+  if (isAbsolutePath(path))
+    return path;
+
+  if (fileExists(path))
+    return path;
+
+  if (!package_path.empty())
+  {
+    const std::string candidate = package_path + "/" + path;
+    if (fileExists(candidate))
+      return candidate;
+  }
+
+  return path;
+}
 }
 
 RosConfigLoader::RosConfigLoader(ros::NodeHandle &private_nh)
@@ -29,6 +63,24 @@ bool RosConfigLoader::load(RosNodeConfig &config,
   private_nh_.param("config_path", config.config_path, default_config_path);
   private_nh_.param("register_variables_path", config.register_variables_path,
                     register_variables_path);
+
+  config.config_path = resolvePath(config.config_path, package_path);
+  config.register_variables_path =
+      resolvePath(config.register_variables_path, package_path);
+
+  if (!fileExists(config.config_path))
+  {
+    ROS_ERROR_STREAM("ros_bridge: config_path does not exist: "
+                     << config.config_path);
+    return false;
+  }
+
+  if (!fileExists(config.register_variables_path))
+  {
+    ROS_ERROR_STREAM("ros_bridge: register_variables_path does not exist: "
+                     << config.register_variables_path);
+    return false;
+  }
   private_nh_.param("vehicle_name", config.vehicle_name, config.vehicle_name);
   private_nh_.param("deploy_topic", config.deploy_topic, config.deploy_topic);
   private_nh_.param("return_topic", config.return_topic, config.return_topic);
