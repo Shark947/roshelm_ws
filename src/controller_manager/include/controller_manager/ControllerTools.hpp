@@ -16,7 +16,7 @@ public:
             double d = common_tools::AngleUtils::normalize180(desired_value);
             return common_tools::AngleUtils::normalize180(c - d);
         }
-        return current_value - desired_value;
+        return desired_value - current_value;
     }
 
     static double applyOutputReverse(double output, bool output_reverse) {
