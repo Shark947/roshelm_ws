@@ -10,4 +10,6 @@ variables:
   - NAV_SPEED
   - NAV_HEADING
   - NAV_DEPTH
+  - DEPLOY
+  - RETURN
   - HELM_MAP_CLEAR
