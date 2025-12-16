@@ -184,7 +184,8 @@ void PIDController::controlLoop(const ros::Time& current_time) {
         double d = normalizeAngle180(desired_value_);
         error = normalizeAngle180(c - d);
     } else {
-        error = current_value_ - desired_value_;
+        // 非角度型量使用常规的期望-当前值，确保正期望输出对应正推力
+        error = desired_value_ - current_value_;
     }
 
     // 4) 计算 dt
