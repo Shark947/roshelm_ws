@@ -52,6 +52,8 @@ private:
   ros::Subscriber heading_sub_;
   ros::Subscriber speed_sub_;
   ros::Subscriber depth_sub_;
+  ros::Subscriber x_sub_;
+  ros::Subscriber y_sub_;
   ros::Subscriber deploy_sub_;
   ros::Subscriber return_sub_;
 

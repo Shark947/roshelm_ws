@@ -28,6 +28,8 @@ bool RosBridge::initialize()
   heading_sub_ = subscribeCurrent(config_.current_heading_topic, "NAV_HEADING");
   speed_sub_ = subscribeCurrent(config_.current_speed_topic, "NAV_SPEED");
   depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
+  x_sub_ = subscribeCurrent(config_.current_x_topic, "NAV_X");
+  y_sub_ = subscribeCurrent(config_.current_y_topic, "NAV_Y");
 
   deploy_sub_ = subscribeBoolean(config_.deploy_topic, "DEPLOY");
   return_sub_ = subscribeBoolean(config_.return_topic, "RETURN");
