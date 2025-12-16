@@ -13,6 +13,8 @@ struct RosNodeConfig
   std::string current_heading_topic;
   std::string current_speed_topic;
   std::string current_depth_topic;
+  std::string current_x_topic;
+  std::string current_y_topic;
   std::string desired_heading_topic;
   std::string desired_speed_topic;
   std::string desired_depth_topic;

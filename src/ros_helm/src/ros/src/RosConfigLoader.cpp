@@ -99,6 +99,10 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.current_speed_topic);
   private_nh_.param("current_depth_topic", config.current_depth_topic,
                     config.current_depth_topic);
+  private_nh_.param("current_x_topic", config.current_x_topic,
+                    config.current_x_topic);
+  private_nh_.param("current_y_topic", config.current_y_topic,
+                    config.current_y_topic);
 
   private_nh_.param("desired_heading_topic", config.desired_heading_topic,
                     config.desired_heading_topic);
@@ -119,6 +123,10 @@ bool RosConfigLoader::load(RosNodeConfig &config,
     config.current_speed_topic = "/" + config.vehicle_name + "/current_speed";
   if (config.current_depth_topic.empty())
     config.current_depth_topic = "/" + config.vehicle_name + "/current_depth";
+  if (config.current_x_topic.empty())
+    config.current_x_topic = "/" + config.vehicle_name + "/current_x";
+  if (config.current_y_topic.empty())
+    config.current_y_topic = "/" + config.vehicle_name + "/current_y";
 
   if (config.desired_heading_topic.empty())
     config.desired_heading_topic = "/" + config.vehicle_name + "/desired_heading";
@@ -198,7 +206,8 @@ bool RosConfigLoader::validateConfig(const RosNodeConfig &config) const
 
   const std::set<std::string> required_topics = {
       config.current_heading_topic, config.current_speed_topic,
-      config.current_depth_topic,  config.desired_heading_topic,
+      config.current_depth_topic,  config.current_x_topic,
+      config.current_y_topic,      config.desired_heading_topic,
       config.desired_speed_topic,  config.desired_depth_topic};
   for (const auto &topic : required_topics)
   {
