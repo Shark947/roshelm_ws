@@ -4,7 +4,7 @@
 #--------------------------------------------------------
 
 SET(SRC
-  ${CMAKE_SOURCE_DIR}/src/helm/tools/HelmGeodesy.cpp
+  ${ROS_HELM_SOURCE_DIR}/src/helm/tools/HelmGeodesy.cpp
   DubinsTurn.cpp
   DubinsCache.cpp
   EdgeTag.cpp
