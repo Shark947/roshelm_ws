@@ -1,2 +1,2 @@
-auh_controller_pid:auh_launch:auh_thrust_manager:behavior_manager:common_msgs:common_tools:controller_manager:ros_moos_bridge:variable_extractor
+auh_controller_pid:auh_launch:auh_thrust_manager:behavior_manager:common_msgs:common_tools:controller_manager:ros_helm:ros_moos_bridge:variable_extractor
 -DCATKIN_DEVEL_PREFIX=/home/xing/roshelm_ws/devel -DCMAKE_INSTALL_PREFIX=/home/xing/roshelm_ws/install -G Unix Makefiles

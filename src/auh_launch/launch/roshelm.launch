@@ -26,12 +26,8 @@
   </node>
 
   <!-- 启动 ros_helm，运行 alpha.bhv 行为 -->
-  <param name="use_sim_time" value="true" />
-  <node pkg="ros_helm" type="ros_helm_node" name="ros_helm" output="screen">
-    <rosparam command="load" file="$(find ros_helm)/config/ros/params.yaml" />
-    <remap from="nav/pose" to="/auh/current_heading" />
-    <remap from="nav/twist" to="/auh/current_speed" />
-    <remap from="nav/depth" to="/auh/current_depth" />
-  </node>
+  <node pkg="ros_helm" type="ros_helm_node" name="ros_helm_node" output="screen">
+    <param name="config_path" value="$(find ros_helm)/config/helm/startHelm.yaml" />
+</node>
 
 </launch>
