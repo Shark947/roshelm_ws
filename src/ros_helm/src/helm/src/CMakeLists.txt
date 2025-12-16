@@ -19,6 +19,10 @@ SET(SRC
   HelmCheck.cpp
   HelmIvP.cpp
   HelmEngine.cpp
+  ../tools/ContactLedger.cpp
+  ../tools/HelmGeodesy.cpp
+  ../tools/HelmMsg.cpp
+  ../tools/HelmUtilityFunctions.cpp
 )
 
 set(ROSHLEM_DEFAULT_CONFIG_PATH

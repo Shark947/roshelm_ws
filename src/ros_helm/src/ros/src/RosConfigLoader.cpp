@@ -1,6 +1,7 @@
 #include "RosConfigLoader.h"
 
 #include <set>
+#include <XmlRpcException.h>
 #include <XmlRpcValue.h>
 #include <ros/package.h>
 
