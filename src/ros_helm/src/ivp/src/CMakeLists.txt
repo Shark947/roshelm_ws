@@ -7,8 +7,13 @@ PROJECT(IVP)
 #======================================================================
 # Build all libraries with position independent code so they can be
 # safely linked into shared objects (e.g., libbehaviors-colregs,
-# libdep_behaviors) without relocation errors.
-SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# libdep_behaviors) without relocation errors. Force the cache entry
+# to prevent any subdirectory from disabling PIC.
+SET(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "Build IVP libraries with position independent code" FORCE)
+SET_PROPERTY(DIRECTORY PROPERTY POSITION_INDEPENDENT_CODE ON)
+IF(NOT CMAKE_POSITION_INDEPENDENT_CODE)
+  MESSAGE(FATAL_ERROR "CMAKE_POSITION_INDEPENDENT_CODE must stay ON for IVP builds.")
+ENDIF()
 
 IF(${WIN32})
   # Define Windows Compiler flags here
@@ -120,6 +125,15 @@ message("IVP_LIB_DIRECTORY:" ${IVP_LIB_DIRECTORY})
 message("IVP_INC_DIRECTORY:" ${IVP_INC_DIRECTORY})
 message("IVP_BIN_DIRECTORY:" ${IVP_BIN_DIRECTORY})
 message("+++++++++++++++++++++++++++++++++++++++++")
+
+#---------------------------------------------------------------------
+# Remove any pre-existing archives to avoid reusing non-PIC builds.
+#---------------------------------------------------------------------
+FILE(GLOB IVP_STALE_ARCHIVES "${IVP_LIB_DIRECTORY}/*.a")
+IF(IVP_STALE_ARCHIVES)
+  MESSAGE(STATUS "Removing pre-existing IVP archives to rebuild with PIC: ${IVP_STALE_ARCHIVES}")
+  FILE(REMOVE ${IVP_STALE_ARCHIVES})
+ENDIF()
 
 #=====================================================================
 # Part 7: Set Library/App categories and membership
