@@ -55,7 +55,8 @@ public:
 
   std::vector<std::string> supportedVariables() const override {
     // 插件实际支持的变量列表
-    return {"DEPTH", "SPEED", "HEADING", "PITCH", "ROLL", "ALTITUDE"};
+    return {"DEPTH", "SPEED", "HEADING", "PITCH", "ROLL", "ALTITUDE",
+            "X", "Y", "NAV_X", "NAV_Y"};
 }
 
   void subscribe(const std::string& var_name_in,
@@ -227,6 +228,48 @@ public:
       };
       ros::Subscriber sub =
         nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
+      subs_.push_back(sub);
+
+    }
+    else if (var_upper == "X" || var_upper == "NAV_X") {
+      std::string topic = "/" + vehicle_name_ + "/pose_gt";
+      auto cb = [this, var_upper, &var_map, debug](const nav_msgs::Odometry::ConstPtr& msg) {
+        double x = msg->pose.pose.position.x;
+        var_map[var_upper] = x;
+
+        common_msgs::Float64Stamped out;
+        out.header  = msg->header;
+        out.data    = x;
+        pubs_[var_upper].publish(out);
+
+        if (debug) {
+          ROS_DEBUG_STREAM("[DefaultVarExt][" << var_upper << "] published "
+                           << x << " @ " << msg->header.stamp);
+        }
+      };
+      ros::Subscriber sub =
+        nh_parent.subscribe<nav_msgs::Odometry>(topic, 2, cb);
+      subs_.push_back(sub);
+
+    }
+    else if (var_upper == "Y" || var_upper == "NAV_Y") {
+      std::string topic = "/" + vehicle_name_ + "/pose_gt";
+      auto cb = [this, var_upper, &var_map, debug](const nav_msgs::Odometry::ConstPtr& msg) {
+        double y = msg->pose.pose.position.y;
+        var_map[var_upper] = y;
+
+        common_msgs::Float64Stamped out;
+        out.header  = msg->header;
+        out.data    = y;
+        pubs_[var_upper].publish(out);
+
+        if (debug) {
+          ROS_DEBUG_STREAM("[DefaultVarExt][" << var_upper << "] published "
+                           << y << " @ " << msg->header.stamp);
+        }
+      };
+      ros::Subscriber sub =
+        nh_parent.subscribe<nav_msgs::Odometry>(topic, 2, cb);
       subs_.push_back(sub);
 
     }
