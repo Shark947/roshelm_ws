@@ -41,3 +41,11 @@ SET(HEADERS
 # Build Library
 ADD_LIBRARY(helmivp ${SRC})
 
+TARGET_LINK_LIBRARIES(helmivp
+  PRIVATE
+    behaviors-marine
+    behaviors
+    bhvutil
+    genutil
+    dl)
+
