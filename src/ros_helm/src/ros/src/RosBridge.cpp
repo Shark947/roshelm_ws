@@ -1,12 +1,15 @@
 #include "RosBridge.h"
 
-#include <list>
 #include <array>
 #include <chrono>
-#include <filesystem>
-#include <iomanip>
-#include <sstream>
 #include <ctime>
+#include <cerrno>
+#include <cstring>
+#include <iomanip>
+#include <list>
+#include <sstream>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include <ros/package.h>
 #include "MBUtils.h"
@@ -184,9 +187,8 @@ bool RosBridge::setupLogDirectory()
       "NAV_SPEED", "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
 
   const std::string package_path = ros::package::getPath("ros_helm");
-  std::filesystem::path base_dir =
-      package_path.empty() ? std::filesystem::path("log")
-                           : std::filesystem::path(package_path) / "log";
+  const std::string base_dir = package_path.empty() ? "log"
+                                                    : package_path + "/log";
 
   const auto now = std::chrono::system_clock::now();
   const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
@@ -196,25 +198,30 @@ bool RosBridge::setupLogDirectory()
   std::ostringstream folder_name;
   folder_name << std::put_time(&tm_buffer, "%Y_%m_%d_%H_%M") << "_log";
 
-  log_directory_ = (base_dir / folder_name.str()).string();
+  log_directory_ = base_dir + "/" + folder_name.str();
 
-  std::error_code ec;
-  std::filesystem::create_directories(log_directory_, ec);
-  if (ec)
-  {
-    ROS_ERROR_STREAM("Failed to create log directory: " << log_directory_
-                     << " error: " << ec.message());
+  auto create_directory = [](const std::string &path) {
+    if (mkdir(path.c_str(), 0755) != 0 && errno != EEXIST)
+    {
+      ROS_ERROR_STREAM("Failed to create directory: " << path
+                       << " error: " << std::strerror(errno));
+      return false;
+    }
+    return true;
+  };
+
+  if (!create_directory(base_dir))
     return false;
-  }
+  if (!create_directory(log_directory_))
+    return false;
 
   for (const auto &key : kLogKeys)
   {
-    std::filesystem::path file_path =
-        std::filesystem::path(log_directory_) / (key + ".txt");
+    const std::string file_path = log_directory_ + "/" + key + ".txt";
     std::ofstream stream(file_path, std::ios::trunc);
     if (!stream.is_open())
     {
-      ROS_ERROR_STREAM("Failed to open log file: " << file_path.string());
+      ROS_ERROR_STREAM("Failed to open log file: " << file_path);
       return false;
     }
     log_streams_[key] = std::move(stream);
