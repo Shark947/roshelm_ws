@@ -16,5 +16,8 @@ target_link_libraries(ros_helm_node
 install(TARGETS ros_helm_node
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-install(DIRECTORY config launch
+install(DIRECTORY ${ROS_HELM_SOURCE_DIR}/config/ros
+        DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/config)
+
+install(DIRECTORY launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

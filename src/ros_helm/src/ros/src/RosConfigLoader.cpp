@@ -21,9 +21,9 @@ bool RosConfigLoader::load(RosNodeConfig &config,
   const std::string package_path = ros::package::getPath("ros_helm");
   std::string register_variables_path;
   if (!package_path.empty())
-    register_variables_path = package_path + "/src/helm/config/registerVariables.yaml";
+    register_variables_path = package_path + "/config/helm/registerVariables.yaml";
   else
-    register_variables_path = "src/helm/config/registerVariables.yaml";
+    register_variables_path = "config/helm/registerVariables.yaml";
 
   private_nh_.param("node_name", config.node_name, config.node_name);
   private_nh_.param("config_path", config.config_path, default_config_path);
