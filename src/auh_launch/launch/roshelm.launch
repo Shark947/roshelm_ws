@@ -28,7 +28,7 @@
   <!-- 启动 ros_helm，运行 alpha.bhv 行为 -->
   <include file="$(find ros_helm)/src/ros/launch/helm_node.launch">
     <arg name="use_sim_time" value="true" />
-    <arg name="config" value="$(find ros_helm)/src/ros/config/params.yaml" />
+    <arg name="config" value="$(find ros_helm)/config/ros/params.yaml" />
   </include>
 
 </launch>
