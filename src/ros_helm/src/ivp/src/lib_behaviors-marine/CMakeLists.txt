@@ -85,7 +85,10 @@ SET(HEADERS
   BHV_FixedTurn.h
 ) 
 
-ADD_LIBRARY(behaviors-marine ${SRC})
+# Build Library
+# Use a static library to break the cyclic dependency chain with lib_behaviors
+# and lib_helmivp.
+ADD_LIBRARY(behaviors-marine STATIC ${SRC})
 
 TARGET_LINK_LIBRARIES(behaviors-marine
    mbutil
