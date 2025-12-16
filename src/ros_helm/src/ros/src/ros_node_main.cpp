@@ -31,7 +31,11 @@ int main(int argc, char **argv)
   }
 
   RosBridge bridge(nh, private_nh, config);
-  bridge.initialize();
+  if (!bridge.initialize())
+  {
+    ROS_ERROR("RosBridge initialization failed");
+    return 1;
+  }
 
   ros::Rate rate(config.loop_frequency);
   while (ros::ok())
