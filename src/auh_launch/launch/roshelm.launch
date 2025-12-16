@@ -1,12 +1,12 @@
 <launch>
-  <!-- 启动 Gazebo 仿真环境 -->
-  <include file="$(find uuv_gazebo_worlds)/launch/auv_underwater_world.launch" />
+  <!-- 1. 启动仿真世界 -->
+  <include file="$(find uuv_gazebo_worlds)/launch/auv_underwater_world.launch"/>
 
-  <!-- 加载 AUH 模型 -->
-  <include file="$(find auh_description)/launch/upload_auh_default.launch" />
+  <!-- 2. 上载 AUH 模型描述 -->
+  <include file="$(find auh_description)/launch/upload_auh_default.launch"/>
 
-  <!-- 启动推进器控制器 -->
-  <include file="$(find auh_thrust_manager)/launch/thrust_manager.launch" />
+  <!-- 3. 启动推进器管理器 -->
+  <include file="$(find auh_thrust_manager)/launch/thrust_manager.launch"/>
 
   <!-- 启动变量提取器 -->
   <node pkg="variable_extractor"
