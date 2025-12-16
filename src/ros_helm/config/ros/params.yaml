@@ -1,7 +1,7 @@
 # Example ros_helm parameters used by roslaunch
 node_name: ros_bridge
-config_path: $(find ros_helm)/config/helm/startHelm.yaml
-register_variables_path: $(find ros_helm)/config/helm/registerVariables.yaml
+config_path: config/helm/startHelm.yaml
+register_variables_path: config/helm/registerVariables.yaml
 loop_frequency: 10.0
 frame_id: map
 vehicle_name: auh
