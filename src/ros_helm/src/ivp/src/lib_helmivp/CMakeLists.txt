@@ -42,6 +42,7 @@ SET(HEADERS
 # Use a static library to prevent cyclic shared library dependencies with
 # lib_behaviors and lib_behaviors-marine.
 ADD_LIBRARY(helmivp STATIC ${SRC})
+SET_TARGET_PROPERTIES(helmivp PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 TARGET_LINK_LIBRARIES(helmivp
   PRIVATE
