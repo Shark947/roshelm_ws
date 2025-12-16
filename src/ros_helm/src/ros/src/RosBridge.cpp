@@ -1,6 +1,14 @@
 #include "RosBridge.h"
 
 #include <list>
+#include <array>
+#include <chrono>
+#include <filesystem>
+#include <iomanip>
+#include <sstream>
+#include <ctime>
+
+#include <ros/package.h>
 #include "MBUtils.h"
 
 RosBridge::RosBridge(ros::NodeHandle &nh, ros::NodeHandle &private_nh,
@@ -11,6 +19,9 @@ RosBridge::RosBridge(ros::NodeHandle &nh, ros::NodeHandle &private_nh,
 
 bool RosBridge::initialize()
 {
+  if (!setupLogDirectory())
+    return false;
+
   heading_sub_ = subscribeCurrent(config_.current_heading_topic, "NAV_HEADING");
   speed_sub_ = subscribeCurrent(config_.current_speed_topic, "NAV_SPEED");
   depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
@@ -50,6 +61,8 @@ void RosBridge::enqueueNavValue(const std::string &key, double value,
   std::lock_guard<std::mutex> guard(mail_mutex_);
   pending_mail_.emplace_back(static_cast<char>(MsgType::Notify), key, value,
                              stamp.toSec(), "ros_bridge");
+
+  logValue(key, value, stamp);
 }
 
 void RosBridge::enqueueBoolValue(const std::string &key, bool value,
@@ -129,6 +142,7 @@ void RosBridge::publishDesired(const HelmIvP &helm)
       std_msgs::Float64 msg;
       msg.data = it->second;
       pub.publish(msg);
+      logValue(key, msg.data, ros::Time::now());
     }
   };
 
@@ -161,4 +175,63 @@ std::map<std::string, double> RosBridge::collectDesiredDoubles(
   }
 
   return desired;
+}
+
+bool RosBridge::setupLogDirectory()
+{
+  static const std::array<std::string, 8> kLogKeys = {
+      "NAV_X", "NAV_Y", "NAV_HEADING", "NAV_DEPTH",
+      "NAV_SPEED", "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
+
+  const std::string package_path = ros::package::getPath("ros_helm");
+  std::filesystem::path base_dir =
+      package_path.empty() ? std::filesystem::path("log")
+                           : std::filesystem::path(package_path) / "log";
+
+  const auto now = std::chrono::system_clock::now();
+  const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
+  std::tm tm_buffer;
+  localtime_r(&now_time, &tm_buffer);
+
+  std::ostringstream folder_name;
+  folder_name << std::put_time(&tm_buffer, "%Y_%m_%d_%H_%M") << "_log";
+
+  log_directory_ = (base_dir / folder_name.str()).string();
+
+  std::error_code ec;
+  std::filesystem::create_directories(log_directory_, ec);
+  if (ec)
+  {
+    ROS_ERROR_STREAM("Failed to create log directory: " << log_directory_
+                     << " error: " << ec.message());
+    return false;
+  }
+
+  for (const auto &key : kLogKeys)
+  {
+    std::filesystem::path file_path =
+        std::filesystem::path(log_directory_) / (key + ".txt");
+    std::ofstream stream(file_path, std::ios::trunc);
+    if (!stream.is_open())
+    {
+      ROS_ERROR_STREAM("Failed to open log file: " << file_path.string());
+      return false;
+    }
+    log_streams_[key] = std::move(stream);
+  }
+
+  ROS_INFO_STREAM("[ros_bridge] logging to " << log_directory_);
+  return true;
+}
+
+void RosBridge::logValue(const std::string &name, double value,
+                         const ros::Time &stamp)
+{
+  std::lock_guard<std::mutex> guard(log_mutex_);
+  auto it = log_streams_.find(name);
+  if (it == log_streams_.end() || !it->second.is_open())
+    return;
+
+  it->second << name << ' ' << std::fixed << std::setprecision(3) << value
+             << ' ' << stamp.toSec() << std::endl;
 }

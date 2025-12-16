@@ -1,8 +1,10 @@
 #pragma once
 
 #include <deque>
+#include <fstream>
 #include <map>
 #include <mutex>
+#include <string>
 #include <ros/ros.h>
 #include <common_msgs/Float64Stamped.h>
 #include <std_msgs/Float64.h>
@@ -40,6 +42,8 @@ private:
                             const std::string &nav_key);
   void booleanCallback(const std_msgs::Bool::ConstPtr &msg,
                        const std::string &key);
+  bool setupLogDirectory();
+  void logValue(const std::string &name, double value, const ros::Time &stamp);
 
   ros::NodeHandle nh_;
   ros::NodeHandle private_nh_;
@@ -58,4 +62,8 @@ private:
 
   std::deque<HelmMsg> pending_mail_;
   std::mutex mail_mutex_;
+
+  std::string log_directory_;
+  std::map<std::string, std::ofstream> log_streams_;
+  std::mutex log_mutex_;
 };
