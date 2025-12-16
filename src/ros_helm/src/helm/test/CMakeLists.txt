@@ -35,9 +35,9 @@ target_compile_features(test_ivp PRIVATE cxx_std_17)
 target_include_directories(test_ivp PRIVATE ${TEST_IVP_INCLUDE_DIRS})
 
 target_link_libraries(test_ivp PRIVATE
+  helmivp
   behaviors
   behaviors-marine
-  helmivp
   ivpbuild
   logic
   ivpcore

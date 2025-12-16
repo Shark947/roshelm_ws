@@ -2,10 +2,11 @@
 
 #include <algorithm>
 #include <chrono>
-#include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <thread>
 #include <utility>
 
@@ -15,6 +16,12 @@
 
 namespace
 {
+bool fileExists(const std::string &path)
+{
+  struct stat sb;
+  return stat(path.c_str(), &sb) == 0;
+}
+
 std::string trim(const std::string &input)
 {
   auto first = input.find_first_not_of(" \t");
@@ -24,26 +31,24 @@ std::string trim(const std::string &input)
   return input.substr(first, last - first + 1);
 }
 
-namespace fs = std::filesystem;
 std::string locateDefaultConfig()
 {
 #ifdef DEFAULT_CONFIG_PATH
-  const fs::path configured_path(DEFAULT_CONFIG_PATH);
-  if (fs::exists(configured_path))
-    return configured_path.string();
+  const std::string configured_path = DEFAULT_CONFIG_PATH;
+  if (fileExists(configured_path))
+    return configured_path;
 #endif
 
-  const fs::path relative_path = fs::path("src") / "helm" / "config" /
-                                "startHelm.yaml";
+  const std::string relative_path = "src/helm/config/startHelm.yaml";
 
-  if (fs::exists(relative_path))
-    return relative_path.string();
+  if (fileExists(relative_path))
+    return relative_path;
 
-  const fs::path parent_path = fs::path("..") / relative_path;
-  if (fs::exists(parent_path))
-    return parent_path.string();
+  const std::string parent_path = "../" + relative_path;
+  if (fileExists(parent_path))
+    return parent_path;
 
-  return relative_path.string();
+  return relative_path;
 }
 }
 

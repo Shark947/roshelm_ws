@@ -1,13 +1,15 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cerrno>
 #include <cstdlib>
-#include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <list>
 #include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <thread>
 #include <unordered_map>
 #include <vector>
@@ -22,12 +24,17 @@ int main()
   constexpr double dt = 0.25; // seconds
 
   // --- log directory ---
-  const std::filesystem::path log_dir = "log";
+  const std::string log_dir = "log";
   const std::string config_path = "src/helm/config/startHelm.yaml";
   HelmCheck helm;
   helm.setConfigPath(config_path);
 
-  std::filesystem::create_directories(log_dir);
+  const int dir_status = mkdir(log_dir.c_str(), 0755);
+  if (dir_status != 0 && errno != EEXIST)
+  {
+    std::perror("mkdir");
+    return 1;
+  }
 
   const std::vector<std::string> log_keys = {
       "NAV_X", "NAV_Y", "NAV_HEADING", "NAV_DEPTH",
@@ -36,7 +43,7 @@ int main()
   std::unordered_map<std::string, std::ofstream> log_streams;
   for (const auto &key : log_keys)
   {
-    log_streams[key].open(log_dir / (key + ".txt"), std::ios::trunc);
+    log_streams[key].open(log_dir + "/" + key + ".txt", std::ios::trunc);
   }
 
   auto log_value = [&log_streams](const std::string &name, double value,
