@@ -1,12 +1,11 @@
 <launch>
   <arg name="use_sim_time" default="false" />
-  <arg name="config" default="$(find ros_helm)/config/params.yaml" />
+  <arg name="config" default="$(find ros_helm)/src/ros/config/params.yaml" />
 
   <param name="use_sim_time" value="$(arg use_sim_time)" />
 
-  <rosparam command="load" file="$(arg config)" />
-
   <node pkg="ros_helm" type="ros_helm_node" name="ros_helm" output="screen">
+    <rosparam command="load" file="$(arg config)" />
     <remap from="nav/pose" to="/nav/pose" />
     <remap from="nav/twist" to="/nav/twist" />
     <remap from="nav/depth" to="/nav/depth" />

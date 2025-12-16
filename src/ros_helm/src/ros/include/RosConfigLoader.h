@@ -9,7 +9,7 @@ struct RosNodeConfig
   std::string node_name{"ros_bridge"};
   std::string config_path;
   std::string register_variables_path;
-  std::string vehicle_name{"auv"};
+  std::string vehicle_name;
   std::string current_heading_topic;
   std::string current_speed_topic;
   std::string current_depth_topic;

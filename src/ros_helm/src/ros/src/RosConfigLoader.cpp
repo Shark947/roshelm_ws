@@ -55,6 +55,12 @@ bool RosConfigLoader::load(RosNodeConfig &config,
   private_nh_.param("desired_depth_topic", config.desired_depth_topic,
                     config.desired_depth_topic);
 
+  if (config.vehicle_name.empty())
+  {
+    ROS_ERROR("ros_bridge: vehicle_name is empty; ensure params.yaml is loaded in the node namespace");
+    return false;
+  }
+
   if (config.current_heading_topic.empty())
     config.current_heading_topic = "/" + config.vehicle_name + "/current_heading";
   if (config.current_speed_topic.empty())
@@ -129,6 +135,12 @@ bool RosConfigLoader::validateConfig(const RosNodeConfig &config) const
   if (config.loop_frequency <= 0.0)
   {
     ROS_ERROR("ros_bridge: loop_frequency must be positive");
+    return false;
+  }
+
+  if (config.vehicle_name.empty())
+  {
+    ROS_ERROR("ros_bridge: vehicle_name must be provided");
     return false;
   }
 
