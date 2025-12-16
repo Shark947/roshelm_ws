@@ -14,7 +14,7 @@ desired_speed_topic: /auh/desired_speed
 desired_depth_topic: /auh/desired_depth
 deploy_topic: /auh/DEPLOY
 return_topic: /auh/RETURN
-deploy_default: false
+deploy_default: true  # start Helm in DEPLOY so alpha.bhv behaviors spawn immediately
 return_default: false
 
 nav_defaults:
