@@ -1,0 +1,21 @@
+# Example ros_helm parameters used by roslaunch
+node_name: ros_bridge
+config_path: $(find ros_helm)/../helm/config/startHelm.yaml
+register_variables_path: $(find ros_helm)/../helm/config/registerVariables.yaml
+loop_frequency: 10.0
+frame_id: map
+vehicle_name: auh
+current_heading_topic: /auh/current_heading
+current_speed_topic: /auh/current_speed
+current_depth_topic: /auh/current_depth
+
+desired_heading_topic: /auh/desired_heading
+desired_speed_topic: /auh/desired_speed
+desired_depth_topic: /auh/desired_depth
+
+nav_defaults:
+  NAV_X: 0.0
+  NAV_Y: 0.0
+  NAV_HEADING: 0.0
+  NAV_SPEED: 0.0
+  NAV_DEPTH: 0.0
