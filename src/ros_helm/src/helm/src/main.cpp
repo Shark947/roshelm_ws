@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-  std::string config_path = "src/helm/config/startHelm.yaml";
+  std::string config_path = "config/helm/startHelm.yaml";
   if (argc > 1)
     config_path = argv[1];
 

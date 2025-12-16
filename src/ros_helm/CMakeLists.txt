@@ -22,7 +22,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # --------------------------------------------------------------
 # Default configuration path
 # --------------------------------------------------------------
-set(DEFAULT_CONFIG_PATH "${ROS_HELM_SOURCE_DIR}/src/helm/config/startHelm.yaml")
+set(DEFAULT_CONFIG_PATH "${ROS_HELM_SOURCE_DIR}/config/helm/startHelm.yaml")
 file(TO_CMAKE_PATH "${DEFAULT_CONFIG_PATH}" DEFAULT_CONFIG_PATH)
 add_compile_definitions(DEFAULT_CONFIG_PATH=\"${DEFAULT_CONFIG_PATH}\")
 

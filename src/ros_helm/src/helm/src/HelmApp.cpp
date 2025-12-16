@@ -39,7 +39,7 @@ std::string locateDefaultConfig()
     return configured_path;
 #endif
 
-  const std::string relative_path = "src/helm/config/startHelm.yaml";
+  const std::string relative_path = "config/helm/startHelm.yaml";
 
   if (fileExists(relative_path))
     return relative_path;

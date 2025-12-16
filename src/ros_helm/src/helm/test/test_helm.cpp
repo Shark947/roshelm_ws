@@ -25,7 +25,7 @@ int main()
 
   // --- log directory ---
   const std::string log_dir = "log";
-  const std::string config_path = "src/helm/config/startHelm.yaml";
+  const std::string config_path = "config/helm/startHelm.yaml";
   HelmCheck helm;
   helm.setConfigPath(config_path);
 

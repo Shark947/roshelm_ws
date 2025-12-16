@@ -1,6 +1,6 @@
 <launch>
   <arg name="use_sim_time" default="false" />
-  <arg name="config" default="$(find ros_helm)/src/ros/config/params.yaml" />
+  <arg name="config" default="$(find ros_helm)/config/ros/params.yaml" />
 
   <param name="use_sim_time" value="$(arg use_sim_time)" />
 
