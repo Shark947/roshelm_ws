@@ -27,6 +27,7 @@ file(TO_CMAKE_PATH "${ROSHLEM_DEFAULT_CONFIG_PATH}"
      ROSHLEM_DEFAULT_CONFIG_PATH)
 
 add_library(helm_core ${SRC})
+target_compile_features(helm_core PUBLIC cxx_std_17)
 
 target_link_libraries(helm_core
   ${MOOS_LIBRARIES}
@@ -54,6 +55,8 @@ target_compile_definitions(helm_core PUBLIC
   DEFAULT_CONFIG_PATH="${ROSHLEM_DEFAULT_CONFIG_PATH}")
 
 ADD_EXECUTABLE(pHelmIvP main.cpp)
+
+target_compile_features(pHelmIvP PRIVATE cxx_std_17)
 
 TARGET_LINK_LIBRARIES(pHelmIvP
   helm_core)
