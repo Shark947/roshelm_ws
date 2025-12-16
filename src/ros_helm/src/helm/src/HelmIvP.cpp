@@ -287,6 +287,14 @@ bool loadHelmYamlConfig(const std::string &path, HelmYamlConfig &config,
       continue;
     }
 
+    // The domain and hold_on_apps sections are nested under the helm stanza.
+    // Once the list ends, any subsequent key/value lines should be parsed as
+    // helm-level configuration rather than remaining in the previous list
+    // section.
+    if ((section == Section::Domains || section == Section::HoldApps) &&
+        cleaned.rfind('-', 0) != 0)
+      section = Section::Helm;
+
     size_t colon = cleaned.find(':');
     if (colon == std::string::npos)
       continue;
