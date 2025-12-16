@@ -35,7 +35,6 @@ target_link_libraries(helm_core
   helmivp
   dep_behaviors
   behaviors-marine
-  geodaid
   contacts
   behaviors-colregs
   ufield
@@ -44,9 +43,8 @@ target_link_libraries(helm_core
   turngeo
   ivpbuild 
   ivpcore
-  ivpsolve 
+  ivpsolve
   geometry
-  apputil
   mbutil
   logic
   genutil

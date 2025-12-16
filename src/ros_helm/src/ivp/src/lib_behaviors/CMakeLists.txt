@@ -27,3 +27,10 @@ SET(HEADERS
 # Build Library
 ADD_LIBRARY(behaviors ${SRC})
 
+TARGET_LINK_LIBRARIES(behaviors
+  PRIVATE
+    helmivp
+    bhvutil
+    genutil
+    mbutil)
+
