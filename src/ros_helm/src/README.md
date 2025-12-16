@@ -13,7 +13,7 @@ catkin_make  # or colcon build
 Launch with the provided example parameters and remappings:
 
 ```bash
-roslaunch ros_helm helm_node.launch
+roslaunch auh_launch roshelm.launch
 ```
 
 Key parameters live in `config/ros/params.yaml` and can be overridden with ROS launch or `rosparam`.
