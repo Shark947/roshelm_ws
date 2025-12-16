@@ -22,7 +22,7 @@ SET(SRC
 )
 
 set(ROSHLEM_DEFAULT_CONFIG_PATH
-    "${CMAKE_SOURCE_DIR}/src/helm/config/startHelm.yaml")
+    "${ROS_HELM_SOURCE_DIR}/src/helm/config/startHelm.yaml")
 file(TO_CMAKE_PATH "${ROSHLEM_DEFAULT_CONFIG_PATH}"
      ROSHLEM_DEFAULT_CONFIG_PATH)
 
