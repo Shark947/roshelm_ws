@@ -3,8 +3,16 @@ thrust_manager:
   control_mode: pid
   thruster_count: 6
 
+  # 推进器索引约定：
+  #   t0/t1 为水平推进器（X 方向，放在艇体左右），t2~t5 为竖直推进器。
+  # thrust_matrix 以 5 行表示 5 个自由度输入 [speed, heading, depth, pitch, roll] 对各推进器的贡献：
+  #   * speed   行：正速度指令 -> t0、t1 同向推力（+x 前进）。
+  #   * heading 行：正航向指令 -> t0、t1 反向推力形成偏航力矩。
+  #   * depth   行：正深度指令 -> 4 个竖直桨同向升沉。
+  #   * pitch   行：正俯仰指令 -> 前后竖直桨反向形成俯仰力矩。
+  #   * roll    行：正横滚指令 -> 左右竖直桨反向形成横滚力矩。
   thrust_matrix: [
-     1,  1,  0,  0,  0,  0,
+    -1, -1,  0,  0,  0,  0,
     -1,  1,  0,  0,  0,  0,
      0,  0,  1,  1,  1,  1,
      0,  0,  1, -1,  1, -1,
