@@ -30,11 +30,12 @@
 #include <algorithm>
 #include <cctype>
 #include <cstdlib>
-#include <filesystem>
 #include <fstream>
 #include <iterator>
 #include <iostream>
+#include <limits.h>
 #include <sstream>
+#include <sys/stat.h>
 #include <cmath>
 #include "HelmGeodesy.h"
 #include "HelmIvP.h"
@@ -94,6 +95,44 @@ std::string trim(const std::string &input)
   return input.substr(first, last - first + 1);
 }
 
+bool fileExists(const std::string &path)
+{
+  struct stat sb;
+  return stat(path.c_str(), &sb) == 0;
+}
+
+bool isAbsolutePath(const std::string &path)
+{
+  return !path.empty() && path.front() == '/';
+}
+
+std::string parentDirectory(const std::string &path)
+{
+  const size_t pos = path.find_last_of('/');
+  if (pos == std::string::npos)
+    return "";
+  if (pos == 0)
+    return "/";
+  return path.substr(0, pos);
+}
+
+std::string joinPath(const std::string &base, const std::string &child)
+{
+  if (base.empty())
+    return child;
+  if (!base.empty() && base.back() == '/')
+    return base + child;
+  return base + "/" + child;
+}
+
+std::string normalizePath(const std::string &path)
+{
+  char resolved[PATH_MAX];
+  if (realpath(path.c_str(), resolved))
+    return std::string(resolved);
+  return path;
+}
+
 bool parseBool(const std::string &value, bool &out)
 {
   std::string lower = value;
@@ -151,30 +190,36 @@ void assignInitialValue(const std::string &key, const std::string &value,
 std::string resolveConfigPath(const std::string &config_path,
                               const std::string &target_path)
 {
-  namespace fs = std::filesystem;
-  fs::path base(config_path);
-  fs::path target(target_path);
-  if (target.is_absolute())
-    return target.string();
-  return (base.parent_path() / target).lexically_normal().string();
+  if (target_path.empty())
+    return target_path;
+  if (isAbsolutePath(target_path))
+    return target_path;
+
+  const std::string base_dir = parentDirectory(config_path);
+  const std::string combined = joinPath(base_dir, target_path);
+  return normalizePath(combined);
 }
 
 bool loadHelmYamlConfig(const std::string &path, HelmYamlConfig &config,
                         std::ostream &out)
 {
-  namespace fs = std::filesystem;
-  fs::path config_path(path);
-  if (!config_path.is_absolute() && !fs::exists(config_path))
+  std::string config_path = path;
+  if (!isAbsolutePath(config_path) && !fileExists(config_path))
   {
-    fs::path parent_path = fs::current_path().parent_path() / config_path;
-    if (fs::exists(parent_path))
-      config_path = parent_path;
+    char cwd_buffer[PATH_MAX];
+    if (getcwd(cwd_buffer, sizeof(cwd_buffer)))
+    {
+      const std::string parent_path = parentDirectory(cwd_buffer);
+      const std::string candidate = joinPath(parent_path, config_path);
+      if (fileExists(candidate))
+        config_path = candidate;
+    }
   }
 
-  const std::string resolved_config_path = config_path.string();
-  config.config_directory = config_path.parent_path().string();
+  const std::string resolved_config_path = normalizePath(config_path);
+  config.config_directory = parentDirectory(resolved_config_path);
 
-  std::ifstream infile(config_path);
+  std::ifstream infile(resolved_config_path);
   if (!infile.is_open())
   {
     out << "[error] unable to open config file: " << resolved_config_path << "\n";
