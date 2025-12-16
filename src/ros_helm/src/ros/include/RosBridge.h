@@ -51,6 +51,9 @@ private:
   ros::Subscriber deploy_sub_;
   ros::Subscriber return_sub_;
 
+  ros::Publisher deploy_pub_;
+  ros::Publisher return_pub_;
+
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
 
   std::deque<HelmMsg> pending_mail_;

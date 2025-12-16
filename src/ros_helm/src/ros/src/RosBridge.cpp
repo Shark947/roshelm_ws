@@ -15,11 +15,18 @@ bool RosBridge::initialize()
   speed_sub_ = subscribeCurrent(config_.current_speed_topic, "NAV_SPEED");
   depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
 
-  enqueueBoolValue("DEPLOY", config_.deploy_default, ros::Time::now());
-  enqueueBoolValue("RETURN", config_.return_default, ros::Time::now());
-
   deploy_sub_ = subscribeBoolean(config_.deploy_topic, "DEPLOY");
   return_sub_ = subscribeBoolean(config_.return_topic, "RETURN");
+
+  deploy_pub_ = nh_.advertise<std_msgs::Bool>(config_.deploy_topic, 1, true);
+  return_pub_ = nh_.advertise<std_msgs::Bool>(config_.return_topic, 1, true);
+
+  std_msgs::Bool default_msg;
+  default_msg.data = config_.deploy_default;
+  deploy_pub_.publish(default_msg);
+
+  default_msg.data = config_.return_default;
+  return_pub_.publish(default_msg);
 
   desired_scalar_pubs_["DESIRED_HEADING"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_heading_topic, 10);
