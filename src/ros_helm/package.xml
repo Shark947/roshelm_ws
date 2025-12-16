@@ -3,7 +3,7 @@
   <name>ros_helm</name>
   <version>0.1.0</version>
   <description>
-    ROS wrapper for MOOS-IvP Helm (ros-helm)
+    ROS wrapper for MOOS-IvP Helm (ros_helm)
   </description>
 
   <maintainer email="your@email.com">Shark947</maintainer>
@@ -11,7 +11,13 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>common_msgs</depend>
   <depend>roscpp</depend>
+  <depend>roslib</depend>
   <depend>std_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_geometry_msgs</depend>
 
 </package>
