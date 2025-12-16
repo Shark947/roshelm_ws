@@ -5,6 +5,11 @@ PROJECT(IVP)
 #======================================================================
 # Part 1: Set Compiler Flags
 #======================================================================
+# Build all libraries with position independent code so they can be
+# safely linked into shared objects (e.g., libbehaviors-colregs,
+# libdep_behaviors) without relocation errors.
+SET(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 IF(${WIN32})
   # Define Windows Compiler flags here
   SET(CMAKE_CXX_FLAGS " ")
