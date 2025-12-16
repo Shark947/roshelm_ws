@@ -15,6 +15,12 @@ bool RosBridge::initialize()
   speed_sub_ = subscribeCurrent(config_.current_speed_topic, "NAV_SPEED");
   depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
 
+  enqueueBoolValue("DEPLOY", config_.deploy_default, ros::Time::now());
+  enqueueBoolValue("RETURN", config_.return_default, ros::Time::now());
+
+  deploy_sub_ = subscribeBoolean(config_.deploy_topic, "DEPLOY");
+  return_sub_ = subscribeBoolean(config_.return_topic, "RETURN");
+
   desired_scalar_pubs_["DESIRED_HEADING"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_heading_topic, 10);
   desired_scalar_pubs_["DESIRED_SPEED"] = nh_.advertise<std_msgs::Float64>(
@@ -37,6 +43,16 @@ void RosBridge::enqueueNavValue(const std::string &key, double value,
                              stamp.toSec(), "ros_bridge");
 }
 
+void RosBridge::enqueueBoolValue(const std::string &key, bool value,
+                                 const ros::Time &stamp)
+{
+  const std::string text = value ? "true" : "false";
+
+  std::lock_guard<std::mutex> guard(mail_mutex_);
+  pending_mail_.emplace_back(static_cast<char>(MsgType::Notify), key, text,
+                             stamp.toSec(), "ros_bridge");
+}
+
 ros::Subscriber RosBridge::subscribeCurrent(const std::string &topic,
                                             const std::string &nav_key)
 {
@@ -50,11 +66,30 @@ ros::Subscriber RosBridge::subscribeCurrent(const std::string &topic,
       });
 }
 
+ros::Subscriber RosBridge::subscribeBoolean(const std::string &topic,
+                                            const std::string &key)
+{
+  if (topic.empty())
+    return {};
+
+  return nh_.subscribe<std_msgs::Bool>(
+      topic, 10,
+      [this, key](const std_msgs::Bool::ConstPtr &msg) {
+        this->booleanCallback(msg, key);
+      });
+}
+
 void RosBridge::currentValueCallback(
     const common_msgs::Float64Stamped::ConstPtr &msg,
     const std::string &nav_key)
 {
   enqueueNavValue(nav_key, msg->data, msg->header.stamp);
+}
+
+void RosBridge::booleanCallback(const std_msgs::Bool::ConstPtr &msg,
+                                const std::string &key)
+{
+  enqueueBoolValue(key, msg->data, ros::Time::now());
 }
 
 void RosBridge::deliverPending(HelmIvP &helm)

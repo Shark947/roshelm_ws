@@ -30,6 +30,12 @@ bool RosConfigLoader::load(RosNodeConfig &config,
   private_nh_.param("register_variables_path", config.register_variables_path,
                     register_variables_path);
   private_nh_.param("vehicle_name", config.vehicle_name, config.vehicle_name);
+  private_nh_.param("deploy_topic", config.deploy_topic, config.deploy_topic);
+  private_nh_.param("return_topic", config.return_topic, config.return_topic);
+  private_nh_.param("deploy_default", config.deploy_default,
+                    config.deploy_default);
+  private_nh_.param("return_default", config.return_default,
+                    config.return_default);
 
   private_nh_.param("loop_frequency", config.loop_frequency,
                     config.loop_frequency);
@@ -62,6 +68,11 @@ bool RosConfigLoader::load(RosNodeConfig &config,
     config.desired_speed_topic = "/" + config.vehicle_name + "/desired_speed";
   if (config.desired_depth_topic.empty())
     config.desired_depth_topic = "/" + config.vehicle_name + "/desired_depth";
+
+  if (config.deploy_topic.empty())
+    config.deploy_topic = "/" + config.vehicle_name + "/DEPLOY";
+  if (config.return_topic.empty())
+    config.return_topic = "/" + config.vehicle_name + "/RETURN";
 
   loadNavDefaults(config);
 
