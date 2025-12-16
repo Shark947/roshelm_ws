@@ -24,9 +24,11 @@ bool RosBridge::initialize()
   std_msgs::Bool default_msg;
   default_msg.data = config_.deploy_default;
   deploy_pub_.publish(default_msg);
+  enqueueBoolValue("DEPLOY", default_msg.data, ros::Time::now());
 
   default_msg.data = config_.return_default;
   return_pub_.publish(default_msg);
+  enqueueBoolValue("RETURN", default_msg.data, ros::Time::now());
 
   desired_scalar_pubs_["DESIRED_HEADING"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_heading_topic, 10);
