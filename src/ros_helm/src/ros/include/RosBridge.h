@@ -6,6 +6,7 @@
 #include <ros/ros.h>
 #include <common_msgs/Float64Stamped.h>
 #include <std_msgs/Float64.h>
+#include <std_msgs/Bool.h>
 
 #include "HelmIvP.h"
 #include "HelmMsg.h"
@@ -28,11 +29,17 @@ private:
 
   void enqueueNavValue(const std::string &key, double value,
                        const ros::Time &stamp);
+  void enqueueBoolValue(const std::string &key, bool value,
+                        const ros::Time &stamp);
   ros::Subscriber subscribeCurrent(const std::string &topic,
                                    const std::string &nav_key);
+  ros::Subscriber subscribeBoolean(const std::string &topic,
+                                   const std::string &key);
 
   void currentValueCallback(const common_msgs::Float64Stamped::ConstPtr &msg,
                             const std::string &nav_key);
+  void booleanCallback(const std_msgs::Bool::ConstPtr &msg,
+                       const std::string &key);
 
   ros::NodeHandle nh_;
   ros::NodeHandle private_nh_;
@@ -41,6 +48,8 @@ private:
   ros::Subscriber heading_sub_;
   ros::Subscriber speed_sub_;
   ros::Subscriber depth_sub_;
+  ros::Subscriber deploy_sub_;
+  ros::Subscriber return_sub_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
 

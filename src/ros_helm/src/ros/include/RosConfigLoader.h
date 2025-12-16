@@ -16,8 +16,12 @@ struct RosNodeConfig
   std::string desired_heading_topic;
   std::string desired_speed_topic;
   std::string desired_depth_topic;
+  std::string deploy_topic;
+  std::string return_topic;
   std::string frame_id{"map"};
   double loop_frequency{10.0};
+  bool deploy_default{false};
+  bool return_default{false};
   std::map<std::string, double> nav_defaults;
 };
 
