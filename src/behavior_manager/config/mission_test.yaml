@@ -1,0 +1,63 @@
+# 顶层指定 vehicle_name，用于生成统一的话题前缀
+vehicle_name: auh
+
+# 行为列表
+behaviors:
+  - type: ObstacleAvoidance
+    name: avoider
+    priority: 0     # 等级 0，属于最高优先
+    pwt: 10.0       # 同等级下的较大权重
+    duration: 20.0 
+    conditions:     # 任何时候只要避障条件满足就立即抢占
+      - "RUNNING:circle_8_3_r3"
+      - "SPEED:>0.2"
+  
+  - type: GotoDepth
+    name: goto3m
+    priority: 1
+    pwt: 5.0
+    depth: 3.0
+    duration: 10.0
+    conditions:
+      - "COMPLETED:avoid_avoider"      # 上一个避障完后才能进入
+
+  - type: ConstantDepth
+    name: const_depth_3
+    priority: 1
+    pwt: 5.0
+    depth: 3.0
+    duration: 30.0
+    conditions:
+      - "COMPLETED:goto3m"
+
+  - type: CircleMotion
+    name: circle_8_3_r3
+    priority: 1
+    pwt: 4.0
+    center_x: 8.0
+    center_y: 3.0
+    radius: 3.0
+    speed: 0.3
+    duration: 200.0
+    conditions:
+      - "COMPLETED:const_depth_3"
+      - "SPEED:<=0.5"   # 仅当速度 ≤ 0.5 时才启动绕圈
+
+  - type: PeriodicUpfloat
+    name: upfloat_periodic
+    priority: 1
+    pwt: 6.0       # 同级比 circle_8_3_r3(4.0) 更偏向控制 depth
+    duration: 5.0
+    interval: 60.0 # 每隔 60 秒触发
+    conditions:
+      - "RUNNING:circle_8_3_r3"  # 只有绕圈时才触发
+      - "DEPTH:<2.0"            # 当深度 < 2m 才触发上浮
+
+  - type: ReturnToStart
+    name: return_home
+    priority: 1
+    pwt: 3.0
+    duration: 20.0
+    conditions:
+      - "COMPLETED:circle_8_3_r3"
+      - "SPEED:<=0.2"

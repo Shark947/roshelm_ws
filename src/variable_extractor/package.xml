@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>variable_extractor</name>
+  <version>0.0.0</version>
+  <description>The variable_extractor package</description>
+
+  <maintainer email="xing@todo.todo">xing</maintainer>
+  <license>TODO</license>
+
+  <!-- Build‐tool 依赖 -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- ROS 运行时 / 编译时依赖 -->
+  <build_depend>roscpp</build_depend>
+  <exec_depend>roscpp</exec_depend>
+
+  <build_depend>std_msgs</build_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <build_depend>nav_msgs</build_depend>
+  <exec_depend>nav_msgs</exec_depend>
+
+  <build_depend>sensor_msgs</build_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+
+  <build_depend>pluginlib</build_depend>
+  <exec_depend>pluginlib</exec_depend>
+
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <build_depend>common_msgs</build_depend>
+  <exec_depend>common_msgs</exec_depend>
+  
+
+  <export>
+    <!-- 声明本包的 pluginlib 插件描述文件 -->
+    <variable_extractor plugin="${prefix}/plugin/variable_extractor_plugins.xml" />
+  </export>
+</package>

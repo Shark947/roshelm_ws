@@ -1,0 +1,41 @@
+########################################################
+# 顶层参数：请务必填写 vehicle_name，用于所有行为拼话题前缀
+########################################################
+vehicle_name: <YOUR_VEHICLE_NAME>   # 示例：vehicle_name: auv1
+
+########################################################
+# behaviors 列表：把所有行为都放在这个数组里
+########################################################
+behaviors:
+  - type: <BEHAVIOR_TYPE>                             # 【必填】C++ 类名（pluginlib 注册时用的全限定名）
+  - name: <INSTANCE_NAME>                         # 【必填】实例名称；该名称将用于私有命名空间 /<INSTANCE_NAME> 而且拼接状态发布话题 /<vehicle_name>/behavior_states/<INSTANCE_NAME>
+  # ----------------------- 通用字段 -----------------------
+  # priority: <INTEGER>                                      # 优先级等级，值越小优先，0 为最高；默认为 1；示例：priority: 1
+  # pwt: <FLOAT>                                                  # 同一优先级下的权重，值越大偏好度越高；默认为 1.0；示例：pwt: 1.0
+  # duration: <FLOAT>                                        # 最大运行时长（秒），<= 0 表示不检查；默认为 0.0；示例：duration: 10.0
+  # duration_idle_decay: <true/false>        # IDLE 时是否继续累计 duration；默认为 false；
+  # timeout_fails: <true/false>                       # 超时后是否算作“失败”；true→FAILED, false→COMPLETED；默认为 false
+  # enable_debug: <true/false>                     # 是否打开调试日志（ROS_DEBUG）；默认为 false
+
+  # ----------------------- 启动条件 -----------------------
+  # 【可选】字符串列表，所有条件需同时满足才能激活
+  # conditions:                   
+  #   - "<STATE>:<OTHER_INSTANCE>" 等待其他行为状态
+  #   - "<VAR>:<op><value>" 等待变量阈值
+  # 如果不需要额外条件可留空 conditions 字段
+  # 示例：
+  # conditions:
+  #   - "COMPLETED:waypoint_1"
+  #   - "SPEED:<=0.5"
+
+  # ---------------- 自定义参数（子类专用） ----------------
+  # 以下字段不是 BehaviorBase 固有的，而是子类的一次性配置。
+  # 可以在子类 initialize() 或 execute() 里，像下面这样读取：
+  #   nh_.param<double>("target_depth", target_depth_, 0.0);
+  #   nh_.param<double>("heading_angle", heading_angle_, 0.0);
+  # 示例：
+  # target_depth: <FLOAT>          # 该行为需要的目标深度 (米)；示例：target_depth: 3.5
+  # heading_angle: <FLOAT>      # 该行为需要的目标航向 (度)；示例：heading_angle: 90.0
+  # safe_distance: <FLOAT>        # 避障行为需要的安全距离 (米)；示例：safe_distance: 1.0
+  # circle_radius: <FLOAT>          # 圆周运动时的半径 (米)；示例：circle_radius: 5.0
+  # max_speed: <FLOAT>            # 最大速度 (m/s)；示例：max_speed: 0.2

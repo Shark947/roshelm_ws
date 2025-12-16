@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<library path="lib/libvariable_extractor">
+  <class name="variable_extractor/DefaultVariableExtractor"
+         type="variable_extractor::DefaultVariableExtractor"
+         base_class_type="variable_extractor::VariableExtractorInterface">
+    <description>默认的变量提取器插件</description>
+  </class>
+</library>

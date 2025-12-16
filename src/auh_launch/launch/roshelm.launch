@@ -1,0 +1,28 @@
+<launch>
+  <!-- 启动 Gazebo 仿真环境 -->
+  <include file="$(find uuv_gazebo_worlds)/launch/auv_underwater_world.launch" />
+
+  <!-- 加载 AUH 模型 -->
+  <include file="$(find auh_description)/launch/upload_auh_default.launch" />
+
+  <!-- 启动推进器控制器 -->
+  <include file="$(find auh_thrust_manager)/launch/thrust_manager.launch" />
+
+  <!-- 启动变量提取器 -->
+  <node pkg="variable_extractor"
+        type="variable_extractor_node"
+        name="variable_extractor_node"
+        output="screen">
+    <param name="vehicle_name" value="auh" />
+    <param name="debug" value="false" />
+  </node>
+
+  <!-- 启动控制器管理器 -->
+  <node pkg="controller_manager"
+        type="controller_manager_node"
+        name="controller_manager_node"
+        output="screen">
+    <param name="controllers_config" value="$(find controller_manager)/config/controllers.yaml" />
+  </node>
+
+</launch>

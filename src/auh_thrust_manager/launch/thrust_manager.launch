@@ -1,0 +1,11 @@
+<launch>
+  <!-- 加载推进器配置 -->
+  <rosparam file="$(find auh_thrust_manager)/config/thrust_manager.yaml" command="load"/>
+
+  <!-- 启动推进器节点 -->
+  <node name="thrust_manager" pkg="auh_thrust_manager" type="thrust_manager" output="screen">
+    <param name="auv_ns" value="auh"/>
+    <param name="control_mode" value="pid"/>
+    <param name="thruster_count" value="6"/>
+  </node>
+</launch>

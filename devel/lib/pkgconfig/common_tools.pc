@@ -1,0 +1,8 @@
+prefix=/home/xing/roshelm_ws/devel
+
+Name: common_tools
+Description: Description of common_tools
+Version: 0.0.0
+Cflags: -I/home/xing/roshelm_ws/src/common_tools/include
+Libs: -L${prefix}/lib 
+Requires: 

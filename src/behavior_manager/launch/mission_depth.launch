@@ -1,0 +1,25 @@
+<launch>
+  <!-- 加载 mission 参数 -->
+  <rosparam file="$(find behavior_manager)/config/mission_depth.yaml" command="load"/>
+
+  <!-- ✅ 加载 PID 控制器参数 -->
+  <rosparam file="$(find auh_controller_pid)/config/pid_params.yaml" command="load"/>
+
+  <!-- ✅ 加载推进器配置参数（加载到私有命名空间） -->
+  <node name="thrust_manager" pkg="auh_thrust_manager" type="thrust_manager" output="screen">
+    <rosparam file="$(find auh_thrust_manager)/config/thrust_manager.yaml" command="load"/>
+  </node>
+
+  <!-- ✅ 启动 PID 控制器：heading -->
+  <node name="pid_heading_controller" pkg="auh_controller_pid" type="PIDcontroller" output="screen">
+    <param name="param_namespace" value="pid_heading"/>
+  </node>
+
+  <!-- ✅ 启动 PID 控制器：depth -->
+  <node name="pid_depth_controller" pkg="auh_controller_pid" type="PIDcontroller" output="screen">
+    <param name="param_namespace" value="pid_depth"/>
+  </node>
+
+  <!-- ✅ 启动行为调度器 -->
+  <node name="mission_manager" pkg="behavior_manager" type="mission_manager" output="screen"/>
+</launch>

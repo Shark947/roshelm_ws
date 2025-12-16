@@ -1,0 +1,21 @@
+pid_heading:
+  vehicle_name: auh
+  Kp: 0.5
+  Ki: 0.01
+  Kd: 1.6
+  integral_limit: 1.0
+  output_limit: 200.0
+  is_angle: true
+  debug: true
+  controlled_variable: heading
+
+pid_depth:
+  vehicle_name: auh
+  Kp: 32
+  Ki: 0.01
+  Kd: 48
+  integral_limit: 6.0
+  output_limit: 200.0
+  is_angle: false
+  debug: true
+  controlled_variable: depth

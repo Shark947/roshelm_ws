@@ -1,0 +1,79 @@
+ServerHost = localhost
+ServerPort = 9000
+MOOSTimeWarp = 1
+Community = auh
+LatOrigin = 0.0
+LongOrigin = 0.0
+
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 200
+
+  Run = MOOSDB          @ NewConsole = false
+  Run = pHelmIvP        @ NewConsole = false
+  Run = pMarineViewer   @ NewConsole = false
+  Run = pNodeReporter   @ NewConsole = false
+}
+
+ProcessConfig = pHelmIvP
+{
+  AppTick    = 4
+  CommsTick  = 4
+
+  behaviors  = test.bhv
+  verbose    = quiet
+  domain     = course:0:359:360
+  domain     = speed:0:4:41
+  domain     = depth:0:199:200
+}
+
+ProcessConfig = pMarineViewer
+{
+  AppTick    = 1
+  CommsTick  = 1
+
+  tiff_file            = forrest19.tif
+  set_pan_x            = -90
+  set_pan_y            = -280
+  zoom                 = 0.65
+  vehicle_shape_scale  = 1.35
+  hash_delta           = 50
+  hash_shade           = 0.4
+  hash_viewable        = true
+
+  left_context[survey-point] = SURVEY_UPDATES = points = vname=$(VNAME), x=$(XPOS), y=$(YPOS), format=bowtie, label=delta, wid1=10, wid2=25, wid3=30, height=20
+
+//  left_context[survey-point] = SURVEY_UPDATES = points = vname=$(VNAME), x=$(XPOS), y=$(YPOS), format=lawnmower, label=delta, width=70, height=30, lane_width=8, rows=north-south, degs=80
+
+  left_context[survey-point] = SURVEY = true
+
+  scope = SURVEY_UPDATES
+  scope = MVIEWER_LCLICK
+  scope = GPS_UPDATE_RECEIVED
+  scope = TIME_AT_SURFACE
+
+  action = DEPTH_VALUE="depth=50"
+  action = DEPTH_VALUE="depth=25"
+  action = DEPTH_VALUE="depth=7"
+  action = UP_LOITER="speed=0"
+  action = UP_LOITER="speed=1.2"
+  action = PSURFACE=true
+  action = PSURFACE=false
+
+  button_one   = DEPLOY # DEPLOY=true # MOOS_MANUAL_OVERRIDE=false
+  button_two   = MOOS_MANUAL_OVERRIDE=false # RETURN=false
+  button_two   = RETURN # RETURN=true
+  button_three = SURVEY-true # SURVEY=true
+  button_four  = SURVEY-false # SURVEY=false
+}
+
+//------------------------------------------
+// pNodeReporter config block
+
+ProcessConfig = pNodeReporter
+{
+  AppTick	= 4
+  CommsTick	= 4
+  vessel_type   = auh
+}
+

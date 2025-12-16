@@ -1,0 +1,8 @@
+prefix=/home/xing/roshelm_ws/install
+
+Name: auh_launch
+Description: Description of auh_launch
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

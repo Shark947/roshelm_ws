@@ -1,0 +1,36 @@
+#pragma once
+
+#include <ros/ros.h>
+#include <std_msgs/Float64.h>
+#include <vector>
+#include <string>
+
+namespace auh_thrust_manager {
+
+class ThrustManager {
+public:
+    ThrustManager(ros::NodeHandle& nh, const std::string& ns, const std::string& control_mode, int thruster_count);
+
+private:
+    std::string auv_ns_;
+    std::string control_mode_;
+    int thruster_count_;
+    std::vector<std::vector<double>> thrust_matrix_;
+
+    // 控制量订阅与推进器发布
+    std::vector<ros::Subscriber> subs_;
+    std::vector<ros::Publisher> pubs_;
+    std::vector<double> input_signals_;
+    std::vector<bool> input_received_;
+
+    // 浮力补偿
+    double buoyancy_compensation_;
+    std::vector<int> vertical_thruster_indices_;
+
+    ros::Timer timer_;
+
+    void inputCallback(const std_msgs::Float64::ConstPtr& msg, int index);
+    void computeThrust(const ros::TimerEvent&);
+};
+
+}  // namespace auh_thrust_manager

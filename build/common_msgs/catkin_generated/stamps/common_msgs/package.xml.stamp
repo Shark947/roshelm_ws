@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>common_msgs</name>
+  <version>0.0.0</version>
+  <description>公用消息包，供各模块共用</description>
+
+  <maintainer email="xing@todo.todo">xing</maintainer>
+  <license>BSD</license>
+
+  <!-- 构建工具依赖 -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- 声明生成消息所需的依赖 -->
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <!-- std_msgs 是消息定义所需的依赖 -->
+  <build_depend>std_msgs</build_depend>
+  <exec_depend>std_msgs</exec_depend>
+</package>

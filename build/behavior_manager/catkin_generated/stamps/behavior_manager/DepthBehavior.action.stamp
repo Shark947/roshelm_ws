@@ -1,0 +1,11 @@
+# ======= Goal =======
+float64 target_depth     # 目标深度（米）
+bool    publish_mismatch # 是否发布深度误差
+---
+# ======= Feedback =======
+float64 current_depth    # 当前观测深度
+float64 depth_error      # current_depth - target_depth
+---
+# ======= Result =======
+bool    success          # 行为是否成功执行
+string  message          # 成功或失败的说明

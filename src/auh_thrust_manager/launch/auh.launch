@@ -1,0 +1,10 @@
+<launch>
+  <!-- 1. 启动仿真世界 -->
+  <include file="$(find uuv_gazebo_worlds)/launch/auv_underwater_world.launch"/>
+
+  <!-- 2. 上载 AUH 模型描述 -->
+  <include file="$(find auh_description)/launch/upload_auh_default.launch"/>
+
+  <!-- 3. 启动推进器管理器 -->
+  <include file="$(find auh_thrust_manager)/launch/thrust_manager.launch"/>
+</launch>

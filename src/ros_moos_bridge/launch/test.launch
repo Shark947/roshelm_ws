@@ -1,0 +1,9 @@
+<launch>
+  <arg name="moos_mission_file" default="$(find ros_moos_bridge)/config/test.moos" />
+  <arg name="vehicle_name" default="auh" />
+
+  <node pkg="ros_moos_bridge" type="bridge_node" name="bridge_node" output="screen">
+    <param name="moos_mission_file" value="$(arg moos_mission_file)" />
+    <param name="vehicle_name" value="$(arg vehicle_name)" />
+  </node>
+</launch>

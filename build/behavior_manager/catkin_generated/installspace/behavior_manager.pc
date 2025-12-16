@@ -1,0 +1,8 @@
+prefix=/home/xing/roshelm_ws/install
+
+Name: behavior_manager
+Description: Description of behavior_manager
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lbehavior_manager
+Requires: roscpp std_msgs nav_msgs pluginlib actionlib actionlib_msgs message_runtime variable_extractor common_msgs

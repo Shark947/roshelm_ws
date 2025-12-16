@@ -1,0 +1,13 @@
+# 顶层一定要指定 vehicle_name
+vehicle_name: auh
+
+my_constant_heading:
+  name: constant_heading_1
+  priority: 1
+  pwt: 1.0
+  duration: 30.0
+  duration_idle_decay: false
+  enable_debug: true
+  conditions:
+    - "RUNNING:waypoint_8_3"
+    - "SPEED:<=0.5"

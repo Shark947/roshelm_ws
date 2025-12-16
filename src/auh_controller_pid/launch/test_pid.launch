@@ -1,0 +1,30 @@
+<launch>
+  <!-- 一次性加载 PID 配置 -->
+  <rosparam file="$(find auh_controller_pid)/config/pid_params.yaml" command="load"/>
+
+  <!-- 启动 Heading PID 控制器 -->
+  <node pkg="auh_controller_pid"
+        type="PIDcontroller"
+        name="pid_heading"
+        output="screen"/>
+
+  <!-- 启动 Depth PID 控制器 -->
+  <node pkg="auh_controller_pid"
+        type="PIDcontroller"
+        name="pid_depth"
+        output="screen"/>
+
+  <!-- 发布期望深度 5m，10Hz -->
+  <node pkg="rostopic"
+        type="rostopic"
+        name="publish_desired_depth"
+        output="screen"
+        args="pub -r 10 /auh/desired_depth std_msgs/Float64 '{data: 5.0}'" />
+
+  <!-- 发布期望航向 60°，10Hz -->
+  <node pkg="rostopic"
+        type="rostopic"
+        name="publish_desired_heading"
+        output="screen"
+        args="pub -r 10 /auh/desired_heading std_msgs/Float64 '{data: 60.0}'" />
+</launch>

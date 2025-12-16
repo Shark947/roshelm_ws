@@ -1,0 +1,27 @@
+ros_to_moos:
+  - ros_topic: /auh/pose_gt
+    moos_var: NAV_X
+  - ros_topic: /auh/pose_gt
+    moos_var: NAV_Y
+  - ros_topic: /auh/pose_gt
+    moos_var: NAV_DEPTH
+  - ros_topic: /auh/imu
+    moos_var: NAV_HEADING
+  - ros_topic: /auh/imu
+    moos_var: NAV_PITCH
+  - ros_topic: /auh/imu
+    moos_var: NAV_ROLL
+  - ros_topic: /auh/dvl
+    moos_var: NAV_SPEED
+
+moos_to_ros:
+  - moos_var: DESIRED_HEADING
+    ros_topic: /auh/desired_heading
+  - moos_var: DESIRED_PITCH
+    ros_topic: /auh/desired_pitch
+  - moos_var: DESIRED_ROLL
+    ros_topic: /auh/desired_roll
+  - moos_var: DESIRED_SPEED
+    ros_topic: /auh/desired_speed
+  - moos_var: DESIRED_DEPTH
+    ros_topic: /auh/desired_depth

@@ -1,0 +1,7 @@
+<library path="lib/libcontroller_manager">
+  <class name="controller_manager/PIDController"
+         type="controller_manager::PIDController"
+         base_class_type="controller_manager::ControllerBase">
+    <description>A plugin for PID controller</description>
+  </class>
+</library>

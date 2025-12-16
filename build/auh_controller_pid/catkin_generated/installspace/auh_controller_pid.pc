@@ -1,0 +1,8 @@
+prefix=/home/xing/roshelm_ws/install
+
+Name: auh_controller_pid
+Description: Description of auh_controller_pid
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lauh_controller_pid
+Requires: geometry_msgs roscpp sensor_msgs std_msgs common_msgs variable_extractor

@@ -1,0 +1,8 @@
+prefix=/home/xing/roshelm_ws/install
+
+Name: variable_extractor
+Description: Description of variable_extractor
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib -lvariable_extractor
+Requires: roscpp std_msgs nav_msgs sensor_msgs pluginlib message_runtime common_msgs

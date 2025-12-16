@@ -1,0 +1,33 @@
+<launch>
+
+  <!-- 启动 VariableExtractor 主节点（融合/发布 current_xxx） -->
+  <node pkg="variable_extractor"
+        type="variable_extractor_node"
+        name="variable_extractor_node"
+        output="screen">
+    <param name="vehicle_name" value="auh"/>
+    <param name="debug" value="false"/>
+  </node>
+  
+  <!-- 启动统一主控节点 -->
+  <node pkg="controller_manager"
+        type="controller_manager_node"
+        name="controller_manager_node"
+        output="screen">
+    <param name="controllers_config" value="$(find controller_manager)/config/controllers.yaml"/>
+  </node>
+
+  <!-- 发布期望深度 5m，10Hz -->
+  <node pkg="rostopic"
+        type="rostopic"
+        name="publish_desired_depth"
+        output="screen"
+        args="pub -r 10 /auh/desired_depth std_msgs/Float64 '{data: 5.0}'" />
+
+  <!-- 发布期望航向 60°，10Hz -->
+  <node pkg="rostopic"
+        type="rostopic"
+        name="publish_desired_heading"
+        output="screen"
+        args="pub -r 10 /auh/desired_heading std_msgs/Float64 '{data: 60.0}'" />
+</launch>

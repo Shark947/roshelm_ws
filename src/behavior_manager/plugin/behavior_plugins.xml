@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<library path="lib/libbehavior_manager">
+  <!-- 
+    name 字段用作 Pluginlib 在运行时查找的 “查找名称”，
+    type 字段是实际的 C++ 类全限定名，必须与 PLUGINLIB_EXPORT_CLASS 中的第一个参数一致，
+    base_class_type 必须与插件的接口类命名空间＋类名一致。
+  -->
+  <class name="behavior_manager/GoToDepth"
+         type="solo_behaviors::GoToDepth"
+         base_class_type="behavior_manager::BehaviorBase">
+    <description>Go to target depth</description>
+  </class>
+
+  <class name="behavior_manager/ConstantDepth"
+         type="solo_behaviors::ConstantDepth"
+         base_class_type="behavior_manager::BehaviorBase">
+    <description>Hold depth for specified duration</description>
+  </class>
+
+  <!-- 如果后续还有更多行为插件，例如“避障”、“抛载”，都在这里继续添加一行 <class> … </class> -->
+</library>

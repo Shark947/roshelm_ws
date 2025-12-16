@@ -1,0 +1,8 @@
+prefix=/home/xing/roshelm_ws/install
+
+Name: ros_moos_bridge
+Description: Description of ros_moos_bridge
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp std_msgs nav_msgs sensor_msgs uuv_sensor_ros_plugins_msgs roslib
