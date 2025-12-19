@@ -1,6 +1,7 @@
 #include "RosBridge.h"
 
 #include <array>
+#include <cmath>
 #include <chrono>
 #include <ctime>
 #include <cerrno>
@@ -110,6 +111,12 @@ void RosBridge::currentValueCallback(
     const common_msgs::Float64Stamped::ConstPtr &msg,
     const std::string &nav_key)
 {
+  if (nav_key == "NAV_HEADING")
+  {
+    const double heading_moos = std::fmod(90.0 - msg->data + 360.0, 360.0);
+    enqueueNavValue(nav_key, heading_moos, msg->header.stamp);
+    return;
+  }
   enqueueNavValue(nav_key, msg->data, msg->header.stamp);
 }
 
@@ -145,7 +152,14 @@ void RosBridge::publishDesired(const HelmIvP &helm)
     if (it != desired.end() && pub)
     {
       std_msgs::Float64 msg;
-      msg.data = it->second;
+      if (key == "DESIRED_HEADING")
+      {
+        msg.data = std::fmod(90.0 - it->second + 360.0, 360.0);
+      }
+      else
+      {
+        msg.data = it->second;
+      }
       pub.publish(msg);
       logValue(key, msg.data, ros::Time::now());
     }
