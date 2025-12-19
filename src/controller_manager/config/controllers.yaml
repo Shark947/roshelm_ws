@@ -25,10 +25,10 @@ controllers:
   pid_speed:
     controller_type: pid
     controlled_variable: speed
-    Kp: 39
-    Ki: 0.01
-    Kd: 74
-    integral_limit: 8.0
+    Kp: 1400
+    Ki: 0.1
+    Kd: 16
+    integral_limit: 14.0
     output_limit: 200.0
     output_reverse: false
     is_angle: false

@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/home/xing/roshelm_ws/devel/include/common_msgs/Float64Stamped.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+
 /home/xing/roshelm_ws/src/common_tools/include/common_tools/AngleUtils.hpp
 
 /home/xing/roshelm_ws/src/common_tools/include/common_tools/StringUtils.hpp
@@ -993,6 +1011,22 @@ ros/forwards.h
 /opt/ros/melodic/include/rosconsole/macros_generated.h
 
 /opt/ros/melodic/include/std_msgs/Float64.h
+string
+-
+vector
+-
+memory
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
+/opt/ros/melodic/include/std_msgs/Header.h
 string
 -
 vector

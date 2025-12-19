@@ -8,7 +8,7 @@ helm:
   behaviors: alpha.bhv
   domain:
     - course: 0:359:360
-    - speed: 0:2:21
+    - speed: 0:4:41
     - depth: 0:1000:1001
   start_engaged: true
   allow_park: true
