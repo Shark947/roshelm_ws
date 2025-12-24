@@ -1,42 +1,22 @@
 //--------    FILE: depth.bhv   -------------
 
 initialize   DEPLOY = false
-initialize   RETURN = false
-	
+
 //----------------------------------------------
 Behavior = BHV_GoToDepth
- {
-   // General Behavior Parameters
-   // ---------------------------
-   name         = gotodepth                 // example
-   pwt          = 100                       // default
-   condition = DEPLOY = true               // example
-   condition = RETURN = false
-   updates      = GOTO_DEPTH_UPDATES        // example
-   endflag   = RETURN = true
-
-   // Parameters specific to this behavior
-   // ------------------------------------
-     capture_delta = 1                      // default (meters)
-             depth = 40,20:30,10:20,15      // example
-            repeat = 0                      // default
- }
-
-//----------------------------------------------
-Behavior=BHV_GoToDepth
 {
-  name      = gotodepth_return
-  pwt       = 100
-  condition = RETURN = true
-  condition = DEPLOY = true
-  perpetual = true
-  updates   = RETURN_UPDATE
-  endflag   = RETURN = false
+  name         = gotodepth_profile
+  pwt          = 100
+  condition    = DEPLOY = true
+  condition    = RETURN = false
+
+  capture_delta = 1
+
+  // 40m停20s -> 30m停10s -> 20m停15s -> 回到1m停5s
+  depth        = 40,20:30,10:20,15:1,5
+  repeat       = 0
+
+  // 结束后触发结束任务
   endflag   = DEPLOY = false
   endflag   = MISSION = complete
-	
-  // Parameters specific to this behavior
-   // ------------------------------------
-     capture_delta = 1                      // default (meters)
-             depth = 1      // example
- }
+}
