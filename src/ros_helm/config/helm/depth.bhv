@@ -1,4 +1,4 @@
-//--------    FILE: alpha.bhv   -------------
+//--------    FILE: depth.bhv   -------------
 
 initialize   DEPLOY = false
 initialize   RETURN = false
