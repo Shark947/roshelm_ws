@@ -15,9 +15,13 @@ struct RosNodeConfig
   std::string current_depth_topic;
   std::string current_x_topic;
   std::string current_y_topic;
+  std::string current_pitch_topic;
+  std::string current_roll_topic;
   std::string desired_heading_topic;
   std::string desired_speed_topic;
   std::string desired_depth_topic;
+  std::string desired_pitch_topic;
+  std::string desired_roll_topic;
   std::string deploy_topic;
   std::string return_topic;
   std::string frame_id{"map"};

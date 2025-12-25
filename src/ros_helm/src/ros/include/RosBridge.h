@@ -54,6 +54,8 @@ private:
   ros::Subscriber depth_sub_;
   ros::Subscriber x_sub_;
   ros::Subscriber y_sub_;
+  ros::Subscriber pitch_sub_;
+  ros::Subscriber roll_sub_;
   ros::Subscriber deploy_sub_;
   ros::Subscriber return_sub_;
 
@@ -64,6 +66,30 @@ private:
 
   std::deque<HelmMsg> pending_mail_;
   std::mutex mail_mutex_;
+
+  struct OrientationCache
+  {
+    double heading_deg{0.0};
+    double pitch_deg{0.0};
+    double roll_deg{0.0};
+    bool has_heading{false};
+    bool has_pitch{false};
+    bool has_roll{false};
+  };
+
+  OrientationCache ros_orientation_;
+
+  struct PositionCache
+  {
+    double x{0.0};
+    double y{0.0};
+    double z{0.0};
+    bool has_x{false};
+    bool has_y{false};
+    bool has_z{false};
+  };
+
+  PositionCache ros_position_;
 
   std::string log_directory_;
   std::map<std::string, std::ofstream> log_streams_;

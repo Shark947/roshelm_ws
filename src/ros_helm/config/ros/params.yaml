@@ -10,10 +10,14 @@ current_speed_topic: /auh/current_speed
 current_depth_topic: /auh/current_depth
 current_x_topic: /auh/current_x
 current_y_topic: /auh/current_y
+current_pitch_topic: /auh/current_pitch
+current_roll_topic: /auh/current_roll
 
 desired_heading_topic: /auh/desired_heading
 desired_speed_topic: /auh/desired_speed
 desired_depth_topic: /auh/desired_depth
+desired_pitch_topic: /auh/desired_pitch
+desired_roll_topic: /auh/desired_roll
 deploy_topic: /auh/DEPLOY
 return_topic: /auh/RETURN
 deploy_default: false  # require an explicit DEPLOY command before behaviors engage
@@ -25,3 +29,5 @@ nav_defaults:
   NAV_HEADING: 0.0
   NAV_SPEED: 0.0
   NAV_DEPTH: 0.0
+  NAV_PITCH: 0.0
+  NAV_ROLL: 0.0
