@@ -103,6 +103,10 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.current_x_topic);
   private_nh_.param("current_y_topic", config.current_y_topic,
                     config.current_y_topic);
+  private_nh_.param("current_pitch_topic", config.current_pitch_topic,
+                    config.current_pitch_topic);
+  private_nh_.param("current_roll_topic", config.current_roll_topic,
+                    config.current_roll_topic);
 
   private_nh_.param("desired_heading_topic", config.desired_heading_topic,
                     config.desired_heading_topic);
@@ -110,6 +114,10 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.desired_speed_topic);
   private_nh_.param("desired_depth_topic", config.desired_depth_topic,
                     config.desired_depth_topic);
+  private_nh_.param("desired_pitch_topic", config.desired_pitch_topic,
+                    config.desired_pitch_topic);
+  private_nh_.param("desired_roll_topic", config.desired_roll_topic,
+                    config.desired_roll_topic);
 
   if (config.vehicle_name.empty())
   {
@@ -127,6 +135,10 @@ bool RosConfigLoader::load(RosNodeConfig &config,
     config.current_x_topic = "/" + config.vehicle_name + "/current_x";
   if (config.current_y_topic.empty())
     config.current_y_topic = "/" + config.vehicle_name + "/current_y";
+  if (config.current_pitch_topic.empty())
+    config.current_pitch_topic = "/" + config.vehicle_name + "/current_pitch";
+  if (config.current_roll_topic.empty())
+    config.current_roll_topic = "/" + config.vehicle_name + "/current_roll";
 
   if (config.desired_heading_topic.empty())
     config.desired_heading_topic = "/" + config.vehicle_name + "/desired_heading";
@@ -134,6 +146,10 @@ bool RosConfigLoader::load(RosNodeConfig &config,
     config.desired_speed_topic = "/" + config.vehicle_name + "/desired_speed";
   if (config.desired_depth_topic.empty())
     config.desired_depth_topic = "/" + config.vehicle_name + "/desired_depth";
+  if (config.desired_pitch_topic.empty())
+    config.desired_pitch_topic = "/" + config.vehicle_name + "/desired_pitch";
+  if (config.desired_roll_topic.empty())
+    config.desired_roll_topic = "/" + config.vehicle_name + "/desired_roll";
 
   if (config.deploy_topic.empty())
     config.deploy_topic = "/" + config.vehicle_name + "/DEPLOY";
@@ -155,7 +171,8 @@ bool RosConfigLoader::loadNavDefaults(RosNodeConfig &config) const
   std::map<std::string, double> defaults = {
       {"NAV_X", 0.0},       {"NAV_Y", 0.0},
       {"NAV_HEADING", 0.0}, {"NAV_SPEED", 0.0},
-      {"NAV_DEPTH", 0.0},
+      {"NAV_DEPTH", 0.0},   {"NAV_PITCH", 0.0},
+      {"NAV_ROLL", 0.0},
   };
 
   XmlRpc::XmlRpcValue yaml_defaults;
@@ -207,8 +224,10 @@ bool RosConfigLoader::validateConfig(const RosNodeConfig &config) const
   const std::set<std::string> required_topics = {
       config.current_heading_topic, config.current_speed_topic,
       config.current_depth_topic,  config.current_x_topic,
-      config.current_y_topic,      config.desired_heading_topic,
-      config.desired_speed_topic,  config.desired_depth_topic};
+      config.current_y_topic,      config.current_pitch_topic,
+      config.current_roll_topic,   config.desired_heading_topic,
+      config.desired_speed_topic,  config.desired_depth_topic,
+      config.desired_pitch_topic,  config.desired_roll_topic};
   for (const auto &topic : required_topics)
   {
     if (topic.empty())

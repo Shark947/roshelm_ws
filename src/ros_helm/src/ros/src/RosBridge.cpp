@@ -13,7 +13,99 @@
 #include <sys/types.h>
 
 #include <ros/package.h>
+#include <tf/transform_datatypes.h>
 #include "MBUtils.h"
+
+namespace
+{
+constexpr double kDegToRad = M_PI / 180.0;
+constexpr double kRadToDeg = 180.0 / M_PI;
+
+double normalizeAngle360(double angle_deg)
+{
+  double value = std::fmod(angle_deg, 360.0);
+  if (value < 0.0)
+    value += 360.0;
+  return value;
+}
+
+tf::Matrix3x3 rosToMoosMatrix()
+{
+  return tf::Matrix3x3(0.0, 1.0, 0.0,
+                       1.0, 0.0, 0.0,
+                       0.0, 0.0, -1.0);
+}
+
+struct RpyDeg
+{
+  double roll{0.0};
+  double pitch{0.0};
+  double yaw{0.0};
+};
+
+RpyDeg convertRosToMoosRpy(double heading_deg, double pitch_deg, double roll_deg)
+{
+  tf::Matrix3x3 ros_rot;
+  ros_rot.setRPY(roll_deg * kDegToRad, pitch_deg * kDegToRad,
+                 heading_deg * kDegToRad);
+
+  tf::Matrix3x3 moos_rot = rosToMoosMatrix() * ros_rot;
+
+  double moos_roll = 0.0;
+  double moos_pitch = 0.0;
+  double moos_yaw = 0.0;
+  moos_rot.getRPY(moos_roll, moos_pitch, moos_yaw);
+
+  return {normalizeAngle360(moos_roll * kRadToDeg),
+          normalizeAngle360(moos_pitch * kRadToDeg),
+          normalizeAngle360(moos_yaw * kRadToDeg)};
+}
+
+RpyDeg convertMoosToRosRpy(double heading_deg, double pitch_deg, double roll_deg)
+{
+  tf::Matrix3x3 moos_rot;
+  moos_rot.setRPY(roll_deg * kDegToRad, pitch_deg * kDegToRad,
+                  heading_deg * kDegToRad);
+
+  tf::Matrix3x3 ros_rot = rosToMoosMatrix().transpose() * moos_rot;
+
+  double ros_roll = 0.0;
+  double ros_pitch = 0.0;
+  double ros_yaw = 0.0;
+  ros_rot.getRPY(ros_roll, ros_pitch, ros_yaw);
+
+  return {normalizeAngle360(ros_roll * kRadToDeg),
+          normalizeAngle360(ros_pitch * kRadToDeg),
+          normalizeAngle360(ros_yaw * kRadToDeg)};
+}
+
+double convertMoosDepthToRos(double moos_depth)
+{
+  const tf::Vector3 moos_pos(0.0, 0.0, moos_depth);
+  const tf::Vector3 ros_pos = rosToMoosMatrix().transpose() * moos_pos;
+  return ros_pos.getZ();
+}
+
+double convertRosSpeedToMoos(double ros_speed)
+{
+  const tf::Vector3 ros_vel(ros_speed, 0.0, 0.0);
+  const tf::Vector3 moos_vel = rosToMoosMatrix() * ros_vel;
+  return std::hypot(moos_vel.getX(), moos_vel.getY());
+}
+
+double convertMoosSpeedToRos(double moos_speed)
+{
+  const tf::Vector3 moos_vel(moos_speed, 0.0, 0.0);
+  const tf::Vector3 ros_vel = rosToMoosMatrix().transpose() * moos_vel;
+  return std::hypot(ros_vel.getX(), ros_vel.getY());
+}
+
+tf::Vector3 convertRosPositionToMoos(double x, double y, double z)
+{
+  const tf::Vector3 ros_pos(x, y, z);
+  return rosToMoosMatrix() * ros_pos;
+}
+}
 
 RosBridge::RosBridge(ros::NodeHandle &nh, ros::NodeHandle &private_nh,
                      const RosNodeConfig &config)
@@ -31,6 +123,8 @@ bool RosBridge::initialize()
   depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
   x_sub_ = subscribeCurrent(config_.current_x_topic, "NAV_X");
   y_sub_ = subscribeCurrent(config_.current_y_topic, "NAV_Y");
+  pitch_sub_ = subscribeCurrent(config_.current_pitch_topic, "NAV_PITCH");
+  roll_sub_ = subscribeCurrent(config_.current_roll_topic, "NAV_ROLL");
 
   deploy_sub_ = subscribeBoolean(config_.deploy_topic, "DEPLOY");
   return_sub_ = subscribeBoolean(config_.return_topic, "RETURN");
@@ -53,6 +147,10 @@ bool RosBridge::initialize()
       config_.desired_speed_topic, 10);
   desired_scalar_pubs_["DESIRED_DEPTH"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_depth_topic, 10);
+  desired_scalar_pubs_["DESIRED_PITCH"] = nh_.advertise<std_msgs::Float64>(
+      config_.desired_pitch_topic, 10);
+  desired_scalar_pubs_["DESIRED_ROLL"] = nh_.advertise<std_msgs::Float64>(
+      config_.desired_roll_topic, 10);
 
   const ros::Time stamp = ros::Time::now();
   for (const auto &entry : config_.nav_defaults)
@@ -111,12 +209,74 @@ void RosBridge::currentValueCallback(
     const common_msgs::Float64Stamped::ConstPtr &msg,
     const std::string &nav_key)
 {
-  if (nav_key == "NAV_HEADING")
+  if (nav_key == "NAV_HEADING" || nav_key == "NAV_PITCH" || nav_key == "NAV_ROLL")
   {
-    const double heading_moos = std::fmod(90.0 - msg->data + 360.0, 360.0);
-    enqueueNavValue(nav_key, heading_moos, msg->header.stamp);
+    if (nav_key == "NAV_HEADING")
+    {
+      ros_orientation_.heading_deg = msg->data;
+      ros_orientation_.has_heading = true;
+    }
+    else if (nav_key == "NAV_PITCH")
+    {
+      ros_orientation_.pitch_deg = msg->data;
+      ros_orientation_.has_pitch = true;
+    }
+    else
+    {
+      ros_orientation_.roll_deg = msg->data;
+      ros_orientation_.has_roll = true;
+    }
+
+    if (ros_orientation_.has_heading && ros_orientation_.has_pitch &&
+        ros_orientation_.has_roll)
+    {
+      const auto moos_rpy = convertRosToMoosRpy(
+          ros_orientation_.heading_deg,
+          ros_orientation_.pitch_deg,
+          ros_orientation_.roll_deg);
+      enqueueNavValue("NAV_HEADING", moos_rpy.yaw, msg->header.stamp);
+      enqueueNavValue("NAV_PITCH", moos_rpy.pitch, msg->header.stamp);
+      enqueueNavValue("NAV_ROLL", moos_rpy.roll, msg->header.stamp);
+    }
     return;
   }
+
+  if (nav_key == "NAV_X" || nav_key == "NAV_Y" || nav_key == "NAV_DEPTH")
+  {
+    if (nav_key == "NAV_X")
+    {
+      ros_position_.x = msg->data;
+      ros_position_.has_x = true;
+    }
+    else if (nav_key == "NAV_Y")
+    {
+      ros_position_.y = msg->data;
+      ros_position_.has_y = true;
+    }
+    else
+    {
+      ros_position_.z = msg->data;
+      ros_position_.has_z = true;
+    }
+
+    if (ros_position_.has_x && ros_position_.has_y && ros_position_.has_z)
+    {
+      const tf::Vector3 moos_pos = convertRosPositionToMoos(
+          ros_position_.x, ros_position_.y, ros_position_.z);
+      enqueueNavValue("NAV_X", moos_pos.getX(), msg->header.stamp);
+      enqueueNavValue("NAV_Y", moos_pos.getY(), msg->header.stamp);
+      enqueueNavValue("NAV_DEPTH", moos_pos.getZ(), msg->header.stamp);
+    }
+    return;
+  }
+
+  if (nav_key == "NAV_SPEED")
+  {
+    const double moos_speed = convertRosSpeedToMoos(msg->data);
+    enqueueNavValue(nav_key, moos_speed, msg->header.stamp);
+    return;
+  }
+
   enqueueNavValue(nav_key, msg->data, msg->header.stamp);
 }
 
@@ -147,26 +307,59 @@ void RosBridge::publishDesired(const HelmIvP &helm)
   if (desired.empty())
     return;
 
-  auto publish_scalar = [&](const std::string &key, ros::Publisher &pub) {
-    auto it = desired.find(key);
-    if (it != desired.end() && pub)
+  const auto now = ros::Time::now();
+
+  const bool has_heading = desired.count("DESIRED_HEADING") > 0;
+  const bool has_pitch = desired.count("DESIRED_PITCH") > 0;
+  const bool has_roll = desired.count("DESIRED_ROLL") > 0;
+
+  if (has_heading || has_pitch || has_roll)
+  {
+    const double heading = has_heading ? desired.at("DESIRED_HEADING") : 0.0;
+    const double pitch = has_pitch ? desired.at("DESIRED_PITCH") : 0.0;
+    const double roll = has_roll ? desired.at("DESIRED_ROLL") : 0.0;
+    const auto ros_rpy = convertMoosToRosRpy(heading, pitch, roll);
+
+    if (has_heading && desired_scalar_pubs_.count("DESIRED_HEADING"))
     {
       std_msgs::Float64 msg;
-      if (key == "DESIRED_HEADING")
-      {
-        msg.data = std::fmod(90.0 - it->second + 360.0, 360.0);
-      }
-      else
-      {
-        msg.data = it->second;
-      }
-      pub.publish(msg);
-      logValue(key, msg.data, ros::Time::now());
+      msg.data = ros_rpy.yaw;
+      desired_scalar_pubs_.at("DESIRED_HEADING").publish(msg);
+      logValue("DESIRED_HEADING", msg.data, now);
     }
-  };
+    if (has_pitch && desired_scalar_pubs_.count("DESIRED_PITCH"))
+    {
+      std_msgs::Float64 msg;
+      msg.data = ros_rpy.pitch;
+      desired_scalar_pubs_.at("DESIRED_PITCH").publish(msg);
+      logValue("DESIRED_PITCH", msg.data, now);
+    }
+    if (has_roll && desired_scalar_pubs_.count("DESIRED_ROLL"))
+    {
+      std_msgs::Float64 msg;
+      msg.data = ros_rpy.roll;
+      desired_scalar_pubs_.at("DESIRED_ROLL").publish(msg);
+      logValue("DESIRED_ROLL", msg.data, now);
+    }
+  }
 
-  for (auto &[key, pub] : desired_scalar_pubs_)
-    publish_scalar(key, pub);
+  if (desired.count("DESIRED_SPEED") > 0 &&
+      desired_scalar_pubs_.count("DESIRED_SPEED"))
+  {
+    std_msgs::Float64 msg;
+    msg.data = convertMoosSpeedToRos(desired.at("DESIRED_SPEED"));
+    desired_scalar_pubs_.at("DESIRED_SPEED").publish(msg);
+    logValue("DESIRED_SPEED", msg.data, now);
+  }
+
+  if (desired.count("DESIRED_DEPTH") > 0 &&
+      desired_scalar_pubs_.count("DESIRED_DEPTH"))
+  {
+    std_msgs::Float64 msg;
+    msg.data = convertMoosDepthToRos(desired.at("DESIRED_DEPTH"));
+    desired_scalar_pubs_.at("DESIRED_DEPTH").publish(msg);
+    logValue("DESIRED_DEPTH", msg.data, now);
+  }
 }
 
 std::map<std::string, double> RosBridge::collectDesiredDoubles(
@@ -198,9 +391,10 @@ std::map<std::string, double> RosBridge::collectDesiredDoubles(
 
 bool RosBridge::setupLogDirectory()
 {
-  static const std::array<std::string, 8> kLogKeys = {
+  static const std::array<std::string, 12> kLogKeys = {
       "NAV_X", "NAV_Y", "NAV_HEADING", "NAV_DEPTH",
-      "NAV_SPEED", "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
+      "NAV_SPEED", "NAV_PITCH", "NAV_ROLL", "DESIRED_HEADING",
+      "DESIRED_SPEED", "DESIRED_DEPTH", "DESIRED_PITCH", "DESIRED_ROLL"};
 
   const std::string package_path = ros::package::getPath("ros_helm");
   const std::string base_dir = package_path.empty() ? "log"
