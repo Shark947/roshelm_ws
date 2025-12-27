@@ -72,6 +72,9 @@ private:
     double heading_deg{0.0};
     double pitch_deg{0.0};
     double roll_deg{0.0};
+    ros::Time heading_stamp;
+    ros::Time pitch_stamp;
+    ros::Time roll_stamp;
     bool has_heading{false};
     bool has_pitch{false};
     bool has_roll{false};

@@ -92,6 +92,9 @@ bool RosConfigLoader::load(RosNodeConfig &config,
   private_nh_.param("loop_frequency", config.loop_frequency,
                     config.loop_frequency);
   private_nh_.param("frame_id", config.frame_id, config.frame_id);
+  private_nh_.param("orientation_sync_tolerance",
+                    config.orientation_sync_tolerance,
+                    config.orientation_sync_tolerance);
 
   private_nh_.param("current_heading_topic", config.current_heading_topic,
                     config.current_heading_topic);

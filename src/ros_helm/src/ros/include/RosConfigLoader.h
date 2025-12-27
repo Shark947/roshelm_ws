@@ -26,6 +26,7 @@ struct RosNodeConfig
   std::string return_topic;
   std::string frame_id{"map"};
   double loop_frequency{10.0};
+  double orientation_sync_tolerance{0.05};
   bool deploy_default{true};
   bool return_default{false};
   std::map<std::string, double> nav_defaults;
