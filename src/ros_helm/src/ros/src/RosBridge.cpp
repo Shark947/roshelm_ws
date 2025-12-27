@@ -49,7 +49,8 @@ RpyDeg convertRosToMoosRpy(double heading_deg, double pitch_deg, double roll_deg
   ros_rot.setRPY(roll_deg * kDegToRad, pitch_deg * kDegToRad,
                  heading_deg * kDegToRad);
 
-  tf::Matrix3x3 moos_rot = rosToMoosMatrix() * ros_rot;
+  const tf::Matrix3x3 transform = rosToMoosMatrix();
+  tf::Matrix3x3 moos_rot = transform * ros_rot * transform.transpose();
 
   double moos_roll = 0.0;
   double moos_pitch = 0.0;
@@ -67,7 +68,8 @@ RpyDeg convertMoosToRosRpy(double heading_deg, double pitch_deg, double roll_deg
   moos_rot.setRPY(roll_deg * kDegToRad, pitch_deg * kDegToRad,
                   heading_deg * kDegToRad);
 
-  tf::Matrix3x3 ros_rot = rosToMoosMatrix().transpose() * moos_rot;
+  const tf::Matrix3x3 transform = rosToMoosMatrix();
+  tf::Matrix3x3 ros_rot = transform.transpose() * moos_rot * transform;
 
   double ros_roll = 0.0;
   double ros_pitch = 0.0;
