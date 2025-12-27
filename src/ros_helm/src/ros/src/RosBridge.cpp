@@ -20,6 +20,7 @@ namespace
 {
 constexpr double kDegToRad = M_PI / 180.0;
 constexpr double kRadToDeg = 180.0 / M_PI;
+constexpr double kHeadingOffsetDeg = 180.0;
 
 double normalizeAngle360(double angle_deg)
 {
@@ -27,6 +28,11 @@ double normalizeAngle360(double angle_deg)
   if (value < 0.0)
     value += 360.0;
   return value;
+}
+
+double applyHeadingOffset(double heading_deg)
+{
+  return normalizeAngle360(heading_deg + kHeadingOffsetDeg);
 }
 
 double normalizeAngle180(double angle_deg)
@@ -53,8 +59,8 @@ double yawFromRotENU(const tf::Matrix3x3 &R_r)
 
 tf::Matrix3x3 rosToMoosMatrix()
 {
-  return tf::Matrix3x3(0.0, 1.0, 0.0,
-                       1.0, 0.0, 0.0,
+  return tf::Matrix3x3(1.0, 0.0, 0.0,
+                       0.0, 1.0, 0.0,
                        0.0, 0.0, -1.0);
 }
 
@@ -81,11 +87,12 @@ RpyDeg convertRosToMoosRpy(double heading_deg, double pitch_deg, double roll_deg
 
   return {normalizeAngle180(moos_roll * kRadToDeg),
           normalizeAngle180(moos_pitch * kRadToDeg),
-          heading_moos};
+          applyHeadingOffset(heading_moos)};
 }
 
 RpyDeg convertMoosToRosRpy(double heading_deg, double pitch_deg, double roll_deg)
 {
+  heading_deg = applyHeadingOffset(heading_deg);
   tf::Matrix3x3 moos_rot;
   moos_rot.setRPY(roll_deg * kDegToRad,
                   pitch_deg * kDegToRad,
@@ -126,7 +133,7 @@ double convertMoosSpeedToRos(double moos_speed)
 
 tf::Vector3 convertRosPositionToMoos(double x, double y, double z)
 {
-  const tf::Vector3 ros_pos(x, y, z);
+  const tf::Vector3 ros_pos(-x, -y, z);
   return rosToMoosMatrix() * ros_pos;
 }
 }
