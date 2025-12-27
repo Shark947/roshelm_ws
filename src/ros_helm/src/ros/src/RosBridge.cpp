@@ -29,6 +29,28 @@ double normalizeAngle360(double angle_deg)
   return value;
 }
 
+double normalizeAngle180(double angle_deg)
+{
+  double value = std::fmod(angle_deg + 180.0, 360.0);
+  if (value < 0.0) value += 360.0;
+  return value - 180.0;
+}
+
+double headingFromRotNED(const tf::Matrix3x3 &R_m)
+{
+  // body x-axis in world = R * [1,0,0]
+  const tf::Vector3 f = R_m * tf::Vector3(1.0, 0.0, 0.0);
+  const double chi = std::atan2(f.getY(), f.getX()) * kRadToDeg; // atan2(East, North)
+  return normalizeAngle360(chi);
+}
+
+double yawFromRotENU(const tf::Matrix3x3 &R_r)
+{
+  const tf::Vector3 f = R_r * tf::Vector3(1.0, 0.0, 0.0);
+  const double psi = std::atan2(f.getY(), f.getX()) * kRadToDeg; // atan2(North, East)
+  return normalizeAngle360(psi);
+}
+
 tf::Matrix3x3 rosToMoosMatrix()
 {
   return tf::Matrix3x3(0.0, 1.0, 0.0,
@@ -46,39 +68,39 @@ struct RpyDeg
 RpyDeg convertRosToMoosRpy(double heading_deg, double pitch_deg, double roll_deg)
 {
   tf::Matrix3x3 ros_rot;
-  ros_rot.setRPY(roll_deg * kDegToRad, pitch_deg * kDegToRad,
+  ros_rot.setRPY(roll_deg * kDegToRad,
+                 pitch_deg * kDegToRad,
                  heading_deg * kDegToRad);
 
-  const tf::Matrix3x3 transform = rosToMoosMatrix();
-  tf::Matrix3x3 moos_rot = transform * ros_rot * transform.transpose();
+  tf::Matrix3x3 moos_rot = rosToMoosMatrix() * ros_rot;
 
-  double moos_roll = 0.0;
-  double moos_pitch = 0.0;
-  double moos_yaw = 0.0;
-  moos_rot.getRPY(moos_roll, moos_pitch, moos_yaw);
+  double moos_roll = 0.0, moos_pitch = 0.0, moos_yaw_unused = 0.0;
+  moos_rot.getRPY(moos_roll, moos_pitch, moos_yaw_unused);
 
-  return {normalizeAngle360(moos_roll * kRadToDeg),
-          normalizeAngle360(moos_pitch * kRadToDeg),
-          normalizeAngle360(moos_yaw * kRadToDeg)};
+  const double heading_moos = headingFromRotNED(moos_rot);
+
+  return {normalizeAngle180(moos_roll * kRadToDeg),
+          normalizeAngle180(moos_pitch * kRadToDeg),
+          heading_moos};
 }
 
 RpyDeg convertMoosToRosRpy(double heading_deg, double pitch_deg, double roll_deg)
 {
   tf::Matrix3x3 moos_rot;
-  moos_rot.setRPY(roll_deg * kDegToRad, pitch_deg * kDegToRad,
+  moos_rot.setRPY(roll_deg * kDegToRad,
+                  pitch_deg * kDegToRad,
                   heading_deg * kDegToRad);
 
-  const tf::Matrix3x3 transform = rosToMoosMatrix();
-  tf::Matrix3x3 ros_rot = transform.transpose() * moos_rot * transform;
+  tf::Matrix3x3 ros_rot = rosToMoosMatrix().transpose() * moos_rot;
 
-  double ros_roll = 0.0;
-  double ros_pitch = 0.0;
-  double ros_yaw = 0.0;
-  ros_rot.getRPY(ros_roll, ros_pitch, ros_yaw);
+  double ros_roll = 0.0, ros_pitch = 0.0, ros_yaw_unused = 0.0;
+  ros_rot.getRPY(ros_roll, ros_pitch, ros_yaw_unused);
 
-  return {normalizeAngle360(ros_roll * kRadToDeg),
-          normalizeAngle360(ros_pitch * kRadToDeg),
-          normalizeAngle360(ros_yaw * kRadToDeg)};
+  const double yaw_ros = yawFromRotENU(ros_rot);
+
+  return {normalizeAngle180(ros_roll * kRadToDeg),
+          normalizeAngle180(ros_pitch * kRadToDeg),
+          yaw_ros};
 }
 
 double convertMoosDepthToRos(double moos_depth)
