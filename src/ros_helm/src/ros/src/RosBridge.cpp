@@ -247,6 +247,9 @@ void RosBridge::currentValueCallback(
       ros_orientation_.heading_deg = msg->data;
       ros_orientation_.heading_stamp = msg->header.stamp;
       ros_orientation_.has_heading = true;
+      const double heading_moos =
+          std::fmod(90.0 - msg->data + 360.0, 360.0);
+      enqueueNavValue(nav_key, heading_moos, msg->header.stamp);
     }
     else if (nav_key == "NAV_PITCH")
     {
@@ -308,7 +311,6 @@ void RosBridge::currentValueCallback(
           ros_orientation_.heading_deg,
           ros_orientation_.pitch_deg,
           ros_orientation_.roll_deg);
-      enqueueNavValue("NAV_HEADING", moos_rpy.yaw, msg->header.stamp);
       enqueueNavValue("NAV_PITCH", moos_rpy.pitch, msg->header.stamp);
       enqueueNavValue("NAV_ROLL", moos_rpy.roll, msg->header.stamp);
     }
@@ -397,7 +399,7 @@ void RosBridge::publishDesired(const HelmIvP &helm)
     if (has_heading && desired_scalar_pubs_.count("DESIRED_HEADING"))
     {
       std_msgs::Float64 msg;
-      msg.data = ros_rpy.yaw;
+      msg.data = std::fmod(90.0 - desired.at("DESIRED_HEADING") + 360.0, 360.0);
       desired_scalar_pubs_.at("DESIRED_HEADING").publish(msg);
       logValue("DESIRED_HEADING", msg.data, now);
     }
