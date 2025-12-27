@@ -23,7 +23,7 @@ namespace variable_extractor {
 /**
  * @brief DefaultVariableExtractor：VariableExtractorInterface 的“默认”实现，
  *        自动订阅以下变量：
- *          - DEPTH   （从 /<vehicle>/pose_gt 中提取 z 轴负值）
+ *          - DEPTH   （从 /<vehicle>/pose_gt 中提取 z 轴原值）
  *          - SPEED   （从 /<vehicle>/dvl 中提取水平速度 sqrt(vx^2+vy^2)）
  *          - HEADING （从 /<vehicle>/imu 中提取航向角(取 yaw, 转为 [0,360) )）
  *          - PITCH   （从 /<vehicle>/imu 中提取俯仰角(deg)）
@@ -93,7 +93,7 @@ public:
     if (var_upper == "DEPTH") {
       std::string topic = "/" + vehicle_name_ + "/pose_gt";
       auto cb = [this, var_upper, &var_map, debug](const nav_msgs::Odometry::ConstPtr& msg) {
-        double depth = -msg->pose.pose.position.z;  // 取负值，使海平面下 depth>0
+        double depth = msg->pose.pose.position.z;  // 取原值
         var_map[var_upper] = depth;
 
         // 发布 Float64Stamped
