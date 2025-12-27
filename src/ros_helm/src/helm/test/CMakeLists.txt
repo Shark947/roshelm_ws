@@ -47,34 +47,3 @@ target_link_libraries(test_ivp PRIVATE
   contacts
   geometry
 )
-
-add_executable(test_helm test_helm.cpp)
-target_sources(test_helm PRIVATE ${HELM_SOURCES})
-target_compile_features(test_helm PRIVATE cxx_std_17)
-target_include_directories(test_helm PRIVATE
-  ${TEST_IVP_INCLUDE_DIRS}
-  ${HELM_INCLUDE_DIRS})
-target_link_libraries(test_helm PRIVATE
-  helmivp
-  behaviors
-  behaviors-marine
-  behaviors-colregs
-  contacts
-  genutil
-  ivpcore
-  ivpbuild
-  ivpsolve
-  mbutil
-  geometry
-  turngeo
-  evalutil
-  encounters
-  obstacles
-  realm
-  ufield
-  dep_behaviors
-  manifest
-  polar
-  bhvutil
-  pthread
-  dl)
