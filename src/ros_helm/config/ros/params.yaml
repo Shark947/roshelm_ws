@@ -4,6 +4,7 @@ config_path: config/helm/startHelm.yaml
 register_variables_path: config/helm/registerVariables.yaml
 loop_frequency: 10.0
 frame_id: map
+orientation_sync_tolerance: 0.05
 vehicle_name: auh
 current_heading_topic: /auh/current_heading
 current_speed_topic: /auh/current_speed

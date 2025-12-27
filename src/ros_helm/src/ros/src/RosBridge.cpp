@@ -238,22 +238,65 @@ void RosBridge::currentValueCallback(
     if (nav_key == "NAV_HEADING")
     {
       ros_orientation_.heading_deg = msg->data;
+      ros_orientation_.heading_stamp = msg->header.stamp;
       ros_orientation_.has_heading = true;
     }
     else if (nav_key == "NAV_PITCH")
     {
       ros_orientation_.pitch_deg = msg->data;
+      ros_orientation_.pitch_stamp = msg->header.stamp;
       ros_orientation_.has_pitch = true;
     }
     else
     {
       ros_orientation_.roll_deg = msg->data;
+      ros_orientation_.roll_stamp = msg->header.stamp;
       ros_orientation_.has_roll = true;
     }
 
     if (ros_orientation_.has_heading && ros_orientation_.has_pitch &&
         ros_orientation_.has_roll)
     {
+      ros::Time min_stamp = ros_orientation_.heading_stamp;
+      ros::Time max_stamp = ros_orientation_.heading_stamp;
+      auto update_minmax = [](const ros::Time &stamp, ros::Time &min_val,
+                              ros::Time &max_val) {
+        if (stamp < min_val)
+          min_val = stamp;
+        if (stamp > max_val)
+          max_val = stamp;
+      };
+      update_minmax(ros_orientation_.pitch_stamp, min_stamp, max_stamp);
+      update_minmax(ros_orientation_.roll_stamp, min_stamp, max_stamp);
+      const double span = (max_stamp - min_stamp).toSec();
+      if (span > config_.orientation_sync_tolerance)
+      {
+        ROS_WARN_THROTTLE(1.0,
+                          "[ros_bridge] orientation sample span %.3fs exceeds "
+                          "tolerance %.3fs, waiting for synced samples",
+                          span, config_.orientation_sync_tolerance);
+        OrientationCache fresh;
+        if (nav_key == "NAV_HEADING")
+        {
+          fresh.heading_deg = msg->data;
+          fresh.heading_stamp = msg->header.stamp;
+          fresh.has_heading = true;
+        }
+        else if (nav_key == "NAV_PITCH")
+        {
+          fresh.pitch_deg = msg->data;
+          fresh.pitch_stamp = msg->header.stamp;
+          fresh.has_pitch = true;
+        }
+        else
+        {
+          fresh.roll_deg = msg->data;
+          fresh.roll_stamp = msg->header.stamp;
+          fresh.has_roll = true;
+        }
+        ros_orientation_ = fresh;
+        return;
+      }
       const auto moos_rpy = convertRosToMoosRpy(
           ros_orientation_.heading_deg,
           ros_orientation_.pitch_deg,
