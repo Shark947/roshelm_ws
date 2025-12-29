@@ -111,6 +111,11 @@ void RosBridge::currentValueCallback(
     const common_msgs::Float64Stamped::ConstPtr &msg,
     const std::string &nav_key)
 {
+  {
+    std::lock_guard<std::mutex> guard(nav_stamp_mutex_);
+    last_nav_stamp_ = msg->header.stamp;
+  }
+
   if (nav_key == "NAV_HEADING")
   {
     const double heading_moos = std::fmod(90.0 - msg->data + 360.0, 360.0);
@@ -123,12 +128,20 @@ void RosBridge::currentValueCallback(
 void RosBridge::booleanCallback(const std_msgs::Bool::ConstPtr &msg,
                                 const std::string &key)
 {
-  enqueueBoolValue(key, msg->data, ros::Time::now());
+  ros::Time stamp;
+  {
+    std::lock_guard<std::mutex> guard(nav_stamp_mutex_);
+    stamp = last_nav_stamp_;
+  }
+  if (stamp.isZero())
+    stamp = ros::Time::now();
+
+  enqueueBoolValue(key, msg->data, stamp);
 }
 
 void RosBridge::deliverPending(HelmIvP &helm)
 {
-  std::deque<HelmMsg> mail;
+  std::list<HelmMsg> mail;
   {
     std::lock_guard<std::mutex> guard(mail_mutex_);
     mail.swap(pending_mail_);
@@ -137,8 +150,7 @@ void RosBridge::deliverPending(HelmIvP &helm)
   if (mail.empty())
     return;
 
-  std::list<HelmMsg> pending(mail.begin(), mail.end());
-  helm.OnNewMail(pending);
+  helm.OnNewMail(mail);
 }
 
 void RosBridge::publishDesired(const HelmIvP &helm)
@@ -250,11 +262,29 @@ bool RosBridge::setupLogDirectory()
 void RosBridge::logValue(const std::string &name, double value,
                          const ros::Time &stamp)
 {
+  constexpr std::size_t kFlushLineInterval = 100;
+  const ros::Duration kFlushPeriod(0.1);
+
   std::lock_guard<std::mutex> guard(log_mutex_);
   auto it = log_streams_.find(name);
   if (it == log_streams_.end() || !it->second.is_open())
     return;
 
   it->second << name << ' ' << std::fixed << std::setprecision(3) << value
-             << ' ' << stamp.toSec() << std::endl;
+             << ' ' << stamp.toSec() << '\n';
+
+  ++log_lines_since_flush_;
+  ros::Time flush_time = stamp;
+  if (flush_time.isZero())
+    flush_time = ros::Time::now();
+  if (last_log_flush_time_.isZero())
+    last_log_flush_time_ = flush_time;
+
+  if (log_lines_since_flush_ >= kFlushLineInterval ||
+      (flush_time - last_log_flush_time_) >= kFlushPeriod)
+  {
+    it->second.flush();
+    log_lines_since_flush_ = 0;
+    last_log_flush_time_ = flush_time;
+  }
 }
