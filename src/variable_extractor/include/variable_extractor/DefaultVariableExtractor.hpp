@@ -24,6 +24,8 @@ namespace variable_extractor {
  * @brief DefaultVariableExtractor：VariableExtractorInterface 的“默认”实现，
  *        自动订阅以下变量：
  *          - DEPTH   （从 /<vehicle>/pose_gt 中提取 z 轴原值）
+ *          - X  （从 /<vehicle>/pose_gt 中提取 x 轴原值）
+ *          - Y  （从 /<vehicle>/pose_gt 中提取 y 轴原值）
  *          - SPEED   （从 /<vehicle>/dvl 中提取水平速度 sqrt(vx^2+vy^2)）
  *          - HEADING （从 /<vehicle>/imu 中提取航向角(取 yaw, 转为 [0,360) )）
  *          - PITCH   （从 /<vehicle>/imu 中提取俯仰角(deg)）
