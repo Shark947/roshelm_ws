@@ -7,7 +7,6 @@
 #include <set>
 #include <vector>
 #include <limits>
-#include <cmath>
 #include <algorithm>
 
 #include <nav_msgs/Odometry.h>
@@ -23,14 +22,14 @@ namespace variable_extractor {
 /**
  * @brief DefaultVariableExtractor：VariableExtractorInterface 的“默认”实现，
  *        自动订阅以下变量：
- *          - DEPTH   （从 /<vehicle>/pose_gt 中提取 z 轴原值）
  *          - X  （从 /<vehicle>/pose_gt 中提取 x 轴原值）
  *          - Y  （从 /<vehicle>/pose_gt 中提取 y 轴原值）
- *          - SPEED   （从 /<vehicle>/dvl 中提取水平速度 sqrt(vx^2+vy^2)）
- *          - HEADING （从 /<vehicle>/imu 中提取航向角(取 yaw, 转为 [0,360) )）
- *          - PITCH   （从 /<vehicle>/imu 中提取俯仰角(deg)）
- *          - ROLL    （从 /<vehicle>/imu 中提取滚转角(deg)）
- *          - ALTITUDE（从 /<vehicle>/dvl 中直接读取 altitude）
+ *          - Z  （从 /<vehicle>/pose_gt 中提取 z 轴原值）
+ *          - VX （从 /<vehicle>/dvl 中提取 x 方向速度）
+ *          - VY （从 /<vehicle>/dvl 中提取 y 方向速度）
+ *          - YAW   （从 /<vehicle>/imu 中提取航向角(rad)）
+ *          - PITCH （从 /<vehicle>/imu 中提取俯仰角(rad)）
+ *          - ROLL  （从 /<vehicle>/imu 中提取滚转角(rad)）
  *        提取后，将数值写入外部传入的 var_map[var_name]，同时发布到
  *        /<vehicle>/current_<var_name> 话题（消息类型：common_msgs/Float64Stamped）。
  */
@@ -57,8 +56,7 @@ public:
 
   std::vector<std::string> supportedVariables() const override {
     // 插件实际支持的变量列表
-    return {"DEPTH", "SPEED", "HEADING", "PITCH", "ROLL", "ALTITUDE",
-            "X",     "Y"};
+    return {"X", "Y", "Z", "VX", "VY", "YAW", "PITCH", "ROLL"};
 }
 
   void subscribe(const std::string& var_name_in,
@@ -92,34 +90,13 @@ public:
     var_map[var_upper] = std::numeric_limits<double>::quiet_NaN();
 
     // 4) 根据 var_upper 选择订阅逻辑
-    if (var_upper == "DEPTH") {
-      std::string topic = "/" + vehicle_name_ + "/pose_gt";
-      auto cb = [this, var_upper, &var_map, debug](const nav_msgs::Odometry::ConstPtr& msg) {
-        double depth = msg->pose.pose.position.z;  // 取原值
-        var_map[var_upper] = depth;
-
-        // 发布 Float64Stamped
-        common_msgs::Float64Stamped out;
-        out.header  = msg->header;
-        out.data    = depth;
-        pubs_[var_upper].publish(out);
-
-        if (debug) {
-          ROS_DEBUG_STREAM("[DefaultVarExt][DEPTH] published "
-                            << depth << " @ " << msg->header.stamp);
-        }
-      };
-      ros::Subscriber sub =
-        nh_parent.subscribe<nav_msgs::Odometry>(topic, 2, cb);
-      subs_.push_back(sub);
-
-    }
-    else if (var_upper == "X") {
+    if (var_upper == "X") {
       std::string topic = "/" + vehicle_name_ + "/pose_gt";
       auto cb = [this, var_upper, &var_map, debug](const nav_msgs::Odometry::ConstPtr& msg) {
         double x = msg->pose.pose.position.x;
         var_map[var_upper] = x;
 
+        // 发布 Float64Stamped
         common_msgs::Float64Stamped out;
         out.header  = msg->header;
         out.data    = x;
@@ -156,22 +133,41 @@ public:
       subs_.push_back(sub);
 
     }
-    else if (var_upper == "SPEED") {
-      std::string topic = "/" + vehicle_name_ + "/dvl";
-      auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
-        double vx    = msg->velocity.x;
-        double vy    = msg->velocity.y;
-        double speed = std::hypot(vx, vy);
-        var_map[var_upper] = speed;
+    else if (var_upper == "Z") {
+      std::string topic = "/" + vehicle_name_ + "/pose_gt";
+      auto cb = [this, var_upper, &var_map, debug](const nav_msgs::Odometry::ConstPtr& msg) {
+        double z = msg->pose.pose.position.z;
+        var_map[var_upper] = z;
 
         common_msgs::Float64Stamped out;
-        out.header.stamp = msg->header.stamp;
-        out.data         = speed;
+        out.header  = msg->header;
+        out.data    = z;
         pubs_[var_upper].publish(out);
 
         if (debug) {
-          ROS_DEBUG_STREAM("[DefaultVarExt][SPEED] published "
-                           << speed << " @ " << msg->header.stamp);
+          ROS_DEBUG_STREAM("[DefaultVarExt][Z] published "
+                           << z << " @ " << msg->header.stamp);
+        }
+      };
+      ros::Subscriber sub =
+        nh_parent.subscribe<nav_msgs::Odometry>(topic, 2, cb);
+      subs_.push_back(sub);
+
+    }
+    else if (var_upper == "VX") {
+      std::string topic = "/" + vehicle_name_ + "/dvl";
+      auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
+        double vx = msg->velocity.x;
+        var_map[var_upper] = vx;
+
+        common_msgs::Float64Stamped out;
+        out.header.stamp = msg->header.stamp;
+        out.data         = vx;
+        pubs_[var_upper].publish(out);
+
+        if (debug) {
+          ROS_DEBUG_STREAM("[DefaultVarExt][VX] published "
+                           << vx << " @ " << msg->header.stamp);
         }
       };
       ros::Subscriber sub =
@@ -179,24 +175,44 @@ public:
       subs_.push_back(sub);
 
     }
-    else if (var_upper == "HEADING") {
+    else if (var_upper == "VY") {
+      std::string topic = "/" + vehicle_name_ + "/dvl";
+      auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
+        double vy = msg->velocity.y;
+        var_map[var_upper] = vy;
+
+        common_msgs::Float64Stamped out;
+        out.header.stamp = msg->header.stamp;
+        out.data         = vy;
+        pubs_[var_upper].publish(out);
+
+        if (debug) {
+          ROS_DEBUG_STREAM("[DefaultVarExt][VY] published "
+                           << vy << " @ " << msg->header.stamp);
+        }
+      };
+      ros::Subscriber sub =
+        nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
+      subs_.push_back(sub);
+
+    }
+    else if (var_upper == "YAW") {
       std::string topic = "/" + vehicle_name_ + "/imu";
       auto cb = [this, var_upper, &var_map, debug](const sensor_msgs::Imu::ConstPtr& msg) {
         const auto& q = msg->orientation;
         tf::Quaternion tf_q(q.x, q.y, q.z, q.w);
         double roll, pitch, yaw;
         tf::Matrix3x3(tf_q).getRPY(roll, pitch, yaw);
-        double heading = std::fmod((yaw * 180.0/M_PI + 360.0), 360.0);
-        var_map[var_upper] = heading;
+        var_map[var_upper] = yaw;
 
         common_msgs::Float64Stamped out;
         out.header.stamp = msg->header.stamp;
-        out.data         = heading;
+        out.data         = yaw;
         pubs_[var_upper].publish(out);
 
         if (debug) {
-          ROS_DEBUG_STREAM("[DefaultVarExt][HEADING] published "
-                           << heading << " @ " << msg->header.stamp);
+          ROS_DEBUG_STREAM("[DefaultVarExt][YAW] published "
+                           << yaw << " @ " << msg->header.stamp);
         }
       };
       ros::Subscriber sub =
@@ -211,17 +227,16 @@ public:
         tf::Quaternion tf_q(q.x, q.y, q.z, q.w);
         double roll, pitch, yaw;
         tf::Matrix3x3(tf_q).getRPY(roll, pitch, yaw);
-        double pitch_deg = pitch * 180.0/M_PI;
-        var_map[var_upper] = pitch_deg;
+        var_map[var_upper] = pitch;
 
         common_msgs::Float64Stamped out;
         out.header.stamp = msg->header.stamp;
-        out.data         = pitch_deg;
+        out.data         = pitch;
         pubs_[var_upper].publish(out);
 
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][PITCH] published "
-                           << pitch_deg << " @ " << msg->header.stamp);
+                           << pitch << " @ " << msg->header.stamp);
         }
       };
       ros::Subscriber sub =
@@ -236,42 +251,20 @@ public:
         tf::Quaternion tf_q(q.x, q.y, q.z, q.w);
         double roll, pitch, yaw;
         tf::Matrix3x3(tf_q).getRPY(roll, pitch, yaw);
-        double roll_deg = roll * 180.0/M_PI;
-        var_map[var_upper] = roll_deg;
+        var_map[var_upper] = roll;
 
         common_msgs::Float64Stamped out;
         out.header.stamp = msg->header.stamp;
-        out.data         = roll_deg;
+        out.data         = roll;
         pubs_[var_upper].publish(out);
 
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][ROLL] published "
-                           << roll_deg << " @ " << msg->header.stamp);
+                           << roll << " @ " << msg->header.stamp);
         }
       };
       ros::Subscriber sub =
         nh_parent.subscribe<sensor_msgs::Imu>(topic, 2, cb);
-      subs_.push_back(sub);
-
-    }
-    else if (var_upper == "ALTITUDE") {
-      std::string topic = "/" + vehicle_name_ + "/dvl";
-      auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
-        double alt = msg->altitude;
-        var_map[var_upper] = alt;
-
-        common_msgs::Float64Stamped out;
-        out.header.stamp = msg->header.stamp;
-        out.data         = alt;
-        pubs_[var_upper].publish(out);
-
-        if (debug) {
-          ROS_DEBUG_STREAM("[DefaultVarExt][ALTITUDE] published "
-                           << alt << " @ " << msg->header.stamp);
-        }
-      };
-      ros::Subscriber sub =
-        nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
       subs_.push_back(sub);
 
     }
