@@ -1,7 +1,7 @@
 #pragma once
 
-#include <deque>
 #include <fstream>
+#include <list>
 #include <map>
 #include <mutex>
 #include <string>
@@ -62,10 +62,14 @@ private:
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
 
-  std::deque<HelmMsg> pending_mail_;
+  std::list<HelmMsg> pending_mail_;
   std::mutex mail_mutex_;
 
   std::string log_directory_;
   std::map<std::string, std::ofstream> log_streams_;
   std::mutex log_mutex_;
+  std::size_t log_lines_since_flush_{0};
+  ros::Time last_log_flush_time_;
+  ros::Time last_nav_stamp_;
+  std::mutex nav_stamp_mutex_;
 };
