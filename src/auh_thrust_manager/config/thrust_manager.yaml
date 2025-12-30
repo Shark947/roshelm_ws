@@ -18,7 +18,7 @@ thrust_manager:
      0,  0, -1, -1,  1,  1
   ]
 
-  buoyancy_compensation: -20
+  buoyancy_compensation: -30
   vertical_thrusters: [2, 3, 4, 5]
 
   # 速度线性俯仰补偿：pitch_speed_gain * speed
