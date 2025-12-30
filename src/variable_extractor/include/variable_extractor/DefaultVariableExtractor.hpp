@@ -175,14 +175,13 @@ public:
         out.data         = vx;
         pubs_[var_upper].publish(out);
 
-        publishSpeed(msg->header.stamp, var_map, debug);
+        updateSpeed(var_map, debug);
 
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][VX] published "
                            << vx << " @ " << msg->header.stamp);
         }
       };
-      ensureSpeedPublisher(nh_parent);
       ros::Subscriber sub =
         nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
       subs_.push_back(sub);
@@ -203,24 +202,22 @@ public:
         out.data         = vy;
         pubs_[var_upper].publish(out);
 
-        publishSpeed(msg->header.stamp, var_map, debug);
+        updateSpeed(var_map, debug);
 
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][VY] published "
                            << vy << " @ " << msg->header.stamp);
         }
       };
-      ensureSpeedPublisher(nh_parent);
       ros::Subscriber sub =
         nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
       subs_.push_back(sub);
 
     }
     else if (var_upper == "SPEED") {
-      ensureSpeedPublisher(nh_parent);
-      // 速度由 VX/VY 计算得到，这里仅保证变量存在并复用 speed 发布器
-      if (!speed_pub_ready_) {
-        ROS_WARN_STREAM("[DefaultVarExt] SPEED publisher not ready.");
+      // 速度由 VX/VY 计算得到，这里仅保证变量存在
+      if (!have_vx_ || !have_vy_) {
+        ROS_WARN_STREAM("[DefaultVarExt] SPEED unavailable until VX/VY are received.");
       }
     }
     else if (var_upper == "YAW") {
@@ -304,20 +301,8 @@ public:
   }
 
 private:
-  void ensureSpeedPublisher(ros::NodeHandle& nh_parent) {
-    if (speed_pub_ready_) {
-      return;
-    }
-    std::string speed_topic = "/" + vehicle_name_ + "/current_speed";
-    ROS_INFO_STREAM("[DefaultVarExt] Advertising topic: " << speed_topic);
-    speed_pub_ = nh_parent.advertise<common_msgs::Float64Stamped>(speed_topic, 1);
-    speed_pub_ready_ = true;
-  }
-
-  void publishSpeed(const ros::Time& stamp,
-                    std::map<std::string, double>& var_map,
-                    bool debug) {
-    if (!speed_pub_ready_ || !(have_vx_ && have_vy_)) {
+  void updateSpeed(std::map<std::string, double>& var_map, bool debug) {
+    if (!(have_vx_ && have_vy_)) {
       return;
     }
     double speed = std::hypot(latest_vx_, latest_vy_);
@@ -325,15 +310,8 @@ private:
     if (it != var_map.end()) {
       it->second = speed;
     }
-
-    common_msgs::Float64Stamped out;
-    out.header.stamp = stamp;
-    out.data = speed;
-    speed_pub_.publish(out);
-
     if (debug) {
-      ROS_DEBUG_STREAM("[DefaultVarExt][SPEED] published "
-                       << speed << " @ " << stamp);
+      ROS_DEBUG_STREAM("[DefaultVarExt][SPEED] updated " << speed);
     }
   }
 
@@ -341,8 +319,6 @@ private:
   std::set<std::string> subscribed_vars_;        ///< 已经订阅的变量（大写形式）
   std::vector<ros::Subscriber> subs_;            ///< 保存 Subscriber 以免析构
   std::map<std::string, ros::Publisher> pubs_;   ///< var_upper -> Publisher
-  ros::Publisher speed_pub_;                     ///< current_speed Publisher
-  bool speed_pub_ready_{false};
   double latest_vx_{0.0};
   double latest_vy_{0.0};
   bool have_vx_{false};
