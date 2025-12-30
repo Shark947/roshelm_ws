@@ -28,9 +28,6 @@ bool RosBridge::initialize()
   if (!setupLogDirectory())
     return false;
 
-  heading_sub_ = subscribeCurrent(config_.current_heading_topic, "NAV_HEADING");
-  speed_sub_ = subscribeCurrent(config_.current_speed_topic, "NAV_SPEED");
-  depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
   x_sub_ = subscribeCurrent(config_.current_x_topic, "NAV_X");
   y_sub_ = subscribeCurrent(config_.current_y_topic, "NAV_Y");
   z_sub_ = subscribeCurrent(config_.current_z_topic, "NAV_Z");
@@ -105,10 +102,77 @@ void RosBridge::currentValueCallback(
     last_nav_stamp_ = msg->header.stamp;
   }
 
-  if (nav_key == "NAV_HEADING")
+  if (nav_key == "NAV_Z")
   {
-    const double heading_moos = std::fmod(90.0 - msg->data + 360.0, 360.0);
-    enqueueNavValue(nav_key, heading_moos, msg->header.stamp);
+    enqueueNavValue("NAV_DEPTH", -msg->data, msg->header.stamp);
+    enqueueNavValue(nav_key, msg->data, msg->header.stamp);
+    return;
+  }
+  if (nav_key == "NAV_VX" || nav_key == "NAV_VY")
+  {
+    constexpr double kStampTolSec = 0.02;
+    bool ready = false;
+    double vx = 0.0;
+    double vy = 0.0;
+    ros::Time stamp;
+
+    {
+      std::lock_guard<std::mutex> guard(speed_mutex_);
+      if (nav_key == "NAV_VX")
+      {
+        speed_cache_.vx = msg->data;
+        speed_cache_.stamp_vx = msg->header.stamp;
+        speed_cache_.has_vx = true;
+      }
+      else
+      {
+        speed_cache_.vy = msg->data;
+        speed_cache_.stamp_vy = msg->header.stamp;
+        speed_cache_.has_vy = true;
+      }
+
+      if (speed_cache_.has_vx && speed_cache_.has_vy)
+      {
+        const double dt = std::fabs(
+            (speed_cache_.stamp_vx - speed_cache_.stamp_vy).toSec());
+        if (dt <= kStampTolSec)
+        {
+          vx = speed_cache_.vx;
+          vy = speed_cache_.vy;
+          stamp = speed_cache_.stamp_vx;
+          if (speed_cache_.stamp_vy > stamp)
+            stamp = speed_cache_.stamp_vy;
+          ready = true;
+          speed_cache_.reset();
+        }
+        else
+        {
+          const double value = msg->data;
+          const ros::Time value_stamp = msg->header.stamp;
+          speed_cache_.reset();
+          if (nav_key == "NAV_VX")
+          {
+            speed_cache_.vx = value;
+            speed_cache_.stamp_vx = value_stamp;
+            speed_cache_.has_vx = true;
+          }
+          else
+          {
+            speed_cache_.vy = value;
+            speed_cache_.stamp_vy = value_stamp;
+            speed_cache_.has_vy = true;
+          }
+        }
+      }
+    }
+
+    if (ready)
+    {
+      const double nav_speed = std::hypot(vx, vy);
+      enqueueNavValue("NAV_SPEED", nav_speed, stamp);
+    }
+
+    enqueueNavValue(nav_key, msg->data, msg->header.stamp);
     return;
   }
   if (nav_key == "ROS_YAW" || nav_key == "ROS_PITCH" || nav_key == "ROS_ROLL")
@@ -235,7 +299,8 @@ void RosBridge::currentValueCallback(
     enqueueNavValue("NAV_PITCH", nav_pitch, stamp);
     enqueueNavValue("NAV_ROLL", nav_roll, stamp);
     constexpr double kRadToDeg = 180.0 / M_PI;
-    enqueueNavValue("TEXT_HEADING", -nav_yaw * kRadToDeg, stamp);
+    const double nav_heading = std::fmod(-nav_yaw * kRadToDeg + 360.0, 360.0);
+    enqueueNavValue("NAV_HEADING", nav_heading, stamp);
     return;
   }
   enqueueNavValue(nav_key, msg->data, msg->header.stamp);
@@ -318,10 +383,10 @@ std::map<std::string, double> RosBridge::collectDesiredDoubles(
 
 bool RosBridge::setupLogDirectory()
 {
-  static const std::array<std::string, 12> kLogKeys = {
+  static const std::array<std::string, 11> kLogKeys = {
       "NAV_X", "NAV_Y", "NAV_HEADING", "NAV_DEPTH",
       "NAV_SPEED", "NAV_YAW", "NAV_PITCH", "NAV_ROLL",
-      "TEXT_HEADING", "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
+      "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
 
   const std::string package_path = ros::package::getPath("ros_helm");
   const std::string base_dir = package_path.empty() ? "log"

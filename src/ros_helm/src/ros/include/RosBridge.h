@@ -69,13 +69,30 @@ private:
     }
   };
 
+  struct SpeedCache
+  {
+    double vx{0.0};
+    double vy{0.0};
+    ros::Time stamp_vx;
+    ros::Time stamp_vy;
+    bool has_vx{false};
+    bool has_vy{false};
+
+    void reset()
+    {
+      vx = 0.0;
+      vy = 0.0;
+      stamp_vx = ros::Time();
+      stamp_vy = ros::Time();
+      has_vx = false;
+      has_vy = false;
+    }
+  };
+
   ros::NodeHandle nh_;
   ros::NodeHandle private_nh_;
   RosNodeConfig config_;
 
-  ros::Subscriber heading_sub_;
-  ros::Subscriber speed_sub_;
-  ros::Subscriber depth_sub_;
   ros::Subscriber x_sub_;
   ros::Subscriber y_sub_;
   ros::Subscriber z_sub_;
@@ -101,4 +118,6 @@ private:
 
   AttitudeCache attitude_cache_;
   std::mutex attitude_mutex_;
+  SpeedCache speed_cache_;
+  std::mutex speed_mutex_;
 };
