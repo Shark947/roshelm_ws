@@ -3,6 +3,7 @@
 #include "HelmIvP.h"
 #include "RosBridge.h"
 #include "RosConfigLoader.h"
+#include "RosNavPublisher.h"
 
 int main(int argc, char **argv)
 {
@@ -34,6 +35,13 @@ int main(int argc, char **argv)
   if (!bridge.initialize())
   {
     ROS_ERROR("RosBridge initialization failed");
+    return 1;
+  }
+
+  RosNavPublisher nav_publisher(nh);
+  if (!nav_publisher.initialize(config.vehicle_name))
+  {
+    ROS_ERROR("RosNavPublisher initialization failed");
     return 1;
   }
 

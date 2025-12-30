@@ -1,7 +1,8 @@
 add_executable(ros_helm_node
   src/ros_node_main.cpp
   src/RosBridge.cpp
-  src/RosConfigLoader.cpp)
+  src/RosConfigLoader.cpp
+  src/RosNavPublisher.cpp)
 
 target_include_directories(ros_helm_node PRIVATE
   ${catkin_INCLUDE_DIRS}
@@ -14,10 +15,12 @@ target_link_libraries(ros_helm_node
   ${catkin_LIBRARIES})
 
 add_executable(ros_nav_publish
-  src/RosNavPublish.cpp)
+  src/RosNavPublish.cpp
+  src/RosNavPublisher.cpp)
 
 target_include_directories(ros_nav_publish PRIVATE
-  ${catkin_INCLUDE_DIRS})
+  ${catkin_INCLUDE_DIRS}
+  ${ROS_HELM_SOURCE_DIR}/src/ros/include)
 
 target_link_libraries(ros_nav_publish
   ${catkin_LIBRARIES})
