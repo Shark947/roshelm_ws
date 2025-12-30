@@ -10,7 +10,7 @@ controllers:
     output_limit: 200.0
     output_reverse: true
     is_angle: true
-    debug: true
+    debug: false
   pid_depth:
     controller_type: pid
     controlled_variable: depth
@@ -19,9 +19,9 @@ controllers:
     Kd: 48
     integral_limit: 6.0
     output_limit: 200.0
-    output_reverse: false
+    output_reverse: true
     is_angle: false
-    debug: true
+    debug: false
   pid_speed:
     controller_type: pid
     controlled_variable: speed
@@ -32,4 +32,15 @@ controllers:
     output_limit: 200.0
     output_reverse: false
     is_angle: false
+    debug: false
+  pid_pitch:
+    controller_type: pid
+    controlled_variable: pitch
+    Kp: 0.5
+    Ki: 0.01
+    Kd: 1.6
+    integral_limit: 1.0
+    output_limit: 200.0
+    output_reverse: false
+    is_angle: true
     debug: true
