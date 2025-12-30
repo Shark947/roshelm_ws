@@ -5,7 +5,10 @@
 namespace auh_thrust_manager {
 
 ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thruster_count)
-    : vehicle_name_(ns), thruster_count_(thruster_count)
+    : vehicle_name_(ns),
+      thruster_count_(thruster_count),
+      current_speed_(0.0),
+      current_speed_received_(false)
 {
     input_signals_.resize(5, 0.0);
     input_received_.resize(5, false);
@@ -47,6 +50,9 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thr
         subs_.emplace_back(nh.subscribe<std_msgs::Float64>(
             topic, 1, boost::bind(&ThrustManager::inputCallback, this, _1, i)));
     }
+    std::string speed_topic = "/" + vehicle_name_ + "/current_speed";
+    current_speed_sub_ = nh.subscribe<common_msgs::Float64Stamped>(
+        speed_topic, 1, &ThrustManager::currentSpeedCallback, this);
 
     // 设置输出话题
     for (int i = 0; i < thruster_count_; ++i) {
@@ -61,6 +67,11 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thr
 void ThrustManager::inputCallback(const std_msgs::Float64::ConstPtr& msg, int index) {
     input_signals_[index] = msg->data;
     input_received_[index] = true;
+}
+
+void ThrustManager::currentSpeedCallback(const common_msgs::Float64Stamped::ConstPtr& msg) {
+    current_speed_ = msg->data;
+    current_speed_received_ = true;
 }
 
 void ThrustManager::computeThrust(const ros::TimerEvent&) {
@@ -82,8 +93,8 @@ void ThrustManager::computeThrust(const ros::TimerEvent&) {
     }
 
     // 根据速度的线性俯仰补偿
-    if (pitch_speed_gain_ != 0.0 && input_received_[0]) {
-        const double pitch_speed_thrust = input_signals_[0] * pitch_speed_gain_;
+    if (pitch_speed_gain_ != 0.0 && current_speed_received_) {
+        const double pitch_speed_thrust = current_speed_ * pitch_speed_gain_;
         for (int idx : pitch_speed_up_thruster_indices_) {
             if (idx >= 0 && idx < thruster_count_)
                 thrust_values[idx] += pitch_speed_thrust;

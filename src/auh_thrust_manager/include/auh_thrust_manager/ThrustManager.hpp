@@ -4,6 +4,7 @@
 #include <std_msgs/Float64.h>
 #include <vector>
 #include <string>
+#include <common_msgs/Float64Stamped.h>
 
 namespace auh_thrust_manager {
 
@@ -21,6 +22,9 @@ private:
     std::vector<ros::Publisher> pubs_;
     std::vector<double> input_signals_;
     std::vector<bool> input_received_;
+    ros::Subscriber current_speed_sub_;
+    double current_speed_;
+    bool current_speed_received_;
 
     // 浮力补偿
     double buoyancy_compensation_;
@@ -34,6 +38,7 @@ private:
     ros::Timer timer_;
 
     void inputCallback(const std_msgs::Float64::ConstPtr& msg, int index);
+    void currentSpeedCallback(const common_msgs::Float64Stamped::ConstPtr& msg);
     void computeThrust(const ros::TimerEvent&);
 };
 
