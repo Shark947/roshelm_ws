@@ -4,15 +4,16 @@
 #include <list>
 #include <map>
 #include <mutex>
+#include <memory>
 #include <string>
 #include <ros/ros.h>
 #include <common_msgs/Float64Stamped.h>
 #include <std_msgs/Float64.h>
-#include <std_msgs/Bool.h>
 
 #include "HelmIvP.h"
 #include "HelmMsg.h"
 #include "Notify.h"
+#include "RosCommandPublisher.h"
 #include "RosConfigLoader.h"
 
 class RosBridge
@@ -35,13 +36,10 @@ private:
                         const ros::Time &stamp);
   ros::Subscriber subscribeCurrent(const std::string &topic,
                                    const std::string &nav_key);
-  ros::Subscriber subscribeBoolean(const std::string &topic,
-                                   const std::string &key);
 
   void currentValueCallback(const common_msgs::Float64Stamped::ConstPtr &msg,
                             const std::string &nav_key);
-  void booleanCallback(const std_msgs::Bool::ConstPtr &msg,
-                       const std::string &key);
+  ros::Time getNavStamp() const;
   bool setupLogDirectory();
   void logValue(const std::string &name, double value, const ros::Time &stamp);
 
@@ -54,11 +52,7 @@ private:
   ros::Subscriber depth_sub_;
   ros::Subscriber x_sub_;
   ros::Subscriber y_sub_;
-  ros::Subscriber deploy_sub_;
-  ros::Subscriber return_sub_;
-
-  ros::Publisher deploy_pub_;
-  ros::Publisher return_pub_;
+  std::unique_ptr<RosCommandPublisher> command_publisher_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
 
@@ -71,5 +65,5 @@ private:
   std::size_t log_lines_since_flush_{0};
   ros::Time last_log_flush_time_;
   ros::Time last_nav_stamp_;
-  std::mutex nav_stamp_mutex_;
+  mutable std::mutex nav_stamp_mutex_;
 };

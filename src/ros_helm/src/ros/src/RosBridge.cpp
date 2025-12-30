@@ -32,20 +32,14 @@ bool RosBridge::initialize()
   x_sub_ = subscribeCurrent(config_.current_x_topic, "NAV_X");
   y_sub_ = subscribeCurrent(config_.current_y_topic, "NAV_Y");
 
-  deploy_sub_ = subscribeBoolean(config_.deploy_topic, "DEPLOY");
-  return_sub_ = subscribeBoolean(config_.return_topic, "RETURN");
-
-  deploy_pub_ = nh_.advertise<std_msgs::Bool>(config_.deploy_topic, 1, true);
-  return_pub_ = nh_.advertise<std_msgs::Bool>(config_.return_topic, 1, true);
-
-  std_msgs::Bool default_msg;
-  default_msg.data = config_.deploy_default;
-  deploy_pub_.publish(default_msg);
-  enqueueBoolValue("DEPLOY", default_msg.data, ros::Time::now());
-
-  default_msg.data = config_.return_default;
-  return_pub_.publish(default_msg);
-  enqueueBoolValue("RETURN", default_msg.data, ros::Time::now());
+  command_publisher_ = std::make_unique<RosCommandPublisher>(
+      nh_, config_,
+      [this](const std::string &key, bool value, const ros::Time &stamp) {
+        enqueueBoolValue(key, value, stamp);
+      },
+      [this]() { return getNavStamp(); });
+  if (!command_publisher_->initialize())
+    return false;
 
   desired_scalar_pubs_["DESIRED_HEADING"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_heading_topic, 10);
@@ -94,19 +88,6 @@ ros::Subscriber RosBridge::subscribeCurrent(const std::string &topic,
       });
 }
 
-ros::Subscriber RosBridge::subscribeBoolean(const std::string &topic,
-                                            const std::string &key)
-{
-  if (topic.empty())
-    return {};
-
-  return nh_.subscribe<std_msgs::Bool>(
-      topic, 10,
-      [this, key](const std_msgs::Bool::ConstPtr &msg) {
-        this->booleanCallback(msg, key);
-      });
-}
-
 void RosBridge::currentValueCallback(
     const common_msgs::Float64Stamped::ConstPtr &msg,
     const std::string &nav_key)
@@ -125,18 +106,10 @@ void RosBridge::currentValueCallback(
   enqueueNavValue(nav_key, msg->data, msg->header.stamp);
 }
 
-void RosBridge::booleanCallback(const std_msgs::Bool::ConstPtr &msg,
-                                const std::string &key)
+ros::Time RosBridge::getNavStamp() const
 {
-  ros::Time stamp;
-  {
-    std::lock_guard<std::mutex> guard(nav_stamp_mutex_);
-    stamp = last_nav_stamp_;
-  }
-  if (stamp.isZero())
-    stamp = ros::Time::now();
-
-  enqueueBoolValue(key, msg->data, stamp);
+  std::lock_guard<std::mutex> guard(nav_stamp_mutex_);
+  return last_nav_stamp_;
 }
 
 void RosBridge::deliverPending(HelmIvP &helm)

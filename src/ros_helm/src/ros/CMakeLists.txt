@@ -1,6 +1,7 @@
 add_executable(ros_helm_node
   src/ros_node_main.cpp
   src/RosBridge.cpp
+  src/RosCommandPublisher.cpp
   src/RosConfigLoader.cpp
   src/RosNavPublisher.cpp)
 
