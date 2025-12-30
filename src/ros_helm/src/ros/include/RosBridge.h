@@ -43,6 +43,32 @@ private:
   bool setupLogDirectory();
   void logValue(const std::string &name, double value, const ros::Time &stamp);
 
+  struct AttitudeCache
+  {
+    double yaw{0.0};
+    double pitch{0.0};
+    double roll{0.0};
+    ros::Time stamp_yaw;
+    ros::Time stamp_pitch;
+    ros::Time stamp_roll;
+    bool has_yaw{false};
+    bool has_pitch{false};
+    bool has_roll{false};
+
+    void reset()
+    {
+      yaw = 0.0;
+      pitch = 0.0;
+      roll = 0.0;
+      stamp_yaw = ros::Time();
+      stamp_pitch = ros::Time();
+      stamp_roll = ros::Time();
+      has_yaw = false;
+      has_pitch = false;
+      has_roll = false;
+    }
+  };
+
   ros::NodeHandle nh_;
   ros::NodeHandle private_nh_;
   RosNodeConfig config_;
@@ -72,4 +98,7 @@ private:
   ros::Time last_log_flush_time_;
   ros::Time last_nav_stamp_;
   mutable std::mutex nav_stamp_mutex_;
+
+  AttitudeCache attitude_cache_;
+  std::mutex attitude_mutex_;
 };

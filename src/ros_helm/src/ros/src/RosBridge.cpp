@@ -1,6 +1,7 @@
 #include "RosBridge.h"
 
 #include <array>
+#include <algorithm>
 #include <cmath>
 #include <chrono>
 #include <ctime>
@@ -13,6 +14,7 @@
 #include <sys/types.h>
 
 #include <ros/package.h>
+#include <tf/transform_datatypes.h>
 #include "MBUtils.h"
 
 RosBridge::RosBridge(ros::NodeHandle &nh, ros::NodeHandle &private_nh,
@@ -34,9 +36,9 @@ bool RosBridge::initialize()
   z_sub_ = subscribeCurrent(config_.current_z_topic, "NAV_Z");
   vx_sub_ = subscribeCurrent(config_.current_vx_topic, "NAV_VX");
   vy_sub_ = subscribeCurrent(config_.current_vy_topic, "NAV_VY");
-  yaw_sub_ = subscribeCurrent(config_.current_yaw_topic, "NAV_YAW");
-  pitch_sub_ = subscribeCurrent(config_.current_pitch_topic, "NAV_PITCH");
-  roll_sub_ = subscribeCurrent(config_.current_roll_topic, "NAV_ROLL");
+  yaw_sub_ = subscribeCurrent(config_.current_yaw_topic, "ROS_YAW");
+  pitch_sub_ = subscribeCurrent(config_.current_pitch_topic, "ROS_PITCH");
+  roll_sub_ = subscribeCurrent(config_.current_roll_topic, "ROS_ROLL");
 
   command_publisher_ = std::make_unique<RosCommandPublisher>(
       nh_, config_,
@@ -107,6 +109,133 @@ void RosBridge::currentValueCallback(
   {
     const double heading_moos = std::fmod(90.0 - msg->data + 360.0, 360.0);
     enqueueNavValue(nav_key, heading_moos, msg->header.stamp);
+    return;
+  }
+  if (nav_key == "ROS_YAW" || nav_key == "ROS_PITCH" || nav_key == "ROS_ROLL")
+  {
+    constexpr double kStampTolSec = 0.02;
+    bool ready = false;
+    double yaw_r = 0.0;
+    double pitch_r = 0.0;
+    double roll_r = 0.0;
+    ros::Time stamp;
+
+    {
+      std::lock_guard<std::mutex> guard(attitude_mutex_);
+
+      if (nav_key == "ROS_YAW")
+      {
+        attitude_cache_.yaw = msg->data;
+        attitude_cache_.stamp_yaw = msg->header.stamp;
+        attitude_cache_.has_yaw = true;
+      }
+      else if (nav_key == "ROS_PITCH")
+      {
+        attitude_cache_.pitch = msg->data;
+        attitude_cache_.stamp_pitch = msg->header.stamp;
+        attitude_cache_.has_pitch = true;
+      }
+      else
+      {
+        attitude_cache_.roll = msg->data;
+        attitude_cache_.stamp_roll = msg->header.stamp;
+        attitude_cache_.has_roll = true;
+      }
+
+      if (attitude_cache_.has_yaw && attitude_cache_.has_pitch &&
+          attitude_cache_.has_roll)
+      {
+        const double dt_yp = std::fabs(
+            (attitude_cache_.stamp_yaw - attitude_cache_.stamp_pitch).toSec());
+        const double dt_yr = std::fabs(
+            (attitude_cache_.stamp_yaw - attitude_cache_.stamp_roll).toSec());
+        const double dt_pr = std::fabs(
+            (attitude_cache_.stamp_pitch - attitude_cache_.stamp_roll).toSec());
+
+        if (dt_yp <= kStampTolSec && dt_yr <= kStampTolSec &&
+            dt_pr <= kStampTolSec)
+        {
+          yaw_r = attitude_cache_.yaw;
+          pitch_r = attitude_cache_.pitch;
+          roll_r = attitude_cache_.roll;
+
+          stamp = attitude_cache_.stamp_yaw;
+          if (attitude_cache_.stamp_pitch > stamp)
+            stamp = attitude_cache_.stamp_pitch;
+          if (attitude_cache_.stamp_roll > stamp)
+            stamp = attitude_cache_.stamp_roll;
+
+          ready = true;
+          attitude_cache_.reset();
+        }
+        else
+        {
+          const double value = msg->data;
+          const ros::Time value_stamp = msg->header.stamp;
+          attitude_cache_.reset();
+          if (nav_key == "ROS_YAW")
+          {
+            attitude_cache_.yaw = value;
+            attitude_cache_.stamp_yaw = value_stamp;
+            attitude_cache_.has_yaw = true;
+          }
+          else if (nav_key == "ROS_PITCH")
+          {
+            attitude_cache_.pitch = value;
+            attitude_cache_.stamp_pitch = value_stamp;
+            attitude_cache_.has_pitch = true;
+          }
+          else
+          {
+            attitude_cache_.roll = value;
+            attitude_cache_.stamp_roll = value_stamp;
+            attitude_cache_.has_roll = true;
+          }
+        }
+      }
+    }
+
+    if (!ready)
+      return;
+
+    tf::Quaternion q;
+    q.setRPY(roll_r, pitch_r, yaw_r);
+    const tf::Matrix3x3 R(q);
+
+    const tf::Matrix3x3 A(0, 1, 0,
+                          -1, 0, 0,
+                          0, 0, 1);
+
+    const tf::Matrix3x3 M = R * A;
+
+    auto clamp = [](double x, double lo, double hi) {
+      return std::max(lo, std::min(hi, x));
+    };
+
+    const double s = clamp(M[2][1], -1.0, 1.0);
+    const double nav_pitch = std::asin(s);
+
+    const double c = std::cos(nav_pitch);
+    double nav_yaw = 0.0;
+    double nav_roll = 0.0;
+
+    constexpr double eps = 1e-9;
+    if (std::fabs(c) > eps)
+    {
+      nav_yaw = std::atan2(-M[0][1], M[1][1]);
+      nav_roll = std::atan2(-M[2][0], M[2][2]);
+    }
+    else
+    {
+      nav_roll = 0.0;
+      nav_yaw = std::atan2(M[1][0], M[0][0]);
+    }
+
+    enqueueNavValue("NAV_YAW", nav_yaw, stamp);
+    enqueueNavValue("NAV_PITCH", nav_pitch, stamp);
+    enqueueNavValue("NAV_ROLL", nav_roll, stamp);
+    constexpr double kRadToDeg = 180.0 / M_PI;
+    enqueueNavValue("TEXT_HEADING", -nav_yaw * kRadToDeg, stamp);
     return;
   }
   enqueueNavValue(nav_key, msg->data, msg->header.stamp);
@@ -189,9 +318,10 @@ std::map<std::string, double> RosBridge::collectDesiredDoubles(
 
 bool RosBridge::setupLogDirectory()
 {
-  static const std::array<std::string, 8> kLogKeys = {
+  static const std::array<std::string, 12> kLogKeys = {
       "NAV_X", "NAV_Y", "NAV_HEADING", "NAV_DEPTH",
-      "NAV_SPEED", "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
+      "NAV_SPEED", "NAV_YAW", "NAV_PITCH", "NAV_ROLL",
+      "TEXT_HEADING", "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
 
   const std::string package_path = ros::package::getPath("ros_helm");
   const std::string base_dir = package_path.empty() ? "log"
