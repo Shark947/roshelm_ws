@@ -1468,19 +1468,6 @@ dep_behaviors/fast:
 .PHONY : dep_behaviors/fast
 
 #=============================================================================
-# Target rules for targets named test_helm
-
-# Build rule for target.
-test_helm: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_helm
-.PHONY : test_helm
-
-# fast build rule for target.
-test_helm/fast:
-	$(MAKE) -f helm_test/CMakeFiles/test_helm.dir/build.make helm_test/CMakeFiles/test_helm.dir/build
-.PHONY : test_helm/fast
-
-#=============================================================================
 # Target rules for targets named test_ivp
 
 # Build rule for target.
@@ -1931,7 +1918,6 @@ help:
 	@echo "... turngeo"
 	@echo "... survey"
 	@echo "... dep_behaviors"
-	@echo "... test_helm"
 	@echo "... test_ivp"
 	@echo "... pHelmIvP"
 	@echo "... helm_core"
