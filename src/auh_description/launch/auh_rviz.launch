@@ -1,0 +1,11 @@
+<launch>
+    <!-- 1.在参数服务器上载入 xacro 文件 -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find auh_description)/robots/auh_default.xacro" />
+    <!-- 2.启动rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find auh_description)/config/auh.rviz"/>
+    <!-- 3.rviz 发布不同部件的坐标关系 -->
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+    <!-- 4.添加控制关节运动的节点 -->
+    <!-- <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui"/> -->
+</launch>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="sds_description">
+ <gazebo reference="base_link">
+     <material>Gazebo/Orange</material>
+     <turnGravityOff>false</turnGravityOff>
+ </gazebo>
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.041063 -0.0011855 0.46415"
+        rpy="0 0 0" />
+      <mass
+        value="159.77" />
+      <inertia
+        ixx="38.344"
+        ixy="15.59"
+        ixz="0.14768"
+        iyy="40.421"
+        iyz="-0.0013124"
+        izz="61.61" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://sds_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://sds_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+<link name="world"/>
+  <joint name="fixed"  type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+  </joint>
+
+</robot>

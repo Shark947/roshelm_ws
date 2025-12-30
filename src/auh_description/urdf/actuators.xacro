@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Adding the thruster units with the macro created in snippets.xacro -->
+  <!--
+    Important:
+        - The thruster IDs must be given as integers and must be unique to each thruster unit
+        - The thruster pose in the <origin> block is relative to the body's center of mass. Be
+          aware that Gazebo does not use the SNAME convention per default.
+    -->
+
+  <!-- <xacro:property name="horizontal_mass" value="0.0063383"/>
+  <xacro:property name="vertical_mass" value="0.103"/> -->
+
+  <!-- horizontal_l -->
+  <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="0" prop_mesh_file="file://$(find auh_description)/meshes/horizontal_l_link.STL">
+    <!-- <inertial>
+      <origin xyz="-0.0091309 0.00036307 -0.0020297" rpy="0 0 0" />
+      <mass value="${horizontal_mass}" />
+      <inertia ixx="0.000103" ixy="0" ixz="0" iyy="0.000218" iyz="0" izz="0.000122" /> 
+      <inertia
+        ixx="3.4518E-05"
+        ixy="-1.8331E-21"
+        ixz="2.5404E-21"
+        iyy="1.9417E-05"
+        iyz="1.6201E-07"
+        izz="1.846E-05" />
+    </inertial> -->
+    <!-- joint origin -->
+    <origin xyz="0.1696 0.9599 0.00059" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+  </xacro:thruster_macro>
+
+  <!-- horizontal_r -->
+  <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="1" prop_mesh_file="file://$(find auh_description)/meshes/horizontal_r_link.STL">
+    <!-- <inertial>
+      <origin xyz="-0.0091309 -0.00036307 0.0020297" rpy="0 0 0" />
+      <mass value="${horizontal_mass}" />
+      <inertia ixx="0.000103" ixy="0" ixz="0" iyy="0.000218" iyz="0" izz="0.000122" />
+      <inertia
+        ixx="3.4518E-05"
+        ixy="3.6703E-19"
+        ixz="1.2109E-19"
+        iyy="1.9417E-05"
+        iyz="1.6201E-07"
+        izz="1.846E-05" />
+    </inertial> -->
+    <!-- joint origin -->
+    <origin xyz="0.1696 -0.9599 0.00059" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+  </xacro:thruster_macro>
+
+  <!-- vertical_lf -->
+  <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="2" prop_mesh_file="file://$(find auh_description)/meshes/vertical_lf_link.STL">
+    <!-- <inertial>
+      <origin xyz="0.00023316 -0.00083022 -0.0073546" rpy="0 0 0" />
+      <mass value="${vertical_mass}" />
+      <inertia ixx="0.000045" ixy="0" ixz="0" iyy="0.000048" iyz="0" izz=" 0.000090" />
+      <inertia
+        ixx="9.5681E-06"
+        ixy="1.6483E-07"
+        ixz="1.8186E-21"
+        iyy="9.9032E-06"
+        iyz="-2.4649E-21"
+        izz="1.8474E-05" />
+    </inertial> -->
+    <!-- joint origin -->
+    <origin xyz="0.67802 0.52533 0.17015" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </xacro:thruster_macro>
+
+    <!-- vertical_rf -->
+  <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="3" prop_mesh_file="file://$(find auh_description)/meshes/vertical_rf_link.STL">
+    <!-- <inertial>
+      <origin xyz="0.00023316 -0.00083022 -0.0073546" rpy="0 0 0" />
+      <mass value="${horizontal_mass}" />
+      <inertia ixx="0.000045" ixy="0" ixz="0" iyy="0.000048" iyz="0" izz=" 0.000090" />
+      <inertia
+        ixx="9.5681E-06"
+        ixy="1.6483E-07"
+        ixz="-1.3652E-21"
+        iyy="9.9032E-06"
+        iyz="-2.651E-20"
+        izz="1.8474E-05" />
+    </inertial> -->
+    <!-- joint origin -->
+    <origin xyz="0.67802 -0.52533 0.17015" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </xacro:thruster_macro>
+
+  <!-- vertical_lb -->
+  <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="4" prop_mesh_file="file://$(find auh_description)/meshes/vertical_lb_link.STL">
+    <!-- <inertial>
+      <origin xyz="-0.00023316 0.00083022 -0.0073546" rpy="0 0 0" />
+      <mass value="${horizontal_mass}" />
+      <inertia ixx="0.000045" ixy="0" ixz="0" iyy="0.000048" iyz="0" izz=" 0.000090" />
+      <inertia
+        ixx="9.5681E-06"
+        ixy="1.6483E-07"
+        ixz="-1.6202E-22"
+        iyy="9.9032E-06"
+        iyz="-2.8585E-20"
+        izz="1.8474E-05" />
+    </inertial> -->
+    <!-- joint origin -->
+    <origin xyz="-0.67802 0.52533 0.17015" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </xacro:thruster_macro>
+
+  <!-- vertical_rb -->
+  <xacro:thruster_macro robot_namespace="${namespace}" thruster_id="5" prop_mesh_file="file://$(find auh_description)/meshes/vertical_rb_link.STL">
+    <!-- <inertial>
+      <origin xyz="-0.00023316 0.00083022 -0.0073546" rpy="0 0 0" />
+      <mass value="${horizontal_mass}" />
+      <inertia ixx="0.000045" ixy="0" ixz="0" iyy="0.000048" iyz="0" izz=" 0.000090" />
+      <inertia
+        ixx="9.5681E-06"
+        ixy="1.6483E-07"
+        ixz="-4.0043E-20"
+        iyy="9.9032E-06"
+        iyz="5.3112E-20"
+        izz="1.8474E-05" />
+    </inertial> -->
+    <!-- joint origin -->
+    <origin xyz="-0.67802 -0.52533 0.17015" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </xacro:thruster_macro>
+
+</robot>

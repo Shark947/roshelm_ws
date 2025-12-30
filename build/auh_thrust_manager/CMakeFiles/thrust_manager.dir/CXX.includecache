@@ -15,6 +15,8 @@ vector
 -
 string
 -
+common_msgs/Float64Stamped.h
+-
 
 /home/xing/roshelm_ws/src/auh_thrust_manager/src/thrust_manager.cpp
 auh_thrust_manager/ThrustManager.hpp

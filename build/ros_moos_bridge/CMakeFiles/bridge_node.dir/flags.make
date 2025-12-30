@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=c++11
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"ros_moos_bridge\"
 
-CXX_INCLUDES = -I/home/xing/roshelm_ws/src/ros_moos_bridge/include -I/home/xing/auh_ws/devel/include -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/home/xing/moos-ivp -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/App/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Comms/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Utils/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Thirdparty/getpot/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Thirdparty/PocoBits/include 
+CXX_INCLUDES = -I/home/xing/roshelm_ws/src/ros_moos_bridge/include -I/home/xing/roshelm_ws/devel/include -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/home/xing/moos-ivp -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/App/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Comms/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Utils/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Thirdparty/getpot/include -I/home/xing/moos-ivp/MOOS/MOOSCore/Core/libMOOS/Thirdparty/PocoBits/include 
 

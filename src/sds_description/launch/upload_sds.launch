@@ -1,0 +1,38 @@
+<launch>
+  <!-- Debug flag -->
+  <arg name="debug" default="0"/>
+  <!-- Remember to first launch Gazebo with a underwater world model
+  Example:
+  >> roslaunch uuv_description ocean_waves.launch
+    or
+  >> roslaunch uuv_description empty_underwater_world.launch
+
+  The default joystick configuration is set for the XBox 360 controller
+  -->
+  <arg name="namespace" default="sds"/>
+  
+  <!-- Vehicle's initial pose -->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="-79.8"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
+
+  <group ns="$(arg namespace)">
+
+    <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 0" />
+   <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find sds_description)/urdf/sds_description.urdf -urdf -model sds -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"
+    output="screen" />
+
+  </group>
+
+</launch>

@@ -23,6 +23,6 @@ thrust_manager:
 
   # 速度线性俯仰补偿：pitch_speed_gain * speed
   # 当 speed=0.25/0.5/0.75/1.0 时，输出线性增加的推力（gain=1.0 时等于 speed）
-  pitch_speed_gain: 1.0
+  pitch_speed_gain: 5.0
   pitch_speed_up_thrusters: [2, 4]
   pitch_speed_down_thrusters: [3, 5]
