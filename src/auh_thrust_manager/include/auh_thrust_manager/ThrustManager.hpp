@@ -9,11 +9,10 @@ namespace auh_thrust_manager {
 
 class ThrustManager {
 public:
-    ThrustManager(ros::NodeHandle& nh, const std::string& ns, const std::string& control_mode, int thruster_count);
+    ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thruster_count);
 
 private:
     std::string auv_ns_;
-    std::string control_mode_;
     int thruster_count_;
     std::vector<std::vector<double>> thrust_matrix_;
 

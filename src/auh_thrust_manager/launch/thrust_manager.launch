@@ -5,7 +5,6 @@
   <!-- 启动推进器节点 -->
   <node name="thrust_manager" pkg="auh_thrust_manager" type="thrust_manager" output="screen">
     <param name="auv_ns" value="auh"/>
-    <param name="control_mode" value="pid"/>
     <param name="thruster_count" value="6"/>
   </node>
 </launch>
