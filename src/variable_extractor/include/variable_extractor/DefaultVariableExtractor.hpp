@@ -53,8 +53,6 @@ public:
       pubs_.clear();
       subscribed_vars_.clear();
       subs_.clear();
-      speed_pub_ = ros::Publisher();
-      speed_pub_ready_ = false;
       have_vx_ = false;
       have_vy_ = false;
     }
