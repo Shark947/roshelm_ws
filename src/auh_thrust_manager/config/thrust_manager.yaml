@@ -14,8 +14,8 @@ thrust_manager:
      1,  1,  0,  0,  0,  0,
     -1,  1,  0,  0,  0,  0,
      0,  0,  1,  1,  1,  1,
-     0,  0,  1, -1,  1, -1,
-     0,  0, -1, -1,  1,  1
+     0,  0,  1,  1, -1, -1,
+     0,  0, -1,  1, -1,  1
   ]
 
   buoyancy_compensation: -30
@@ -24,5 +24,5 @@ thrust_manager:
   # 速度线性俯仰补偿：pitch_speed_gain * speed
   # 当 speed=0.25/0.5/0.75/1.0 时，输出线性增加的推力（gain=1.0 时等于 speed）
   pitch_speed_gain: 5.0
-  pitch_speed_up_thrusters: [2, 4]
-  pitch_speed_down_thrusters: [3, 5]
+  pitch_speed_up_thrusters: [2, 3]
+  pitch_speed_down_thrusters: [4, 5]
