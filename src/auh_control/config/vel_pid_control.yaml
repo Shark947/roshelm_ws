@@ -1,0 +1,10 @@
+velocity_control:
+    linear_p: 5.0
+    linear_i: 0
+    linear_d: 0.0
+    linear_sat: 1
+
+    angular_p: 5.0
+    angular_i: 0
+    angular_d: 0
+    angular_sat: 1

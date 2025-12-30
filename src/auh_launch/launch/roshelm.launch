@@ -33,11 +33,4 @@
     <param name="config_path" value="$(find ros_helm)/config/helm/startHelm.yaml" />
   </node>
 
-    <!-- 临时发布 desired_pitch 为 0 -->
-  <node pkg="rostopic"
-        type="rostopic"
-        name="desired_pitch_zero_pub"
-        args="pub -r 10 /auh/desired_pitch std_msgs/Float64 0.0"
-        output="screen" />
-
 </launch>
