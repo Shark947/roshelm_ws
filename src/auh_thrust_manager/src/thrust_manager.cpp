@@ -29,6 +29,17 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, const s
         ROS_WARN("Parameter 'vertical_thrusters' not set, buoyancy compensation will be ignored.");
     }
 
+    // 加载速度线性俯仰补偿参数
+    nh.param<double>("pitch_speed_gain", pitch_speed_gain_, 0.0);
+    if (!nh.getParam("pitch_speed_up_thrusters", pitch_speed_up_thruster_indices_)) {
+        pitch_speed_up_thruster_indices_ = {2, 4};
+        ROS_WARN("Parameter 'pitch_speed_up_thrusters' not set, using default [2, 4].");
+    }
+    if (!nh.getParam("pitch_speed_down_thrusters", pitch_speed_down_thruster_indices_)) {
+        pitch_speed_down_thruster_indices_ = {3, 5};
+        ROS_WARN("Parameter 'pitch_speed_down_thrusters' not set, using default [3, 5].");
+    }
+
     // 订阅输入控制器话题
     const std::vector<std::string> keys = {"speed", "heading", "depth", "pitch", "roll"};
     for (size_t i = 0; i < keys.size(); ++i) {
@@ -67,6 +78,19 @@ void ThrustManager::computeThrust(const ros::TimerEvent&) {
         for (int i = 0; i < 5; ++i) {
             if (input_received_[i])
                 thrust_values[j] += input_signals_[i] * thrust_matrix_[i][j];
+        }
+    }
+
+    // 根据速度的线性俯仰补偿
+    if (pitch_speed_gain_ != 0.0 && input_received_[0]) {
+        const double pitch_speed_thrust = input_signals_[0] * pitch_speed_gain_;
+        for (int idx : pitch_speed_up_thruster_indices_) {
+            if (idx >= 0 && idx < thruster_count_)
+                thrust_values[idx] += pitch_speed_thrust;
+        }
+        for (int idx : pitch_speed_down_thruster_indices_) {
+            if (idx >= 0 && idx < thruster_count_)
+                thrust_values[idx] -= pitch_speed_thrust;
         }
     }
 
