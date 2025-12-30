@@ -15,6 +15,12 @@ struct RosNodeConfig
   std::string current_depth_topic;
   std::string current_x_topic;
   std::string current_y_topic;
+  std::string current_z_topic;
+  std::string current_vx_topic;
+  std::string current_vy_topic;
+  std::string current_yaw_topic;
+  std::string current_pitch_topic;
+  std::string current_roll_topic;
   std::string desired_heading_topic;
   std::string desired_speed_topic;
   std::string desired_depth_topic;

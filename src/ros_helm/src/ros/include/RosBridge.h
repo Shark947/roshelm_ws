@@ -52,6 +52,12 @@ private:
   ros::Subscriber depth_sub_;
   ros::Subscriber x_sub_;
   ros::Subscriber y_sub_;
+  ros::Subscriber z_sub_;
+  ros::Subscriber vx_sub_;
+  ros::Subscriber vy_sub_;
+  ros::Subscriber yaw_sub_;
+  ros::Subscriber pitch_sub_;
+  ros::Subscriber roll_sub_;
   std::unique_ptr<RosCommandPublisher> command_publisher_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;

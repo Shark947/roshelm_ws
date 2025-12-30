@@ -31,6 +31,12 @@ bool RosBridge::initialize()
   depth_sub_ = subscribeCurrent(config_.current_depth_topic, "NAV_DEPTH");
   x_sub_ = subscribeCurrent(config_.current_x_topic, "NAV_X");
   y_sub_ = subscribeCurrent(config_.current_y_topic, "NAV_Y");
+  z_sub_ = subscribeCurrent(config_.current_z_topic, "NAV_Z");
+  vx_sub_ = subscribeCurrent(config_.current_vx_topic, "NAV_VX");
+  vy_sub_ = subscribeCurrent(config_.current_vy_topic, "NAV_VY");
+  yaw_sub_ = subscribeCurrent(config_.current_yaw_topic, "NAV_YAW");
+  pitch_sub_ = subscribeCurrent(config_.current_pitch_topic, "NAV_PITCH");
+  roll_sub_ = subscribeCurrent(config_.current_roll_topic, "NAV_ROLL");
 
   command_publisher_ = std::make_unique<RosCommandPublisher>(
       nh_, config_,
