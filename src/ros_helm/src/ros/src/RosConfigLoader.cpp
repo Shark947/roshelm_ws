@@ -103,6 +103,18 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.current_x_topic);
   private_nh_.param("current_y_topic", config.current_y_topic,
                     config.current_y_topic);
+  private_nh_.param("current_z_topic", config.current_z_topic,
+                    config.current_z_topic);
+  private_nh_.param("current_vx_topic", config.current_vx_topic,
+                    config.current_vx_topic);
+  private_nh_.param("current_vy_topic", config.current_vy_topic,
+                    config.current_vy_topic);
+  private_nh_.param("current_yaw_topic", config.current_yaw_topic,
+                    config.current_yaw_topic);
+  private_nh_.param("current_pitch_topic", config.current_pitch_topic,
+                    config.current_pitch_topic);
+  private_nh_.param("current_roll_topic", config.current_roll_topic,
+                    config.current_roll_topic);
 
   private_nh_.param("desired_heading_topic", config.desired_heading_topic,
                     config.desired_heading_topic);
@@ -127,6 +139,18 @@ bool RosConfigLoader::load(RosNodeConfig &config,
     config.current_x_topic = "/" + config.vehicle_name + "/current_x";
   if (config.current_y_topic.empty())
     config.current_y_topic = "/" + config.vehicle_name + "/current_y";
+  if (config.current_z_topic.empty())
+    config.current_z_topic = "/" + config.vehicle_name + "/current_z";
+  if (config.current_vx_topic.empty())
+    config.current_vx_topic = "/" + config.vehicle_name + "/current_vx";
+  if (config.current_vy_topic.empty())
+    config.current_vy_topic = "/" + config.vehicle_name + "/current_vy";
+  if (config.current_yaw_topic.empty())
+    config.current_yaw_topic = "/" + config.vehicle_name + "/current_yaw";
+  if (config.current_pitch_topic.empty())
+    config.current_pitch_topic = "/" + config.vehicle_name + "/current_pitch";
+  if (config.current_roll_topic.empty())
+    config.current_roll_topic = "/" + config.vehicle_name + "/current_roll";
 
   if (config.desired_heading_topic.empty())
     config.desired_heading_topic = "/" + config.vehicle_name + "/desired_heading";
@@ -207,7 +231,10 @@ bool RosConfigLoader::validateConfig(const RosNodeConfig &config) const
   const std::set<std::string> required_topics = {
       config.current_heading_topic, config.current_speed_topic,
       config.current_depth_topic,  config.current_x_topic,
-      config.current_y_topic,      config.desired_heading_topic,
+      config.current_y_topic,      config.current_z_topic,
+      config.current_vx_topic,     config.current_vy_topic,
+      config.current_yaw_topic,    config.current_pitch_topic,
+      config.current_roll_topic,   config.desired_heading_topic,
       config.desired_speed_topic,  config.desired_depth_topic};
   for (const auto &topic : required_topics)
   {

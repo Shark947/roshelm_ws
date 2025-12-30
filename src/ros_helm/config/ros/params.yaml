@@ -10,6 +10,12 @@ current_speed_topic: /auh/current_speed
 current_depth_topic: /auh/current_depth
 current_x_topic: /auh/current_x
 current_y_topic: /auh/current_y
+current_z_topic: /auh/current_z
+current_vx_topic: /auh/current_vx
+current_vy_topic: /auh/current_vy
+current_yaw_topic: /auh/current_yaw
+current_pitch_topic: /auh/current_pitch
+current_roll_topic: /auh/current_roll
 
 desired_heading_topic: /auh/desired_heading
 desired_speed_topic: /auh/desired_speed
