@@ -1,0 +1,73 @@
+disturbances:
+  -
+    type: wrench
+    starting_time: 10
+    duration: 5
+    force:
+      - 0
+      - 0
+      - 0
+    torque:
+      - 0
+      - 0
+      - 50
+  -
+    type: wrench
+    starting_time: 30
+    duration: 5
+    force:
+      - 0
+      - 0
+      - 0
+    torque:
+      - 0
+      - 0
+      - 50
+  -
+    type: wrench
+    starting_time: 50
+    duration: 5
+    force:
+      - 0
+      - 0
+      - 0
+    torque:
+      - 0
+      - 0
+      - 50
+  -
+    type: wrench
+    starting_time: 70
+    duration: 5
+    force:
+      - 0
+      - 0
+      - 0
+    torque:
+      - 0
+      - 0
+      - 50    
+  -
+    type: wrench
+    starting_time: 90
+    duration: 5
+    force:
+      - 0
+      - 0
+      - 0
+    torque:
+      - 0
+      - 0
+      - 50
+  -
+    type: wrench
+    starting_time: 110
+    duration: 5
+    force:
+      - 0
+      - 0
+      - 0
+    torque:
+      - 0
+      - 0
+      - 50
