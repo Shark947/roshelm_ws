@@ -1,6 +1,5 @@
 thrust_manager:
   auv_ns: auh
-  control_mode: pid
   thruster_count: 6
 
   # 推进器索引约定：

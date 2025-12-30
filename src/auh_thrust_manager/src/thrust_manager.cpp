@@ -4,8 +4,8 @@
 
 namespace auh_thrust_manager {
 
-ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, const std::string& control_mode, int thruster_count)
-    : auv_ns_(ns), control_mode_(control_mode), thruster_count_(thruster_count)
+ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thruster_count)
+    : auv_ns_(ns), thruster_count_(thruster_count)
 {
     input_signals_.resize(5, 0.0);
     input_received_.resize(5, false);
@@ -43,7 +43,7 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, const s
     // 订阅输入控制器话题
     const std::vector<std::string> keys = {"speed", "heading", "depth", "pitch", "roll"};
     for (size_t i = 0; i < keys.size(); ++i) {
-        std::string topic = "/" + auv_ns_ + "/" + control_mode_ + "_" + keys[i];
+        std::string topic = "/" + auv_ns_ + "/desired_" + keys[i];
         subs_.emplace_back(nh.subscribe<std_msgs::Float64>(
             topic, 1, boost::bind(&ThrustManager::inputCallback, this, _1, i)));
     }
@@ -118,15 +118,14 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "thrust_manager");
     ros::NodeHandle nh("~");
 
-    std::string auv_ns, control_mode;
+    std::string auv_ns;
     int thruster_count;
 
     nh.param<std::string>("auv_ns", auv_ns, "auh");
-    nh.param<std::string>("control_mode", control_mode, "pid");
     nh.param<int>("thruster_count", thruster_count, 6);
 
 
-    auh_thrust_manager::ThrustManager manager(nh, auv_ns, control_mode, thruster_count);
+    auh_thrust_manager::ThrustManager manager(nh, auv_ns, thruster_count);
     ros::spin();
     return 0;
 }
