@@ -8,6 +8,7 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
+#include <cmath>
 
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/Imu.h>
@@ -27,6 +28,7 @@ namespace variable_extractor {
  *          - Z  （从 /<vehicle>/pose_gt 中提取 z 轴原值）
  *          - VX （从 /<vehicle>/dvl 中提取 x 方向速度）
  *          - VY （从 /<vehicle>/dvl 中提取 y 方向速度）
+ *          - SPEED （由 VX/VY 计算得到的速度大小）
  *          - YAW   （从 /<vehicle>/imu 中提取航向角(rad)）
  *          - PITCH （从 /<vehicle>/imu 中提取俯仰角(rad)）
  *          - ROLL  （从 /<vehicle>/imu 中提取滚转角(rad)）
@@ -51,12 +53,16 @@ public:
       pubs_.clear();
       subscribed_vars_.clear();
       subs_.clear();
+      speed_pub_ = ros::Publisher();
+      speed_pub_ready_ = false;
+      have_vx_ = false;
+      have_vy_ = false;
     }
 }
 
   std::vector<std::string> supportedVariables() const override {
     // 插件实际支持的变量列表
-    return {"X", "Y", "Z", "VX", "VY", "YAW", "PITCH", "ROLL"};
+    return {"X", "Y", "Z", "VX", "VY", "SPEED", "YAW", "PITCH", "ROLL"};
 }
 
   void subscribe(const std::string& var_name_in,
@@ -159,17 +165,24 @@ public:
       auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
         double vx = msg->velocity.x;
         var_map[var_upper] = vx;
+        latest_vx_ = vx;
+        latest_vy_ = msg->velocity.y;
+        have_vx_ = true;
+        have_vy_ = true;
 
         common_msgs::Float64Stamped out;
         out.header.stamp = msg->header.stamp;
         out.data         = vx;
         pubs_[var_upper].publish(out);
 
+        publishSpeed(msg->header.stamp, var_map, debug);
+
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][VX] published "
                            << vx << " @ " << msg->header.stamp);
         }
       };
+      ensureSpeedPublisher(nh_parent);
       ros::Subscriber sub =
         nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
       subs_.push_back(sub);
@@ -180,21 +193,35 @@ public:
       auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
         double vy = msg->velocity.y;
         var_map[var_upper] = vy;
+        latest_vx_ = msg->velocity.x;
+        latest_vy_ = vy;
+        have_vx_ = true;
+        have_vy_ = true;
 
         common_msgs::Float64Stamped out;
         out.header.stamp = msg->header.stamp;
         out.data         = vy;
         pubs_[var_upper].publish(out);
 
+        publishSpeed(msg->header.stamp, var_map, debug);
+
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][VY] published "
                            << vy << " @ " << msg->header.stamp);
         }
       };
+      ensureSpeedPublisher(nh_parent);
       ros::Subscriber sub =
         nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
       subs_.push_back(sub);
 
+    }
+    else if (var_upper == "SPEED") {
+      ensureSpeedPublisher(nh_parent);
+      // 速度由 VX/VY 计算得到，这里仅保证变量存在并复用 speed 发布器
+      if (!speed_pub_ready_) {
+        ROS_WARN_STREAM("[DefaultVarExt] SPEED publisher not ready.");
+      }
     }
     else if (var_upper == "YAW") {
       std::string topic = "/" + vehicle_name_ + "/imu";
@@ -277,10 +304,49 @@ public:
   }
 
 private:
+  void ensureSpeedPublisher(ros::NodeHandle& nh_parent) {
+    if (speed_pub_ready_) {
+      return;
+    }
+    std::string speed_topic = "/" + vehicle_name_ + "/current_speed";
+    ROS_INFO_STREAM("[DefaultVarExt] Advertising topic: " << speed_topic);
+    speed_pub_ = nh_parent.advertise<common_msgs::Float64Stamped>(speed_topic, 1);
+    speed_pub_ready_ = true;
+  }
+
+  void publishSpeed(const ros::Time& stamp,
+                    std::map<std::string, double>& var_map,
+                    bool debug) {
+    if (!speed_pub_ready_ || !(have_vx_ && have_vy_)) {
+      return;
+    }
+    double speed = std::hypot(latest_vx_, latest_vy_);
+    auto it = var_map.find("SPEED");
+    if (it != var_map.end()) {
+      it->second = speed;
+    }
+
+    common_msgs::Float64Stamped out;
+    out.header.stamp = stamp;
+    out.data = speed;
+    speed_pub_.publish(out);
+
+    if (debug) {
+      ROS_DEBUG_STREAM("[DefaultVarExt][SPEED] published "
+                       << speed << " @ " << stamp);
+    }
+  }
+
   std::string vehicle_name_;                     ///< 车辆名称
   std::set<std::string> subscribed_vars_;        ///< 已经订阅的变量（大写形式）
   std::vector<ros::Subscriber> subs_;            ///< 保存 Subscriber 以免析构
   std::map<std::string, ros::Publisher> pubs_;   ///< var_upper -> Publisher
+  ros::Publisher speed_pub_;                     ///< current_speed Publisher
+  bool speed_pub_ready_{false};
+  double latest_vx_{0.0};
+  double latest_vy_{0.0};
+  bool have_vx_{false};
+  bool have_vy_{false};
 };
 
 }  // namespace variable_extractor
