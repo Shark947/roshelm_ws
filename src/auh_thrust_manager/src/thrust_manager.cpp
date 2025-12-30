@@ -5,7 +5,7 @@
 namespace auh_thrust_manager {
 
 ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thruster_count)
-    : auv_ns_(ns), thruster_count_(thruster_count)
+    : vehicle_name_(ns), thruster_count_(thruster_count)
 {
     input_signals_.resize(5, 0.0);
     input_received_.resize(5, false);
@@ -43,14 +43,14 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thr
     // 订阅输入控制器话题
     const std::vector<std::string> keys = {"speed", "heading", "depth", "pitch", "roll"};
     for (size_t i = 0; i < keys.size(); ++i) {
-        std::string topic = "/" + auv_ns_ + "/desired_" + keys[i];
+        std::string topic = "/" + vehicle_name_ + "/desired_" + keys[i];
         subs_.emplace_back(nh.subscribe<std_msgs::Float64>(
             topic, 1, boost::bind(&ThrustManager::inputCallback, this, _1, i)));
     }
 
     // 设置输出话题
     for (int i = 0; i < thruster_count_; ++i) {
-        std::string topic = "/" + auv_ns_ + "/t" + std::to_string(i);
+        std::string topic = "/" + vehicle_name_ + "/t" + std::to_string(i);
         pubs_.emplace_back(nh.advertise<std_msgs::Float64>(topic, 1));
     }
 
@@ -118,14 +118,14 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "thrust_manager");
     ros::NodeHandle nh("~");
 
-    std::string auv_ns;
+    std::string vehicle_name;
     int thruster_count;
 
-    nh.param<std::string>("auv_ns", auv_ns, "auh");
+    nh.param<std::string>("vehicle_name", vehicle_name, "auh");
     nh.param<int>("thruster_count", thruster_count, 6);
 
 
-    auh_thrust_manager::ThrustManager manager(nh, auv_ns, thruster_count);
+    auh_thrust_manager::ThrustManager manager(nh, vehicle_name, thruster_count);
     ros::spin();
     return 0;
 }

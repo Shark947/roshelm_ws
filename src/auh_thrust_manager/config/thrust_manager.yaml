@@ -1,5 +1,5 @@
 thrust_manager:
-  auv_ns: auh
+  vehicle_name: auh
   thruster_count: 6
 
   # 推进器索引约定：
