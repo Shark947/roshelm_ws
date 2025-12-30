@@ -5,7 +5,7 @@ app:
   comms_tick: 4
 
 helm:
-  behaviors: depth.bhv
+  behaviors: alpha.bhv
   domain:
     - course: 0:359:360
     - speed: 0:4:41
