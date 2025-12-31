@@ -25,6 +25,8 @@ import tf2_ros
 from uuv_thrusters import ThrusterManager
 from geometry_msgs.msg import Wrench, WrenchStamped
 from uuv_thruster_manager.srv import *
+from std_msgs.msg import Float64
+from uuv_gazebo_ros_plugins_msgs.msg import FloatStamped
 
 
 class ThrusterAllocatorNode(ThrusterManager):
@@ -62,6 +64,15 @@ class ThrusterAllocatorNode(ThrusterManager):
             self.get_config)
         
 
+         #-------------------AUH(1/1)----------------------------------
+        self.auh_thruster0 = rospy.Subscriber("/auh/t0", Float64, self.sub_Auh_Thrust0, queue_size=10)
+        self.auh_thruster1 = rospy.Subscriber("/auh/t1", Float64, self.sub_Auh_Thrust1, queue_size=10)
+        self.auh_thruster2 = rospy.Subscriber("/auh/t2", Float64, self.sub_Auh_Thrust2, queue_size=10)
+        self.auh_thruster3 = rospy.Subscriber("/auh/t3", Float64, self.sub_Auh_Thrust3, queue_size=10)
+        self.auh_thruster4 = rospy.Subscriber("/auh/t4", Float64, self.sub_Auh_Thrust4, queue_size=10)
+        self.auh_thruster5 = rospy.Subscriber("/auh/t5", Float64, self.sub_Auh_Thrust5, queue_size=10)
+        #-------------------AUH----------------------------------
+
         rate = rospy.Rate(self.config['update_rate'])
         while not rospy.is_shutdown():
             if self.config['timeout'] > 0:
@@ -73,6 +84,26 @@ class ThrusterAllocatorNode(ThrusterManager):
                         self.thrust.fill(0)
                         self.command_thrusters()
             rate.sleep()
+
+     #-------------------AUH(2/2)----------------------------------
+    def sub_Auh_Thrust0(self, thrust):
+       self.pub_Auh_Thrust(0,  thrust.data)
+
+    def sub_Auh_Thrust1(self, thrust):
+       self.pub_Auh_Thrust(1,  thrust.data)
+
+    def sub_Auh_Thrust2(self, thrust):
+       self.pub_Auh_Thrust(2,  thrust.data)
+    
+    def sub_Auh_Thrust3(self, thrust):
+       self.pub_Auh_Thrust(3,  thrust.data)
+    
+    def sub_Auh_Thrust4(self, thrust):
+       self.pub_Auh_Thrust(4,  thrust.data)
+    
+    def sub_Auh_Thrust5(self, thrust):
+       self.pub_Auh_Thrust(5,  thrust.data)
+    #-------------------AUH----------------------------------
 
     def get_thruster_info(self, request):
         """Return service callback with thruster information."""
