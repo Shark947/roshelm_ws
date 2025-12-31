@@ -1,7 +1,6 @@
 #include "auh_thrust_manager/ThrustManager.hpp"
 #include <boost/bind.hpp>
 #include <algorithm>
-#include <uuv_gazebo_ros_plugins_msgs/FloatStamped.h>
 
 namespace auh_thrust_manager {
 
@@ -65,8 +64,8 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thr
 
     // 设置输出话题
     for (int i = 0; i < thruster_count_; ++i) {
-        std::string topic = "/" + vehicle_name_ + "/thrusters/" + std::to_string(i) + "/input";
-        pubs_.emplace_back(nh.advertise<uuv_gazebo_ros_plugins_msgs::FloatStamped>(topic, 1));
+        std::string topic = "/" + vehicle_name_ + "/t" + std::to_string(i);
+        pubs_.emplace_back(nh.advertise<std_msgs::Float64>(topic, 1));
     }
 
     // 定时器：20Hz 推力输出
@@ -140,8 +139,7 @@ void ThrustManager::computeThrust(const ros::TimerEvent&) {
 
     // 推进器输出
     for (int j = 0; j < thruster_count_; ++j) {
-        uuv_gazebo_ros_plugins_msgs::FloatStamped msg;
-        msg.header.stamp = ros::Time::now();
+        std_msgs::Float64 msg;
         msg.data = thrust_values[j];
         pubs_[j].publish(msg);
     }
