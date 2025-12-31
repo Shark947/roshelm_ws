@@ -392,8 +392,3 @@ class ThrusterManager:
             rospy.loginfo('thrust[%d]:',i)
             rospy.loginfo(thrust[i])
         return thrust
-
-    #-------------------AUH----------------------------------
-    def pub_Auh_Thrust(self, i, thrust):
-        self.thrusters[i].publish_command(thrust)
-    #-------------------AUH----------------------------------
