@@ -30,6 +30,12 @@ private:
     double buoyancy_compensation_;
     std::vector<int> vertical_thruster_indices_;
 
+    // 线性俯仰控制参数
+    std::vector<double> pitch_speed_points_;
+    std::vector<double> pitch_thrust_points_;
+    std::vector<int> pitch_up_thrusters_;
+    std::vector<int> pitch_down_thrusters_;
+
 
     ros::Timer timer_;
 

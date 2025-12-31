@@ -32,6 +32,25 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thr
         ROS_WARN("Parameter 'vertical_thrusters' not set, buoyancy compensation will be ignored.");
     }
 
+    // 加载线性俯仰控制参数
+    if (!nh.getParam("pitch_speed_points", pitch_speed_points_)) {
+        pitch_speed_points_ = {0.25, 0.5, 0.75, 1.0};
+    }
+    if (!nh.getParam("pitch_thrust_points", pitch_thrust_points_)) {
+        pitch_thrust_points_ = {0.25, 0.5, 0.75, 1.0};
+    }
+    if (!nh.getParam("pitch_up_thrusters", pitch_up_thrusters_)) {
+        pitch_up_thrusters_ = {2, 3};
+    }
+    if (!nh.getParam("pitch_down_thrusters", pitch_down_thrusters_)) {
+        pitch_down_thrusters_ = {4, 5};
+    }
+    if (pitch_speed_points_.size() != pitch_thrust_points_.size() || pitch_speed_points_.empty()) {
+        ROS_WARN("Pitch speed/thrust points mismatch, linear pitch control disabled.");
+        pitch_speed_points_.clear();
+        pitch_thrust_points_.clear();
+    }
+
     // 订阅输入控制器话题
     const std::vector<std::string> keys = {"speed", "heading", "depth", "pitch", "roll"};
     for (size_t i = 0; i < keys.size(); ++i) {
@@ -78,6 +97,36 @@ void ThrustManager::computeThrust(const ros::TimerEvent&) {
         for (int i = 0; i < 5; ++i) {
             if (input_received_[i])
                 thrust_values[j] += input_signals_[i] * thrust_matrix_[i][j];
+        }
+    }
+
+    // 固定线性俯仰控制：根据 current_speed 线性增加推力，抬头姿态
+    if (current_speed_received_ && !pitch_speed_points_.empty()) {
+        double pitch_thrust = pitch_thrust_points_.front();
+        if (current_speed_ <= pitch_speed_points_.front()) {
+            pitch_thrust = pitch_thrust_points_.front();
+        } else if (current_speed_ >= pitch_speed_points_.back()) {
+            pitch_thrust = pitch_thrust_points_.back();
+        } else {
+            for (size_t i = 1; i < pitch_speed_points_.size(); ++i) {
+                if (current_speed_ <= pitch_speed_points_[i]) {
+                    double s0 = pitch_speed_points_[i - 1];
+                    double s1 = pitch_speed_points_[i];
+                    double t0 = pitch_thrust_points_[i - 1];
+                    double t1 = pitch_thrust_points_[i];
+                    double ratio = (current_speed_ - s0) / (s1 - s0);
+                    pitch_thrust = t0 + ratio * (t1 - t0);
+                    break;
+                }
+            }
+        }
+        for (int index : pitch_up_thrusters_) {
+            if (index >= 0 && index < thruster_count_)
+                thrust_values[index] += pitch_thrust;
+        }
+        for (int index : pitch_down_thrusters_) {
+            if (index >= 0 && index < thruster_count_)
+                thrust_values[index] -= pitch_thrust;
         }
     }
 
