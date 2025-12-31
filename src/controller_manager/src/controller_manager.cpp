@@ -75,7 +75,7 @@ void ControllerManager::loadAndSetupControllers(const YAML::Node& controllers_no
             std::string ctrl_type = controller->getControllerType();
             std::string desired_topic = "/" + vehicle_name_ + "/desired_" + var;
             std::string status_topic  = "/" + vehicle_name_ + "/current_" + var;
-            std::string output_topic  = "/" + vehicle_name_ + "/" + ctrl_type + "_" + var;
+            std::string output_topic  = "/" + vehicle_name_ + "/output_" + var;
 
             context.desired_topic = desired_topic;
             context.status_topic  = status_topic;

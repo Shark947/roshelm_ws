@@ -35,7 +35,7 @@ ThrustManager::ThrustManager(ros::NodeHandle& nh, const std::string& ns, int thr
     // 订阅输入控制器话题
     const std::vector<std::string> keys = {"speed", "heading", "depth", "pitch", "roll"};
     for (size_t i = 0; i < keys.size(); ++i) {
-        std::string topic = "/" + vehicle_name_ + "/desired_" + keys[i];
+        std::string topic = "/" + vehicle_name_ + "/output_" + keys[i];
         subs_.emplace_back(nh.subscribe<std_msgs::Float64>(
             topic, 1, boost::bind(&ThrustManager::inputCallback, this, _1, i)));
     }
