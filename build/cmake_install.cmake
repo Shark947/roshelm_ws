@@ -131,6 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/xing/roshelm_ws/build/gtest/cmake_install.cmake")
+  include("/home/xing/roshelm_ws/build/auh_control/cmake_install.cmake")
   include("/home/xing/roshelm_ws/build/auh_description/cmake_install.cmake")
   include("/home/xing/roshelm_ws/build/auh_launch/cmake_install.cmake")
   include("/home/xing/roshelm_ws/build/common_tools/cmake_install.cmake")

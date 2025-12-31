@@ -23,6 +23,6 @@ thrust_manager:
 
   # 线性俯仰控制：根据 current_speed 分段线性映射推力
   pitch_speed_points: [0.25, 0.5, 0.75, 1.0]
-  pitch_thrust_points: [0.25, 0.5, 0.75, 1.0]
+  pitch_thrust_points: [10, 20, 30, 40]
   pitch_up_thrusters: [2, 3]
   pitch_down_thrusters: [4, 5]

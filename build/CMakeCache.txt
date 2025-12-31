@@ -745,6 +745,12 @@ actionlib_msgs_DIR:PATH=/opt/ros/melodic/share/actionlib_msgs/cmake
 angles_DIR:PATH=/opt/ros/melodic/share/angles/cmake
 
 //Value Computed by CMake
+auh_control_BINARY_DIR:STATIC=/home/xing/roshelm_ws/build/auh_control
+
+//Value Computed by CMake
+auh_control_SOURCE_DIR:STATIC=/home/xing/roshelm_ws/src/auh_control
+
+//Value Computed by CMake
 auh_controller_pid_BINARY_DIR:STATIC=/home/xing/roshelm_ws/build/auh_controller_pid
 
 //Value Computed by CMake
@@ -1745,7 +1751,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=67
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=68
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

@@ -98,14 +98,6 @@ common_tools/AngleUtils.hpp
 controller_manager/RosCompat.hpp
 -
 
-/home/xing/roshelm_ws/src/controller_manager/include/controller_manager/PIDController.hpp
-controller_manager/ControllerBase.hpp
-/home/xing/roshelm_ws/src/controller_manager/include/controller_manager/controller_manager/ControllerBase.hpp
-vector
--
-yaml-cpp/yaml.h
--
-
 /home/xing/roshelm_ws/src/controller_manager/include/controller_manager/RosCompat.hpp
 ros/node_handle.h
 -
@@ -130,22 +122,6 @@ common_tools/StringUtils.hpp
 std_msgs/Float64.h
 -
 common_msgs/Float64Stamped.h
--
-
-/home/xing/roshelm_ws/src/controller_manager/src/pid_controller.cpp
-controller_manager/PIDController.hpp
-/home/xing/roshelm_ws/src/controller_manager/src/controller_manager/PIDController.hpp
-common_tools/YamlUtils.hpp
--
-cmath
--
-limits
--
-algorithm
--
-controller_manager/RosCompat.hpp
-/home/xing/roshelm_ws/src/controller_manager/src/controller_manager/RosCompat.hpp
-pluginlib/class_list_macros.h
 -
 
 /opt/ros/melodic/include/class_loader/class_loader.hpp
@@ -270,10 +246,6 @@ tinyxml2.h
 ./class_loader_imp.hpp
 /opt/ros/melodic/include/pluginlib/./././class_loader_imp.hpp
 
-/opt/ros/melodic/include/pluginlib/./class_list_macros.hpp
-class_loader/class_loader.hpp
--
-
 /opt/ros/melodic/include/pluginlib/./class_loader_imp.hpp
 cstdlib
 -
@@ -311,10 +283,6 @@ ros/package.h
 /opt/ros/melodic/include/pluginlib/class_desc.hpp
 string
 -
-
-/opt/ros/melodic/include/pluginlib/class_list_macros.h
-./class_list_macros.hpp
-/opt/ros/melodic/include/pluginlib/./class_list_macros.hpp
 
 /opt/ros/melodic/include/pluginlib/class_loader.hpp
 map

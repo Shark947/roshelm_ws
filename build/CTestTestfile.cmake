@@ -5,6 +5,7 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
+subdirs("auh_control")
 subdirs("auh_description")
 subdirs("auh_launch")
 subdirs("common_tools")
