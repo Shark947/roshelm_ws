@@ -8,6 +8,7 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
+#include <cmath>
 
 #include <nav_msgs/Odometry.h>
 #include <sensor_msgs/Imu.h>
@@ -27,6 +28,7 @@ namespace variable_extractor {
  *          - Z  （从 /<vehicle>/pose_gt 中提取 z 轴原值）
  *          - VX （从 /<vehicle>/dvl 中提取 x 方向速度）
  *          - VY （从 /<vehicle>/dvl 中提取 y 方向速度）
+ *          - SPEED （由 VX 和 VY 计算速度）
  *          - YAW   （从 /<vehicle>/imu 中提取航向角(rad)）
  *          - PITCH （从 /<vehicle>/imu 中提取俯仰角(rad)）
  *          - ROLL  （从 /<vehicle>/imu 中提取滚转角(rad)）
@@ -56,7 +58,7 @@ public:
 
   std::vector<std::string> supportedVariables() const override {
     // 插件实际支持的变量列表
-    return {"X", "Y", "Z", "VX", "VY", "YAW", "PITCH", "ROLL"};
+    return {"X", "Y", "Z", "VX", "VY", "SPEED", "YAW", "PITCH", "ROLL"};
 }
 
   void subscribe(const std::string& var_name_in,
@@ -189,6 +191,29 @@ public:
         if (debug) {
           ROS_DEBUG_STREAM("[DefaultVarExt][VY] published "
                            << vy << " @ " << msg->header.stamp);
+        }
+      };
+      ros::Subscriber sub =
+        nh_parent.subscribe<uuv_sensor_ros_plugins_msgs::DVL>(topic, 2, cb);
+      subs_.push_back(sub);
+
+    }
+    else if (var_upper == "SPEED") {
+      std::string topic = "/" + vehicle_name_ + "/dvl";
+      auto cb = [this, var_upper, &var_map, debug](const uuv_sensor_ros_plugins_msgs::DVL::ConstPtr& msg) {
+        double vx = msg->velocity.x;
+        double vy = msg->velocity.y;
+        double speed = std::hypot(vx, vy);
+        var_map[var_upper] = speed;
+
+        common_msgs::Float64Stamped out;
+        out.header.stamp = msg->header.stamp;
+        out.data         = speed;
+        pubs_[var_upper].publish(out);
+
+        if (debug) {
+          ROS_DEBUG_STREAM("[DefaultVarExt][SPEED] published "
+                           << speed << " @ " << msg->header.stamp);
         }
       };
       ros::Subscriber sub =
