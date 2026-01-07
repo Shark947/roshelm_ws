@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="sds">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://sds/meshes/sds.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://sds/meshes/sds.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+      <!-- 自发光薄片（贴在模型表面；圆盘，便于顶摄像机识别） -->
+      <visual name="opt_beacon_disc_core">
+        <pose>0 0 0.25 0 0 0</pose>  <!-- 稍微“浮出”表面，避免被自身遮挡 -->
+        <geometry>
+          <cylinder>
+            <radius>0.15</radius>    <!-- 直径 0.50 m；10 m 处约 25~30 px -->
+            <length>0.01</length>    <!-- 薄片 -->
+          </cylinder>
+        </geometry>
+        <material>
+          <lighting>false</lighting>   <!-- 关键：不受场景灯光影响，恒亮 -->
+          <!-- 清澈水域：偏蓝；浑浊水把三行换成注释的绿色 -->
+          <ambient>0.00 0.30 0.90 1</ambient>
+          <diffuse>0.00 0.30 0.90 1</diffuse>
+          <specular>0 0 0 1</specular>
+          <emissive>0.00 1.00 1.00 1</emissive>
+          <double_sided>true</double_sided>
+          <!-- 浑浊水建议改为：
+          <ambient>0.10 0.85 0.55 1</ambient>
+          <diffuse>0.10 0.85 0.55 1</diffuse>
+          <specular>0 0 0 1</specular>
+          <emissive>0.10 1.00 0.65 1</emissive>
+          <double_sided>true</double_sided>
+          -->
+        </material>
+        <cast_shadows>false</cast_shadows>
+      </visual>
+
+      <!-- 自发光光晕（更大、半透明；仅为视觉增强，不照亮环境） -->
+      <visual name="opt_beacon_disc_halo">
+        <pose>0 0 0.25 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.30</radius>    <!-- 直径 1.2 m 的柔和光晕 -->
+            <length>0.01</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <lighting>false</lighting>
+          <ambient>0.00 0.30 0.90 0</ambient>
+          <diffuse>0.00 0.30 0.90 0</diffuse>
+          <specular>0 0 0 1</specular>
+          <emissive>0.00 0.60 1.00 1</emissive>
+          <double_sided>true</double_sided>
+        </material>
+        <transparency>0.6</transparency>
+        <cast_shadows>false</cast_shadows>
+      </visual>
+
+      <!-- 近距离环境点光：仅照亮模型上表面 -->
+      <light type="point" name="env_fill_light">
+        <pose>0 0 0.3 0 0 0</pose>
+        <diffuse>0.00 0.35 1.00 1</diffuse>
+        <specular>0.00 0.15 0.50 1</specular>
+        <attenuation>
+          <range>6.0</range>      <!-- 小半径，只让模型自身亮一点 -->
+          <constant>0.7</constant>
+          <linear>0.25</linear>
+          <quadratic>0.12</quadratic>
+        </attenuation>
+        <cast_shadows>false</cast_shadows>
+      </light>
+
+      <!-- 向上的聚光灯（60°）：用于“环境效果”，10 m 距离看得到打到的面 -->
+      <light type="spot" name="up_spot">
+        <pose>0 0 0.20 0 0 0</pose>     <!-- 发射点略离表面 -->
+        <direction>0 0 1</direction>    <!-- +Z 向上 -->
+        <spot>
+          <inner_angle>0.5236</inner_angle>  <!-- 30° -->
+          <outer_angle>1.0472</outer_angle>  <!-- 60° -->
+          <falloff>1.0</falloff>
+        </spot>
+        <!-- 只考虑 10 m 高度：把射程与远距亮度调到能打到上方接收面（海面/相机附近物体） -->
+        <attenuation>
+          <range>30</range>       <!-- 10 m 应对有余量 -->
+          <constant>0.4</constant>
+          <linear>0.02</linear>
+          <quadratic>0.02</quadratic>
+        </attenuation>
+        <diffuse>0.00 0.35 1.00 1</diffuse>
+        <specular>0.00 0.15 0.50 1</specular>
+        <cast_shadows>false</cast_shadows>
+      </light>
+    </link>
+  </model>
+</sdf>
+

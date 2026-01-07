@@ -1,0 +1,40 @@
+<launch>
+  <!-- 1) 世界启动 -->
+  <include file="$(find uuv_gazebo_worlds)/launch/auv_underwater_world_black.launch"/>
+
+  <!-- 2) AUH 初始位姿 -->
+  <arg name="auh_x"     default="0"/>
+  <arg name="auh_y"     default="0"/>
+  <arg name="auh_z"     default="-60"/>
+  <arg name="auh_roll"  default="0"/>
+  <arg name="auh_pitch" default="0"/>
+  <arg name="auh_yaw"   default="0"/>
+
+  <!-- 2.1 上载 AUH 模型描述（传入位姿参数） -->
+  <include file="$(find auh_description)/launch/upload_auh_docking.launch">
+    <arg name="x"     value="$(arg auh_x)"/>
+    <arg name="y"     value="$(arg auh_y)"/>
+    <arg name="z"     value="$(arg auh_z)"/>
+    <arg name="roll"  value="$(arg auh_roll)"/>
+    <arg name="pitch" value="$(arg auh_pitch)"/>
+    <arg name="yaw"   value="$(arg auh_yaw)"/>
+  </include>
+
+  <!-- 3) 推进器管理器 -->
+  <include file="$(find auh_thrust_manager)/launch/thrust_manager.launch"/>
+
+  <!-- 4) Spawn SDS 静态障碍物 -->
+  <arg name="sds_x"     default="10"/>
+  <arg name="sds_y"     default="5"/>
+  <arg name="sds_z"     default="-79.8"/>
+  <arg name="sds_roll"  default="0"/>
+  <arg name="sds_pitch" default="0"/>
+  <arg name="sds_yaw"   default="0"/>
+  
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_sds_static" output="screen"
+        args="-urdf
+              -file $(find sds_description)/urdf/sds_static.urdf
+              -model sds
+              -x $(arg sds_x) -y $(arg sds_y) -z $(arg sds_z)
+              -R $(arg sds_roll) -P $(arg sds_pitch) -Y $(arg sds_yaw)"/>
+</launch>

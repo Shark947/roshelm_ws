@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="sds_static">
+
+  <!-- 让 Gazebo 把该模型当作静态障碍物 -->
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+
+  <link name="base_link">
+
+    <!-- 想完全静态障碍物的话 inertial 可以很简单，避免 Gazebo 报 warning -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://sds_description/meshes/base_link.STL"/>
+      </geometry>
+      <material name="sds_color">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://sds_description/meshes/base_link.STL"/>
+      </geometry>
+    </collision>
+
+  </link>
+
+  <!-- Gazebo 外观材质（可选） -->
+  <gazebo reference="base_link">
+    <material>Gazebo/Yellow</material>
+    <turnGravityOff>false</turnGravityOff>
+  </gazebo>
+
+</robot>

@@ -1,0 +1,23 @@
+<launch>
+  <arg name="x" default="10"/>
+  <arg name="y" default="5"/>
+  <arg name="z" default="-79.8"/>
+  <arg name="R" default="0"/>
+  <arg name="P" default="0"/>
+  <arg name="Y" default="0"/>
+
+  <!-- 把 URDF 放到 robot_description -->
+  <param name="robot_description"
+         textfile="$(find sds_description)/urdf/sds_description.urdf"/>
+
+  <!-- 可选：如果需要 TF（比如 RViz）就开着 -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="sds_state_pub">
+    <param name="use_sim_time" value="true"/>
+  </node>
+
+  <!-- 把模型 spawn 进 Gazebo -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_sds" output="screen"
+        args="-urdf -param robot_description -model sds
+              -x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg R) -P $(arg P) -Y $(arg Y)"/>
+</launch>
