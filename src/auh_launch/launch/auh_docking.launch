@@ -23,6 +23,23 @@
   <!-- 3) 推进器管理器 -->
   <include file="$(find auh_thrust_manager)/launch/thrust_manager.launch"/>
 
+    <!-- 启动变量提取器 -->
+  <node pkg="variable_extractor"
+        type="variable_extractor_node"
+        name="variable_extractor_node"
+        output="screen">
+    <param name="vehicle_name" value="auh" />
+    <param name="debug" value="false" />
+  </node>
+
+  <!-- 启动控制器管理器 -->
+  <node pkg="controller_manager"
+        type="controller_manager_node"
+        name="controller_manager_node"
+        output="screen">
+    <param name="controllers_config" value="$(find controller_manager)/config/controllers.yaml" />
+  </node>
+
   <!-- 4) Spawn SDS 静态障碍物 -->
   <arg name="sds_x"     default="10"/>
   <arg name="sds_y"     default="5"/>

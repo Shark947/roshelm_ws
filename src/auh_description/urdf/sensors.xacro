@@ -43,7 +43,7 @@
   <xacro:default_camera namespace="${namespace}" parent_link="${namespace}/base_link" suffix="">
     <origin xyz="0.3 0 -0.6" rpy="0 0 0"/>
   </xacro:default_camera>
-    <xacro:default_camera namespace="${namespace}" parent_link="${namespace}/base_link" suffix="bottom">
+  <xacro:default_camera namespace="${namespace}" parent_link="${namespace}/base_link" suffix="bottom">
     <origin xyz="0 0 -0.83" rpy="0 1.57 0"/>
   </xacro:default_camera>
 
