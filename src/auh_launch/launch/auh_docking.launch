@@ -54,4 +54,20 @@
               -model sds
               -x $(arg sds_x) -y $(arg sds_y) -z $(arg sds_z)
               -R $(arg sds_roll) -P $(arg sds_pitch) -Y $(arg sds_yaw)"/>
+
+  <node pkg="docking_optical_vision"
+        type="docking_optical_vision_node"
+        name="docking_optical_vision"
+        output="screen">
+    <rosparam command="load" file="$(find docking_optical_vision)/config/vision.yaml"/>
+  </node>
+
+  <!-- 5) docking_nav 参数加载 -->
+  <!-- <rosparam command="load" file="$(find docking_nav)/config/docking.yaml" />
+  <node pkg="docking_nav"
+        type="docking_nav_node"
+        name="docking_nav"
+        output="screen"/> -->
+ 
+
 </launch>

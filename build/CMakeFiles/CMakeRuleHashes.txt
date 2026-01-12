@@ -7,6 +7,8 @@ d20797656c59798c6b41782d27dcf070 /home/xing/roshelm_ws/devel/include/behavior_ma
 d2edce3e66078cb4898cb7cf2a47172d /home/xing/roshelm_ws/devel/include/behavior_manager/DepthBehaviorGoal.h
 ab093edd32bea6af4e260737a2010e51 /home/xing/roshelm_ws/devel/include/behavior_manager/DepthBehaviorResult.h
 fb664923f8e053c6d8ce581e496e80b2 /home/xing/roshelm_ws/devel/include/common_msgs/Float64Stamped.h
+21f5f25e38b18a3c0d8dc40bc589248a /home/xing/roshelm_ws/devel/include/docking_optical_msgs/OpticalFeedback.h
+37e49c822e46c96cc76b04c8be474b39 /home/xing/roshelm_ws/devel/include/docking_optical_msgs/OpticalMeasurement.h
 58dcbd883ca9441877cbbef71d81c86b /home/xing/roshelm_ws/devel/include/uuv_auv_control_allocator/AUVCommand.h
 dd29fec02241968f4532d0fe6615e515 /home/xing/roshelm_ws/devel/include/uuv_control_cascaded_pid/AccelerationControlConfig.h
 ccb0cd9e60df2337d1585d8e7c2c7227 /home/xing/roshelm_ws/devel/include/uuv_control_cascaded_pid/PositionControlConfig.h
@@ -79,6 +81,9 @@ d699930af2c9d96690db77f9932203f4 /home/xing/roshelm_ws/devel/lib/python2.7/dist-
 807d410cd8b68d99c670f4de783a7dce /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/behavior_manager/msg/__init__.py
 fff06f2ef80cd70c8c20b94d64dbf71b /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/common_msgs/msg/_Float64Stamped.py
 5aab02933441f866d3a00b529ae254f6 /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/common_msgs/msg/__init__.py
+7c4e7a3980ae2da8a95022107c084d78 /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/docking_optical_msgs/msg/_OpticalFeedback.py
+677f3754234ed248b0d336b8f5686019 /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/docking_optical_msgs/msg/_OpticalMeasurement.py
+9e04c2be865ccb5975b858b2dded7a7b /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/docking_optical_msgs/msg/__init__.py
 5badf0cc71896bad93f375cacbf2423d /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/uuv_auv_control_allocator/msg/_AUVCommand.py
 492bcbfcb9e16a7c8e60ac20f8ca144e /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/uuv_auv_control_allocator/msg/__init__.py
 cbde21747c99b7a5ade78e569311677a /home/xing/roshelm_ws/devel/lib/python2.7/dist-packages/uuv_control_msgs/msg/_Trajectory.py
@@ -155,6 +160,8 @@ f43dd55ab88624af6199bf450e33b3b9 /home/xing/roshelm_ws/devel/share/common-lisp/r
 7affdb9ad47485ef7249028e7cc3bcc0 /home/xing/roshelm_ws/devel/share/common-lisp/ros/behavior_manager/msg/DepthBehaviorGoal.lisp
 e36aac1dd92638fce8e1acabe10c3d6c /home/xing/roshelm_ws/devel/share/common-lisp/ros/behavior_manager/msg/DepthBehaviorResult.lisp
 8c75a45dc6747f98ec770edc7e63912c /home/xing/roshelm_ws/devel/share/common-lisp/ros/common_msgs/msg/Float64Stamped.lisp
+92655fb682c8743490842226d2f7505f /home/xing/roshelm_ws/devel/share/common-lisp/ros/docking_optical_msgs/msg/OpticalFeedback.lisp
+75a9703fc8d652d9d3f33e07f8b3bf1c /home/xing/roshelm_ws/devel/share/common-lisp/ros/docking_optical_msgs/msg/OpticalMeasurement.lisp
 3f8a911db821cb5a9b34d9734831ce1b /home/xing/roshelm_ws/devel/share/common-lisp/ros/uuv_auv_control_allocator/msg/AUVCommand.lisp
 13c1e2c682b173ef571846c8981441f3 /home/xing/roshelm_ws/devel/share/common-lisp/ros/uuv_control_msgs/msg/Trajectory.lisp
 16a5bc343388ff399c3ac35d4ba04567 /home/xing/roshelm_ws/devel/share/common-lisp/ros/uuv_control_msgs/msg/TrajectoryPoint.lisp
@@ -222,6 +229,8 @@ dba5d6434f36d07005e67eb2bacff49b /home/xing/roshelm_ws/devel/share/gennodejs/ros
 cea0a4ca3b25d85761dc222de926b5cb /home/xing/roshelm_ws/devel/share/gennodejs/ros/behavior_manager/msg/DepthBehaviorGoal.js
 7e5fba5973caf28135a73c39493c8a7a /home/xing/roshelm_ws/devel/share/gennodejs/ros/behavior_manager/msg/DepthBehaviorResult.js
 7470106e902918167163e82b6a5aefac /home/xing/roshelm_ws/devel/share/gennodejs/ros/common_msgs/msg/Float64Stamped.js
+613f6ca8f726f039a285835b21da77bc /home/xing/roshelm_ws/devel/share/gennodejs/ros/docking_optical_msgs/msg/OpticalFeedback.js
+c543b2c26740191cee298a5b89f9cb39 /home/xing/roshelm_ws/devel/share/gennodejs/ros/docking_optical_msgs/msg/OpticalMeasurement.js
 65b6b8fea6998dc972e9bc56e3ec6ce5 /home/xing/roshelm_ws/devel/share/gennodejs/ros/uuv_auv_control_allocator/msg/AUVCommand.js
 5e7285d04de18d4a208dd9d1710ac9ae /home/xing/roshelm_ws/devel/share/gennodejs/ros/uuv_control_msgs/msg/Trajectory.js
 3d6e9a6d80c60a65bca470697e7ba90a /home/xing/roshelm_ws/devel/share/gennodejs/ros/uuv_control_msgs/msg/TrajectoryPoint.js
@@ -291,6 +300,9 @@ f30c1473d72588e571a3e525c920b583 /home/xing/roshelm_ws/devel/share/gennodejs/ros
 81f7348e12197b074faffacb64d9cb0f /home/xing/roshelm_ws/devel/share/roseus/ros/behavior_manager/msg/DepthBehaviorResult.l
 d42add7cea038a75fe5dda43429c2f4a /home/xing/roshelm_ws/devel/share/roseus/ros/common_msgs/manifest.l
 adced6d020c869230ee7b3f21f8bd27f /home/xing/roshelm_ws/devel/share/roseus/ros/common_msgs/msg/Float64Stamped.l
+eaa875c8ec8abf02d39808df3b5f56c5 /home/xing/roshelm_ws/devel/share/roseus/ros/docking_optical_msgs/manifest.l
+efaeaca17998d516d6ed746968c3f53e /home/xing/roshelm_ws/devel/share/roseus/ros/docking_optical_msgs/msg/OpticalFeedback.l
+b7d3fedeb40bcc8fc3de3dff2fa91798 /home/xing/roshelm_ws/devel/share/roseus/ros/docking_optical_msgs/msg/OpticalMeasurement.l
 d69e8b722b2947f6d0c26670c7475609 /home/xing/roshelm_ws/devel/share/roseus/ros/uuv_auv_control_allocator/manifest.l
 449baa05fbf72935a909366bcdc1477a /home/xing/roshelm_ws/devel/share/roseus/ros/uuv_auv_control_allocator/msg/AUVCommand.l
 ef4b54da6d39271d1520f5a1cf5431b4 /home/xing/roshelm_ws/devel/share/roseus/ros/uuv_control_msgs/manifest.l
@@ -375,6 +387,13 @@ e7346f7aad1939be13354b3c54aac0b6 common_msgs/CMakeFiles/common_msgs_generate_mes
 e7346f7aad1939be13354b3c54aac0b6 common_msgs/CMakeFiles/common_msgs_generate_messages_lisp
 e7346f7aad1939be13354b3c54aac0b6 common_msgs/CMakeFiles/common_msgs_generate_messages_nodejs
 e7346f7aad1939be13354b3c54aac0b6 common_msgs/CMakeFiles/common_msgs_generate_messages_py
+e6a974f65748ce92acf91c6f48bbc6c4 docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback
+02e15533b5c49bf4f489d9f6264144c6 docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement
+a52985310d9dcd284af09282e0e88eba docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp
+a52985310d9dcd284af09282e0e88eba docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus
+a52985310d9dcd284af09282e0e88eba docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_lisp
+a52985310d9dcd284af09282e0e88eba docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs
+a52985310d9dcd284af09282e0e88eba docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py
 119c9b21f62a5ee4597494ae82fda216 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/_uuv_auv_control_allocator_generate_messages_check_deps_AUVCommand
 e99dd35a5cf1ab05b20dd36926c8a28b uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_cpp
 e99dd35a5cf1ab05b20dd36926c8a28b uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_eus

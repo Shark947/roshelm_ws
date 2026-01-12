@@ -1,0 +1,49 @@
+# docking_optical_vision/config/vision.yaml
+
+# ====== 订阅 ======
+camera_topic: "/auh/auh/camerabottom/camera_image"
+camera_info_topic: "/auh/auh/camerabottom/camera_info"
+
+queue_size: 1
+
+# ====== 发布/订阅 ======
+optical_measurement_topic: "/docking/optical_measurement"
+optical_feedback_topic: "/docking/optical_feedback"
+
+# ====== 控制台输出节流 ======
+print_every_n: 30
+print_camera_info_every_n: 120
+print_detection_every_n: 10      # 每N次检测输出一次结果（避免刷屏）
+
+# ====== 白点检测参数 ======
+# 1) 图像预处理
+use_roi: false
+roi_x: 0
+roi_y: 0
+roi_w: 768
+roi_h: 492
+
+blur_kernel: 3                   # 高斯模糊核大小（奇数，0表示不模糊）
+
+# 2) 阈值分割
+threshold_value: 190             # 灰度阈值
+use_adaptive_threshold: false    # 如果光照不稳再开
+adaptive_block_size: 31          # 奇数
+adaptive_c: -5
+
+# 3) 形态学
+morph_open_kernel: 3             # 去掉孤立噪点（0表示不做）
+morph_close_kernel: 5            # 填补白点空洞（0表示不做）
+
+# 4) 目标筛选
+min_blob_area: 1                 # 最小连通域面积（像素）
+max_blob_area: 5000              # 最大连通域面积（像素）
+choose_mode: "brightest"         # "largest" 或 "brightest"
+
+# ====== 角度符号约定 ======
+# 默认采用 optical image 坐标：
+# u 向右为正，v 向下为正
+# theta_x = atan((u-cx)/fx), theta_y = atan((v-cy)/fy)
+invert_theta_x: false
+invert_theta_y: false
+

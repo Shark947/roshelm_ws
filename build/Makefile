@@ -519,6 +519,175 @@ common_msgs_generate_messages_nodejs/fast:
 .PHONY : common_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
+# Target rules for targets named docking_optical_msgs_generate_messages_eus
+
+# Build rule for target.
+docking_optical_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_generate_messages_eus
+.PHONY : docking_optical_msgs_generate_messages_eus
+
+# fast build rule for target.
+docking_optical_msgs_generate_messages_eus/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/build
+.PHONY : docking_optical_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_gennodejs
+
+# Build rule for target.
+docking_optical_msgs_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_gennodejs
+.PHONY : docking_optical_msgs_gennodejs
+
+# fast build rule for target.
+docking_optical_msgs_gennodejs/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/build
+.PHONY : docking_optical_msgs_gennodejs/fast
+
+#=============================================================================
+# Target rules for targets named _docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement
+
+# Build rule for target.
+_docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement
+.PHONY : _docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement
+
+# fast build rule for target.
+_docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement.dir/build.make docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement.dir/build
+.PHONY : _docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_gencpp
+
+# Build rule for target.
+docking_optical_msgs_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_gencpp
+.PHONY : docking_optical_msgs_gencpp
+
+# fast build rule for target.
+docking_optical_msgs_gencpp/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_gencpp.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_gencpp.dir/build
+.PHONY : docking_optical_msgs_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_geneus
+
+# Build rule for target.
+docking_optical_msgs_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_geneus
+.PHONY : docking_optical_msgs_geneus
+
+# fast build rule for target.
+docking_optical_msgs_geneus/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_geneus.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_geneus.dir/build
+.PHONY : docking_optical_msgs_geneus/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_generate_messages_py
+
+# Build rule for target.
+docking_optical_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_generate_messages_py
+.PHONY : docking_optical_msgs_generate_messages_py
+
+# fast build rule for target.
+docking_optical_msgs_generate_messages_py/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build
+.PHONY : docking_optical_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_generate_messages
+
+# Build rule for target.
+docking_optical_msgs_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_generate_messages
+.PHONY : docking_optical_msgs_generate_messages
+
+# fast build rule for target.
+docking_optical_msgs_generate_messages/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/build
+.PHONY : docking_optical_msgs_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named _docking_optical_msgs_generate_messages_check_deps_OpticalFeedback
+
+# Build rule for target.
+_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _docking_optical_msgs_generate_messages_check_deps_OpticalFeedback
+.PHONY : _docking_optical_msgs_generate_messages_check_deps_OpticalFeedback
+
+# fast build rule for target.
+_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/build.make docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/build
+.PHONY : _docking_optical_msgs_generate_messages_check_deps_OpticalFeedback/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_generate_messages_lisp
+
+# Build rule for target.
+docking_optical_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_generate_messages_lisp
+.PHONY : docking_optical_msgs_generate_messages_lisp
+
+# fast build rule for target.
+docking_optical_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_lisp.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_lisp.dir/build
+.PHONY : docking_optical_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_genlisp
+
+# Build rule for target.
+docking_optical_msgs_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_genlisp
+.PHONY : docking_optical_msgs_genlisp
+
+# fast build rule for target.
+docking_optical_msgs_genlisp/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_genlisp.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_genlisp.dir/build
+.PHONY : docking_optical_msgs_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_generate_messages_nodejs
+
+# Build rule for target.
+docking_optical_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_generate_messages_nodejs
+.PHONY : docking_optical_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+docking_optical_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build
+.PHONY : docking_optical_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_generate_messages_cpp
+
+# Build rule for target.
+docking_optical_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_generate_messages_cpp
+.PHONY : docking_optical_msgs_generate_messages_cpp
+
+# fast build rule for target.
+docking_optical_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/build
+.PHONY : docking_optical_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_msgs_genpy
+
+# Build rule for target.
+docking_optical_msgs_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs_genpy
+.PHONY : docking_optical_msgs_genpy
+
+# fast build rule for target.
+docking_optical_msgs_genpy/fast:
+	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/build
+.PHONY : docking_optical_msgs_genpy/fast
+
+#=============================================================================
 # Target rules for targets named uuv_auv_control_allocator_generate_messages
 
 # Build rule for target.
@@ -2404,82 +2573,17 @@ controller_manager/fast:
 .PHONY : controller_manager/fast
 
 #=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_cpp
+# Target rules for targets named sensor_msgs_generate_messages_eus
 
 # Build rule for target.
-actionlib_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_cpp
-.PHONY : actionlib_msgs_generate_messages_cpp
+sensor_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_eus
+.PHONY : sensor_msgs_generate_messages_eus
 
 # fast build rule for target.
-actionlib_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-.PHONY : actionlib_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_py
-
-# Build rule for target.
-nav_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_py
-.PHONY : nav_msgs_generate_messages_py
-
-# fast build rule for target.
-nav_msgs_generate_messages_py/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_py.dir/build
-.PHONY : nav_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_lisp
-
-# Build rule for target.
-nav_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_lisp
-.PHONY : nav_msgs_generate_messages_lisp
-
-# fast build rule for target.
-nav_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
-.PHONY : nav_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_cpp
-
-# Build rule for target.
-nav_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_cpp
-.PHONY : nav_msgs_generate_messages_cpp
-
-# fast build rule for target.
-nav_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
-.PHONY : nav_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_nodejs
-
-# Build rule for target.
-nav_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_nodejs
-.PHONY : nav_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-nav_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
-.PHONY : nav_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named nav_msgs_generate_messages_eus
-
-# Build rule for target.
-nav_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_eus
-.PHONY : nav_msgs_generate_messages_eus
-
-# fast build rule for target.
-nav_msgs_generate_messages_eus/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
-.PHONY : nav_msgs_generate_messages_eus/fast
+sensor_msgs_generate_messages_eus/fast:
+	$(MAKE) -f docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+.PHONY : sensor_msgs_generate_messages_eus/fast
 
 #=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_lisp
@@ -2491,60 +2595,8 @@ sensor_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
 .PHONY : sensor_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_eus
-
-# Build rule for target.
-actionlib_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_eus
-.PHONY : actionlib_msgs_generate_messages_eus
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_lisp
-
-# Build rule for target.
-actionlib_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_lisp
-.PHONY : actionlib_msgs_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-.PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_nodejs
-
-# Build rule for target.
-actionlib_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_nodejs
-.PHONY : actionlib_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
-.PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_py
-
-# Build rule for target.
-actionlib_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_py
-.PHONY : actionlib_msgs_generate_messages_py
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_py/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-.PHONY : actionlib_msgs_generate_messages_py/fast
 
 #=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_nodejs
@@ -2556,21 +2608,8 @@ sensor_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named sensor_msgs_generate_messages_eus
-
-# Build rule for target.
-sensor_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 sensor_msgs_generate_messages_eus
-.PHONY : sensor_msgs_generate_messages_eus
-
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
 
 #=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_cpp
@@ -2582,7 +2621,7 @@ sensor_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
 .PHONY : sensor_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2595,8 +2634,281 @@ sensor_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_py/fast:
-	$(MAKE) -f ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make ros_moos_bridge/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+	$(MAKE) -f docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 .PHONY : sensor_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named docking_optical_vision_node
+
+# Build rule for target.
+docking_optical_vision_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_vision_node
+.PHONY : docking_optical_vision_node
+
+# fast build rule for target.
+docking_optical_vision_node/fast:
+	$(MAKE) -f docking_optical_vision/CMakeFiles/docking_optical_vision_node.dir/build.make docking_optical_vision/CMakeFiles/docking_optical_vision_node.dir/build
+.PHONY : docking_optical_vision_node/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_py
+
+# Build rule for target.
+actionlib_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_py
+.PHONY : actionlib_generate_messages_py
+
+# fast build rule for target.
+actionlib_generate_messages_py/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_generate_messages_py.dir/build.make docking_nav/CMakeFiles/actionlib_generate_messages_py.dir/build
+.PHONY : actionlib_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_nodejs
+
+# Build rule for target.
+actionlib_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_nodejs
+.PHONY : actionlib_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_generate_messages_nodejs/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make docking_nav/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+.PHONY : actionlib_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_lisp
+
+# Build rule for target.
+actionlib_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_lisp
+.PHONY : actionlib_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_generate_messages_lisp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make docking_nav/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+.PHONY : actionlib_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_eus
+
+# Build rule for target.
+actionlib_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_eus
+.PHONY : actionlib_generate_messages_eus
+
+# fast build rule for target.
+actionlib_generate_messages_eus/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_generate_messages_eus.dir/build.make docking_nav/CMakeFiles/actionlib_generate_messages_eus.dir/build
+.PHONY : actionlib_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_cpp
+
+# Build rule for target.
+actionlib_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_cpp
+.PHONY : actionlib_msgs_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make docking_nav/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+.PHONY : actionlib_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_py
+
+# Build rule for target.
+nav_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_py
+.PHONY : nav_msgs_generate_messages_py
+
+# fast build rule for target.
+nav_msgs_generate_messages_py/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make docking_nav/CMakeFiles/nav_msgs_generate_messages_py.dir/build
+.PHONY : nav_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_py
+
+# Build rule for target.
+tf2_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_py
+.PHONY : tf2_msgs_generate_messages_py
+
+# fast build rule for target.
+tf2_msgs_generate_messages_py/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make docking_nav/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
+.PHONY : tf2_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_cpp
+
+# Build rule for target.
+nav_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_cpp
+.PHONY : nav_msgs_generate_messages_cpp
+
+# fast build rule for target.
+nav_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make docking_nav/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
+.PHONY : nav_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_nodejs
+
+# Build rule for target.
+nav_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_nodejs
+.PHONY : nav_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+nav_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make docking_nav/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
+.PHONY : nav_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_lisp
+
+# Build rule for target.
+nav_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_lisp
+.PHONY : nav_msgs_generate_messages_lisp
+
+# fast build rule for target.
+nav_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make docking_nav/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
+.PHONY : nav_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_eus
+
+# Build rule for target.
+tf2_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_eus
+.PHONY : tf2_msgs_generate_messages_eus
+
+# fast build rule for target.
+tf2_msgs_generate_messages_eus/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make docking_nav/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
+.PHONY : tf2_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_nodejs
+
+# Build rule for target.
+tf2_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_nodejs
+.PHONY : tf2_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+tf2_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make docking_nav/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
+.PHONY : tf2_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_eus
+
+# Build rule for target.
+actionlib_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_eus
+.PHONY : actionlib_msgs_generate_messages_eus
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_eus/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make docking_nav/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+.PHONY : actionlib_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_lisp
+
+# Build rule for target.
+actionlib_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_lisp
+.PHONY : actionlib_msgs_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make docking_nav/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+.PHONY : actionlib_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_nodejs
+
+# Build rule for target.
+actionlib_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_nodejs
+.PHONY : actionlib_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make docking_nav/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+.PHONY : actionlib_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_py
+
+# Build rule for target.
+actionlib_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_py
+.PHONY : actionlib_msgs_generate_messages_py
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_py/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make docking_nav/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+.PHONY : actionlib_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_cpp
+
+# Build rule for target.
+tf2_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_cpp
+.PHONY : tf2_msgs_generate_messages_cpp
+
+# fast build rule for target.
+tf2_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make docking_nav/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
+.PHONY : tf2_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named nav_msgs_generate_messages_eus
+
+# Build rule for target.
+nav_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_msgs_generate_messages_eus
+.PHONY : nav_msgs_generate_messages_eus
+
+# fast build rule for target.
+nav_msgs_generate_messages_eus/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make docking_nav/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
+.PHONY : nav_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named tf2_msgs_generate_messages_lisp
+
+# Build rule for target.
+tf2_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_lisp
+.PHONY : tf2_msgs_generate_messages_lisp
+
+# fast build rule for target.
+tf2_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make docking_nav/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
+.PHONY : tf2_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_generate_messages_cpp
+
+# Build rule for target.
+actionlib_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_cpp
+.PHONY : actionlib_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_generate_messages_cpp/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make docking_nav/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+.PHONY : actionlib_generate_messages_cpp/fast
 
 #=============================================================================
 # Target rules for targets named bridge_node
@@ -2610,136 +2922,6 @@ bridge_node: cmake_check_build_system
 bridge_node/fast:
 	$(MAKE) -f ros_moos_bridge/CMakeFiles/bridge_node.dir/build.make ros_moos_bridge/CMakeFiles/bridge_node.dir/build
 .PHONY : bridge_node/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_py
-
-# Build rule for target.
-tf2_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_py
-.PHONY : tf2_msgs_generate_messages_py
-
-# fast build rule for target.
-tf2_msgs_generate_messages_py/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make ros_helm/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
-.PHONY : tf2_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_nodejs
-
-# Build rule for target.
-actionlib_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_nodejs
-.PHONY : actionlib_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make ros_helm/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_lisp
-
-# Build rule for target.
-tf2_msgs_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_lisp
-.PHONY : tf2_msgs_generate_messages_lisp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make ros_helm/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
-.PHONY : tf2_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_py
-
-# Build rule for target.
-actionlib_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_py
-.PHONY : actionlib_generate_messages_py
-
-# fast build rule for target.
-actionlib_generate_messages_py/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/actionlib_generate_messages_py.dir/build.make ros_helm/CMakeFiles/actionlib_generate_messages_py.dir/build
-.PHONY : actionlib_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_cpp
-
-# Build rule for target.
-actionlib_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_cpp
-.PHONY : actionlib_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_generate_messages_cpp/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make ros_helm/CMakeFiles/actionlib_generate_messages_cpp.dir/build
-.PHONY : actionlib_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_cpp
-
-# Build rule for target.
-tf2_msgs_generate_messages_cpp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_cpp
-.PHONY : tf2_msgs_generate_messages_cpp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make ros_helm/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
-.PHONY : tf2_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_eus
-
-# Build rule for target.
-actionlib_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_eus
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/actionlib_generate_messages_eus.dir/build.make ros_helm/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_generate_messages_lisp
-
-# Build rule for target.
-actionlib_generate_messages_lisp: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_generate_messages_lisp
-.PHONY : actionlib_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make ros_helm/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_nodejs
-
-# Build rule for target.
-tf2_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_nodejs
-.PHONY : tf2_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-tf2_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make ros_helm/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
-.PHONY : tf2_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named tf2_msgs_generate_messages_eus
-
-# Build rule for target.
-tf2_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tf2_msgs_generate_messages_eus
-.PHONY : tf2_msgs_generate_messages_eus
-
-# fast build rule for target.
-tf2_msgs_generate_messages_eus/fast:
-	$(MAKE) -f ros_helm/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make ros_helm/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
-.PHONY : tf2_msgs_generate_messages_eus/fast
 
 #=============================================================================
 # Target rules for targets named behaviors
@@ -5082,6 +5264,19 @@ help:
 	@echo "... common_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... common_msgs_generate_messages_nodejs"
+	@echo "... docking_optical_msgs_generate_messages_eus"
+	@echo "... docking_optical_msgs_gennodejs"
+	@echo "... _docking_optical_msgs_generate_messages_check_deps_OpticalMeasurement"
+	@echo "... docking_optical_msgs_gencpp"
+	@echo "... docking_optical_msgs_geneus"
+	@echo "... docking_optical_msgs_generate_messages_py"
+	@echo "... docking_optical_msgs_generate_messages"
+	@echo "... _docking_optical_msgs_generate_messages_check_deps_OpticalFeedback"
+	@echo "... docking_optical_msgs_generate_messages_lisp"
+	@echo "... docking_optical_msgs_genlisp"
+	@echo "... docking_optical_msgs_generate_messages_nodejs"
+	@echo "... docking_optical_msgs_generate_messages_cpp"
+	@echo "... docking_optical_msgs_genpy"
 	@echo "... uuv_auv_control_allocator_generate_messages"
 	@echo "... geometry_msgs_generate_messages_py"
 	@echo "... uuv_auv_control_allocator_generate_messages_cpp"
@@ -5227,32 +5422,33 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... controller_manager_node"
 	@echo "... controller_manager"
+	@echo "... sensor_msgs_generate_messages_eus"
+	@echo "... sensor_msgs_generate_messages_lisp"
+	@echo "... sensor_msgs_generate_messages_nodejs"
+	@echo "... sensor_msgs_generate_messages_cpp"
+	@echo "... sensor_msgs_generate_messages_py"
+	@echo "... docking_optical_vision_node"
+	@echo "... actionlib_generate_messages_py"
+	@echo "... actionlib_generate_messages_nodejs"
+	@echo "... actionlib_generate_messages_lisp"
+	@echo "... actionlib_generate_messages_eus"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... nav_msgs_generate_messages_py"
-	@echo "... nav_msgs_generate_messages_lisp"
+	@echo "... tf2_msgs_generate_messages_py"
 	@echo "... nav_msgs_generate_messages_cpp"
 	@echo "... nav_msgs_generate_messages_nodejs"
-	@echo "... nav_msgs_generate_messages_eus"
-	@echo "... sensor_msgs_generate_messages_lisp"
+	@echo "... nav_msgs_generate_messages_lisp"
+	@echo "... tf2_msgs_generate_messages_eus"
+	@echo "... tf2_msgs_generate_messages_nodejs"
 	@echo "... actionlib_msgs_generate_messages_eus"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... sensor_msgs_generate_messages_cpp"
-	@echo "... sensor_msgs_generate_messages_py"
-	@echo "... bridge_node"
-	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... tf2_msgs_generate_messages_lisp"
-	@echo "... actionlib_generate_messages_py"
-	@echo "... actionlib_generate_messages_cpp"
 	@echo "... tf2_msgs_generate_messages_cpp"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... actionlib_generate_messages_lisp"
-	@echo "... tf2_msgs_generate_messages_nodejs"
-	@echo "... tf2_msgs_generate_messages_eus"
+	@echo "... nav_msgs_generate_messages_eus"
+	@echo "... tf2_msgs_generate_messages_lisp"
+	@echo "... actionlib_generate_messages_cpp"
+	@echo "... bridge_node"
 	@echo "... behaviors"
 	@echo "... bhvutil"
 	@echo "... behaviors-marine"
