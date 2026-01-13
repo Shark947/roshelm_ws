@@ -51,6 +51,7 @@ int main(int argc, char **argv)
     bridge.deliverPending(helm);
     helm.Iterate();
     bridge.publishDesired(helm);
+    bridge.logStatusIfNeeded(helm);
     ros::spinOnce();
     rate.sleep();
   }

@@ -28,6 +28,7 @@ public:
 
   void deliverPending(HelmIvP &helm);
   void publishDesired(const HelmIvP &helm);
+  void logStatusIfNeeded(const HelmIvP &helm);
 
 private:
   std::map<std::string, double> collectDesiredDoubles(const HelmIvP &helm) const;
@@ -115,6 +116,13 @@ private:
   std::unique_ptr<RosCommandPublisher> command_publisher_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
+  std::map<std::string, double> nav_values_;
+  std::map<std::string, double> desired_values_;
+  std::map<std::string, bool> bool_values_;
+  std::mutex status_mutex_;
+  ros::Time start_time_;
+  ros::Time last_status_log_;
+  double status_log_period_{0.0};
 
   std::list<HelmMsg> pending_mail_;
   std::mutex mail_mutex_;

@@ -21,7 +21,7 @@
   <node pkg="controller_manager"
         type="controller_manager_node"
         name="controller_manager_node"
-        output="screen">
+        output="log">
     <param name="controllers_config" value="$(find controller_manager)/config/controllers.yaml" />
   </node>
 
