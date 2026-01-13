@@ -1,6 +1,6 @@
 //--------    FILE: docking.bhv   -------------
 
-initialize   DEPLOY = true
+initialize   DEPLOY = false
 initialize   RETURN = false
 initialize   MODE = LIFT
 initialize   GOTO_DEPTH = false
