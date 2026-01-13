@@ -25,6 +25,9 @@ RosBridge::RosBridge(ros::NodeHandle &nh, ros::NodeHandle &private_nh,
 
 bool RosBridge::initialize()
 {
+  status_log_period_ = config_.status_log_period;
+  start_time_ = ros::Time::now();
+
   if (!setupLogDirectory())
     return false;
 
@@ -67,6 +70,11 @@ void RosBridge::enqueueNavValue(const std::string &key, double value,
   pending_mail_.emplace_back(static_cast<char>(MsgType::Notify), key, value,
                              stamp.toSec(), "ros_bridge");
 
+  {
+    std::lock_guard<std::mutex> status_guard(status_mutex_);
+    nav_values_[key] = value;
+  }
+
   logValue(key, value, stamp);
 }
 
@@ -78,6 +86,11 @@ void RosBridge::enqueueBoolValue(const std::string &key, bool value,
   std::lock_guard<std::mutex> guard(mail_mutex_);
   pending_mail_.emplace_back(static_cast<char>(MsgType::Notify), key, text,
                              stamp.toSec(), "ros_bridge");
+
+  {
+    std::lock_guard<std::mutex> status_guard(status_mutex_);
+    bool_values_[key] = value;
+  }
 }
 
 void RosBridge::enqueueStringValue(const std::string &key,
@@ -365,6 +378,15 @@ void RosBridge::publishDesired(const HelmIvP &helm)
   if (desired.empty())
     return;
 
+  {
+    std::map<std::string, double> desired_snapshot = desired;
+    auto heading = desired_snapshot.find("DESIRED_HEADING");
+    if (heading != desired_snapshot.end())
+      heading->second = std::fmod(90.0 - heading->second + 360.0, 360.0);
+    std::lock_guard<std::mutex> status_guard(status_mutex_);
+    desired_values_ = std::move(desired_snapshot);
+  }
+
   auto publish_scalar = [&](const std::string &key, ros::Publisher &pub) {
     auto it = desired.find(key);
     if (it != desired.end() && pub)
@@ -385,6 +407,79 @@ void RosBridge::publishDesired(const HelmIvP &helm)
 
   for (auto &[key, pub] : desired_scalar_pubs_)
     publish_scalar(key, pub);
+}
+
+void RosBridge::logStatusIfNeeded(const HelmIvP &helm)
+{
+  if (status_log_period_ <= 0.0)
+    return;
+
+  const ros::Time now = ros::Time::now();
+  if (!last_status_log_.isZero() &&
+      (now - last_status_log_).toSec() < status_log_period_)
+  {
+    return;
+  }
+  last_status_log_ = now;
+
+  std::map<std::string, double> nav_snapshot;
+  std::map<std::string, double> desired_snapshot;
+  std::map<std::string, bool> bool_snapshot;
+  {
+    std::lock_guard<std::mutex> status_guard(status_mutex_);
+    nav_snapshot = nav_values_;
+    desired_snapshot = desired_values_;
+    bool_snapshot = bool_values_;
+  }
+
+  auto format_double_map = [](const std::map<std::string, double> &data,
+                              const std::string &prefix) {
+    std::ostringstream stream;
+    stream << std::fixed << std::setprecision(3);
+    bool first = true;
+    for (const auto &entry : data)
+    {
+      if (!prefix.empty() && entry.first.rfind(prefix, 0) != 0)
+        continue;
+      if (!first)
+        stream << ", ";
+      stream << entry.first << "=" << entry.second;
+      first = false;
+    }
+    return stream.str();
+  };
+
+  const auto &report = helm.getHelmReport();
+  std::string running_behaviors = report.getRunningBehaviors(false);
+  if (running_behaviors.empty())
+    running_behaviors = "none";
+  std::string mode_summary = report.getModeSummary();
+  if (mode_summary.empty())
+    mode_summary = "unknown";
+
+  auto bool_or_default = [&](const std::string &key, bool fallback) {
+    auto it = bool_snapshot.find(key);
+    return it == bool_snapshot.end() ? fallback : it->second;
+  };
+
+  const bool deploy_state = bool_or_default("DEPLOY", config_.deploy_default);
+  const bool return_state = bool_or_default("RETURN", config_.return_default);
+
+  const std::string nav_text = format_double_map(nav_snapshot, "NAV_");
+  const std::string desired_text = format_double_map(desired_snapshot, "DESIRED_");
+
+  const double uptime = start_time_.isZero() ? 0.0 : (now - start_time_).toSec();
+  std::ostringstream status;
+  status << "[ros_helm] status=running uptime_s=" << std::fixed << std::setprecision(1)
+         << uptime
+         << " mode=" << mode_summary
+         << " running_behaviors=" << running_behaviors
+         << " DEPLOY=" << (deploy_state ? "true" : "false")
+         << " RETURN=" << (return_state ? "true" : "false")
+         << " DESIRED={" << (desired_text.empty() ? "none" : desired_text) << "}"
+         << " NAV={" << (nav_text.empty() ? "none" : nav_text) << "}";
+
+  ROS_INFO_STREAM(status.str());
 }
 
 std::map<std::string, double> RosBridge::collectDesiredDoubles(

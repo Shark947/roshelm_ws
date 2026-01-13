@@ -88,6 +88,8 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.deploy_default);
   private_nh_.param("return_default", config.return_default,
                     config.return_default);
+  private_nh_.param("status_log_period", config.status_log_period,
+                    config.status_log_period);
 
   private_nh_.param("loop_frequency", config.loop_frequency,
                     config.loop_frequency);
@@ -219,6 +221,12 @@ bool RosConfigLoader::validateConfig(const RosNodeConfig &config) const
   if (config.loop_frequency <= 0.0)
   {
     ROS_ERROR("ros_bridge: loop_frequency must be positive");
+    return false;
+  }
+
+  if (config.status_log_period < 0.0)
+  {
+    ROS_ERROR("ros_bridge: status_log_period must be non-negative");
     return false;
   }
 

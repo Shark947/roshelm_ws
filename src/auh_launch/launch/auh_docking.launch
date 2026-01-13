@@ -36,7 +36,7 @@
   <node pkg="controller_manager"
         type="controller_manager_node"
         name="controller_manager_node"
-        output="screen">
+        output="log">
     <param name="controllers_config" value="$(find controller_manager)/config/controllers.yaml" />
   </node>
 
@@ -58,7 +58,7 @@
   <node pkg="docking_optical_vision"
         type="docking_optical_vision_node"
         name="docking_optical_vision"
-        output="screen">
+        output="log">
     <rosparam command="load" file="$(find docking_optical_vision)/config/vision.yaml"/>
   </node>
 

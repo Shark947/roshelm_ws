@@ -28,6 +28,7 @@ struct RosNodeConfig
   std::string return_topic;
   std::string frame_id{"map"};
   double loop_frequency{10.0};
+  double status_log_period{2.0};
   bool deploy_default{true};
   bool return_default{false};
   std::map<std::string, double> nav_defaults;

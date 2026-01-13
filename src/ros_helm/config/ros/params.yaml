@@ -3,6 +3,7 @@ node_name: ros_bridge
 config_path: config/helm/startHelm.yaml
 register_variables_path: config/helm/registerVariables.yaml
 loop_frequency: 10.0
+status_log_period: 2.0
 frame_id: map
 vehicle_name: auh
 current_heading_topic: /auh/current_heading
