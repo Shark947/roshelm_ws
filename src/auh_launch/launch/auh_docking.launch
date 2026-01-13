@@ -5,7 +5,7 @@
   <!-- 2) AUH 初始位姿 -->
   <arg name="auh_x"     default="0"/>
   <arg name="auh_y"     default="0"/>
-  <arg name="auh_z"     default="-60"/>
+  <arg name="auh_z"     default="-3"/>
   <arg name="auh_roll"  default="0"/>
   <arg name="auh_pitch" default="0"/>
   <arg name="auh_yaw"   default="0"/>

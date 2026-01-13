@@ -76,7 +76,6 @@ endforeach()
 # Add include dirs
 # --------------------------------------------------------------
 set(IVP_INCLUDE_DIRS
-  ${ROS_HELM_SOURCE_DIR}/src/include/ivp
   ${ROS_HELM_SOURCE_DIR}/src
   ${ROS_HELM_SOURCE_DIR}/src/helm/include
   ${ROS_HELM_SOURCE_DIR}/src/helm/tools
@@ -89,7 +88,6 @@ foreach(lib ${IVP_LIBS})
 endforeach()
 
 set(ROS_HELM_PUBLIC_INCLUDE_DIRS
-  ${ROS_HELM_SOURCE_DIR}/src/include/ivp
   ${ROS_HELM_SOURCE_DIR}/src
   ${ROS_HELM_SOURCE_DIR}/src/helm/include
   ${ROS_HELM_SOURCE_DIR}/src/helm/tools

@@ -1087,6 +1087,9 @@ pluginlib_DIR:PATH=/opt/ros/melodic/share/pluginlib/cmake
 //Value Computed by CMake
 ros_helm_BINARY_DIR:STATIC=/home/xing/roshelm_ws/build/ros_helm
 
+//The directory containing a CMake configuration file for ros_helm.
+ros_helm_DIR:PATH=/home/xing/roshelm_ws/devel/share/ros_helm/cmake
+
 //Value Computed by CMake
 ros_helm_SOURCE_DIR:STATIC=/home/xing/roshelm_ws/src/ros_helm
 
