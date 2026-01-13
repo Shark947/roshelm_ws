@@ -3,10 +3,6 @@ docking_nav:
   # 通信/控制迭代周期，秒
   nav_server_period: 0.1
 
-  # ====== 网络（如果ROS化后不走Socket，也可先保留，后续不用再删） ======
-  ip_address: "192.168.30.213"
-  socket_port: 8000
-
   # ====== 相机/安装几何 ======
   # 相机与艇体参考点的水平偏移量 ΔL，米
   optical_camera_delta_l: 0
@@ -70,3 +66,7 @@ docking_nav:
   transimit_duration_sec: 15
   # DockingMaxTry (DockingMaxTry): 入坞最大重试次数
   docking_max_try: 3
+
+  # ====== 视觉数据超时 ======
+  # 超时未收到视觉数据则视为无效
+  optical_timeout_sec: 0.5

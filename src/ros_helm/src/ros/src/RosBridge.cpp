@@ -53,6 +53,26 @@ bool RosBridge::initialize()
   desired_scalar_pubs_["DESIRED_DEPTH"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_depth_topic, 10);
 
+  docking_mode_sub_ =
+      subscribeString(config_.docking_mode_topic, "MODE");
+  docking_stationing_sub_ =
+      subscribeBoolean(config_.docking_stationing_topic, "STATIONING");
+  docking_constheight_sub_ =
+      subscribeBoolean(config_.docking_constheight_topic, "CONSTHEIGHT");
+  docking_dockdepth_update_sub_ =
+      subscribeString(config_.docking_dockdepth_update_topic,
+                      "DOCKDEPTH_UPDATE");
+  docking_dockhdg_updates_sub_ =
+      subscribeString(config_.docking_dockhdg_updates_topic, "DOCKHDG_UPDATES");
+  docking_docking_falling_sub_ =
+      subscribeBoolean(config_.docking_docking_falling_topic,
+                       "DOCKING_FALLING");
+  docking_manual_override_sub_ =
+      subscribeBoolean(config_.docking_manual_override_topic,
+                       "MOOS_MANUAL_OVERIDE");
+  docking_failed_sub_ =
+      subscribeBoolean(config_.docking_failed_topic, "DOCKINGFAILED");
+
   const ros::Time stamp = ros::Time::now();
   for (const auto &entry : config_.nav_defaults)
     enqueueNavValue(entry.first, entry.second, stamp);
@@ -80,6 +100,15 @@ void RosBridge::enqueueBoolValue(const std::string &key, bool value,
                              stamp.toSec(), "ros_bridge");
 }
 
+void RosBridge::enqueueStringValue(const std::string &key,
+                                   const std::string &value,
+                                   const ros::Time &stamp)
+{
+  std::lock_guard<std::mutex> guard(mail_mutex_);
+  pending_mail_.emplace_back(static_cast<char>(MsgType::Notify), key, value,
+                             stamp.toSec(), "ros_bridge");
+}
+
 ros::Subscriber RosBridge::subscribeCurrent(const std::string &topic,
                                             const std::string &nav_key)
 {
@@ -90,6 +119,30 @@ ros::Subscriber RosBridge::subscribeCurrent(const std::string &topic,
       topic, 10,
       [this, nav_key](const common_msgs::Float64Stamped::ConstPtr &msg) {
         this->currentValueCallback(msg, nav_key);
+      });
+}
+
+ros::Subscriber RosBridge::subscribeBoolean(const std::string &topic,
+                                            const std::string &key)
+{
+  if (topic.empty())
+    return {};
+
+  return nh_.subscribe<std_msgs::Bool>(
+      topic, 10, [this, key](const std_msgs::Bool::ConstPtr &msg) {
+        this->enqueueBoolValue(key, msg->data, ros::Time::now());
+      });
+}
+
+ros::Subscriber RosBridge::subscribeString(const std::string &topic,
+                                           const std::string &key)
+{
+  if (topic.empty())
+    return {};
+
+  return nh_.subscribe<std_msgs::String>(
+      topic, 10, [this, key](const std_msgs::String::ConstPtr &msg) {
+        this->enqueueStringValue(key, msg->data, ros::Time::now());
       });
 }
 
