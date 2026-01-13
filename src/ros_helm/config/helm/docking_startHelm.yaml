@@ -1,0 +1,32 @@
+app:
+  name: pHelmIvP
+  community: alpha
+  app_tick: 4
+  comms_tick: 4
+
+helm:
+  behaviors: docking.bhv
+  domain:
+    - course: 0:359:360
+    - speed: 0:4:41
+    - depth: 0:1000:1001
+  start_engaged: true
+  allow_park: true
+  allow_disengaged: true
+  park_on_allstop: false
+  disengage_on_allstop: false
+  goals_mandatory: false
+  other_override_var: AUTONOMY_OVERRIDE
+  verbose: terse
+  hold_on_apps: []
+  node_skew:
+    vehicle: auh
+    seconds: 45
+  ok_skew: 60
+
+initial_values:
+  NAV_X: 0
+  NAV_Y: 0
+  NAV_HEADING: 0
+  NAV_SPEED: 0
+  NAV_DEPTH: 0

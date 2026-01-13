@@ -8,7 +8,9 @@
 #include <string>
 #include <ros/ros.h>
 #include <common_msgs/Float64Stamped.h>
+#include <std_msgs/Bool.h>
 #include <std_msgs/Float64.h>
+#include <std_msgs/String.h>
 
 #include "HelmIvP.h"
 #include "HelmMsg.h"
@@ -34,8 +36,14 @@ private:
                        const ros::Time &stamp);
   void enqueueBoolValue(const std::string &key, bool value,
                         const ros::Time &stamp);
+  void enqueueStringValue(const std::string &key, const std::string &value,
+                          const ros::Time &stamp);
   ros::Subscriber subscribeCurrent(const std::string &topic,
                                    const std::string &nav_key);
+  ros::Subscriber subscribeBoolean(const std::string &topic,
+                                   const std::string &key);
+  ros::Subscriber subscribeString(const std::string &topic,
+                                  const std::string &key);
 
   void currentValueCallback(const common_msgs::Float64Stamped::ConstPtr &msg,
                             const std::string &nav_key);
@@ -101,6 +109,14 @@ private:
   ros::Subscriber yaw_sub_;
   ros::Subscriber pitch_sub_;
   ros::Subscriber roll_sub_;
+  ros::Subscriber docking_mode_sub_;
+  ros::Subscriber docking_stationing_sub_;
+  ros::Subscriber docking_constheight_sub_;
+  ros::Subscriber docking_dockdepth_update_sub_;
+  ros::Subscriber docking_dockhdg_updates_sub_;
+  ros::Subscriber docking_docking_falling_sub_;
+  ros::Subscriber docking_manual_override_sub_;
+  ros::Subscriber docking_failed_sub_;
   std::unique_ptr<RosCommandPublisher> command_publisher_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;

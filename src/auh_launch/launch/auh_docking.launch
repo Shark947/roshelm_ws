@@ -63,11 +63,24 @@
   </node>
 
   <!-- 5) docking_nav 参数加载 -->
-  <!-- <rosparam command="load" file="$(find docking_nav)/config/docking.yaml" />
+  <rosparam command="load" file="$(find docking_nav)/config/docking.yaml" />
+  <rosparam command="load" file="$(find docking_nav)/config/io.yaml" />
   <node pkg="docking_nav"
         type="docking_nav_node"
         name="docking_nav"
-        output="screen"/> -->
+        output="screen"/>
+
+  <!-- 6) ros_helm -->
+  <rosparam command="load"
+            file="$(find ros_helm)/config/ros/params.yaml"
+            ns="ros_helm_node" />
+  <rosparam command="load"
+            file="$(find ros_helm)/config/ros/docking_params.yaml"
+            ns="ros_helm_node" />
+  <node pkg="ros_helm" type="ros_helm_node" name="ros_helm_node" output="screen">
+    <param name="config_path" value="$(find ros_helm)/config/helm/docking_startHelm.yaml" />
+    <param name="register_variables_path" value="$(find ros_helm)/config/helm/docking_registerVariables.yaml" />
+  </node>
  
 
 </launch>
