@@ -10,13 +10,13 @@ namespace
 struct DockingRosConfig
 {
   RosNodeConfig base;
-  std::string docking_mode_topic{"/docking/mode"};
-  std::string docking_stationing_topic{"/docking/stationing"};
-  std::string docking_constheight_topic{"/docking/constheight"};
-  std::string docking_dockdepth_update_topic{"/docking/dockdepth_update"};
-  std::string docking_dockhdg_updates_topic{"/docking/dockhdg_updates"};
-  std::string docking_docking_falling_topic{"/docking/docking_falling"};
-  std::string docking_manual_override_topic{"/docking/manual_override"};
+  std::string mode_topic{"/docking/mode"};
+  std::string stationing_topic{"/docking/stationing"};
+  std::string constheight_topic{"/docking/constheight"};
+  std::string dockdepth_update_topic{"/docking/dockdepth_update"};
+  std::string dockhdg_updates_topic{"/docking/dockhdg_updates"};
+  std::string docking_falling_topic{"/docking/docking_falling"};
+  std::string manual_override_topic{"/docking/manual_override"};
   std::string docking_failed_topic{"/docking/docking_failed"};
 };
 
@@ -34,24 +34,24 @@ public:
     if (!base_loader_.load(config.base, default_config_path))
       return false;
 
-    private_nh_.param("docking_mode_topic", config.docking_mode_topic,
-                      config.docking_mode_topic);
-    private_nh_.param("docking_stationing_topic", config.docking_stationing_topic,
-                      config.docking_stationing_topic);
-    private_nh_.param("docking_constheight_topic", config.docking_constheight_topic,
-                      config.docking_constheight_topic);
-    private_nh_.param("docking_dockdepth_update_topic",
-                      config.docking_dockdepth_update_topic,
-                      config.docking_dockdepth_update_topic);
-    private_nh_.param("docking_dockhdg_updates_topic",
-                      config.docking_dockhdg_updates_topic,
-                      config.docking_dockhdg_updates_topic);
-    private_nh_.param("docking_docking_falling_topic",
-                      config.docking_docking_falling_topic,
-                      config.docking_docking_falling_topic);
-    private_nh_.param("docking_manual_override_topic",
-                      config.docking_manual_override_topic,
-                      config.docking_manual_override_topic);
+    private_nh_.param("mode_topic", config.mode_topic,
+                      config.mode_topic);
+    private_nh_.param("stationing_topic", config.stationing_topic,
+                      config.stationing_topic);
+    private_nh_.param("constheight_topic", config.constheight_topic,
+                      config.constheight_topic);
+    private_nh_.param("dockdepth_update_topic",
+                      config.dockdepth_update_topic,
+                      config.dockdepth_update_topic);
+    private_nh_.param("dockhdg_updates_topic",
+                      config.dockhdg_updates_topic,
+                      config.dockhdg_updates_topic);
+    private_nh_.param("docking_falling_topic",
+                      config.docking_falling_topic,
+                      config.docking_falling_topic);
+    private_nh_.param("manual_override_topic",
+                      config.manual_override_topic,
+                      config.manual_override_topic);
     private_nh_.param("docking_failed_topic", config.docking_failed_topic,
                       config.docking_failed_topic);
 
@@ -78,22 +78,22 @@ public:
       return false;
 
     docking_mode_sub_ =
-        subscribeString(docking_config_.docking_mode_topic, "MODE");
+        subscribeString(docking_config_.mode_topic, "MODE");
     docking_stationing_sub_ =
-        subscribeBoolean(docking_config_.docking_stationing_topic, "STATIONING");
+        subscribeBoolean(docking_config_.stationing_topic, "STATIONING");
     docking_constheight_sub_ =
-        subscribeBoolean(docking_config_.docking_constheight_topic, "CONSTHEIGHT");
+        subscribeBoolean(docking_config_.constheight_topic, "CONSTHEIGHT");
     docking_dockdepth_update_sub_ =
-        subscribeString(docking_config_.docking_dockdepth_update_topic,
+        subscribeString(docking_config_.dockdepth_update_topic,
                         "DOCKDEPTH_UPDATE");
     docking_dockhdg_updates_sub_ =
-        subscribeString(docking_config_.docking_dockhdg_updates_topic,
+        subscribeString(docking_config_.dockhdg_updates_topic,
                         "DOCKHDG_UPDATES");
     docking_docking_falling_sub_ =
-        subscribeBoolean(docking_config_.docking_docking_falling_topic,
+        subscribeBoolean(docking_config_.docking_falling_topic,
                          "DOCKING_FALLING");
     docking_manual_override_sub_ =
-        subscribeBoolean(docking_config_.docking_manual_override_topic,
+        subscribeBoolean(docking_config_.manual_override_topic,
                          "MOOS_MANUAL_OVERIDE");
     docking_failed_sub_ =
         subscribeBoolean(docking_config_.docking_failed_topic, "DOCKINGFAILED");

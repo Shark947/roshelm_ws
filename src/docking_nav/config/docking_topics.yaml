@@ -1,0 +1,20 @@
+# ====== ROS I/O 话题配置 ======
+optical_measurement_topic: /docking/optical_measurement
+mode_topic: /docking/mode
+stationing_topic: /docking/stationing
+constheight_topic: /docking/constheight
+dockdepth_update_topic: /docking/dockdepth_update
+dockhdg_updates_topic: /docking/dockhdg_updates
+docking_falling_topic: /docking/docking_falling
+manual_override_topic: /docking/manual_override
+docking_failed_topic: /docking/docking_failed
+phase_topic: /docking/phase
+optical_xy_topic: /docking/optical_xy
+optical_feedback_topic: /docking/optical_feedback
+
+# ====== 航行器状态输入（可切换到 NAV_* 发布源）======
+nav_heading_topic: /auh/current_heading
+nav_depth_topic: /auh/current_depth
+nav_pitch_topic: /auh/current_pitch
+nav_roll_topic: /auh/current_roll
+desired_speed_topic: /auh/desired_speed
