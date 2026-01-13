@@ -26,14 +26,6 @@ struct RosNodeConfig
   std::string desired_depth_topic;
   std::string deploy_topic;
   std::string return_topic;
-  std::string docking_mode_topic;
-  std::string docking_stationing_topic;
-  std::string docking_constheight_topic;
-  std::string docking_dockdepth_update_topic;
-  std::string docking_dockhdg_updates_topic;
-  std::string docking_docking_falling_topic;
-  std::string docking_manual_override_topic;
-  std::string docking_failed_topic;
   std::string frame_id{"map"};
   double loop_frequency{10.0};
   bool deploy_default{true};
