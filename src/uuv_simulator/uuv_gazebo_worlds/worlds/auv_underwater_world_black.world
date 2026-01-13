@@ -29,8 +29,8 @@
     <!-- ✅ 已删除所有 <light> ... </light> 全局光源 -->
     <!-- 只照亮 sds 周围约 1m 半径的圆形区域 -->
 <light name="sds_spot_1m" type="spot">
-  <!-- sds 在 (10,5,-79.8)，灯放上方 3m：z=-76.8 -->
-  <pose>10 5 -76.8 0 0 0</pose>
+  <!-- sds 在 (0,0,-79.8)，灯放上方 3m：z=-76.8 -->
+  <pose>0 0 -76.8 0 0 0</pose>
 
   <diffuse>255 255 255 255</diffuse>
   <specular>0.2 0.2 0.2 1</specular>

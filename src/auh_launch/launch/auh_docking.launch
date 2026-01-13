@@ -41,8 +41,8 @@
   </node>
 
   <!-- 4) Spawn SDS 静态障碍物 -->
-  <arg name="sds_x"     default="10"/>
-  <arg name="sds_y"     default="5"/>
+  <arg name="sds_x"     default="0"/>
+  <arg name="sds_y"     default="0"/>
   <arg name="sds_z"     default="-79.8"/>
   <arg name="sds_roll"  default="0"/>
   <arg name="sds_pitch" default="0"/>

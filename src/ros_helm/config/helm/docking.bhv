@@ -1,4 +1,4 @@
-//--------    FILE: beta.bhv   -------------
+//--------    FILE: docking.bhv   -------------
 
 initialize   DEPLOY = true
 initialize   RETURN = false
@@ -7,8 +7,6 @@ initialize   GOTO_DEPTH = false
 initialize   DESIRED_ROLL=-1
 initialize   CONSTHEIGHT = true
 initialize   STATIONING = true
-//initialize   DET_CAMSONPOWER = true
-//initialize   DET_LIGPOWER=true
 	
 //----------------------------------------------
 Behavior = BHV_GoToDepth
@@ -18,16 +16,12 @@ Behavior = BHV_GoToDepth
   condition    = RETURN = false
   condition    = DEPLOY = true
   condition    = MODE==LIFT               // example
-  // condition    = GOTO_DEPTH = true
   runflag      = DET_LIGPOWER = true
   runflag      = DET_CAMSONPOWER = true
   runflag      = DET_MAGPOWER= true
-// runflag      = DET_SONPOWER = true
-  // runflag      = DET_CAMPOWER = true
   
   endflag      = GOTO_DEPTH = false
   endflag      = MODE=SURVEY
-//  endflag      = MODE=CLOSETODOCKING
   updates      = GOTO_DEPTH_UPDATES        // example
   perpetual    = true
 
@@ -46,7 +40,7 @@ Behavior=BHV_ConstantSpeed
   pwt        = 100
   condition  = RETURN = false
   condition  = DEPLOY = true
-  condition  = MODE=SURVEY // RETURNING               // example
+  condition  = MODE=SURVEY
   perpetual  = false
   updates    = SPEED_UPDATE
   endflag    = SPD = false
@@ -70,10 +64,9 @@ Behavior = BHV_ConstantDepth
   // duration  = 60
   duration  = no-time-limit
   
-  // condition = MODE==ACTIVE
   condition = DEPLOY=true
   condition = RETURN=false
-  condition = MODE = SURVEY // RETURNING
+  condition = MODE = SURVEY 
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
@@ -92,18 +85,12 @@ Behavior = BHV_Waypoint
   condition = RETURN = false
   condition = DEPLOY = true
   condition = MODE = SURVEY //RETURNING
-  //runflag   = DET_CAMPOWER = true
-  // runflag   = DET_SONPOWER = true
   runflag   = DET_CAMSONPOWER = true
   runflag   = DET_LIGPOWER = true
- // endflag   = MODE = UPFLOAT
-  //endflag   = DET_CAMPOWER = false
-  // endflag   = DET_SONPOWER = false
   endflag   = DET_CAMSONPOWER = false
   endflag   = DET_LIGPOWER = false
   endflag   = DET_MAGPOWER= false
-  endflag   = MODE = RETURNING//CLOSETODOCK
-  //endflag   = CONSTHEIGHT = false 
+  endflag   = MODE = RETURNING
   
   updates    = WPT_UPDATE
   perpetual  = true
@@ -117,27 +104,10 @@ Behavior = BHV_Waypoint
          slip_radius = 4
   efficiency_measure = all
 
-           polygon =  10,20//:24,20:16,20 
-        // polygon = 0,-8 : 6,-8 : 6,0 : 3,-9 : 4,-5
-  //           polygon =   0,-14 : -24,-14: -24,10  : 0,10 // : 7,15
-            // polygon = 0,200 : 80,200 : 80,1 : 0,1
-            // polygon = 0,10 : 8,10 : 8,1 : 0,1 // yuanchiguan
-            // polygon = 8,0 : 8,-8 : 6,-10 : 3,-9 : 4,-5
-            // polygon = -8,0 : -8,-8 : -6,-10 : -3,-9 : -4,-5
-    // polygon = -3.5,1.5 :-5,5 :-3.5,8.5 :0,10 :3.5,8.5 :5,5 :3.5,1.5 :0,0 // CW
-    // polygon = 3.5,1.5 :5,5 :3.5,8.5 :0,10 :-3.5,8.5 :-5,5 :-3.5,1.5 :0,0 // CCW
-//     points = format=lawnmower, x=0, y=14, height=4, width=30, lane_width=30, rows=north-south, degs=0
-    // points = format=lawnmower, x=a, y=b, height=c, width=d, lane_width=3, rows=north-south, degs=f
-    // polygon = format=radial, label=foxtrot, x=a, y=b, radius=c, pts=n, snap=1
+           polygon =  10,20
 
                order = normal
              repeat  = 0
-
-    // visual_hints = nextpt_color=yellow
-    // visual_hints = nextpt_vertex_size=8
-    // visual_hints = nextpt_lcolor=gray70
-    // visual_hints = vertex_color=dodger_blue, edge_color=white
-    // visual_hints = vertex_size=5, edge_size=1
 }
 
 
@@ -147,7 +117,7 @@ Behavior=BHV_ConstantSpeed
   pwt        = 100
   condition  = RETURN = false
   condition  = DEPLOY = true
-  condition  = (MODE = CLOSETODOCKING) or (MODE=RETURNING)  // RETURNING  or closetodocking             // example
+  condition  = (MODE = CLOSETODOCKING) or (MODE=RETURNING)  // RETURNING  or closetodocking 
   perpetual  = false
   updates    = SPEED_UPDATE
   endflag    = SPD = false
@@ -168,17 +138,11 @@ Behavior = BHV_Waypoint
   condition = RETURN = false
   condition = DEPLOY = true
   condition =(MODE = CLOSETODOCKING) or (MODE=RETURNING) //RETURNING or close
-  //runflag   = DET_CAMPOWER = true
-  // runflag   = DET_SONPOWER = true
   runflag   = DET_CAMSONPOWER = true
   runflag   = DET_LIGPOWER = true
- // endflag   = MODE = UPFLOAT
-  //endflag   = DET_CAMPOWER = false
-  // endflag   = DET_SONPOWER = false
   endflag   = DET_CAMSONPOWER = false
   endflag   = DET_LIGPOWER = false
   endflag   = RETURN1 = true
-  //endflag   = CONSTHEIGHT = false 
   
   updates    = WPT_UPDATE
   perpetual  = true
@@ -192,27 +156,10 @@ Behavior = BHV_Waypoint
          slip_radius = 2
   efficiency_measure = all
 
-           polygon =  0,0//:24,20:16,20 
-        // polygon = 0,-8 : 6,-8 : 6,0 : 3,-9 : 4,-5
-  //           polygon =   0,-14 : -24,-14: -24,10  : 0,10 // : 7,15
-            // polygon = 0,200 : 80,200 : 80,1 : 0,1
-            // polygon = 0,10 : 8,10 : 8,1 : 0,1 // yuanchiguan
-            // polygon = 8,0 : 8,-8 : 6,-10 : 3,-9 : 4,-5
-            // polygon = -8,0 : -8,-8 : -6,-10 : -3,-9 : -4,-5
-    // polygon = -3.5,1.5 :-5,5 :-3.5,8.5 :0,10 :3.5,8.5 :5,5 :3.5,1.5 :0,0 // CW
-    // polygon = 3.5,1.5 :5,5 :3.5,8.5 :0,10 :-3.5,8.5 :-5,5 :-3.5,1.5 :0,0 // CCW
-//     points = format=lawnmower, x=0, y=14, height=4, width=30, lane_width=30, rows=north-south, degs=0
-    // points = format=lawnmower, x=a, y=b, height=c, width=d, lane_width=3, rows=north-south, degs=f
-    // polygon = format=radial, label=foxtrot, x=a, y=b, radius=c, pts=n, snap=1
+           polygon =  0,0
 
                order = normal
              repeat  = 100000
-
-    // visual_hints = nextpt_color=yellow
-    // visual_hints = nextpt_vertex_size=8
-    // visual_hints = nextpt_lcolor=gray70
-    // visual_hints = vertex_color=dodger_blue, edge_color=white
-    // visual_hints = vertex_size=5, edge_size=1
 }
 
 //----------------------------------------------
@@ -220,10 +167,8 @@ Behavior = BHV_ConstantDepth
 {
   name      = const_depth_return
   pwt       = 100
-  // duration  = 60
   duration  = no-time-limit
   
-  // condition = MODE==ACTIVE
   condition = DEPLOY=true
   condition = RETURN=false
   condition = (MODE = CLOSETODOCKING)or(MODE=RETURNING) // RETURNING
@@ -249,9 +194,6 @@ Behavior = BHV_StationKeep
   condition    = DEPLOY = true
   condition    = MODE==DOCKING         // example
   condition    = STATIONING = true
-  // inactiveflag = STATIONING = false    // example
-  // activeflag   = STATIONING = true     // example
-  // inactiveflag = STATIONING = false    // example
   endflag   = STATIONPHASE = STATIONCOMPLETED     // example
 
 
@@ -282,13 +224,9 @@ Behavior = BHV_ConstantDepth
   // duration  = 60
   duration  = no-time-limit
   
-  // condition = MODE==ACTIVE
   condition = DEPLOY=true
   condition = RETURN=false
   condition = MODE = DOCKING
-  //condition = (MODE = DOCKING) or (MODE = RETURNING)
-  // condition    = STATIONING = true
-  // condition = DOCKINGPHASE = ENDOFPHASE1
   updates   = DOCKDEPTH_UPDATE
 
         depth = 0
@@ -308,7 +246,6 @@ Behavior = BHV_ConstantHeading
   condition    = DEPLOY = true
   condition    = MODE==DOCKING               // example
   condition    = STATIONING = false
-  //condition  = STATIONPHASE = STATIONCOMPLETED               // example
   duration  = no-time-limit
   perpetual  = true
 
@@ -337,14 +274,10 @@ Behavior = BHV_GoToDepth
   condition    = RETURN = false
   condition    = DEPLOY = true
   condition    = MODE==GOTODETECT               // example
-  // condition    = GOTO_DEPTH = true
   runflag     = CONSTHEIGHT= true
   runflag      = DET_LIGPOWER = true
   runflag      = DET_CAMSONPOWER = true
-  // runflag      = DET_SONPOWER = true
-  // runflag      = DET_CAMPOWER = true
   endflag      = GOTO_DEPTH = false
- // endflag      = MODE=SURVEY
   endflag      = MODE=DETECTING
   updates      = GOTO_DEPTH_DETECT_UPDATES        // example
   perpetual    = true
@@ -410,17 +343,11 @@ Behavior = BHV_Waypoint
   condition = RETURN = false
   condition = DEPLOY = true
   condition = MODE = DETECTING //RETURNING
-  //runflag   = DET_CAMPOWER = true
-  // runflag   = DET_SONPOWER = true
   runflag   = DET_CAMSONPOWER = true
   runflag   = DET_LIGPOWER = true
- // endflag   = MODE = UPFLOAT
-  //endflag   = DET_CAMPOWER = false
-  // endflag   = DET_SONPOWER = false
   endflag   = DET_CAMSONPOWER = false
   endflag   = DET_LIGPOWER = false
   endflag   = MODE = UPFLOAT//CLOSETODOCK
-  //endflag   = CONSTHEIGHT = false 
   
   updates    = DETECT_WPT_UPDATE
   perpetual  = true
@@ -434,18 +361,7 @@ Behavior = BHV_Waypoint
          slip_radius = 4
   efficiency_measure = all
 
-           polygon =  10,20//:24,20:16,20 
-        // polygon = 0,-8 : 6,-8 : 6,0 : 3,-9 : 4,-5
-  //           polygon =   0,-14 : -24,-14: -24,10  : 0,10 // : 7,15
-            // polygon = 0,200 : 80,200 : 80,1 : 0,1
-            // polygon = 0,10 : 8,10 : 8,1 : 0,1 // yuanchiguan
-            // polygon = 8,0 : 8,-8 : 6,-10 : 3,-9 : 4,-5
-            // polygon = -8,0 : -8,-8 : -6,-10 : -3,-9 : -4,-5
-    // polygon = -3.5,1.5 :-5,5 :-3.5,8.5 :0,10 :3.5,8.5 :5,5 :3.5,1.5 :0,0 // CW
-    // polygon = 3.5,1.5 :5,5 :3.5,8.5 :0,10 :-3.5,8.5 :-5,5 :-3.5,1.5 :0,0 // CCW
-//     points = format=lawnmower, x=0, y=14, height=4, width=30, lane_width=30, rows=north-south, degs=0
-    // points = format=lawnmower, x=a, y=b, height=c, width=d, lane_width=3, rows=north-south, degs=f
-    // polygon = format=radial, label=foxtrot, x=a, y=b, radius=c, pts=n, snap=1
+           polygon =  10,20
 
                order = normal
              repeat  = 0
