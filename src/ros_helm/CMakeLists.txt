@@ -26,23 +26,6 @@ set(DEFAULT_CONFIG_PATH "${ROS_HELM_SOURCE_DIR}/config/helm/startHelm.yaml")
 file(TO_CMAKE_PATH "${DEFAULT_CONFIG_PATH}" DEFAULT_CONFIG_PATH)
 add_compile_definitions(DEFAULT_CONFIG_PATH=\"${DEFAULT_CONFIG_PATH}\")
 
-catkin_package(
-  INCLUDE_DIRS
-    ${ROS_HELM_SOURCE_DIR}/src/helm/include
-    ${ROS_HELM_SOURCE_DIR}/src/helm/tools
-    ${ROS_HELM_SOURCE_DIR}/src/ros/include
-  LIBRARIES helm_core
-  CATKIN_DEPENDS
-    geometry_msgs
-    nav_msgs
-    common_msgs
-    roscpp
-    roslib
-    std_msgs
-    tf2
-    tf2_geometry_msgs
-)
-
 # --------------------------------------------------------------
 # Paths
 # --------------------------------------------------------------
@@ -105,7 +88,33 @@ foreach(lib ${IVP_LIBS})
   list(APPEND IVP_INCLUDE_DIRS ${IVP_SOURCE_DIR}/${lib})
 endforeach()
 
+set(ROS_HELM_PUBLIC_INCLUDE_DIRS
+  ${ROS_HELM_SOURCE_DIR}/src/include/ivp
+  ${ROS_HELM_SOURCE_DIR}/src
+  ${ROS_HELM_SOURCE_DIR}/src/helm/include
+  ${ROS_HELM_SOURCE_DIR}/src/helm/tools
+  ${ROS_HELM_SOURCE_DIR}/src/ros/include
+)
+foreach(lib ${IVP_LIBS})
+  list(APPEND ROS_HELM_PUBLIC_INCLUDE_DIRS ${IVP_SOURCE_DIR}/${lib})
+endforeach()
+
 include_directories(${IVP_INCLUDE_DIRS})
+
+catkin_package(
+  INCLUDE_DIRS
+    ${ROS_HELM_PUBLIC_INCLUDE_DIRS}
+  LIBRARIES helm_core ros_helm_bridge
+  CATKIN_DEPENDS
+    geometry_msgs
+    nav_msgs
+    common_msgs
+    roscpp
+    roslib
+    std_msgs
+    tf2
+    tf2_geometry_msgs
+)
 
 # --------------------------------------------------------------
 # Add all IVP subdirectories

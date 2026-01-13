@@ -122,26 +122,6 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.desired_speed_topic);
   private_nh_.param("desired_depth_topic", config.desired_depth_topic,
                     config.desired_depth_topic);
-  private_nh_.param("docking_mode_topic", config.docking_mode_topic,
-                    config.docking_mode_topic);
-  private_nh_.param("docking_stationing_topic", config.docking_stationing_topic,
-                    config.docking_stationing_topic);
-  private_nh_.param("docking_constheight_topic", config.docking_constheight_topic,
-                    config.docking_constheight_topic);
-  private_nh_.param("docking_dockdepth_update_topic",
-                    config.docking_dockdepth_update_topic,
-                    config.docking_dockdepth_update_topic);
-  private_nh_.param("docking_dockhdg_updates_topic",
-                    config.docking_dockhdg_updates_topic,
-                    config.docking_dockhdg_updates_topic);
-  private_nh_.param("docking_docking_falling_topic",
-                    config.docking_docking_falling_topic,
-                    config.docking_docking_falling_topic);
-  private_nh_.param("docking_manual_override_topic",
-                    config.docking_manual_override_topic,
-                    config.docking_manual_override_topic);
-  private_nh_.param("docking_failed_topic", config.docking_failed_topic,
-                    config.docking_failed_topic);
 
   if (config.vehicle_name.empty())
   {

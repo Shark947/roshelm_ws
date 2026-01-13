@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   docking_optical_msgs
   geometry_msgs
   nav_msgs
+  ros_helm
   roscpp
   sensor_msgs
   std_msgs
@@ -109,8 +110,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  CATKIN_DEPENDS common_msgs docking_optical_msgs geometry_msgs nav_msgs roscpp
-                 sensor_msgs std_msgs tf2 tf2_ros
+  CATKIN_DEPENDS common_msgs docking_optical_msgs geometry_msgs nav_msgs
+                 ros_helm roscpp sensor_msgs std_msgs tf2 tf2_ros
 )
 
 ###########
@@ -138,6 +139,12 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(docking_nav_node src/docking_nav_node.cpp)
+add_executable(docking_nav_roshelm_node src/docking_nav_roshelm_node.cpp)
+
+set(DOCKING_NAV_DEFAULT_CONFIG_PATH "${CMAKE_CURRENT_SOURCE_DIR}/config/helm/docking_startHelm.yaml")
+file(TO_CMAKE_PATH "${DOCKING_NAV_DEFAULT_CONFIG_PATH}" DOCKING_NAV_DEFAULT_CONFIG_PATH)
+target_compile_definitions(docking_nav_roshelm_node PRIVATE
+  DOCKING_NAV_DEFAULT_CONFIG_PATH=\"${DOCKING_NAV_DEFAULT_CONFIG_PATH}\")
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -148,9 +155,14 @@ add_executable(docking_nav_node src/docking_nav_node.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(docking_nav_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(docking_nav_roshelm_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(docking_nav_node
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(docking_nav_roshelm_node
   ${catkin_LIBRARIES}
 )
 
@@ -195,6 +207,10 @@ target_link_libraries(docking_nav_node
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+
+install(DIRECTORY config
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 #############
 ## Testing ##
