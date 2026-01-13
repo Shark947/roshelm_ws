@@ -63,8 +63,12 @@
   </node>
 
   <!-- 5) docking_nav 参数加载 -->
-  <rosparam command="load" file="$(find docking_nav)/config/docking.yaml" />
-  <rosparam command="load" file="$(find docking_nav)/config/io.yaml" />
+  <rosparam command="load"
+            file="$(find docking_nav)/config/docking_node.yaml"
+            ns="docking_nav" />
+  <rosparam command="load"
+            file="$(find docking_nav)/config/docking_topics.yaml"
+            ns="docking_nav" />
   <node pkg="docking_nav"
         type="docking_nav_node"
         name="docking_nav"
@@ -75,7 +79,7 @@
             file="$(find ros_helm)/config/ros/params.yaml"
             ns="docking_nav_roshelm_node" />
   <rosparam command="load"
-            file="$(find docking_nav)/config/ros/docking_params.yaml"
+            file="$(find docking_nav)/config/docking_topics.yaml"
             ns="docking_nav_roshelm_node" />
   <node pkg="docking_nav"
         type="docking_nav_roshelm_node"

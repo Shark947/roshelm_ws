@@ -68,8 +68,7 @@ fallback_y: 0.0"
 
 ## 配置参数
 
-参数位于 `docking_nav/config/docking.yaml`（算法参数）与
-`docking_nav/config/io.yaml`（I/O 话题映射）。ros-helm 入坞配置在
-`docking_nav/config/ros/docking_params.yaml` 和
+参数位于 `docking_nav/config/docking_node.yaml`（算法参数）与
+`docking_nav/config/docking_topics.yaml`（I/O 话题映射）。ros-helm 入坞配置在
 `docking_nav/config/helm/docking_startHelm.yaml`。
-如需直接使用 NAV_* 数据源，可在 `io.yaml` 中将 `nav_*_topic` 指向对应的 NAV 发布话题。
+如需直接使用 NAV_* 数据源，可在 `docking_topics.yaml` 中将 `nav_*_topic` 指向对应的 NAV 发布话题。

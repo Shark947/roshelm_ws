@@ -1,9 +1,0 @@
-# Docking-specific ros_helm parameters (loaded only for docking)
-docking_mode_topic: /docking/mode
-docking_stationing_topic: /docking/stationing
-docking_constheight_topic: /docking/constheight
-docking_dockdepth_update_topic: /docking/dockdepth_update
-docking_dockhdg_updates_topic: /docking/dockhdg_updates
-docking_docking_falling_topic: /docking/docking_falling
-docking_manual_override_topic: /docking/manual_override
-docking_failed_topic: /docking/docking_failed
