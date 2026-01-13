@@ -31,7 +31,7 @@ catkin_package(
     ${ROS_HELM_SOURCE_DIR}/src/helm/include
     ${ROS_HELM_SOURCE_DIR}/src/helm/tools
     ${ROS_HELM_SOURCE_DIR}/src/ros/include
-  LIBRARIES helm_core
+  LIBRARIES helm_core ros_helm_bridge
   CATKIN_DEPENDS
     geometry_msgs
     nav_msgs

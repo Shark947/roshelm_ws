@@ -2,7 +2,7 @@
 
 ## 节点与话题
 
-**节点：** `docking_nav_node`
+**节点：** `docking_nav_node`（算法），`docking_nav_roshelm_node`（入坞 ros-helm 桥接）
 
 **输入：**
 
@@ -43,7 +43,7 @@ roslaunch auh_launch auh_docking.launch
 2. **将 Helm 行为切换为 docking.bhv（通过 docking_startHelm.yaml 配置）：**
 
 ```bash
-rosparam get /ros_helm_node/config_path
+rosparam get /docking_nav_roshelm_node/config_path
 ```
 
 3. **发布模式切换（示例：进入 DOCKING）：**
@@ -69,5 +69,7 @@ fallback_y: 0.0"
 ## 配置参数
 
 参数位于 `docking_nav/config/docking.yaml`（算法参数）与
-`docking_nav/config/io.yaml`（I/O 话题映射）。如需直接使用 NAV_* 数据源，
-可在 `io.yaml` 中将 `nav_*_topic` 指向对应的 NAV 发布话题。
+`docking_nav/config/io.yaml`（I/O 话题映射）。ros-helm 入坞配置在
+`docking_nav/config/ros/docking_params.yaml` 和
+`docking_nav/config/helm/docking_startHelm.yaml`。
+如需直接使用 NAV_* 数据源，可在 `io.yaml` 中将 `nav_*_topic` 指向对应的 NAV 发布话题。
