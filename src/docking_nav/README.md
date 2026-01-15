@@ -10,10 +10,10 @@
 | --- | --- | --- |
 | `/docking/optical_measurement` | `docking_optical_msgs/OpticalMeasurement` | 视觉测量输入（替代原 TCP 输入） |
 | `/docking/mode` | `std_msgs/String` | 入坞模式（如 `CLOSETODOCKING`、`DOCKING`） |
-| `/auh/current_depth` | `common_msgs/Float64Stamped` | 当前深度（米） |
-| `/auh/current_heading` | `common_msgs/Float64Stamped` | 当前航向（deg） |
-| `/auh/current_pitch` | `common_msgs/Float64Stamped` | 当前俯仰（rad） |
-| `/auh/current_roll` | `common_msgs/Float64Stamped` | 当前横滚（rad） |
+| `/auh/NAV_DEPTH` | `common_msgs/Float64Stamped` | 当前深度（米） |
+| `/auh/NAV_HEADING` | `common_msgs/Float64Stamped` | 当前航向（deg） |
+| `/auh/NAV_PITCH` | `common_msgs/Float64Stamped` | 当前俯仰（rad） |
+| `/auh/NAV_ROLL` | `common_msgs/Float64Stamped` | 当前横滚（rad） |
 | `/auh/desired_speed` | `std_msgs/Float64` | Helm 输出的期望航速 |
 
 **输出（用于 Helm 与调试）：**
@@ -71,4 +71,4 @@ fallback_y: 0.0"
 参数位于 `docking_nav/config/docking_node.yaml`（算法参数）与
 `docking_nav/config/docking_topics.yaml`（I/O 话题映射）。ros-helm 入坞配置在
 `docking_nav/config/helm/docking_startHelm.yaml`。
-如需直接使用 NAV_* 数据源，可在 `docking_topics.yaml` 中将 `nav_*_topic` 指向对应的 NAV 发布话题。
+默认使用 NAV_* 数据源，如需切换到其他输入，可在 `docking_topics.yaml` 中修改 `nav_*_topic`。

@@ -17,6 +17,14 @@ current_vy_topic: /auh/current_vy
 current_yaw_topic: /auh/current_yaw
 current_pitch_topic: /auh/current_pitch
 current_roll_topic: /auh/current_roll
+nav_x_topic: /auh/NAV_X
+nav_y_topic: /auh/NAV_Y
+nav_depth_topic: /auh/NAV_DEPTH
+nav_speed_topic: /auh/NAV_SPEED
+nav_heading_topic: /auh/NAV_HEADING
+nav_yaw_topic: /auh/NAV_YAW
+nav_pitch_topic: /auh/NAV_PITCH
+nav_roll_topic: /auh/NAV_ROLL
 
 desired_heading_topic: /auh/desired_heading
 desired_speed_topic: /auh/desired_speed

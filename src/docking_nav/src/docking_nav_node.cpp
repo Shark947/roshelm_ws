@@ -167,13 +167,13 @@ private:
     private_nh_.param("optical_feedback_topic", optical_feedback_topic_,
                       std::string("/docking/optical_feedback"));
     private_nh_.param("nav_heading_topic", nav_heading_topic_,
-                      std::string("/auh/current_heading"));
+                      std::string("/auh/NAV_HEADING"));
     private_nh_.param("nav_depth_topic", nav_depth_topic_,
-                      std::string("/auh/current_depth"));
+                      std::string("/auh/NAV_DEPTH"));
     private_nh_.param("nav_pitch_topic", nav_pitch_topic_,
-                      std::string("/auh/current_pitch"));
+                      std::string("/auh/NAV_PITCH"));
     private_nh_.param("nav_roll_topic", nav_roll_topic_,
-                      std::string("/auh/current_roll"));
+                      std::string("/auh/NAV_ROLL"));
     private_nh_.param("desired_speed_topic", desired_speed_topic_,
                       std::string("/auh/desired_speed"));
 
@@ -625,10 +625,10 @@ private:
   std::string phase_topic_{"/docking/phase"};
   std::string optical_xy_topic_{"/docking/optical_xy"};
   std::string optical_feedback_topic_{"/docking/optical_feedback"};
-  std::string nav_heading_topic_{"/auh/current_heading"};
-  std::string nav_depth_topic_{"/auh/current_depth"};
-  std::string nav_pitch_topic_{"/auh/current_pitch"};
-  std::string nav_roll_topic_{"/auh/current_roll"};
+  std::string nav_heading_topic_{"/auh/NAV_HEADING"};
+  std::string nav_depth_topic_{"/auh/NAV_DEPTH"};
+  std::string nav_pitch_topic_{"/auh/NAV_PITCH"};
+  std::string nav_roll_topic_{"/auh/NAV_ROLL"};
   std::string desired_speed_topic_{"/auh/desired_speed"};
 
   double dfDockHeading_{0.0};

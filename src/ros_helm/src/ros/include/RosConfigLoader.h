@@ -21,6 +21,14 @@ struct RosNodeConfig
   std::string current_yaw_topic;
   std::string current_pitch_topic;
   std::string current_roll_topic;
+  std::string nav_x_topic;
+  std::string nav_y_topic;
+  std::string nav_depth_topic;
+  std::string nav_speed_topic;
+  std::string nav_heading_topic;
+  std::string nav_yaw_topic;
+  std::string nav_pitch_topic;
+  std::string nav_roll_topic;
   std::string desired_heading_topic;
   std::string desired_speed_topic;
   std::string desired_depth_topic;
