@@ -40,6 +40,9 @@ morph_close_kernel: 5            # 填补白点空洞（0表示不做）
 # 4) 目标筛选
 min_blob_area: 1                 # 最小连通域面积（像素）
 max_blob_area: 5000              # 最大连通域面积（像素）
+min_brightness: 200.0            # 亮度门限，过滤弱反光
+max_pixel_jump: 80.0             # 像素跳变限制（0 表示不限制）
+ema_alpha: 0.4                   # 角度 EMA 平滑系数（0~1）
 choose_mode: "brightest"         # "largest" 或 "brightest"
 
 # ====== 角度符号约定 ======
