@@ -485,6 +485,15 @@ void RosBridge::logStatusIfNeeded(const HelmIvP &helm)
   std::string running_behaviors = report.getRunningBehaviors(false);
   if (running_behaviors.empty())
     running_behaviors = "none";
+  std::string active_behaviors = report.getActiveBehaviors(false);
+  if (active_behaviors.empty())
+    active_behaviors = "none";
+  std::string idle_behaviors = report.getIdleBehaviors(false);
+  if (idle_behaviors.empty())
+    idle_behaviors = "none";
+  std::string disabled_behaviors = report.getDisabledBehaviors(false);
+  if (disabled_behaviors.empty())
+    disabled_behaviors = "none";
   std::string mode_summary = report.getModeSummary();
   if (mode_summary.empty())
     mode_summary = "unknown";
@@ -506,6 +515,9 @@ void RosBridge::logStatusIfNeeded(const HelmIvP &helm)
          << uptime
          << " mode=" << mode_summary
          << " running_behaviors=" << running_behaviors
+         << " active_behaviors=" << active_behaviors
+         << " idle_behaviors=" << idle_behaviors
+         << " disabled_behaviors=" << disabled_behaviors
          << " DEPLOY=" << (deploy_state ? "true" : "false")
          << " RETURN=" << (return_state ? "true" : "false")
          << " DESIRED={" << (desired_text.empty() ? "none" : desired_text) << "}"
