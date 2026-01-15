@@ -2,7 +2,7 @@
 
 ## 节点与话题
 
-**节点：** `docking_nav_server_node`（入坞算法 + 直接 Helm 变量注入）
+**节点：** `docking_nav_main_node`（入坞算法 + ROS 话题驱动 Helm 交互）
 
 **输入：**
 
@@ -31,13 +31,7 @@
 roslaunch auh_launch auh_docking.launch
 ```
 
-2. **确认 Helm 配置路径（通过 docking_startHelm.yaml 配置）：**
-
-```bash
-rosparam get /docking_nav/config_path
-```
-
-3. **发布视觉输入示例：**
+2. **发布视觉输入示例：**
 
 ```bash
 rostopic pub --once /docking/optical_measurement docking_optical_msgs/OpticalMeasurement "header:
@@ -53,6 +47,7 @@ fallback_y: 0.0"
 
 ## 配置参数
 
-参数位于 `docking_nav/config/docking_node.yaml`（算法参数）与
-`ros_helm/config/ros/params.yaml`（Helm/ROS 桥接参数）。入坞 Helm 配置在
+参数位于 `docking_nav/config/docking_node.yaml`（算法参数）、`ros_helm/config/ros/params.yaml`
+（Helm/ROS 桥接参数）以及 `docking_nav/config/ros/helm_docking_params.yaml`
+（入坞行为的 Helm 命令话题）。入坞 Helm 配置在
 `docking_nav/config/helm/docking_startHelm.yaml`。

@@ -39,6 +39,8 @@ struct RosNodeConfig
   bool deploy_default{true};
   bool return_default{false};
   std::map<std::string, double> nav_defaults;
+  std::map<std::string, std::string> bool_command_topics;
+  std::map<std::string, std::string> string_command_topics;
 };
 
 class RosConfigLoader

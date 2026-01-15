@@ -6,6 +6,7 @@
 #include <mutex>
 #include <memory>
 #include <string>
+#include <vector>
 #include <ros/ros.h>
 #include <common_msgs/Float64Stamped.h>
 #include <std_msgs/Bool.h>
@@ -113,6 +114,8 @@ private:
   ros::Subscriber yaw_sub_;
   ros::Subscriber pitch_sub_;
   ros::Subscriber roll_sub_;
+  std::vector<ros::Subscriber> command_bool_subs_;
+  std::vector<ros::Subscriber> command_string_subs_;
   std::unique_ptr<RosCommandPublisher> command_publisher_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;

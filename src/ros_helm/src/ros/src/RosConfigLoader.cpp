@@ -49,6 +49,40 @@ RosConfigLoader::RosConfigLoader(ros::NodeHandle &private_nh)
 {
 }
 
+namespace
+{
+bool loadCommandTopics(ros::NodeHandle &private_nh,
+                       const std::string &param_name,
+                       std::map<std::string, std::string> &topics)
+{
+  XmlRpc::XmlRpcValue raw_value;
+  if (!private_nh.getParam(param_name, raw_value))
+  {
+    return true;
+  }
+
+  if (raw_value.getType() != XmlRpc::XmlRpcValue::TypeStruct)
+  {
+    ROS_ERROR_STREAM("ros_bridge: " << param_name
+                                    << " must be a map of key: topic");
+    return false;
+  }
+
+  topics.clear();
+  for (auto it = raw_value.begin(); it != raw_value.end(); ++it)
+  {
+    if (it->second.getType() != XmlRpc::XmlRpcValue::TypeString)
+    {
+      ROS_ERROR_STREAM("ros_bridge: " << param_name << "[" << it->first
+                                      << "] must be a string");
+      return false;
+    }
+    topics[it->first] = static_cast<std::string>(it->second);
+  }
+  return true;
+}
+}  // namespace
+
 bool RosConfigLoader::load(RosNodeConfig &config,
                            const std::string &default_config_path) const
 {
@@ -74,6 +108,12 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                     config.return_default);
   private_nh_.param("status_log_period", config.status_log_period,
                     config.status_log_period);
+  if (!loadCommandTopics(private_nh_, "bool_command_topics",
+                         config.bool_command_topics))
+    return false;
+  if (!loadCommandTopics(private_nh_, "string_command_topics",
+                         config.string_command_topics))
+    return false;
 
   private_nh_.param("loop_frequency", config.loop_frequency,
                     config.loop_frequency);
