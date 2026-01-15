@@ -10,3 +10,6 @@ string_command_topics:
   MODE: /docking/mode
   DOCKDEPTH_UPDATE: /docking/dockdepth_update
   DOCKHDG_UPDATES: /docking/dockhdg_updates
+
+mode_state_topics:
+  MODE: /docking/mode_state

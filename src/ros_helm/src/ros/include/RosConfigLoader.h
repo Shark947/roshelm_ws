@@ -41,6 +41,7 @@ struct RosNodeConfig
   std::map<std::string, double> nav_defaults;
   std::map<std::string, std::string> bool_command_topics;
   std::map<std::string, std::string> string_command_topics;
+  std::map<std::string, std::string> mode_state_topics;
 };
 
 class RosConfigLoader

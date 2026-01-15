@@ -114,6 +114,9 @@ bool RosConfigLoader::load(RosNodeConfig &config,
   if (!loadCommandTopics(private_nh_, "string_command_topics",
                          config.string_command_topics))
     return false;
+  if (!loadCommandTopics(private_nh_, "mode_state_topics",
+                         config.mode_state_topics))
+    return false;
 
   private_nh_.param("loop_frequency", config.loop_frequency,
                     config.loop_frequency);

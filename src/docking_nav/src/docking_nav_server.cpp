@@ -106,6 +106,11 @@ void DockingNavServer::setDesiredSpeed(double speed_mps)
   desired_speed_ = speed_mps;
 }
 
+void DockingNavServer::setModeFromExternal(const std::string &mode)
+{
+  setModeInternal(mode, false, false);
+}
+
 DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
 {
   Outputs outputs;
@@ -513,12 +518,21 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
 
 void DockingNavServer::setMode(const std::string &mode, bool force)
 {
+  setModeInternal(mode, true, force);
+}
+
+void DockingNavServer::setModeInternal(const std::string &mode, bool publish,
+                                       bool force)
+{
   if (!force && mode == mode_)
     return;
   const std::string previous = mode_;
   mode_ = mode;
   ROS_INFO_STREAM("[docking_nav] MODE change: " << previous << " -> " << mode_);
-  injectString("MODE", mode_);
+  if (publish)
+  {
+    injectString("MODE", mode_);
+  }
   if (mode_ == "DOCKING")
   {
     nPhaseCount_ = 1;

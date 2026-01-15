@@ -37,6 +37,7 @@ public:
   void setNavPitch(double pitch_rad);
   void setNavRoll(double roll_rad);
   void setDesiredSpeed(double speed_mps);
+  void setModeFromExternal(const std::string &mode);
 
   Outputs update(const ros::Time &stamp);
 
@@ -54,6 +55,7 @@ private:
   bool loadParams(ros::NodeHandle &private_nh);
   void handleDocking(const ros::Time &stamp, Outputs &outputs);
   void setMode(const std::string &mode, bool force = false);
+  void setModeInternal(const std::string &mode, bool publish, bool force);
 
   void injectDepthUpdate(double depth);
   void injectHeadingUpdate(const std::string &update);
