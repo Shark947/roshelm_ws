@@ -3314,17 +3314,17 @@ docking_nav_roshelm_node/fast:
 .PHONY : docking_nav_roshelm_node/fast
 
 #=============================================================================
-# Target rules for targets named docking_nav_node
+# Target rules for targets named docking_nav_server_node
 
 # Build rule for target.
-docking_nav_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 docking_nav_node
-.PHONY : docking_nav_node
+docking_nav_server_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 docking_nav_server_node
+.PHONY : docking_nav_server_node
 
 # fast build rule for target.
-docking_nav_node/fast:
-	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_node.dir/build.make docking_nav/CMakeFiles/docking_nav_node.dir/build
-.PHONY : docking_nav_node/fast
+docking_nav_server_node/fast:
+	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_server_node.dir/build.make docking_nav/CMakeFiles/docking_nav_server_node.dir/build
+.PHONY : docking_nav_server_node/fast
 
 #=============================================================================
 # Target rules for targets named tf_generate_messages_nodejs
@@ -5518,7 +5518,7 @@ help:
 	@echo "... ros_helm_node"
 	@echo "... ros_helm_bridge"
 	@echo "... docking_nav_roshelm_node"
-	@echo "... docking_nav_node"
+	@echo "... docking_nav_server_node"
 	@echo "... tf_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_py"

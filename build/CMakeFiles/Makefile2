@@ -8111,7 +8111,7 @@ all: ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors/CMakeFiles/behaviors.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors/CMakeFiles/behaviors.dir/rule
@@ -8221,7 +8221,7 @@ all: ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 26
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 27
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/rule
@@ -8395,7 +8395,7 @@ all: ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/rule
@@ -8513,7 +8513,7 @@ all: ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_helmivp/CMakeFiles/helmivp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 21
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_helmivp/CMakeFiles/helmivp.dir/rule
@@ -8669,7 +8669,7 @@ ivp/lib_logic/preinstall:
 ivp/lib_logic/CMakeFiles/logic.dir/all:
 	$(MAKE) -f ivp/lib_logic/CMakeFiles/logic.dir/build.make ivp/lib_logic/CMakeFiles/logic.dir/depend
 	$(MAKE) -f ivp/lib_logic/CMakeFiles/logic.dir/build.make ivp/lib_logic/CMakeFiles/logic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target logic"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=40 "Built target logic"
 .PHONY : ivp/lib_logic/CMakeFiles/logic.dir/all
 
 # Include target in all.
@@ -8679,7 +8679,7 @@ all: ivp/lib_logic/CMakeFiles/logic.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_logic/CMakeFiles/logic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_logic/CMakeFiles/logic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_logic/CMakeFiles/logic.dir/rule
@@ -8999,7 +8999,7 @@ ivp/lib_realm/preinstall:
 ivp/lib_realm/CMakeFiles/realm.dir/all:
 	$(MAKE) -f ivp/lib_realm/CMakeFiles/realm.dir/build.make ivp/lib_realm/CMakeFiles/realm.dir/depend
 	$(MAKE) -f ivp/lib_realm/CMakeFiles/realm.dir/build.make ivp/lib_realm/CMakeFiles/realm.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=49,50 "Built target realm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=49 "Built target realm"
 .PHONY : ivp/lib_realm/CMakeFiles/realm.dir/all
 
 # Include target in all.
@@ -9009,7 +9009,7 @@ all: ivp/lib_realm/CMakeFiles/realm.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_realm/CMakeFiles/realm.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_realm/CMakeFiles/realm.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_realm/CMakeFiles/realm.dir/rule
@@ -9403,7 +9403,7 @@ all: ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/rule
@@ -9468,7 +9468,7 @@ all: helm_test/CMakeFiles/test_ivp.dir/all
 
 # Build rule for subdir invocation for target.
 helm_test/CMakeFiles/test_ivp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 helm_test/CMakeFiles/test_ivp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_test/CMakeFiles/test_ivp.dir/rule
@@ -9539,7 +9539,7 @@ all: helm_app/CMakeFiles/pHelmIvP.dir/all
 
 # Build rule for subdir invocation for target.
 helm_app/CMakeFiles/pHelmIvP.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 32
 	$(MAKE) -f CMakeFiles/Makefile2 helm_app/CMakeFiles/pHelmIvP.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_app/CMakeFiles/pHelmIvP.dir/rule
@@ -9589,7 +9589,7 @@ all: helm_app/CMakeFiles/helm_core.dir/all
 
 # Build rule for subdir invocation for target.
 helm_app/CMakeFiles/helm_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 32
 	$(MAKE) -f CMakeFiles/Makefile2 helm_app/CMakeFiles/helm_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_app/CMakeFiles/helm_core.dir/rule
@@ -9661,7 +9661,7 @@ all: ros_node/CMakeFiles/ros_helm_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_node/CMakeFiles/ros_helm_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 33
 	$(MAKE) -f CMakeFiles/Makefile2 ros_node/CMakeFiles/ros_helm_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_node/CMakeFiles/ros_helm_node.dir/rule
@@ -9702,7 +9702,7 @@ ros_node/CMakeFiles/ros_helm_bridge.dir/all: ivp/lib_dep_behaviors/CMakeFiles/de
 ros_node/CMakeFiles/ros_helm_bridge.dir/all: helm_app/CMakeFiles/helm_core.dir/all
 	$(MAKE) -f ros_node/CMakeFiles/ros_helm_bridge.dir/build.make ros_node/CMakeFiles/ros_helm_bridge.dir/depend
 	$(MAKE) -f ros_node/CMakeFiles/ros_helm_bridge.dir/build.make ros_node/CMakeFiles/ros_helm_bridge.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target ros_helm_bridge"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=50 "Built target ros_helm_bridge"
 .PHONY : ros_node/CMakeFiles/ros_helm_bridge.dir/all
 
 # Include target in all.
@@ -9712,7 +9712,7 @@ all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
 
 # Build rule for subdir invocation for target.
 ros_node/CMakeFiles/ros_helm_bridge.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 33
 	$(MAKE) -f CMakeFiles/Makefile2 ros_node/CMakeFiles/ros_helm_bridge.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_node/CMakeFiles/ros_helm_bridge.dir/rule
@@ -9737,13 +9737,13 @@ clean: ros_node/CMakeFiles/ros_helm_bridge.dir/clean
 
 # Convenience name for "all" pass in the directory.
 docking_nav/all: docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/all
-docking_nav/all: docking_nav/CMakeFiles/docking_nav_node.dir/all
+docking_nav/all: docking_nav/CMakeFiles/docking_nav_server_node.dir/all
 
 .PHONY : docking_nav/all
 
 # Convenience name for "clean" pass in the directory.
 docking_nav/clean: docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/clean
-docking_nav/clean: docking_nav/CMakeFiles/docking_nav_node.dir/clean
+docking_nav/clean: docking_nav/CMakeFiles/docking_nav_server_node.dir/clean
 
 .PHONY : docking_nav/clean
 
@@ -9839,7 +9839,7 @@ all: docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/all
 
 # Build rule for subdir invocation for target.
 docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 36
 	$(MAKE) -f CMakeFiles/Makefile2 docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/rule
@@ -9860,109 +9860,109 @@ clean: docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target docking_nav/CMakeFiles/docking_nav_node.dir
+# Target rules for target docking_nav/CMakeFiles/docking_nav_server_node.dir
 
 # All Build rule for target.
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_py.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_lisp.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_genutil/CMakeFiles/genutil.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_geometry/CMakeFiles/geometry.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_logic/CMakeFiles/logic.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_contacts/CMakeFiles/contacts.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_ufield/CMakeFiles/ufield.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_mbutil/CMakeFiles/mbutil.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: helm_app/CMakeFiles/helm_core.dir/all
-docking_nav/CMakeFiles/docking_nav_node.dir/all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
-	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_node.dir/build.make docking_nav/CMakeFiles/docking_nav_node.dir/depend
-	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_node.dir/build.make docking_nav/CMakeFiles/docking_nav_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_nav_node"
-.PHONY : docking_nav/CMakeFiles/docking_nav_node.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: docking_optical_vision/CMakeFiles/sensor_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/nav_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_py.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/actionlib_generate_messages_lisp.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_helm/CMakeFiles/tf2_msgs_generate_messages_eus.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_genutil/CMakeFiles/genutil.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_geometry/CMakeFiles/geometry.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_logic/CMakeFiles/logic.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_contacts/CMakeFiles/contacts.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_ufield/CMakeFiles/ufield.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_mbutil/CMakeFiles/mbutil.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: helm_app/CMakeFiles/helm_core.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
+	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_server_node.dir/build.make docking_nav/CMakeFiles/docking_nav_server_node.dir/depend
+	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_server_node.dir/build.make docking_nav/CMakeFiles/docking_nav_server_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_nav_server_node"
+.PHONY : docking_nav/CMakeFiles/docking_nav_server_node.dir/all
 
 # Include target in all.
-all: docking_nav/CMakeFiles/docking_nav_node.dir/all
+all: docking_nav/CMakeFiles/docking_nav_server_node.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-docking_nav/CMakeFiles/docking_nav_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
-	$(MAKE) -f CMakeFiles/Makefile2 docking_nav/CMakeFiles/docking_nav_node.dir/all
+docking_nav/CMakeFiles/docking_nav_server_node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 36
+	$(MAKE) -f CMakeFiles/Makefile2 docking_nav/CMakeFiles/docking_nav_server_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
-.PHONY : docking_nav/CMakeFiles/docking_nav_node.dir/rule
+.PHONY : docking_nav/CMakeFiles/docking_nav_server_node.dir/rule
 
 # Convenience name for target.
-docking_nav_node: docking_nav/CMakeFiles/docking_nav_node.dir/rule
+docking_nav_server_node: docking_nav/CMakeFiles/docking_nav_server_node.dir/rule
 
-.PHONY : docking_nav_node
-
-# clean rule for target.
-docking_nav/CMakeFiles/docking_nav_node.dir/clean:
-	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_node.dir/build.make docking_nav/CMakeFiles/docking_nav_node.dir/clean
-.PHONY : docking_nav/CMakeFiles/docking_nav_node.dir/clean
+.PHONY : docking_nav_server_node
 
 # clean rule for target.
-clean: docking_nav/CMakeFiles/docking_nav_node.dir/clean
+docking_nav/CMakeFiles/docking_nav_server_node.dir/clean:
+	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_server_node.dir/build.make docking_nav/CMakeFiles/docking_nav_server_node.dir/clean
+.PHONY : docking_nav/CMakeFiles/docking_nav_server_node.dir/clean
+
+# clean rule for target.
+clean: docking_nav/CMakeFiles/docking_nav_server_node.dir/clean
 
 .PHONY : clean
 
@@ -13478,7 +13478,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_batter
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_dynamics.dir/all
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=40 "Built target linear_battery_ros_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target linear_battery_ros_plugin"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/all
 
 # Include target in all.
@@ -13488,7 +13488,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_b
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/rule

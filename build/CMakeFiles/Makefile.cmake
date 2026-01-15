@@ -992,7 +992,7 @@ set(CMAKE_DEPEND_INFO_FILES
   "ros_node/CMakeFiles/ros_helm_node.dir/DependInfo.cmake"
   "ros_node/CMakeFiles/ros_helm_bridge.dir/DependInfo.cmake"
   "docking_nav/CMakeFiles/docking_nav_roshelm_node.dir/DependInfo.cmake"
-  "docking_nav/CMakeFiles/docking_nav_node.dir/DependInfo.cmake"
+  "docking_nav/CMakeFiles/docking_nav_server_node.dir/DependInfo.cmake"
   "uuv_simulator/uuv_assistants/CMakeFiles/tf_generate_messages_nodejs.dir/DependInfo.cmake"
   "uuv_simulator/uuv_assistants/CMakeFiles/topic_tools_generate_messages_nodejs.dir/DependInfo.cmake"
   "uuv_simulator/uuv_assistants/CMakeFiles/topic_tools_generate_messages_py.dir/DependInfo.cmake"
