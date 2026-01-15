@@ -14,8 +14,8 @@ optical_feedback_topic: "/docking/optical_feedback"
 print_every_n: 30
 print_camera_info_every_n: 120
 print_detection_every_n: 10      # 每N次检测输出一次结果（避免刷屏）
-min_consecutive_detections: 2    # 连续检测到白点才认为 valid=true
-max_consecutive_misses: 2        # 连续丢失白点才认为 valid=false
+min_consecutive_detections: 1    # 连续检测到白点才认为 valid=true
+max_consecutive_misses: 1        # 连续丢失白点才认为 valid=false
 
 # ====== 白点检测参数 ======
 # 1) 图像预处理
@@ -35,13 +35,13 @@ adaptive_c: -5
 
 # 3) 形态学
 morph_open_kernel: 3             # 去掉孤立噪点（0表示不做）
-morph_close_kernel: 5            # 填补白点空洞（0表示不做）
+morph_close_kernel: 0            # 填补白点空洞（0表示不做）
 
 # 4) 目标筛选
-min_blob_area: 1                 # 最小连通域面积（像素）
-max_blob_area: 5000              # 最大连通域面积（像素）
+min_blob_area: 100                 # 最小连通域面积（像素）
+max_blob_area: 30000              # 最大连通域面积（像素）
 min_brightness: 200.0            # 亮度门限，过滤弱反光
-max_pixel_jump: 80.0             # 像素跳变限制（0 表示不限制）
+max_pixel_jump: 0             # 像素跳变限制（0 表示不限制）
 ema_alpha: 0.4                   # 角度 EMA 平滑系数（0~1）
 choose_mode: "brightest"         # "largest" 或 "brightest"
 
