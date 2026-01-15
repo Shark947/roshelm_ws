@@ -140,6 +140,30 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
 
   dfCameraDepth_ = dfNavDepth_ + m_dfDepthBias_ + m_dfDepthCameraBias_;
 
+  if (mode_ != "DOCKING" && mode_ != "CLOSETODOCKING")
+  {
+    double distance = 0.0;
+    if (shouldAutoEnterCloseToDocking(distance))
+    {
+      ++auto_enter_count_;
+      if (auto_enter_count_ >= m_dfFreq_ * auto_enter_duration_sec_)
+      {
+        ROS_INFO_STREAM("[docking_nav] Auto entering CLOSETODOCKING after "
+                        << auto_enter_duration_sec_
+                        << "s of stable optical data (distance=" << distance
+                        << ")");
+        setMode("CLOSETODOCKING");
+        constheight_ = true;
+        injectBool("CONSTHEIGHT", constheight_);
+        auto_enter_count_ = 0;
+      }
+    }
+    else
+    {
+      auto_enter_count_ = 0;
+    }
+  }
+
   if (mode_ == "DOCKING" || mode_ == "CLOSETODOCKING")
   {
     handleDocking(stamp, outputs);
@@ -223,6 +247,9 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
   private_nh.param("docking_max_try", m_nDockingMaxTry_, 3);
   private_nh.param("optical_timeout_sec", optical_timeout_sec_, 0.5);
   private_nh.param("initial_mode", mode_, mode_);
+  private_nh.param("auto_enter_closetodocking", auto_enter_closetodocking_,
+                   false);
+  private_nh.param("auto_enter_duration_sec", auto_enter_duration_sec_, 2.0);
 
   dfDockHeading_ = angle360(dfDockHeading_ + 90.0);
   m_dfFreq_ = 1.0 / nav_server_period_;
@@ -263,8 +290,38 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
                   << " dock_heading=" << dfDockHeading_ << " dradius="
                   << dradius_ << " dinheading=" << dinheading_
                   << " align_depth_count=" << dfvAlignDepth_.size()
-                  << " initial_mode=" << mode_);
+                  << " initial_mode=" << mode_
+                  << " auto_enter_closetodocking="
+                  << (auto_enter_closetodocking_ ? "true" : "false")
+                  << " auto_enter_duration_sec=" << auto_enter_duration_sec_);
   return true;
+}
+
+bool DockingNavServer::shouldAutoEnterCloseToDocking(double &distance) const
+{
+  if (!auto_enter_closetodocking_ || dfvAlignDepth_.empty() || !bDataFlag_)
+  {
+    distance = 0.0;
+    return false;
+  }
+
+  const auto &first_phase = dfvAlignDepth_.front();
+  const double dfDX = (dfLightDepth_ - dfCameraDepth_) *
+                          std::tan(degToRad(dfOpticalNavLoc_[1])) *
+                          std::sin(degToRad(dfNavHeading_)) -
+                      (dfLightDepth_ - dfCameraDepth_) *
+                          std::tan(degToRad(dfOpticalNavLoc_[2])) *
+                          std::cos(degToRad(dfNavHeading_)) -
+                      dfDeltaL_ * std::sin(degToRad(dfNavHeading_));
+  const double dfDY = -(dfLightDepth_ - dfCameraDepth_) *
+                          std::tan(degToRad(dfOpticalNavLoc_[2])) *
+                          std::sin(degToRad(dfNavHeading_)) -
+                      (dfLightDepth_ - dfCameraDepth_) *
+                          std::tan(degToRad(dfOpticalNavLoc_[1])) *
+                          std::cos(degToRad(dfNavHeading_)) +
+                      dfDeltaL_ * std::cos(degToRad(dfNavHeading_));
+  distance = distToPoint(0, 0, dfDY, dfDX);
+  return distance <= first_phase.outer_radius;
 }
 
 void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)

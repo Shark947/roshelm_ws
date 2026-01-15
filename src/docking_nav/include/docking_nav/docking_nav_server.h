@@ -56,6 +56,7 @@ private:
   void handleDocking(const ros::Time &stamp, Outputs &outputs);
   void setMode(const std::string &mode, bool force = false);
   void setModeInternal(const std::string &mode, bool publish, bool force);
+  bool shouldAutoEnterCloseToDocking(double &distance) const;
 
   void injectDepthUpdate(double depth);
   void injectHeadingUpdate(const std::string &update);
@@ -143,6 +144,10 @@ private:
   ros::Time last_optical_stamp_;
   double fallback_x_{0.0};
   double fallback_y_{0.0};
+
+  bool auto_enter_closetodocking_{false};
+  double auto_enter_duration_sec_{2.0};
+  int auto_enter_count_{0};
 
   bool last_data_flag_{false};
   int last_phase_count_{0};
