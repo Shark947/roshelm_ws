@@ -39,6 +39,7 @@ bool DockingNavServer::initialize(ros::NodeHandle &private_nh)
   }
 
   setMode(mode_, true);
+  ROS_INFO_STREAM("[docking_nav] Initial mode=" << mode_);
   injectBool("CONSTHEIGHT", constheight_);
   injectBool("STATIONING", stationing_);
   injectBool("DOCKING_FALLING", docking_falling_);
@@ -65,6 +66,17 @@ void DockingNavServer::setOpticalMeasurement(
   fallback_x_ = msg.fallback_x;
   fallback_y_ = msg.fallback_y;
   bDataFlag_ = msg.valid;
+  ROS_DEBUG_STREAM_THROTTLE(
+      1.0, "[docking_nav] Optical measurement valid=" << (bDataFlag_ ? "true" : "false")
+                                                      << " d_heading_deg="
+                                                      << dfOpticalNavLoc_[0]
+                                                      << " theta_x_deg="
+                                                      << dfOpticalNavLoc_[1]
+                                                      << " theta_y_deg="
+                                                      << dfOpticalNavLoc_[2]
+                                                      << " fallback=("
+                                                      << fallback_x_ << ","
+                                                      << fallback_y_ << ")");
 }
 
 void DockingNavServer::setNavHeading(double heading_deg)
@@ -99,16 +111,26 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
   Outputs outputs;
   ++m_iterations_;
 
+  const bool prev_data_flag = bDataFlag_;
   if (!optical_received_ ||
       (stamp - last_optical_stamp_).toSec() > optical_timeout_sec_)
   {
     bDataFlag_ = false;
   }
 
+  if (prev_data_flag != bDataFlag_)
+  {
+    ROS_INFO_STREAM("[docking_nav] Optical data valid="
+                    << (bDataFlag_ ? "true" : "false"));
+  }
+
   if (!bDataFlag_)
   {
     dfOpticalNavLoc_[1] = fallback_x_;
     dfOpticalNavLoc_[2] = fallback_y_;
+    ROS_DEBUG_STREAM_THROTTLE(
+        1.0, "[docking_nav] Using fallback optical XY=(" << fallback_x_ << ","
+                                                         << fallback_y_ << ")");
   }
 
   dfCameraDepth_ = dfNavDepth_ + m_dfDepthBias_ + m_dfDepthCameraBias_;
@@ -122,6 +144,45 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
     fillFeedback(outputs, 1.0, 0.0, 0.0, 0.0, stamp);
     fillPhase(outputs);
     fillOpticalXY(outputs, 0.0, 0.0, stamp);
+    ROS_DEBUG_STREAM_THROTTLE(
+        2.0, "[docking_nav] Mode=" << mode_ << " (no docking logic)");
+  }
+
+  if (last_phase_count_ != nPhaseCount_)
+  {
+    ROS_INFO_STREAM("[docking_nav] Phase change: " << last_phase_count_
+                                                   << " -> " << nPhaseCount_);
+    last_phase_count_ = nPhaseCount_;
+  }
+  if (last_stationing_ != stationing_)
+  {
+    ROS_INFO_STREAM("[docking_nav] STATIONING="
+                    << (stationing_ ? "true" : "false"));
+    last_stationing_ = stationing_;
+  }
+  if (last_constheight_ != constheight_)
+  {
+    ROS_INFO_STREAM("[docking_nav] CONSTHEIGHT="
+                    << (constheight_ ? "true" : "false"));
+    last_constheight_ = constheight_;
+  }
+  if (last_docking_falling_ != docking_falling_)
+  {
+    ROS_INFO_STREAM("[docking_nav] DOCKING_FALLING="
+                    << (docking_falling_ ? "true" : "false"));
+    last_docking_falling_ = docking_falling_;
+  }
+  if (last_manual_override_ != manual_override_)
+  {
+    ROS_INFO_STREAM("[docking_nav] MOOS_MANUAL_OVERIDE="
+                    << (manual_override_ ? "true" : "false"));
+    last_manual_override_ = manual_override_;
+  }
+  if (last_docking_failed_ != docking_failed_)
+  {
+    ROS_INFO_STREAM("[docking_nav] DOCKINGFAILED="
+                    << (docking_failed_ ? "true" : "false"));
+    last_docking_failed_ = docking_failed_;
   }
 
   return outputs;
@@ -191,6 +252,13 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
   }
 
   nPhaseNum_ = static_cast<int>(dfvAlignDepth_.size()) + 1;
+  ROS_INFO_STREAM("[docking_nav] Loaded params: nav_server_period="
+                  << nav_server_period_ << " optical_timeout_sec="
+                  << optical_timeout_sec_ << " dock_depth=" << dfDockDepth_
+                  << " dock_heading=" << dfDockHeading_ << " dradius="
+                  << dradius_ << " dinheading=" << dinheading_
+                  << " align_depth_count=" << dfvAlignDepth_.size()
+                  << " initial_mode=" << mode_);
   return true;
 }
 
@@ -203,6 +271,7 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
         !bDockingPhase_ && mode_ == "CLOSETODOCKING")
     {
       bDockingPhase_ = true;
+      ROS_INFO_STREAM("[docking_nav] Optical stable; switching to DOCKING");
       setMode("DOCKING");
       constheight_ = false;
       injectBool("CONSTHEIGHT", constheight_);
@@ -242,6 +311,11 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
   }
 
   distance_ = distToPoint(0, 0, dfNextX, dfNextY);
+  ROS_DEBUG_STREAM_THROTTLE(
+      1.0, "[docking_nav] Computed next_xy=(" << dfNextX << "," << dfNextY
+                                              << ") distance=" << distance_
+                                              << " heading=" << dfNavHeading_
+                                              << " depth=" << dfNavDepth_);
 
   if (nPhaseCount_ > 0 && nPhaseCount_ < nPhaseNum_)
   {
@@ -256,6 +330,9 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
         ++nPhaseCount_;
         nCtnuInvalidDataCount_ = 0;
         dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
+        ROS_INFO_STREAM("[docking_nav] Enter phase=" << nPhaseCount_
+                                                     << " depth="
+                                                     << dfCurrentDepth_);
         injectDepthUpdate(dfCurrentDepth_);
         injectHeadingUpdate("pwt=1");
         stationing_ = true;
@@ -290,6 +367,8 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
             {
               nPhaseCount_ = nPhaseNum_;
               dfCurrentDepth_ = dfDockDepth_ + dfFallDepth_;
+              ROS_INFO_STREAM("[docking_nav] Final phase reached, falling to depth="
+                              << dfCurrentDepth_);
               injectDepthUpdate(dfCurrentDepth_);
               injectHeadingUpdate(
                   "pwt=200,heading=" + std::to_string(dfDockHeading_));
@@ -313,6 +392,9 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
           --nPhaseCount_;
           nCtnuInvalidDataCount_ = 0;
           dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
+          ROS_INFO_STREAM("[docking_nav] Phase fallback to " << nPhaseCount_
+                                                            << " depth="
+                                                            << dfCurrentDepth_);
           injectDepthUpdate(dfCurrentDepth_);
           injectHeadingUpdate("pwt=1");
           stationing_ = true;
@@ -331,11 +413,15 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
             injectBool("CONSTHEIGHT", constheight_);
             bDockingPhase_ = false;
             ++nDockingTryCount_;
+            ROS_WARN_STREAM("[docking_nav] Retry docking attempt "
+                            << nDockingTryCount_ << "/"
+                            << m_nDockingMaxTry_);
           }
           else
           {
             docking_failed_ = true;
             injectBool("DOCKINGFAILED", docking_failed_);
+            ROS_ERROR_STREAM("[docking_nav] Docking failed after max retries");
           }
         }
       }
@@ -367,6 +453,8 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
           bRetryLastPhase_ = false;
           nCtnuInvalidDataCount_ = 0;
           dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
+          ROS_WARN_STREAM("[docking_nav] Depth/attitude error; reverting to phase "
+                          << nPhaseCount_ << " depth=" << dfCurrentDepth_);
           injectDepthUpdate(dfCurrentDepth_);
           docking_falling_ = false;
           injectBool("DOCKING_FALLING", docking_falling_);
@@ -392,6 +480,8 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
             nConstantDepthCount_ = 0;
             nCtnuInvalidDataCount_ = 0;
             nFloatIteration_ = 0;
+            ROS_WARN_STREAM("[docking_nav] Retry last phase count="
+                            << nRetryLastPhase_);
           }
         }
       }
@@ -413,7 +503,9 @@ void DockingNavServer::setMode(const std::string &mode, bool force)
 {
   if (!force && mode == mode_)
     return;
+  const std::string previous = mode_;
   mode_ = mode;
+  ROS_INFO_STREAM("[docking_nav] MODE change: " << previous << " -> " << mode_);
   injectString("MODE", mode_);
   if (mode_ == "DOCKING")
   {
