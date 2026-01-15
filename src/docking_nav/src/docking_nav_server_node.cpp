@@ -9,10 +9,14 @@
 #include <docking_optical_msgs/OpticalMeasurement.h>
 #include <docking_optical_msgs/OpticalFeedback.h>
 #include <geometry_msgs/PointStamped.h>
-#include <std_msgs/Bool.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/Int32.h>
-#include <std_msgs/String.h>
+
+#include "HelmIvP.h"
+#include "HelmVariableInjector.h"
+#include "RosBridge.h"
+#include "RosConfigLoader.h"
+#include "RosNavPublisher.h"
 
 namespace
 {
@@ -46,11 +50,14 @@ struct AlignDepth
 };
 }  // namespace
 
-class DockingNavNode
+class DockingNavServer
 {
 public:
-  DockingNavNode(ros::NodeHandle nh, ros::NodeHandle private_nh)
-      : nh_(nh), private_nh_(private_nh)
+  DockingNavServer(ros::NodeHandle nh, ros::NodeHandle private_nh,
+                   HelmVariableInjector *helm_injector)
+      : nh_(nh),
+        private_nh_(private_nh),
+        helm_injector_(helm_injector)
   {
   }
 
@@ -63,36 +70,18 @@ public:
 
     optical_sub_ = nh_.subscribe(
         optical_measurement_topic_, 10,
-        &DockingNavNode::opticalCallback, this);
-    mode_sub_ = nh_.subscribe(mode_topic_, 10,
-                              &DockingNavNode::modeCallback, this);
+        &DockingNavServer::opticalCallback, this);
 
     heading_sub_ = nh_.subscribe(nav_heading_topic_, 10,
-                                 &DockingNavNode::headingCallback, this);
+                                 &DockingNavServer::headingCallback, this);
     depth_sub_ = nh_.subscribe(nav_depth_topic_, 10,
-                               &DockingNavNode::depthCallback, this);
+                               &DockingNavServer::depthCallback, this);
     pitch_sub_ = nh_.subscribe(nav_pitch_topic_, 10,
-                               &DockingNavNode::pitchCallback, this);
+                               &DockingNavServer::pitchCallback, this);
     roll_sub_ = nh_.subscribe(nav_roll_topic_, 10,
-                              &DockingNavNode::rollCallback, this);
+                              &DockingNavServer::rollCallback, this);
     desired_speed_sub_ = nh_.subscribe(
-        desired_speed_topic_, 10, &DockingNavNode::desiredSpeedCallback, this);
-
-    mode_pub_ = nh_.advertise<std_msgs::String>(mode_topic_, 10, true);
-    stationing_pub_ =
-        nh_.advertise<std_msgs::Bool>(stationing_topic_, 10, true);
-    constheight_pub_ =
-        nh_.advertise<std_msgs::Bool>(constheight_topic_, 10, true);
-    dockdepth_update_pub_ =
-        nh_.advertise<std_msgs::String>(dockdepth_update_topic_, 10);
-    dockhdg_updates_pub_ =
-        nh_.advertise<std_msgs::String>(dockhdg_updates_topic_, 10);
-    docking_falling_pub_ =
-        nh_.advertise<std_msgs::Bool>(docking_falling_topic_, 10, true);
-    manual_override_pub_ =
-        nh_.advertise<std_msgs::Bool>(manual_override_topic_, 10, true);
-    docking_failed_pub_ =
-        nh_.advertise<std_msgs::Bool>(docking_failed_topic_, 10, true);
+        desired_speed_topic_, 10, &DockingNavServer::desiredSpeedCallback, this);
     phase_pub_ = nh_.advertise<std_msgs::Int32>(phase_topic_, 10);
     optical_xy_pub_ = nh_.advertise<geometry_msgs::PointStamped>(
         optical_xy_topic_, 10);
@@ -101,14 +90,14 @@ public:
             optical_feedback_topic_, 10);
 
     const ros::Duration period(nav_server_period_);
-    timer_ = nh_.createTimer(period, &DockingNavNode::timerCallback, this);
+    timer_ = nh_.createTimer(period, &DockingNavServer::timerCallback, this);
 
-    publishMode(mode_);
-    publishBool(constheight_pub_, constheight_);
-    publishBool(stationing_pub_, stationing_);
-    publishBool(docking_falling_pub_, docking_falling_);
-    publishBool(manual_override_pub_, manual_override_);
-    publishBool(docking_failed_pub_, docking_failed_);
+    setMode(mode_, true);
+    injectBool("CONSTHEIGHT", constheight_);
+    injectBool("STATIONING", stationing_);
+    injectBool("DOCKING_FALLING", docking_falling_);
+    injectBool("MOOS_MANUAL_OVERIDE", manual_override_);
+    injectBool("DOCKINGFAILED", docking_failed_);
     return true;
   }
 
@@ -142,40 +131,7 @@ private:
     private_nh_.param("transimit_duration_sec", m_nTransimitDuration_, 30);
     private_nh_.param("docking_max_try", m_nDockingMaxTry_, 3);
     private_nh_.param("optical_timeout_sec", optical_timeout_sec_, 0.5);
-    private_nh_.param("optical_measurement_topic", optical_measurement_topic_,
-                      std::string("/docking/optical_measurement"));
-    private_nh_.param("mode_topic", mode_topic_,
-                      std::string("/docking/mode"));
-    private_nh_.param("stationing_topic", stationing_topic_,
-                      std::string("/docking/stationing"));
-    private_nh_.param("constheight_topic", constheight_topic_,
-                      std::string("/docking/constheight"));
-    private_nh_.param("dockdepth_update_topic", dockdepth_update_topic_,
-                      std::string("/docking/dockdepth_update"));
-    private_nh_.param("dockhdg_updates_topic", dockhdg_updates_topic_,
-                      std::string("/docking/dockhdg_updates"));
-    private_nh_.param("docking_falling_topic", docking_falling_topic_,
-                      std::string("/docking/docking_falling"));
-    private_nh_.param("manual_override_topic", manual_override_topic_,
-                      std::string("/docking/manual_override"));
-    private_nh_.param("docking_failed_topic", docking_failed_topic_,
-                      std::string("/docking/docking_failed"));
-    private_nh_.param("phase_topic", phase_topic_,
-                      std::string("/docking/phase"));
-    private_nh_.param("optical_xy_topic", optical_xy_topic_,
-                      std::string("/docking/optical_xy"));
-    private_nh_.param("optical_feedback_topic", optical_feedback_topic_,
-                      std::string("/docking/optical_feedback"));
-    private_nh_.param("nav_heading_topic", nav_heading_topic_,
-                      std::string("/auh/NAV_HEADING"));
-    private_nh_.param("nav_depth_topic", nav_depth_topic_,
-                      std::string("/auh/NAV_DEPTH"));
-    private_nh_.param("nav_pitch_topic", nav_pitch_topic_,
-                      std::string("/auh/NAV_PITCH"));
-    private_nh_.param("nav_roll_topic", nav_roll_topic_,
-                      std::string("/auh/NAV_ROLL"));
-    private_nh_.param("desired_speed_topic", desired_speed_topic_,
-                      std::string("/auh/desired_speed"));
+    private_nh_.param("initial_mode", mode_, mode_);
 
     dfDockHeading_ = angle360(dfDockHeading_ + 90.0);
     m_dfFreq_ = 1.0 / nav_server_period_;
@@ -224,27 +180,6 @@ private:
     fallback_x_ = msg->fallback_x;
     fallback_y_ = msg->fallback_y;
     bDataFlag_ = msg->valid;
-  }
-
-  void modeCallback(const std_msgs::String::ConstPtr &msg)
-  {
-    const std::string new_mode = msg->data;
-    if (new_mode == mode_)
-    {
-      return;
-    }
-    mode_ = new_mode;
-    if (mode_ == "DOCKING")
-    {
-      nPhaseCount_ = 1;
-      if (!dfvAlignDepth_.empty())
-      {
-        dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
-        dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
-        dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
-        publishDepthUpdate(dfCurrentDepth_);
-      }
-    }
   }
 
   void headingCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
@@ -312,10 +247,9 @@ private:
           !bDockingPhase_ && mode_ == "CLOSETODOCKING")
       {
         bDockingPhase_ = true;
-        publishMode("DOCKING");
-        mode_ = "DOCKING";
+        setMode("DOCKING");
         constheight_ = false;
-        publishBool(constheight_pub_, constheight_);
+        injectBool("CONSTHEIGHT", constheight_);
       }
     }
     else
@@ -356,7 +290,7 @@ private:
     if (nPhaseCount_ > 0 && nPhaseCount_ < nPhaseNum_)
     {
       dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
-      publishDepthUpdate(dfCurrentDepth_);
+      injectDepthUpdate(dfCurrentDepth_);
 
       if (bDataFlag_ && distance_ <= dfOuterRadius_)
       {
@@ -367,15 +301,15 @@ private:
           ++nPhaseCount_;
           nCtnuInvalidDataCount_ = 0;
           dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
-          publishDepthUpdate(dfCurrentDepth_);
-          publishHeadingUpdate("pwt=1");
+          injectDepthUpdate(dfCurrentDepth_);
+          injectHeadingUpdate("pwt=1");
           stationing_ = true;
-          publishBool(stationing_pub_, stationing_);
+          injectBool("STATIONING", stationing_);
           dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
           dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
           if (nPhaseCount_ == nPhaseNum_ - 1)
           {
-            publishHeadingUpdate("pwt=50");
+            injectHeadingUpdate("pwt=50");
           }
         }
         else if (bDataFlag_ && nPhaseCount_ == nPhaseNum_ - 1)
@@ -383,15 +317,15 @@ private:
           if (distance_ < dfInnerRadius_ * 0.8 && distance_ > 0.3)
           {
             stationing_ = false;
-            publishBool(stationing_pub_, stationing_);
-            publishHeadingUpdate(
+            injectBool("STATIONING", stationing_);
+            injectHeadingUpdate(
                 "pwt=50,heading=" + std::to_string(dfDockHeading_));
           }
           else if (distance_ > dfInnerRadius_ * 1.2)
           {
             stationing_ = true;
-            publishBool(stationing_pub_, stationing_);
-            publishHeadingUpdate("pwt=1");
+            injectBool("STATIONING", stationing_);
+            injectHeadingUpdate("pwt=1");
           }
           if ((desired_speed_ * 7 + distance_) < dradius_)
           {
@@ -401,13 +335,13 @@ private:
               {
                 nPhaseCount_ = nPhaseNum_;
                 dfCurrentDepth_ = dfDockDepth_ + dfFallDepth_;
-                publishDepthUpdate(dfCurrentDepth_);
-                publishHeadingUpdate(
+                injectDepthUpdate(dfCurrentDepth_);
+                injectHeadingUpdate(
                     "pwt=200,heading=" + std::to_string(dfDockHeading_));
                 stationing_ = false;
-                publishBool(stationing_pub_, stationing_);
+                injectBool("STATIONING", stationing_);
                 docking_falling_ = true;
-                publishBool(docking_falling_pub_, docking_falling_);
+                injectBool("DOCKING_FALLING", docking_falling_);
               }
             }
           }
@@ -424,12 +358,12 @@ private:
             --nPhaseCount_;
             nCtnuInvalidDataCount_ = 0;
             dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
-            publishDepthUpdate(dfCurrentDepth_);
-            publishHeadingUpdate("pwt=1");
+            injectDepthUpdate(dfCurrentDepth_);
+            injectHeadingUpdate("pwt=1");
             stationing_ = true;
-            publishBool(stationing_pub_, stationing_);
+            injectBool("STATIONING", stationing_);
             docking_falling_ = false;
-            publishBool(docking_falling_pub_, docking_falling_);
+            injectBool("DOCKING_FALLING", docking_falling_);
             dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
             dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
           }
@@ -437,17 +371,16 @@ private:
           {
             if (nDockingTryCount_ < m_nDockingMaxTry_)
             {
-              publishMode("CLOSETODOCKING");
-              mode_ = "CLOSETODOCKING";
+              setMode("CLOSETODOCKING");
               constheight_ = true;
-              publishBool(constheight_pub_, constheight_);
+              injectBool("CONSTHEIGHT", constheight_);
               bDockingPhase_ = false;
               ++nDockingTryCount_;
             }
             else
             {
               docking_failed_ = true;
-              publishBool(docking_failed_pub_, docking_failed_);
+              injectBool("DOCKINGFAILED", docking_failed_);
             }
           }
         }
@@ -480,9 +413,9 @@ private:
             bRetryLastPhase_ = false;
             nCtnuInvalidDataCount_ = 0;
             dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
-            publishDepthUpdate(dfCurrentDepth_);
+            injectDepthUpdate(dfCurrentDepth_);
             docking_falling_ = false;
-            publishBool(docking_falling_pub_, docking_falling_);
+            injectBool("DOCKING_FALLING", docking_falling_);
             dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
             dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
             nConstantDepthCount_ = 0;
@@ -494,15 +427,15 @@ private:
             {
               ++nFloatIteration_;
               manual_override_ = true;
-              publishBool(manual_override_pub_, manual_override_);
+              injectBool("MOOS_MANUAL_OVERIDE", manual_override_);
             }
             else
             {
               ++nRetryLastPhase_;
               manual_override_ = false;
-              publishBool(manual_override_pub_, manual_override_);
+              injectBool("MOOS_MANUAL_OVERIDE", manual_override_);
               docking_falling_ = true;
-              publishBool(docking_falling_pub_, docking_falling_);
+              injectBool("DOCKING_FALLING", docking_falling_);
               nConstantDepthCount_ = 0;
               nCtnuInvalidDataCount_ = 0;
               nFloatIteration_ = 0;
@@ -513,7 +446,7 @@ private:
       else
       {
         docking_falling_ = false;
-        publishBool(docking_falling_pub_, docking_falling_);
+        injectBool("DOCKING_FALLING", docking_falling_);
       }
     }
 
@@ -523,32 +456,47 @@ private:
                     dfNextY);
   }
 
-  void publishMode(const std::string &mode)
+  void setMode(const std::string &mode, bool force = false)
   {
-    std_msgs::String msg;
-    msg.data = mode;
-    mode_pub_.publish(msg);
+    if (!force && mode == mode_)
+      return;
+    mode_ = mode;
+    injectString("MODE", mode_);
+    if (mode_ == "DOCKING")
+    {
+      nPhaseCount_ = 1;
+      if (!dfvAlignDepth_.empty())
+      {
+        dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
+        dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
+        dfCurrentDepth_ = dfvAlignDepth_[nPhaseCount_ - 1].depth;
+        injectDepthUpdate(dfCurrentDepth_);
+      }
+    }
   }
 
-  void publishDepthUpdate(double depth)
+  void injectDepthUpdate(double depth)
   {
-    std_msgs::String msg;
-    msg.data = "depth=" + std::to_string(depth);
-    dockdepth_update_pub_.publish(msg);
+    injectString("DOCKDEPTH_UPDATE", "depth=" + std::to_string(depth));
   }
 
-  void publishHeadingUpdate(const std::string &update)
+  void injectHeadingUpdate(const std::string &update)
   {
-    std_msgs::String msg;
-    msg.data = update;
-    dockhdg_updates_pub_.publish(msg);
+    injectString("DOCKHDG_UPDATES", update);
   }
 
-  void publishBool(const ros::Publisher &pub, bool value)
+  void injectBool(const std::string &key, bool value)
   {
-    std_msgs::Bool msg;
-    msg.data = value;
-    pub.publish(msg);
+    if (!helm_injector_)
+      return;
+    helm_injector_->queueBool(key, value, ros::Time::now().toSec());
+  }
+
+  void injectString(const std::string &key, const std::string &value)
+  {
+    if (!helm_injector_)
+      return;
+    helm_injector_->queueString(key, value, ros::Time::now().toSec());
   }
 
   void publishPhase()
@@ -588,23 +536,15 @@ private:
 
   ros::NodeHandle nh_;
   ros::NodeHandle private_nh_;
+  HelmVariableInjector *helm_injector_{nullptr};
 
   ros::Subscriber optical_sub_;
-  ros::Subscriber mode_sub_;
   ros::Subscriber heading_sub_;
   ros::Subscriber depth_sub_;
   ros::Subscriber pitch_sub_;
   ros::Subscriber roll_sub_;
   ros::Subscriber desired_speed_sub_;
 
-  ros::Publisher mode_pub_;
-  ros::Publisher stationing_pub_;
-  ros::Publisher constheight_pub_;
-  ros::Publisher dockdepth_update_pub_;
-  ros::Publisher dockhdg_updates_pub_;
-  ros::Publisher docking_falling_pub_;
-  ros::Publisher manual_override_pub_;
-  ros::Publisher docking_failed_pub_;
   ros::Publisher phase_pub_;
   ros::Publisher optical_xy_pub_;
   ros::Publisher optical_feedback_pub_;
@@ -614,14 +554,6 @@ private:
   double nav_server_period_{0.1};
   double optical_timeout_sec_{0.5};
   std::string optical_measurement_topic_{"/docking/optical_measurement"};
-  std::string mode_topic_{"/docking/mode"};
-  std::string stationing_topic_{"/docking/stationing"};
-  std::string constheight_topic_{"/docking/constheight"};
-  std::string dockdepth_update_topic_{"/docking/dockdepth_update"};
-  std::string dockhdg_updates_topic_{"/docking/dockhdg_updates"};
-  std::string docking_falling_topic_{"/docking/docking_falling"};
-  std::string manual_override_topic_{"/docking/manual_override"};
-  std::string docking_failed_topic_{"/docking/docking_failed"};
   std::string phase_topic_{"/docking/phase"};
   std::string optical_xy_topic_{"/docking/optical_xy"};
   std::string optical_feedback_topic_{"/docking/optical_feedback"};
@@ -704,16 +636,60 @@ private:
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "docking_nav_node");
+  ros::init(argc, argv, "docking_nav_server_node");
   ros::NodeHandle nh;
   ros::NodeHandle private_nh("~");
 
-  DockingNavNode node(nh, private_nh);
+  RosNodeConfig config;
+  RosConfigLoader loader(private_nh);
+  if (!loader.load(config, DOCKING_NAV_DEFAULT_CONFIG_PATH))
+  {
+    ROS_ERROR("Failed to load docking ROS Helm configuration");
+    return 1;
+  }
+
+  HelmIvP helm;
+  helm.setAppName(config.node_name);
+  helm.setConfigPath(config.config_path);
+
+  if (!helm.OnStartUp())
+  {
+    ROS_ERROR("HelmIvP startup failed");
+    return 1;
+  }
+
+  RosBridge bridge(nh, private_nh, config);
+  if (!bridge.initialize())
+  {
+    ROS_ERROR("RosBridge initialization failed");
+    return 1;
+  }
+
+  RosNavPublisher nav_publisher(nh);
+  if (!nav_publisher.initialize(config.vehicle_name))
+  {
+    ROS_ERROR("RosNavPublisher initialization failed");
+    return 1;
+  }
+
+  HelmVariableInjector injector("docking_nav_server");
+  DockingNavServer node(nh, private_nh, &injector);
   if (!node.initialize())
   {
     return 1;
   }
 
-  ros::spin();
+  ros::Rate rate(config.loop_frequency);
+  while (ros::ok())
+  {
+    bridge.deliverPending(helm);
+    injector.flush(helm);
+    helm.Iterate();
+    bridge.publishDesired(helm);
+    bridge.logStatusIfNeeded(helm);
+    ros::spinOnce();
+    rate.sleep();
+  }
+
   return 0;
 }
