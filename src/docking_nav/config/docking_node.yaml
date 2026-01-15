@@ -32,14 +32,14 @@ depth_camera_bias: 0.83
 # ====== 分层对准 ======
 # AlignDepth (AlignDepth): 例 "5:4" 表示 a_i 序列，真实对准深度为 D_light - a_i
 # ROS里用数组表达
-align_depth_offsets: [5.0, 4.0]
+align_depth_offsets: [5.0, 4.0, 3.0]
 
 # PhaseDepth (PhaseDepth): MOOS配置里有，但原代码里 push_back 被注释了（先保留，后续ROS版决定是否启用）
 phase_depth_list: [0.0, 3.0]
 
 # ====== 入坞末端策略参数 ======
 # FallDepth (FallDepth): 下沉入坞深度余量 ΔD_fall，米（目标深度 = DockDepth + FallDepth）
-fall_depth: 0.5
+fall_depth: 0.3
 
 # dradius (dradius): 最终触发半径 r_d，米
 dradius: 0.7
@@ -47,7 +47,7 @@ dradius: 0.7
 dinheading_deg: 20.0
 
 # DistanceBias (DistanceBias): 深度差/距离一致性阈值 ε_z，米
-distance_bias: 0.3
+distance_bias: 0.5
 # AngleBias (AngleBias): 姿态一致性阈值 ε_angle，deg
 angle_bias_deg: 5.0
 
@@ -60,7 +60,7 @@ maxtry_minute_num: 1
 # ConstantDepthMinuteNum (ConstantDepthMinuteNum): 定深等待/判据计时（分钟）
 constant_depth_minute_num: 1
 # LastPhaseFloatTime (LastPhaseFloatTime): 最后阶段漂浮/等待时间，毫秒
-last_phase_float_time_ms: 4000
+last_phase_float_time_ms: 5000
 # TransimitDuration (TransimitDuration): 连续有效视觉的判定时长（秒）
 transimit_duration_sec: 15
 # DockingMaxTry (DockingMaxTry): 入坞最大重试次数

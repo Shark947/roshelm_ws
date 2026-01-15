@@ -29,7 +29,7 @@ Behavior = BHV_GoToDepth
   // ------------------------------------
     capture_delta = 0.5                      // default (meters)
      //capture_flag = MODE=SURVEY            // example
-            depth = 76,20		    // example
+            depth = 75,20		    // example
            repeat = 0                      // default
 }
 
@@ -70,7 +70,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
-        depth = 77.3
+        depth = 76
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
@@ -175,7 +175,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
-        depth = 77.3
+        depth = 76
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
@@ -286,7 +286,7 @@ Behavior = BHV_GoToDepth
   // ------------------------------------
     capture_delta = 0.5                      // default (meters)
      //capture_flag = MODE=SURVEY            // example
-            depth = 76,30        // example
+            depth = 75,30        // example
            repeat = 0                      // default
 }
 
