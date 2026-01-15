@@ -141,4 +141,12 @@ private:
   ros::Time last_optical_stamp_;
   double fallback_x_{0.0};
   double fallback_y_{0.0};
+
+  bool last_data_flag_{false};
+  int last_phase_count_{0};
+  bool last_stationing_{true};
+  bool last_constheight_{true};
+  bool last_docking_falling_{false};
+  bool last_manual_override_{false};
+  bool last_docking_failed_{false};
 };

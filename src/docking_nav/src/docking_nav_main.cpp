@@ -107,6 +107,9 @@ public:
     {
       return false;
     }
+    ROS_INFO_STREAM("[docking_nav] Initialized server with period="
+                    << server_.navServerPeriod() << "s timeout="
+                    << server_.opticalTimeoutSec() << "s");
 
     optical_sub_ = nh_.subscribe(
         topics_.optical_measurement_topic, 10,
@@ -134,6 +137,17 @@ public:
 
     const ros::Duration period(server_.navServerPeriod());
     timer_ = nh_.createTimer(period, &DockingNavMain::timerCallback, this);
+    ROS_INFO_STREAM("[docking_nav] Subscribed topics: optical="
+                    << topics_.optical_measurement_topic
+                    << " heading=" << topics_.nav_heading_topic
+                    << " depth=" << topics_.nav_depth_topic
+                    << " pitch=" << topics_.nav_pitch_topic
+                    << " roll=" << topics_.nav_roll_topic
+                    << " desired_speed=" << topics_.desired_speed_topic);
+    ROS_INFO_STREAM("[docking_nav] Publishing topics: phase="
+                    << topics_.phase_topic << " optical_xy="
+                    << topics_.optical_xy_topic << " optical_feedback="
+                    << topics_.optical_feedback_topic);
     return true;
   }
 
@@ -169,6 +183,9 @@ private:
     std_msgs::Bool msg;
     msg.data = value;
     it->second.publish(msg);
+    ROS_DEBUG_STREAM("[docking_nav] Publish bool command " << key << "="
+                                                           << (value ? "true"
+                                                                     : "false"));
   }
 
   void publishStringCommand(const std::string &key, const std::string &value)
@@ -181,6 +198,8 @@ private:
     std_msgs::String msg;
     msg.data = value;
     it->second.publish(msg);
+    ROS_INFO_STREAM("[docking_nav] Publish string command " << key << "="
+                                                            << value);
   }
 
   void opticalCallback(
@@ -223,6 +242,14 @@ private:
     phase_pub_.publish(phase_msg);
     optical_xy_pub_.publish(outputs.optical_xy);
     optical_feedback_pub_.publish(outputs.optical_feedback);
+
+    ROS_DEBUG_STREAM_THROTTLE(
+        1.0, "[docking_nav] Outputs: phase=" << outputs.phase
+                                             << " optical_xy=("
+                                             << outputs.optical_xy.point.x
+                                             << ","
+                                             << outputs.optical_xy.point.y
+                                             << ")");
   }
 
   ros::NodeHandle nh_;
