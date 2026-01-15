@@ -51,7 +51,7 @@ RosConfigLoader::RosConfigLoader(ros::NodeHandle &private_nh)
 
 namespace
 {
-bool loadCommandTopics(ros::NodeHandle &private_nh,
+bool loadCommandTopics(const ros::NodeHandle &private_nh,
                        const std::string &param_name,
                        std::map<std::string, std::string> &topics)
 {
