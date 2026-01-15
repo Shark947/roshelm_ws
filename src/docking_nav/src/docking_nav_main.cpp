@@ -103,6 +103,8 @@ public:
 
   bool initialize()
   {
+    initCommandPublishers();
+
     if (!server_.initialize(private_nh_))
     {
       return false;
@@ -132,8 +134,6 @@ public:
     optical_feedback_pub_ =
         nh_.advertise<docking_optical_msgs::OpticalFeedback>(
             topics_.optical_feedback_topic, 10);
-
-    initCommandPublishers();
 
     const ros::Duration period(server_.navServerPeriod());
     timer_ = nh_.createTimer(period, &DockingNavMain::timerCallback, this);

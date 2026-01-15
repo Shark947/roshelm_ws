@@ -14,6 +14,8 @@ optical_feedback_topic: "/docking/optical_feedback"
 print_every_n: 30
 print_camera_info_every_n: 120
 print_detection_every_n: 10      # 每N次检测输出一次结果（避免刷屏）
+min_consecutive_detections: 2    # 连续检测到白点才认为 valid=true
+max_consecutive_misses: 2        # 连续丢失白点才认为 valid=false
 
 # ====== 白点检测参数 ======
 # 1) 图像预处理
@@ -46,4 +48,3 @@ choose_mode: "brightest"         # "largest" 或 "brightest"
 # theta_x = atan((u-cx)/fx), theta_y = atan((v-cy)/fy)
 invert_theta_x: false
 invert_theta_y: false
-
