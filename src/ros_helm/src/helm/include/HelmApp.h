@@ -32,10 +32,6 @@ public:
   }
   void setConfigPath(const std::string &path) { m_config_path = path; }
   void setConfigDirectory(const std::string &path) { m_config_dir = path; }
-  void setRegisterVariablesPath(const std::string &path)
-  {
-    m_register_config_path = path;
-  }
 
   void setStartupParameters(const STRING_LIST &params) { m_startup_params = params; }
   void setAppTick(double app_tick) { m_app_tick = app_tick; }
@@ -83,7 +79,6 @@ protected:
   STRING_LIST m_startup_params;
   std::set<std::string> m_registered_vars;
   std::string m_config_dir;
-  std::string m_register_config_path;
 
 private:
   class AppCastState
@@ -125,8 +120,6 @@ private:
   bool handleMailCommsPolicy(const std::string &str);
   bool appcastRequested();
 
-  std::vector<std::string> loadRegisterVariables() const;
-
 private:
   AppCastState m_ac;
   bool m_new_run_warning;
@@ -142,4 +135,3 @@ private:
   std::map<std::string, double> m_map_bcast_tstart;
   std::map<std::string, std::string> m_map_bcast_thresh;
 };
-

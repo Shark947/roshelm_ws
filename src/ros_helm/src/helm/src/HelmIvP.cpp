@@ -1521,7 +1521,6 @@ bool HelmIvP::OnStartUp()
   setAppName(config.app_name);
   setHostCommunity(config.community);
   setConfigDirectory(config.config_directory);
-  setRegisterVariablesPath(resolveConfigPath(m_config_path, "registerVariables.yaml"));
   setStartupParameters(buildStartupParams(config));
   m_app_tick = config.app_tick;
   m_comms_tick = config.comms_tick;
@@ -2266,4 +2265,3 @@ bool HelmIvP::holdForNavSolution()
 
   return(true);
 }
-

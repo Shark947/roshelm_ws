@@ -2,7 +2,6 @@
 
 #include <algorithm>
 #include <chrono>
-#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sys/stat.h>
@@ -20,15 +19,6 @@ bool fileExists(const std::string &path)
 {
   struct stat sb;
   return stat(path.c_str(), &sb) == 0;
-}
-
-std::string trim(const std::string &input)
-{
-  auto first = input.find_first_not_of(" \t");
-  if (first == std::string::npos)
-    return "";
-  auto last = input.find_last_not_of(" \t\r\n");
-  return input.substr(first, last - first + 1);
 }
 
 std::string locateDefaultConfig()
@@ -296,9 +286,6 @@ std::vector<std::string> HelmApp::collectAdditionalRegisterVariables() const
 
 void HelmApp::RegisterVariables()
 {
-  for (const auto &var : loadRegisterVariables())
-    registerSingleVariable(var);
-
   for (const auto &extra : collectAdditionalRegisterVariables())
     registerSingleVariable(extra);
 }
@@ -481,48 +468,3 @@ std::string HelmApp::AppCastState::getFormattedString(bool with_header) const
 
   return os.str();
 }
-
-std::vector<std::string> HelmApp::loadRegisterVariables() const
-{
-  std::vector<std::string> variables;
-  std::string path = m_register_config_path;
-  if (path.empty())
-  {
-    if (!m_config_dir.empty())
-      path = m_config_dir + "/registerVariables.yaml";
-    else
-      path = "registerVariables.yaml";
-  }
-
-  std::ifstream infile(path);
-  if (!infile.is_open())
-    return variables;
-
-  bool in_variables = false;
-  std::string line;
-  while (std::getline(infile, line))
-  {
-    std::string cleaned = trim(line);
-    if (cleaned.empty() || cleaned[0] == '#')
-      continue;
-
-    if (cleaned == "variables:" || cleaned == "variables:|")
-    {
-      in_variables = true;
-      continue;
-    }
-
-    if (!in_variables)
-      continue;
-
-    if (cleaned.rfind("-", 0) == 0)
-    {
-      std::string var = trim(cleaned.substr(1));
-      if (!var.empty())
-        variables.push_back(var);
-    }
-  }
-
-  return variables;
-}
-

@@ -132,7 +132,6 @@ int main(int argc, char **argv)
   HelmIvP helm;
   helm.setAppName(config.base.node_name);
   helm.setConfigPath(config.base.config_path);
-  helm.setRegisterVariablesPath(config.base.register_variables_path);
 
   if (!helm.OnStartUp())
   {
