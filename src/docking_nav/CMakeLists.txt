@@ -138,11 +138,13 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(docking_nav_node src/docking_nav_node.cpp)
+add_executable(docking_nav_server_node src/docking_nav_server_node.cpp)
 add_executable(docking_nav_roshelm_node src/docking_nav_roshelm_node.cpp)
 
 set(DOCKING_NAV_DEFAULT_CONFIG_PATH "${CMAKE_CURRENT_SOURCE_DIR}/config/helm/docking_startHelm.yaml")
 file(TO_CMAKE_PATH "${DOCKING_NAV_DEFAULT_CONFIG_PATH}" DOCKING_NAV_DEFAULT_CONFIG_PATH)
+target_compile_definitions(docking_nav_server_node PRIVATE
+  DOCKING_NAV_DEFAULT_CONFIG_PATH=\"${DOCKING_NAV_DEFAULT_CONFIG_PATH}\")
 target_compile_definitions(docking_nav_roshelm_node PRIVATE
   DOCKING_NAV_DEFAULT_CONFIG_PATH=\"${DOCKING_NAV_DEFAULT_CONFIG_PATH}\")
 
@@ -154,11 +156,11 @@ target_compile_definitions(docking_nav_roshelm_node PRIVATE
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(docking_nav_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(docking_nav_server_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(docking_nav_roshelm_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(docking_nav_node
+target_link_libraries(docking_nav_server_node
   ${catkin_LIBRARIES}
 )
 

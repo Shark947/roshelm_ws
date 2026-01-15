@@ -1,4 +1,5 @@
 add_library(ros_helm_bridge
+  src/HelmVariableInjector.cpp
   src/RosBridge.cpp
   src/RosCommandPublisher.cpp
   src/RosConfigLoader.cpp
