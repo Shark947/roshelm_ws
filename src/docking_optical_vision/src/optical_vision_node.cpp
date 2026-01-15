@@ -9,6 +9,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
 
+#include <cmath>
 #include <limits>
 #include <string>
 
@@ -55,6 +56,9 @@ public:
     // blob filter
     pnh.param<int>("min_blob_area", min_blob_area_, 5);
     pnh.param<int>("max_blob_area", max_blob_area_, 5000);
+    pnh.param<double>("min_brightness", min_brightness_, 200.0);
+    pnh.param<double>("max_pixel_jump", max_pixel_jump_, 80.0);
+    pnh.param<double>("ema_alpha", ema_alpha_, 0.4);
     pnh.param<std::string>("choose_mode", choose_mode_, std::string("brightest"));
 
     // sign
@@ -66,6 +70,8 @@ public:
     if (adaptive_block_size_ % 2 == 0) adaptive_block_size_ += 1;
     if (blur_kernel_ < 0) blur_kernel_ = 0;
     if (blur_kernel_ % 2 == 0 && blur_kernel_ != 0) blur_kernel_ += 1;
+    if (ema_alpha_ < 0.0) ema_alpha_ = 0.0;
+    if (ema_alpha_ > 1.0) ema_alpha_ = 1.0;
 
     // ====== 2) 订阅 ======
     img_sub_ = it_.subscribe(camera_topic_, queue_size_, &OpticalVisionNode::imageCb, this);
@@ -79,6 +85,9 @@ public:
     ROS_INFO_STREAM("[docking_optical_vision] publish measurement=" << meas_topic_);
     ROS_INFO_STREAM("[docking_optical_vision] choose_mode=" << choose_mode_
                     << " thr=" << threshold_value_
+                    << " min_brightness=" << min_brightness_
+                    << " max_pixel_jump=" << max_pixel_jump_
+                    << " ema_alpha=" << ema_alpha_
                     << " invert_x=" << invert_theta_x_ << " invert_y=" << invert_theta_y_);
   }
 
@@ -229,6 +238,13 @@ private:
       double u = mu.m10 / mu.m00;
       double v = mu.m01 / mu.m00;
 
+      cv::Rect bb = cv::boundingRect(contours[i]);
+      bb &= cv::Rect(0, 0, gray.cols, gray.rows);
+      cv::Scalar mean_val = cv::mean(gray(bb), bin(bb));
+      double brightness = mean_val[0];
+      if (brightness < min_brightness_)
+        continue;
+
       double score = 0.0;
       if (choose_mode_ == "largest")
       {
@@ -237,10 +253,7 @@ private:
       else
       {
         // brightest：以灰度均值作为亮度评分（更稳，避免“噪点大但不亮”）
-        cv::Rect bb = cv::boundingRect(contours[i]);
-        bb &= cv::Rect(0, 0, gray.cols, gray.rows);
-        cv::Scalar mean_val = cv::mean(gray(bb), bin(bb)); // 只在白色mask内统计更理想
-        score = mean_val[0];
+        score = brightness;
       }
 
       if (score > best_score)
@@ -266,6 +279,17 @@ private:
     double u = u_roi + roi.x;
     double v = v_roi + roi.y;
 
+    if (has_last_detection_ && max_pixel_jump_ > 0.0)
+    {
+      double dist = std::hypot(u - last_u_, v - last_v_);
+      if (dist > max_pixel_jump_)
+      {
+        markDetectionResult(false);
+        publishMeasurement(msg->header, 0.0, 0.0);
+        return;
+      }
+    }
+
     // ---- 10) 像素 -> 角度（deg）----
     // optical image 坐标默认：
     //   u 向右为正，v 向下为正
@@ -275,6 +299,18 @@ private:
 
     if (invert_theta_x_) theta_x = -theta_x;
     if (invert_theta_y_) theta_y = -theta_y;
+
+    if (has_last_theta_)
+    {
+      theta_x = ema_alpha_ * theta_x + (1.0 - ema_alpha_) * last_theta_x_;
+      theta_y = ema_alpha_ * theta_y + (1.0 - ema_alpha_) * last_theta_y_;
+    }
+    last_theta_x_ = theta_x;
+    last_theta_y_ = theta_y;
+    has_last_theta_ = true;
+    last_u_ = u;
+    last_v_ = v;
+    has_last_detection_ = true;
 
     // ---- 11) 发布 OpticalMeasurement ----
     markDetectionResult(true);
@@ -367,6 +403,9 @@ private:
   // blob filter
   int min_blob_area_{5};
   int max_blob_area_{5000};
+  double min_brightness_{200.0};
+  double max_pixel_jump_{80.0};
+  double ema_alpha_{0.4};
   std::string choose_mode_{"brightest"};
 
   // sign convention
@@ -380,6 +419,12 @@ private:
   int consecutive_detects_{0};
   int consecutive_misses_{0};
   bool filtered_valid_{false};
+  bool has_last_detection_{false};
+  double last_u_{0.0};
+  double last_v_{0.0};
+  bool has_last_theta_{false};
+  double last_theta_x_{0.0};
+  double last_theta_y_{0.0};
 
   bool has_caminfo_{false};
   double fx_{0}, fy_{0}, cx_{0}, cy_{0};
