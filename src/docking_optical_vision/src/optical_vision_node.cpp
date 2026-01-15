@@ -29,6 +29,8 @@ public:
     pnh.param<int>("print_every_n", print_every_n_, 30);
     pnh.param<int>("print_camera_info_every_n", print_caminfo_every_n_, 120);
     pnh.param<int>("print_detection_every_n", print_detection_every_n_, 10);
+    pnh.param<int>("min_consecutive_detections", min_consecutive_detections_, 2);
+    pnh.param<int>("max_consecutive_misses", max_consecutive_misses_, 2);
 
     // ROI
     pnh.param<bool>("use_roi", use_roi_, false);
@@ -118,7 +120,8 @@ private:
     if (!has_caminfo_)
     {
       ROS_WARN_THROTTLE(2.0, "[vision] No CameraInfo yet. Publish valid=false.");
-      publishInvalid(msg->header);
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
 
@@ -132,14 +135,16 @@ private:
     catch (const cv_bridge::Exception& e)
     {
       ROS_ERROR_STREAM("[vision] cv_bridge exception: " << e.what());
-      publishInvalid(msg->header);
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
 
     cv::Mat rgb = cv_ptr->image;
     if (rgb.empty())
     {
-      publishInvalid(msg->header);
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
 
@@ -203,7 +208,8 @@ private:
     if (contours.empty())
     {
       // 没检测到白点
-      publishInvalid(msg->header);
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
 
@@ -246,7 +252,8 @@ private:
 
     if (best_idx < 0)
     {
-      publishInvalid(msg->header);
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
 
@@ -270,15 +277,8 @@ private:
     if (invert_theta_y_) theta_y = -theta_y;
 
     // ---- 11) 发布 OpticalMeasurement ----
-    docking_optical_msgs::OpticalMeasurement meas;
-    meas.header = msg->header;
-    meas.valid = true;
-    meas.d_heading_deg = 0.0;        // 当前阶段先不估计
-    meas.theta_x_deg = theta_x;
-    meas.theta_y_deg = theta_y;
-    meas.fallback_x = 0.0;
-    meas.fallback_y = 0.0;
-    meas_pub_.publish(meas);
+    markDetectionResult(true);
+    publishMeasurement(msg->header, theta_x, theta_y);
 
     // ---- 12) 控制台输出（节流）----
     detect_count_++;
@@ -292,14 +292,37 @@ private:
     }
   }
 
-  void publishInvalid(const std_msgs::Header& header)
+  void markDetectionResult(bool detected)
+  {
+    if (detected)
+    {
+      ++consecutive_detects_;
+      consecutive_misses_ = 0;
+      if (consecutive_detects_ >= min_consecutive_detections_)
+      {
+        filtered_valid_ = true;
+      }
+    }
+    else
+    {
+      ++consecutive_misses_;
+      consecutive_detects_ = 0;
+      if (consecutive_misses_ >= max_consecutive_misses_)
+      {
+        filtered_valid_ = false;
+      }
+    }
+  }
+
+  void publishMeasurement(const std_msgs::Header& header, double theta_x,
+                          double theta_y)
   {
     docking_optical_msgs::OpticalMeasurement meas;
     meas.header = header;
-    meas.valid = false;
+    meas.valid = filtered_valid_;
     meas.d_heading_deg = 0.0;
-    meas.theta_x_deg = 0.0;
-    meas.theta_y_deg = 0.0;
+    meas.theta_x_deg = filtered_valid_ ? theta_x : 0.0;
+    meas.theta_y_deg = filtered_valid_ ? theta_y : 0.0;
     meas.fallback_x = 0.0;
     meas.fallback_y = 0.0;
     meas_pub_.publish(meas);
@@ -321,6 +344,8 @@ private:
   int print_every_n_{30};
   int print_caminfo_every_n_{120};
   int print_detection_every_n_{10};
+  int min_consecutive_detections_{2};
+  int max_consecutive_misses_{2};
 
   // ROI params
   bool use_roi_{false};
@@ -351,6 +376,10 @@ private:
   uint64_t frame_count_{0};
   uint64_t caminfo_count_{0};
   uint64_t detect_count_{0};
+
+  int consecutive_detects_{0};
+  int consecutive_misses_{0};
+  bool filtered_valid_{false};
 
   bool has_caminfo_{false};
   double fx_{0}, fy_{0}, cx_{0}, cy_{0};
