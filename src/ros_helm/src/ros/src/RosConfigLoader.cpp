@@ -53,32 +53,16 @@ bool RosConfigLoader::load(RosNodeConfig &config,
                            const std::string &default_config_path) const
 {
   const std::string package_path = ros::package::getPath("ros_helm");
-  std::string register_variables_path;
-  if (!package_path.empty())
-    register_variables_path = package_path + "/config/helm/registerVariables.yaml";
-  else
-    register_variables_path = "config/helm/registerVariables.yaml";
 
   private_nh_.param("node_name", config.node_name, config.node_name);
   private_nh_.param("config_path", config.config_path, default_config_path);
-  private_nh_.param("register_variables_path", config.register_variables_path,
-                    register_variables_path);
 
   config.config_path = resolvePath(config.config_path, package_path);
-  config.register_variables_path =
-      resolvePath(config.register_variables_path, package_path);
 
   if (!fileExists(config.config_path))
   {
     ROS_ERROR_STREAM("ros_bridge: config_path does not exist: "
                      << config.config_path);
-    return false;
-  }
-
-  if (!fileExists(config.register_variables_path))
-  {
-    ROS_ERROR_STREAM("ros_bridge: register_variables_path does not exist: "
-                     << config.register_variables_path);
     return false;
   }
   private_nh_.param("vehicle_name", config.vehicle_name, config.vehicle_name);

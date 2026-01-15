@@ -86,7 +86,6 @@
         name="docking_nav_roshelm_node"
         output="screen">
     <param name="config_path" value="$(find docking_nav)/config/helm/docking_startHelm.yaml" />
-    <param name="register_variables_path" value="$(find docking_nav)/config/helm/docking_registerVariables.yaml" />
   </node>
  
 
