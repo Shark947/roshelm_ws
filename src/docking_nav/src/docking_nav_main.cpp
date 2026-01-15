@@ -19,6 +19,7 @@ struct DockingNavTopics
   std::string phase_topic{"/docking/phase"};
   std::string optical_xy_topic{"/docking/optical_xy"};
   std::string optical_feedback_topic{"/docking/optical_feedback"};
+  std::string mode_state_topic{"/docking/mode_state"};
   std::string nav_heading_topic{"/auh/NAV_HEADING"};
   std::string nav_depth_topic{"/auh/NAV_DEPTH"};
   std::string nav_pitch_topic{"/auh/NAV_PITCH"};
@@ -48,6 +49,8 @@ DockingNavTopics loadDockingNavTopics(ros::NodeHandle &private_nh)
                    topics.optical_xy_topic);
   private_nh.param("optical_feedback_topic", topics.optical_feedback_topic,
                    topics.optical_feedback_topic);
+  private_nh.param("mode_state_topic", topics.mode_state_topic,
+                   topics.mode_state_topic);
   private_nh.param("nav_heading_topic", topics.nav_heading_topic,
                    topics.nav_heading_topic);
   private_nh.param("nav_depth_topic", topics.nav_depth_topic,
@@ -116,6 +119,8 @@ public:
     optical_sub_ = nh_.subscribe(
         topics_.optical_measurement_topic, 10,
         &DockingNavMain::opticalCallback, this);
+    mode_state_sub_ = nh_.subscribe(
+        topics_.mode_state_topic, 10, &DockingNavMain::modeStateCallback, this);
     heading_sub_ = nh_.subscribe(
         topics_.nav_heading_topic, 10, &DockingNavMain::headingCallback, this);
     depth_sub_ = nh_.subscribe(
@@ -139,6 +144,7 @@ public:
     timer_ = nh_.createTimer(period, &DockingNavMain::timerCallback, this);
     ROS_INFO_STREAM("[docking_nav] Subscribed topics: optical="
                     << topics_.optical_measurement_topic
+                    << " mode_state=" << topics_.mode_state_topic
                     << " heading=" << topics_.nav_heading_topic
                     << " depth=" << topics_.nav_depth_topic
                     << " pitch=" << topics_.nav_pitch_topic
@@ -208,6 +214,11 @@ private:
     server_.setOpticalMeasurement(*msg);
   }
 
+  void modeStateCallback(const std_msgs::String::ConstPtr &msg)
+  {
+    server_.setModeFromExternal(msg->data);
+  }
+
   void headingCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
   {
     server_.setNavHeading(msg->data);
@@ -264,6 +275,7 @@ private:
   ros::Subscriber pitch_sub_;
   ros::Subscriber roll_sub_;
   ros::Subscriber desired_speed_sub_;
+  ros::Subscriber mode_state_sub_;
 
   ros::Publisher phase_pub_;
   ros::Publisher optical_xy_pub_;

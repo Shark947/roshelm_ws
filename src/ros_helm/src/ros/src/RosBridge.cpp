@@ -12,10 +12,36 @@
 #include <sstream>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <utility>
 
 #include <ros/package.h>
 #include <tf/transform_datatypes.h>
 #include "MBUtils.h"
+
+namespace
+{
+std::map<std::string, std::string> parseModeSummary(
+    const std::string &summary)
+{
+  std::map<std::string, std::string> result;
+  if (summary.empty())
+    return result;
+
+  std::stringstream stream(summary);
+  std::string token;
+  while (std::getline(stream, token, '#'))
+  {
+    auto at_pos = token.find('@');
+    if (at_pos == std::string::npos)
+      continue;
+    const std::string key = token.substr(0, at_pos);
+    const std::string value = token.substr(at_pos + 1);
+    if (!key.empty())
+      result[key] = value;
+  }
+  return result;
+}
+}  // namespace
 
 RosBridge::RosBridge(ros::NodeHandle &nh, ros::NodeHandle &private_nh,
                      const RosNodeConfig &config)
@@ -60,6 +86,11 @@ bool RosBridge::initialize()
       config_.desired_speed_topic, 10);
   desired_scalar_pubs_["DESIRED_DEPTH"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_depth_topic, 10);
+  for (const auto &entry : config_.mode_state_topics)
+  {
+    mode_state_pubs_[entry.first] =
+        nh_.advertise<std_msgs::String>(entry.second, 10, true);
+  }
 
   nav_scalar_pubs_["NAV_X"] = nh_.advertise<common_msgs::Float64Stamped>(
       config_.nav_x_topic, 10);
@@ -439,6 +470,34 @@ void RosBridge::publishDesired(const HelmIvP &helm)
 
   for (auto &[key, pub] : desired_scalar_pubs_)
     publish_scalar(key, pub);
+}
+
+void RosBridge::publishModeState(const HelmIvP &helm)
+{
+  if (mode_state_pubs_.empty())
+    return;
+
+  const std::string summary = helm.getHelmReport().getModeSummary();
+  const auto mode_values = parseModeSummary(summary);
+  if (mode_values.empty())
+    return;
+
+  for (const auto &entry : mode_state_pubs_)
+  {
+    const auto it = mode_values.find(entry.first);
+    if (it == mode_values.end())
+      continue;
+
+    const std::string &value = it->second;
+    auto prev_it = mode_state_values_.find(entry.first);
+    if (prev_it != mode_state_values_.end() && prev_it->second == value)
+      continue;
+
+    std_msgs::String msg;
+    msg.data = value;
+    entry.second.publish(msg);
+    mode_state_values_[entry.first] = value;
+  }
 }
 
 void RosBridge::logStatusIfNeeded(const HelmIvP &helm)

@@ -76,6 +76,12 @@ roslaunch auh_launch auh_docking.launch
 | `DOCKDEPTH_UPDATE` | `/docking/dockdepth_update` | `std_msgs/String` |
 | `DOCKHDG_UPDATES` | `/docking/dockhdg_updates` | `std_msgs/String` |
 
+**模式状态（Helm -> ROS）：**
+
+| Helm 模式变量 | ROS 话题 | 类型 |
+| --- | --- | --- |
+| `MODE` | `/docking/mode_state` | `std_msgs/String` |
+
 **布尔命令：**
 
 | Helm 变量 | ROS 话题 | 类型 |

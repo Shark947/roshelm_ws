@@ -29,6 +29,7 @@ public:
 
   void deliverPending(HelmIvP &helm);
   void publishDesired(const HelmIvP &helm);
+  void publishModeState(const HelmIvP &helm);
   void logStatusIfNeeded(const HelmIvP &helm);
 
 private:
@@ -120,9 +121,11 @@ private:
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
   std::map<std::string, ros::Publisher> nav_scalar_pubs_;
+  std::map<std::string, ros::Publisher> mode_state_pubs_;
   std::map<std::string, double> nav_values_;
   std::map<std::string, double> desired_values_;
   std::map<std::string, bool> bool_values_;
+  std::map<std::string, std::string> mode_state_values_;
   std::mutex status_mutex_;
   ros::Time start_time_;
   ros::Time last_status_log_;
