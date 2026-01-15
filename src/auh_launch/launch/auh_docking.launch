@@ -66,13 +66,19 @@
   <rosparam command="load"
             file="$(find docking_nav)/config/docking_node.yaml"
             ns="docking_nav" />
+  <!-- 6) ros_helm 参数加载 -->
   <rosparam command="load"
             file="$(find ros_helm)/config/ros/params.yaml"
-            ns="docking_nav" />
+            ns="ros_helm_node" />
+  <rosparam command="load"
+            file="$(find docking_nav)/config/ros/helm_docking_params.yaml"
+            ns="ros_helm_node" />
+  <node pkg="ros_helm" type="ros_helm_node" name="ros_helm_node" output="screen">
+    <param name="config_path" value="$(find docking_nav)/config/helm/docking_startHelm.yaml" />
+  </node>
   <node pkg="docking_nav"
-        type="docking_nav_server_node"
+        type="docking_nav_main_node"
         name="docking_nav"
         output="screen">
-    <param name="config_path" value="$(find docking_nav)/config/helm/docking_startHelm.yaml" />
   </node>
 </launch>

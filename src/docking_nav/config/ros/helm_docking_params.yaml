@@ -1,0 +1,12 @@
+# Extra command topics for docking behaviors
+bool_command_topics:
+  STATIONING: /docking/stationing
+  CONSTHEIGHT: /docking/constheight
+  DOCKING_FALLING: /docking/docking_falling
+  MOOS_MANUAL_OVERIDE: /docking/manual_override
+  DOCKINGFAILED: /docking/docking_failed
+
+string_command_topics:
+  MODE: /docking/mode
+  DOCKDEPTH_UPDATE: /docking/dockdepth_update
+  DOCKHDG_UPDATES: /docking/dockhdg_updates

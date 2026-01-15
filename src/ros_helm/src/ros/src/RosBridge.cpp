@@ -49,6 +49,11 @@ bool RosBridge::initialize()
   if (!command_publisher_->initialize())
     return false;
 
+  for (const auto &entry : config_.bool_command_topics)
+    command_bool_subs_.push_back(subscribeBoolean(entry.second, entry.first));
+  for (const auto &entry : config_.string_command_topics)
+    command_string_subs_.push_back(subscribeString(entry.second, entry.first));
+
   desired_scalar_pubs_["DESIRED_HEADING"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_heading_topic, 10);
   desired_scalar_pubs_["DESIRED_SPEED"] = nh_.advertise<std_msgs::Float64>(
