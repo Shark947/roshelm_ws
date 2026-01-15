@@ -13,8 +13,8 @@ optical_xy_topic: /docking/optical_xy
 optical_feedback_topic: /docking/optical_feedback
 
 # ====== 航行器状态输入（可切换到 NAV_* 发布源）======
-nav_heading_topic: /auh/current_heading
-nav_depth_topic: /auh/current_depth
-nav_pitch_topic: /auh/current_pitch
-nav_roll_topic: /auh/current_roll
+nav_heading_topic: /auh/NAV_HEADING
+nav_depth_topic: /auh/NAV_DEPTH
+nav_pitch_topic: /auh/NAV_PITCH
+nav_roll_topic: /auh/NAV_ROLL
 desired_speed_topic: /auh/desired_speed

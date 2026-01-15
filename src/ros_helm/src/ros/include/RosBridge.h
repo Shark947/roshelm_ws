@@ -116,6 +116,7 @@ private:
   std::unique_ptr<RosCommandPublisher> command_publisher_;
 
   std::map<std::string, ros::Publisher> desired_scalar_pubs_;
+  std::map<std::string, ros::Publisher> nav_scalar_pubs_;
   std::map<std::string, double> nav_values_;
   std::map<std::string, double> desired_values_;
   std::map<std::string, bool> bool_values_;

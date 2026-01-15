@@ -56,6 +56,23 @@ bool RosBridge::initialize()
   desired_scalar_pubs_["DESIRED_DEPTH"] = nh_.advertise<std_msgs::Float64>(
       config_.desired_depth_topic, 10);
 
+  nav_scalar_pubs_["NAV_X"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_x_topic, 10);
+  nav_scalar_pubs_["NAV_Y"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_y_topic, 10);
+  nav_scalar_pubs_["NAV_DEPTH"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_depth_topic, 10);
+  nav_scalar_pubs_["NAV_SPEED"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_speed_topic, 10);
+  nav_scalar_pubs_["NAV_HEADING"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_heading_topic, 10);
+  nav_scalar_pubs_["NAV_YAW"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_yaw_topic, 10);
+  nav_scalar_pubs_["NAV_PITCH"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_pitch_topic, 10);
+  nav_scalar_pubs_["NAV_ROLL"] = nh_.advertise<common_msgs::Float64Stamped>(
+      config_.nav_roll_topic, 10);
+
   const ros::Time stamp = ros::Time::now();
   for (const auto &entry : config_.nav_defaults)
     enqueueNavValue(entry.first, entry.second, stamp);
@@ -73,6 +90,16 @@ void RosBridge::enqueueNavValue(const std::string &key, double value,
   {
     std::lock_guard<std::mutex> status_guard(status_mutex_);
     nav_values_[key] = value;
+  }
+
+  auto pub_it = nav_scalar_pubs_.find(key);
+  if (pub_it != nav_scalar_pubs_.end())
+  {
+    common_msgs::Float64Stamped msg;
+    msg.header.stamp = stamp;
+    msg.header.frame_id = config_.frame_id;
+    msg.data = value;
+    pub_it->second.publish(msg);
   }
 
   logValue(key, value, stamp);
