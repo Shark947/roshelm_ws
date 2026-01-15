@@ -632,14 +632,13 @@
 /home/xing/roshelm_ws/build/ros_node/CMakeFiles/rebuild_cache.dir
 /home/xing/roshelm_ws/build/ros_node/CMakeFiles/edit_cache.dir
 /home/xing/roshelm_ws/build/docking_nav/CMakeFiles/install/strip.dir
-/home/xing/roshelm_ws/build/docking_nav/CMakeFiles/install.dir
-/home/xing/roshelm_ws/build/docking_nav/CMakeFiles/docking_nav_roshelm_node.dir
 /home/xing/roshelm_ws/build/docking_nav/CMakeFiles/install/local.dir
 /home/xing/roshelm_ws/build/docking_nav/CMakeFiles/test.dir
-/home/xing/roshelm_ws/build/docking_nav/CMakeFiles/docking_nav_server_node.dir
+/home/xing/roshelm_ws/build/docking_nav/CMakeFiles/docking_nav_main_node.dir
 /home/xing/roshelm_ws/build/docking_nav/CMakeFiles/list_install_components.dir
 /home/xing/roshelm_ws/build/docking_nav/CMakeFiles/edit_cache.dir
 /home/xing/roshelm_ws/build/docking_nav/CMakeFiles/rebuild_cache.dir
+/home/xing/roshelm_ws/build/docking_nav/CMakeFiles/install.dir
 /home/xing/roshelm_ws/build/sds_description/CMakeFiles/install/strip.dir
 /home/xing/roshelm_ws/build/sds_description/CMakeFiles/edit_cache.dir
 /home/xing/roshelm_ws/build/sds_description/CMakeFiles/list_install_components.dir
