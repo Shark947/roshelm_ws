@@ -49,7 +49,7 @@ dinheading_deg: 20.0
 # DistanceBias (DistanceBias): 深度差/距离一致性阈值 ε_z，米
 distance_bias: 0.3
 # AngleBias (AngleBias): 姿态一致性阈值 ε_angle，deg
-angle_bias_deg: 1.0
+angle_bias_deg: 5.0
 
 # （可选）radius1th (radius1th): 代码里支持读取但配置没给；先给个默认
 radius1th: 0.0
