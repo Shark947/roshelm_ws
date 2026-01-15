@@ -436,12 +436,24 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
   if (nPhaseCount_ == nPhaseNum_)
   {
     const double depth_error = std::abs(dfLightDepth_ - dfCameraDepth_);
-    if (depth_error > m_dfDistanceBias_ ||
-        std::abs(dfNavPitch_ - dfIMUPitchAmountBias_ - dfDockPitch_) >
-            dfAngleBias_ ||
-        std::abs(dfNavRoll_ - dfIMURollAmountBias_ - dfDockRoll_) >
-            dfAngleBias_)
+    const double pitch_error =
+        std::abs(dfNavPitch_ - dfIMUPitchAmountBias_ - dfDockPitch_);
+    const double roll_error =
+        std::abs(dfNavRoll_ - dfIMURollAmountBias_ - dfDockRoll_);
+    const bool depth_ok = depth_error <= m_dfDistanceBias_;
+    const bool pitch_ok = pitch_error <= dfAngleBias_;
+    const bool roll_ok = roll_error <= dfAngleBias_;
+
+    if (!depth_ok || !pitch_ok || !roll_ok)
     {
+      ROS_WARN_STREAM_THROTTLE(
+          1.0,
+          "[docking_nav] Final phase check failed: depth_error="
+              << depth_error << " (threshold=" << m_dfDistanceBias_
+              << ") pitch_error=" << pitch_error
+              << " (bias_deg=" << dfAngleBias_
+              << ") roll_error=" << roll_error << " (bias_deg=" << dfAngleBias_
+              << ")");
       ++nConstantDepthCount_;
       if (nConstantDepthCount_ > nConstantDepthMinuteNum_ * 60 * m_dfFreq_ ||
           nRetryLastPhase_ >= 5)
