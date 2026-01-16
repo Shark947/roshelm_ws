@@ -1,0 +1,5 @@
+0.000 [docking_nav] Publish bool command CONSTHEIGHT=true
+0.000 [docking_nav] Publish bool command STATIONING=true
+0.000 [docking_nav] Publish bool command DOCKING_FALLING=false
+0.000 [docking_nav] Publish bool command MOOS_MANUAL_OVERIDE=false
+0.000 [docking_nav] Publish bool command DOCKINGFAILED=false
