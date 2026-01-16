@@ -168,7 +168,7 @@ private:
     std_msgs::Header header;
     header.stamp = now;
     header.frame_id = last_frame_id_;
-    updateFilteredValid(false, now);
+    markDetectionResult(false, now);
     publishMeasurement(header, 0.0, 0.0);
   }
 
@@ -311,8 +311,6 @@ private:
     for (int i = 0; i < (int)contours.size(); ++i)
     {
       double area = cv::contourArea(contours[i]);
-      if (area < min_blob_area_ || area > max_blob_area_)
-        continue;
 
       // 质心
       cv::Moments mu = cv::moments(contours[i]);
@@ -324,8 +322,6 @@ private:
       bb &= cv::Rect(0, 0, gray.cols, gray.rows);
       cv::Scalar mean_val = cv::mean(gray(bb), bin(bb));
       double brightness = mean_val[0];
-      if (brightness < min_brightness_)
-        continue;
 
       double score = 0.0;
       if (choose_mode_ == "largest")
@@ -361,17 +357,6 @@ private:
     double u = u_roi + roi.x;
     double v = v_roi + roi.y;
 
-    if (has_last_detection_ && max_pixel_jump_ > 0.0)
-    {
-      double dist = std::hypot(u - last_u_, v - last_v_);
-      if (dist > max_pixel_jump_)
-      {
-        markDetectionResult(false, msg->header.stamp);
-        publishMeasurement(msg->header, 0.0, 0.0);
-        return;
-      }
-    }
-
     // ---- 10) 像素 -> 角度（deg）----
     // optical image 坐标默认：
     //   u 向右为正，v 向下为正
@@ -382,33 +367,12 @@ private:
     if (invert_theta_x_) theta_x = -theta_x;
     if (invert_theta_y_) theta_y = -theta_y;
 
-    if (optical_max_theta_deg_ > 0.0 &&
-        (std::abs(theta_x) > optical_max_theta_deg_ ||
-         std::abs(theta_y) > optical_max_theta_deg_))
-    {
-      markDetectionResult(false, msg->header.stamp);
-      publishMeasurement(msg->header, 0.0, 0.0);
-      return;
-    }
-
-    if (has_last_theta_)
-    {
-      theta_x = ema_alpha_ * theta_x + (1.0 - ema_alpha_) * last_theta_x_;
-      theta_y = ema_alpha_ * theta_y + (1.0 - ema_alpha_) * last_theta_y_;
-    }
     last_theta_x_ = theta_x;
     last_theta_y_ = theta_y;
     has_last_theta_ = true;
     last_u_ = u;
     last_v_ = v;
     has_last_detection_ = true;
-    if (!opticalGeometryValid(theta_x, theta_y))
-    {
-      markDetectionResult(false, msg->header.stamp);
-      publishMeasurement(msg->header, 0.0, 0.0);
-      return;
-    }
-
     // ---- 11) 发布 OpticalMeasurement ----
     markDetectionResult(true, msg->header.stamp);
     publishMeasurement(msg->header, theta_x, theta_y);
@@ -427,46 +391,8 @@ private:
 
   void markDetectionResult(bool detected, const ros::Time& stamp)
   {
-    if (detected)
-    {
-      ++consecutive_detects_;
-      consecutive_misses_ = 0;
-      if (consecutive_detects_ >= min_consecutive_detections_)
-      {
-        updateFilteredValid(true, stamp);
-      }
-    }
-    else
-    {
-      ++consecutive_misses_;
-      consecutive_detects_ = 0;
-      if (consecutive_misses_ >= max_consecutive_misses_)
-      {
-        updateFilteredValid(false, stamp);
-      }
-    }
-  }
-
-  void updateFilteredValid(bool desired, const ros::Time& stamp)
-  {
-    if (desired == filtered_valid_)
-    {
-      return;
-    }
-
-    const double hold_sec = desired ? valid_hold_sec_ : invalid_hold_sec_;
-    if (hold_sec <= 0.0 || last_state_change_time_.isZero())
-    {
-      filtered_valid_ = desired;
-      last_state_change_time_ = stamp;
-      return;
-    }
-
-    if ((stamp - last_state_change_time_).toSec() >= hold_sec)
-    {
-      filtered_valid_ = desired;
-      last_state_change_time_ = stamp;
-    }
+    filtered_valid_ = detected;
+    last_state_change_time_ = stamp;
   }
 
   void publishMeasurement(const std_msgs::Header& header, double theta_x,
@@ -481,64 +407,6 @@ private:
     meas.fallback_x = 0.0;
     meas.fallback_y = 0.0;
     meas_pub_.publish(meas);
-  }
-
-  bool opticalGeometryValid(double theta_x, double theta_y)
-  {
-    if (optical_depth_min_m_ <= 0.0 && optical_depth_max_m_ <= 0.0 &&
-        optical_max_next_xy_jump_m_ <= 0.0)
-    {
-      return true;
-    }
-
-    if (has_nav_depth_ && has_dock_depth_)
-    {
-      const double light_depth = dock_depth_ - dock_panel_;
-      const double camera_depth = nav_depth_ + depth_bias_ + depth_camera_bias_;
-      const double depth_delta = light_depth - camera_depth;
-      if (!std::isfinite(depth_delta))
-      {
-        return false;
-      }
-      if (optical_depth_min_m_ > 0.0 && depth_delta < optical_depth_min_m_)
-      {
-        return false;
-      }
-      if (optical_depth_max_m_ > 0.0 && depth_delta > optical_depth_max_m_)
-      {
-        return false;
-      }
-
-      if (optical_max_next_xy_jump_m_ > 0.0 && has_nav_heading_)
-      {
-        const double heading_rad = nav_heading_deg_ * M_PI / 180.0;
-        const double dx = depth_delta * std::tan(theta_x * M_PI / 180.0) *
-                              std::sin(heading_rad) -
-                          depth_delta * std::tan(theta_y * M_PI / 180.0) *
-                              std::cos(heading_rad) -
-                          optical_camera_delta_l_ * std::sin(heading_rad);
-        const double dy = -depth_delta * std::tan(theta_y * M_PI / 180.0) *
-                              std::sin(heading_rad) -
-                          depth_delta * std::tan(theta_x * M_PI / 180.0) *
-                              std::cos(heading_rad) +
-                          optical_camera_delta_l_ * std::cos(heading_rad);
-        const double next_x = dy;
-        const double next_y = dx;
-        if (has_last_next_xy_)
-        {
-          const double jump = std::hypot(next_x - last_next_x_,
-                                         next_y - last_next_y_);
-          if (jump > optical_max_next_xy_jump_m_)
-          {
-            return false;
-          }
-        }
-        has_last_next_xy_ = true;
-        last_next_x_ = next_x;
-        last_next_y_ = next_y;
-      }
-    }
-    return true;
   }
 
 private:
