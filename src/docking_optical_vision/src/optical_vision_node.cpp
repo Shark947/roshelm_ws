@@ -304,19 +304,80 @@ private:
       return;
     }
 
-    // ---- 8) 选择目标：largest 或 brightest ----
+    // ---- 8) 选择目标：largest / brightest / center ----
     int best_idx = -1;
     double best_score = -1.0;
+    bool has_candidate = false;
 
-    for (int i = 0; i < (int)contours.size(); ++i)
+    if (choose_mode_ == "center")
+    {
+      cv::Mat mask = cv::Mat::zeros(bin.size(), CV_8U);
+      for (int i = 0; i < static_cast<int>(contours.size()); ++i)
+      {
+        double area = cv::contourArea(contours[i]);
+        if (min_blob_area_ > 0 && area < min_blob_area_) continue;
+        if (max_blob_area_ > 0 && area > max_blob_area_) continue;
+        cv::drawContours(mask, contours, i, cv::Scalar(255), cv::FILLED);
+        has_candidate = true;
+      }
+
+      if (!has_candidate)
+      {
+        markDetectionResult(false, msg->header.stamp);
+        publishMeasurement(msg->header, 0.0, 0.0);
+        return;
+      }
+
+      cv::Moments mu = cv::moments(mask, true);
+      if (mu.m00 <= 1e-6)
+      {
+        markDetectionResult(false, msg->header.stamp);
+        publishMeasurement(msg->header, 0.0, 0.0);
+        return;
+      }
+
+      double u_roi = mu.m10 / mu.m00;
+      double v_roi = mu.m01 / mu.m00;
+
+      // 图像坐标系下的像素中心（相对于整幅图）
+      double u = u_roi + roi.x;
+      double v = v_roi + roi.y;
+
+      // ---- 10) 像素 -> 角度（deg）----
+      double theta_x = std::atan((u - cx_) / fx_) * 180.0 / M_PI;
+      double theta_y = std::atan((v - cy_) / fy_) * 180.0 / M_PI;
+
+      if (invert_theta_x_) theta_x = -theta_x;
+      if (invert_theta_y_) theta_y = -theta_y;
+
+      last_theta_x_ = theta_x;
+      last_theta_y_ = theta_y;
+      has_last_theta_ = true;
+      last_u_ = u;
+      last_v_ = v;
+      has_last_detection_ = true;
+      markDetectionResult(true, msg->header.stamp);
+      publishMeasurement(msg->header, theta_x, theta_y);
+
+      detect_count_++;
+      if (print_detection_every_n_ > 0 && (detect_count_ % print_detection_every_n_ == 0))
+      {
+        ROS_INFO_STREAM("[vision] DETECT u=" << u << " v=" << v
+                        << " area=" << mu.m00
+                        << " theta_x_deg=" << theta_x
+                        << " theta_y_deg=" << theta_y);
+      }
+      return;
+    }
+
+    for (int i = 0; i < static_cast<int>(contours.size()); ++i)
     {
       double area = cv::contourArea(contours[i]);
+      if (min_blob_area_ > 0 && area < min_blob_area_) continue;
+      if (max_blob_area_ > 0 && area > max_blob_area_) continue;
 
-      // 质心
       cv::Moments mu = cv::moments(contours[i]);
       if (mu.m00 <= 1e-6) continue;
-      double u = mu.m10 / mu.m00;
-      double v = mu.m01 / mu.m00;
 
       cv::Rect bb = cv::boundingRect(contours[i]);
       bb &= cv::Rect(0, 0, gray.cols, gray.rows);
@@ -338,10 +399,11 @@ private:
       {
         best_score = score;
         best_idx = i;
+        has_candidate = true;
       }
     }
 
-    if (best_idx < 0)
+    if (!has_candidate || best_idx < 0)
     {
       markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
