@@ -89,6 +89,12 @@ void DockingNavServer::setNavDepth(double depth_m)
   dfNavDepth_ = depth_m;
 }
 
+void DockingNavServer::setDockDepth(double depth_m)
+{
+  dfDockDepth_ = depth_m;
+  dfLightDepth_ = dfDockDepth_ - m_dfDockPanel_;
+}
+
 void DockingNavServer::setNavPitch(double pitch_rad)
 {
   dfNavPitch_ = pitch_rad * 180.0 / kPi;
@@ -413,7 +419,7 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
           stationing_ = false;
           injectBool("STATIONING", stationing_);
           injectHeadingUpdate(
-              "pwt=50#heading=" + std::to_string(dfDockHeading_));
+              "pwt=50,heading=" + std::to_string(dfDockHeading_));
         }
         else if (distance_ > dfInnerRadius_ * 1.2)
         {
@@ -433,7 +439,7 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
                               << dfCurrentDepth_);
               injectDepthUpdate(dfCurrentDepth_);
               injectHeadingUpdate(
-                  "pwt=200#heading=" + std::to_string(dfDockHeading_));
+                  "pwt=200,heading=" + std::to_string(dfDockHeading_));
               stationing_ = false;
               injectBool("STATIONING", stationing_);
               docking_falling_ = true;

@@ -14,6 +14,7 @@
 | `/auh/NAV_PITCH` | `common_msgs/Float64Stamped` | 当前俯仰（rad） |
 | `/auh/NAV_ROLL` | `common_msgs/Float64Stamped` | 当前横滚（rad） |
 | `/auh/desired_speed` | `std_msgs/Float64` | Helm 输出的期望航速 |
+| `/docking/dock_depth` | `common_msgs/Float64Stamped` | 坞站深度更新（米） |
 
 **输出（用于调试）：**
 
