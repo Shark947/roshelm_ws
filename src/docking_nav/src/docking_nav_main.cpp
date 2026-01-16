@@ -160,8 +160,7 @@ public:
       return false;
     }
     ROS_INFO_STREAM("[docking_nav] Initialized server with period="
-                    << server_.navServerPeriod() << "s timeout="
-                    << server_.opticalTimeoutSec() << "s");
+                    << server_.navServerPeriod() << "s");
 
     optical_sub_ = nh_.subscribe(
         topics_.optical_measurement_topic, 10,

@@ -9,6 +9,9 @@ queue_size: 1
 # ====== 发布/订阅 ======
 optical_measurement_topic: "/docking/optical_measurement"
 optical_feedback_topic: "/docking/optical_feedback"
+nav_depth_topic: "/auh/NAV_DEPTH"
+nav_heading_topic: "/auh/NAV_HEADING"
+dock_depth_topic: "/docking/dock_depth"
 
 # ====== 控制台输出节流 ======
 print_every_n: 30
@@ -16,6 +19,7 @@ print_camera_info_every_n: 120
 print_detection_every_n: 10      # 每N次检测输出一次结果（避免刷屏）
 min_consecutive_detections: 1    # 连续检测到白点才认为 valid=true
 max_consecutive_misses: 1        # 连续丢失白点才认为 valid=false
+optical_timeout_sec: 0.5         # 超时未收到图像则触发 invalid
 
 # ====== 白点检测参数 ======
 # 1) 图像预处理
@@ -44,6 +48,16 @@ min_brightness: 200.0            # 亮度门限，过滤弱反光
 max_pixel_jump: 0             # 像素跳变限制（0 表示不限制）
 ema_alpha: 0.4                   # 角度 EMA 平滑系数（0~1）
 choose_mode: "brightest"         # "largest" 或 "brightest"
+optical_max_theta_deg: 25.0      # 光轴角度上限（deg）
+optical_depth_min_m: 1.0         # depth_delta = light_depth - camera_depth
+optical_depth_max_m: 6.0
+optical_max_next_xy_jump_m: 1.0  # 连续帧 next_xy 最大跳变阈值（m）
+
+# ====== 光学几何辅助参数 ======
+optical_camera_delta_l: 0        # 相机与艇体参考点的水平偏移量 ΔL
+depth_bias: 0.0                  # 深度零偏/安装偏置 b_d
+depth_camera_bias: 0.83          # 相机深度偏置 b_c
+dock_panel: 0.1                  # 坞站面板/光源相对坞站深度的偏置 d_p
 
 # ====== 角度符号约定 ======
 # 默认采用 optical image 坐标：
