@@ -2,8 +2,10 @@
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/CameraInfo.h>
 #include <image_transport/image_transport.h>
+#include <std_msgs/Header.h>
 
 #include <docking_optical_msgs/OpticalMeasurement.h>
+#include <common_msgs/Float64Stamped.h>
 
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -24,6 +26,9 @@ public:
     pnh.param<std::string>("camera_info_topic", camera_info_topic_, std::string("/camera/camera_info"));
     pnh.param<std::string>("optical_measurement_topic", meas_topic_, std::string("/docking/optical_measurement"));
     pnh.param<std::string>("optical_feedback_topic", feedback_topic_, std::string("/docking/optical_feedback"));
+    pnh.param<std::string>("nav_depth_topic", nav_depth_topic_, std::string("/auh/NAV_DEPTH"));
+    pnh.param<std::string>("nav_heading_topic", nav_heading_topic_, std::string("/auh/NAV_HEADING"));
+    pnh.param<std::string>("dock_depth_topic", dock_depth_topic_, std::string("/docking/dock_depth"));
 
     pnh.param<int>("queue_size", queue_size_, 1);
 
@@ -32,6 +37,7 @@ public:
     pnh.param<int>("print_detection_every_n", print_detection_every_n_, 10);
     pnh.param<int>("min_consecutive_detections", min_consecutive_detections_, 2);
     pnh.param<int>("max_consecutive_misses", max_consecutive_misses_, 2);
+    pnh.param<double>("optical_timeout_sec", optical_timeout_sec_, 0.5);
 
     // ROI
     pnh.param<bool>("use_roi", use_roi_, false);
@@ -60,6 +66,15 @@ public:
     pnh.param<double>("max_pixel_jump", max_pixel_jump_, 80.0);
     pnh.param<double>("ema_alpha", ema_alpha_, 0.4);
     pnh.param<std::string>("choose_mode", choose_mode_, std::string("brightest"));
+    pnh.param<double>("optical_max_theta_deg", optical_max_theta_deg_, 30.0);
+    pnh.param<double>("optical_depth_min_m", optical_depth_min_m_, 0.3);
+    pnh.param<double>("optical_depth_max_m", optical_depth_max_m_, 12.0);
+    pnh.param<double>("optical_max_next_xy_jump_m", optical_max_next_xy_jump_m_, 3.0);
+
+    pnh.param<double>("optical_camera_delta_l", optical_camera_delta_l_, 0.0);
+    pnh.param<double>("depth_bias", depth_bias_, 0.0);
+    pnh.param<double>("depth_camera_bias", depth_camera_bias_, 0.0);
+    pnh.param<double>("dock_panel", dock_panel_, 0.0);
 
     // sign
     pnh.param<bool>("invert_theta_x", invert_theta_x_, false);
@@ -76,9 +91,19 @@ public:
     // ====== 2) 订阅 ======
     img_sub_ = it_.subscribe(camera_topic_, queue_size_, &OpticalVisionNode::imageCb, this);
     caminfo_sub_ = nh.subscribe(camera_info_topic_, 1, &OpticalVisionNode::cameraInfoCb, this);
+    nav_depth_sub_ = nh.subscribe<common_msgs::Float64Stamped>(
+        nav_depth_topic_, 10, &OpticalVisionNode::navDepthCb, this);
+    nav_heading_sub_ = nh.subscribe<common_msgs::Float64Stamped>(
+        nav_heading_topic_, 10, &OpticalVisionNode::navHeadingCb, this);
+    dock_depth_sub_ = nh.subscribe<common_msgs::Float64Stamped>(
+        dock_depth_topic_, 10, &OpticalVisionNode::dockDepthCb, this);
 
     // ====== 3) 发布 ======
     meas_pub_ = nh.advertise<docking_optical_msgs::OpticalMeasurement>(meas_topic_, 10);
+    if (optical_timeout_sec_ > 0.0)
+    {
+      timeout_timer_ = nh.createTimer(ros::Duration(0.1), &OpticalVisionNode::timeoutCb, this);
+    }
 
     ROS_INFO_STREAM("[docking_optical_vision] camera_topic=" << camera_topic_);
     ROS_INFO_STREAM("[docking_optical_vision] camera_info_topic=" << camera_info_topic_);
@@ -89,9 +114,60 @@ public:
                     << " max_pixel_jump=" << max_pixel_jump_
                     << " ema_alpha=" << ema_alpha_
                     << " invert_x=" << invert_theta_x_ << " invert_y=" << invert_theta_y_);
+    ROS_INFO_STREAM("[docking_optical_vision] nav_depth_topic=" << nav_depth_topic_
+                    << " nav_heading_topic=" << nav_heading_topic_
+                    << " dock_depth_topic=" << dock_depth_topic_);
+    ROS_INFO_STREAM("[docking_optical_vision] optical_limits: theta_deg=" << optical_max_theta_deg_
+                    << " depth=[" << optical_depth_min_m_ << ","
+                    << optical_depth_max_m_ << "] max_next_xy_jump="
+                    << optical_max_next_xy_jump_m_ << " timeout_sec="
+                    << optical_timeout_sec_);
   }
 
 private:
+  void navDepthCb(const common_msgs::Float64Stamped::ConstPtr& msg)
+  {
+    nav_depth_ = msg->data;
+    has_nav_depth_ = true;
+  }
+
+  void navHeadingCb(const common_msgs::Float64Stamped::ConstPtr& msg)
+  {
+    nav_heading_deg_ = msg->data;
+    has_nav_heading_ = true;
+  }
+
+  void dockDepthCb(const common_msgs::Float64Stamped::ConstPtr& msg)
+  {
+    dock_depth_ = msg->data;
+    has_dock_depth_ = true;
+  }
+
+  void timeoutCb(const ros::TimerEvent&)
+  {
+    if (last_frame_time_.isZero())
+    {
+      return;
+    }
+    const ros::Time now = ros::Time::now();
+    if ((now - last_frame_time_).toSec() <= optical_timeout_sec_)
+    {
+      return;
+    }
+    if ((now - last_timeout_publish_).toSec() < optical_timeout_sec_)
+    {
+      return;
+    }
+    last_timeout_publish_ = now;
+    filtered_valid_ = false;
+    consecutive_detects_ = 0;
+    consecutive_misses_ = max_consecutive_misses_;
+    std_msgs::Header header;
+    header.stamp = now;
+    header.frame_id = last_frame_id_;
+    publishMeasurement(header, 0.0, 0.0);
+  }
+
   // ===== 相机内参 =====
   void cameraInfoCb(const sensor_msgs::CameraInfoConstPtr& msg)
   {
@@ -115,6 +191,8 @@ private:
   void imageCb(const sensor_msgs::ImageConstPtr& msg)
   {
     frame_count_++;
+    last_frame_time_ = msg->header.stamp;
+    last_frame_id_ = msg->header.frame_id;
 
     if (print_every_n_ > 0 && (frame_count_ % print_every_n_ == 0))
     {
@@ -300,6 +378,15 @@ private:
     if (invert_theta_x_) theta_x = -theta_x;
     if (invert_theta_y_) theta_y = -theta_y;
 
+    if (optical_max_theta_deg_ > 0.0 &&
+        (std::abs(theta_x) > optical_max_theta_deg_ ||
+         std::abs(theta_y) > optical_max_theta_deg_))
+    {
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
+      return;
+    }
+
     if (has_last_theta_)
     {
       theta_x = ema_alpha_ * theta_x + (1.0 - ema_alpha_) * last_theta_x_;
@@ -311,6 +398,12 @@ private:
     last_u_ = u;
     last_v_ = v;
     has_last_detection_ = true;
+    if (!opticalGeometryValid(theta_x, theta_y))
+    {
+      markDetectionResult(false);
+      publishMeasurement(msg->header, 0.0, 0.0);
+      return;
+    }
 
     // ---- 11) 发布 OpticalMeasurement ----
     markDetectionResult(true);
@@ -364,16 +457,81 @@ private:
     meas_pub_.publish(meas);
   }
 
+  bool opticalGeometryValid(double theta_x, double theta_y)
+  {
+    if (optical_depth_min_m_ <= 0.0 && optical_depth_max_m_ <= 0.0 &&
+        optical_max_next_xy_jump_m_ <= 0.0)
+    {
+      return true;
+    }
+
+    if (has_nav_depth_ && has_dock_depth_)
+    {
+      const double light_depth = dock_depth_ - dock_panel_;
+      const double camera_depth = nav_depth_ + depth_bias_ + depth_camera_bias_;
+      const double depth_delta = light_depth - camera_depth;
+      if (!std::isfinite(depth_delta))
+      {
+        return false;
+      }
+      if (optical_depth_min_m_ > 0.0 && depth_delta < optical_depth_min_m_)
+      {
+        return false;
+      }
+      if (optical_depth_max_m_ > 0.0 && depth_delta > optical_depth_max_m_)
+      {
+        return false;
+      }
+
+      if (optical_max_next_xy_jump_m_ > 0.0 && has_nav_heading_)
+      {
+        const double heading_rad = nav_heading_deg_ * M_PI / 180.0;
+        const double dx = depth_delta * std::tan(theta_x * M_PI / 180.0) *
+                              std::sin(heading_rad) -
+                          depth_delta * std::tan(theta_y * M_PI / 180.0) *
+                              std::cos(heading_rad) -
+                          optical_camera_delta_l_ * std::sin(heading_rad);
+        const double dy = -depth_delta * std::tan(theta_y * M_PI / 180.0) *
+                              std::sin(heading_rad) -
+                          depth_delta * std::tan(theta_x * M_PI / 180.0) *
+                              std::cos(heading_rad) +
+                          optical_camera_delta_l_ * std::cos(heading_rad);
+        const double next_x = dy;
+        const double next_y = dx;
+        if (has_last_next_xy_)
+        {
+          const double jump = std::hypot(next_x - last_next_x_,
+                                         next_y - last_next_y_);
+          if (jump > optical_max_next_xy_jump_m_)
+          {
+            return false;
+          }
+        }
+        has_last_next_xy_ = true;
+        last_next_x_ = next_x;
+        last_next_y_ = next_y;
+      }
+    }
+    return true;
+  }
+
 private:
   image_transport::ImageTransport it_;
   image_transport::Subscriber img_sub_;
   ros::Subscriber caminfo_sub_;
+  ros::Subscriber nav_depth_sub_;
+  ros::Subscriber nav_heading_sub_;
+  ros::Subscriber dock_depth_sub_;
   ros::Publisher meas_pub_;
+  ros::Timer timeout_timer_;
 
   std::string camera_topic_;
   std::string camera_info_topic_;
   std::string meas_topic_;
   std::string feedback_topic_;
+  std::string nav_depth_topic_;
+  std::string nav_heading_topic_;
+  std::string dock_depth_topic_;
 
   int queue_size_{1};
 
@@ -382,6 +540,7 @@ private:
   int print_detection_every_n_{10};
   int min_consecutive_detections_{2};
   int max_consecutive_misses_{2};
+  double optical_timeout_sec_{0.5};
 
   // ROI params
   bool use_roi_{false};
@@ -407,6 +566,15 @@ private:
   double max_pixel_jump_{80.0};
   double ema_alpha_{0.4};
   std::string choose_mode_{"brightest"};
+  double optical_max_theta_deg_{30.0};
+  double optical_depth_min_m_{0.3};
+  double optical_depth_max_m_{12.0};
+  double optical_max_next_xy_jump_m_{3.0};
+
+  double optical_camera_delta_l_{0.0};
+  double depth_bias_{0.0};
+  double depth_camera_bias_{0.0};
+  double dock_panel_{0.0};
 
   // sign convention
   bool invert_theta_x_{false};
@@ -428,6 +596,21 @@ private:
 
   bool has_caminfo_{false};
   double fx_{0}, fy_{0}, cx_{0}, cy_{0};
+
+  bool has_nav_depth_{false};
+  bool has_nav_heading_{false};
+  bool has_dock_depth_{false};
+  double nav_depth_{0.0};
+  double nav_heading_deg_{0.0};
+  double dock_depth_{0.0};
+
+  bool has_last_next_xy_{false};
+  double last_next_x_{0.0};
+  double last_next_y_{0.0};
+
+  ros::Time last_frame_time_;
+  ros::Time last_timeout_publish_;
+  std::string last_frame_id_;
 };
 
 int main(int argc, char** argv)

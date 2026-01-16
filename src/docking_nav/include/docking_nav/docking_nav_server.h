@@ -45,7 +45,6 @@ public:
   Outputs update(const ros::Time &stamp);
 
   double navServerPeriod() const { return nav_server_period_; }
-  double opticalTimeoutSec() const { return optical_timeout_sec_; }
 
 private:
   struct AlignDepth
@@ -60,7 +59,6 @@ private:
   void setMode(const std::string &mode, bool force = false);
   void setModeInternal(const std::string &mode, bool publish, bool force);
   bool shouldAutoEnterCloseToDocking(double &distance) const;
-  bool opticalGeometryValid(double &depth_delta, std::string &reason) const;
 
   void injectDepthUpdate(double depth);
   void injectHeadingUpdate(const std::string &update);
@@ -78,13 +76,6 @@ private:
   DebugLogCallback debug_log_callback_;
 
   double nav_server_period_{0.1};
-  double optical_timeout_sec_{0.5};
-  int optical_invalid_debounce_count_{0};
-  double optical_max_next_xy_jump_m_{3.0};
-  double optical_depth_min_m_{0.3};
-  double optical_depth_max_m_{12.0};
-  double optical_max_theta_deg_{30.0};
-
   double dfDockHeading_{0.0};
   double dfDockPitch_{0.0};
   double dfDockRoll_{0.0};
@@ -151,33 +142,11 @@ private:
   unsigned int m_iterations_{0};
 
   bool optical_received_{false};
-  ros::Time last_optical_stamp_;
-  double fallback_x_{0.0};
-  double fallback_y_{0.0};
-  int optical_invalid_count_{0};
-  bool have_last_valid_optical_{false};
-  double last_valid_optical_heading_{0.0};
-  double last_valid_optical_x_{0.0};
-  double last_valid_optical_y_{0.0};
-  bool have_last_valid_next_xy_{false};
-  double last_valid_next_x_{0.0};
-  double last_valid_next_y_{0.0};
 
   bool auto_enter_closetodocking_{false};
   double auto_enter_duration_sec_{2.0};
   int auto_enter_count_{0};
 
-  double stationing_min_hold_sec_{1.0};
-  double stationing_inner_ratio_{0.8};
-  double stationing_outer_ratio_{1.2};
-  double stationing_inner_min_distance_{0.3};
-  double heading_align_delay_sec_{1.0};
-
-  ros::Time last_stationing_change_;
-  ros::Time inner_ring_entry_time_;
-  bool inner_ring_active_{false};
-
-  bool last_data_flag_{false};
   int last_phase_count_{0};
   bool last_stationing_{true};
   bool last_constheight_{true};

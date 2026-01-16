@@ -8,6 +8,9 @@
 namespace
 {
 constexpr double kPi = 3.14159265358979323846;
+constexpr double kStationingInnerRatio = 0.8;
+constexpr double kStationingOuterRatio = 1.2;
+constexpr double kStationingMinDistance = 0.3;
 
 double degToRad(double deg)
 {
@@ -64,21 +67,11 @@ void DockingNavServer::setDebugLogCallback(DebugLogCallback debug_callback)
 void DockingNavServer::setOpticalMeasurement(
     const docking_optical_msgs::OpticalMeasurement &msg)
 {
-  last_optical_stamp_ = msg.header.stamp;
   optical_received_ = true;
   dfOpticalNavLoc_[0] = msg.d_heading_deg;
   dfOpticalNavLoc_[1] = msg.theta_x_deg;
   dfOpticalNavLoc_[2] = msg.theta_y_deg;
-  fallback_x_ = msg.fallback_x;
-  fallback_y_ = msg.fallback_y;
   bDataFlag_ = msg.valid;
-  if (bDataFlag_)
-  {
-    have_last_valid_optical_ = true;
-    last_valid_optical_heading_ = msg.d_heading_deg;
-    last_valid_optical_x_ = msg.theta_x_deg;
-    last_valid_optical_y_ = msg.theta_y_deg;
-  }
   ROS_DEBUG_STREAM_THROTTLE(
       1.0, "[docking_nav] Optical measurement valid=" << (bDataFlag_ ? "true" : "false")
                                                       << " d_heading_deg="
@@ -86,10 +79,7 @@ void DockingNavServer::setOpticalMeasurement(
                                                       << " theta_x_deg="
                                                       << dfOpticalNavLoc_[1]
                                                       << " theta_y_deg="
-                                                      << dfOpticalNavLoc_[2]
-                                                      << " fallback=("
-                                                      << fallback_x_ << ","
-                                                      << fallback_y_ << ")");
+                                                      << dfOpticalNavLoc_[2]);
   static ros::Time last_log_time;
   const ros::Time now = ros::Time::now();
   if (debug_log_callback_ && (now - last_log_time).toSec() >= 1.0)
@@ -100,8 +90,7 @@ void DockingNavServer::setOpticalMeasurement(
            << (bDataFlag_ ? "true" : "false")
            << " d_heading_deg=" << dfOpticalNavLoc_[0]
            << " theta_x_deg=" << dfOpticalNavLoc_[1]
-           << " theta_y_deg=" << dfOpticalNavLoc_[2]
-           << " fallback=(" << fallback_x_ << "," << fallback_y_ << ")";
+           << " theta_y_deg=" << dfOpticalNavLoc_[2];
     debug_log_callback_(stream.str());
   }
 }
@@ -150,8 +139,7 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
   ++m_iterations_;
 
   const bool prev_data_flag = bDataFlag_;
-  if (!optical_received_ ||
-      (stamp - last_optical_stamp_).toSec() > optical_timeout_sec_)
+  if (!optical_received_)
   {
     bDataFlag_ = false;
   }
@@ -160,60 +148,6 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
   {
     ROS_INFO_STREAM("[docking_nav] Optical data valid="
                     << (bDataFlag_ ? "true" : "false"));
-  }
-
-  if (bDataFlag_)
-  {
-    optical_invalid_count_ = 0;
-  }
-  else
-  {
-    ++optical_invalid_count_;
-  }
-
-  const bool use_fallback =
-      !bDataFlag_ &&
-      (optical_invalid_debounce_count_ == 0 ||
-       optical_invalid_count_ >= optical_invalid_debounce_count_);
-
-  if (use_fallback)
-  {
-    dfOpticalNavLoc_[1] = fallback_x_;
-    dfOpticalNavLoc_[2] = fallback_y_;
-    ROS_DEBUG_STREAM_THROTTLE(
-        1.0, "[docking_nav] Using fallback optical XY=(" << fallback_x_ << ","
-                                                         << fallback_y_ << ")");
-    static ros::Time last_fallback_log_time;
-    const ros::Time now = ros::Time::now();
-    if (debug_log_callback_ && (now - last_fallback_log_time).toSec() >= 1.0)
-    {
-      last_fallback_log_time = now;
-      std::ostringstream stream;
-      stream << "[docking_nav] Using fallback optical XY=(" << fallback_x_
-             << "," << fallback_y_ << ")";
-      debug_log_callback_(stream.str());
-    }
-  }
-  else if (!bDataFlag_ && have_last_valid_optical_)
-  {
-    dfOpticalNavLoc_[0] = last_valid_optical_heading_;
-    dfOpticalNavLoc_[1] = last_valid_optical_x_;
-    dfOpticalNavLoc_[2] = last_valid_optical_y_;
-    ROS_DEBUG_STREAM_THROTTLE(
-        1.0, "[docking_nav] Holding last valid optical XY=("
-                 << last_valid_optical_x_ << "," << last_valid_optical_y_
-                 << ") invalid_count=" << optical_invalid_count_);
-    static ros::Time last_hold_log_time;
-    const ros::Time now = ros::Time::now();
-    if (debug_log_callback_ && (now - last_hold_log_time).toSec() >= 1.0)
-    {
-      last_hold_log_time = now;
-      std::ostringstream stream;
-      stream << "[docking_nav] Holding last valid optical XY=("
-             << last_valid_optical_x_ << "," << last_valid_optical_y_
-             << ") invalid_count=" << optical_invalid_count_;
-      debug_log_callback_(stream.str());
-    }
   }
 
   dfCameraDepth_ = dfNavDepth_ + m_dfDepthBias_ + m_dfDepthCameraBias_;
@@ -332,24 +266,10 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
   private_nh.param("last_phase_float_time_ms", m_nLastPhaseFloatTime_, 500.0);
   private_nh.param("transimit_duration_sec", m_nTransimitDuration_, 30);
   private_nh.param("docking_max_try", m_nDockingMaxTry_, 3);
-  private_nh.param("optical_timeout_sec", optical_timeout_sec_, 0.5);
-  private_nh.param("optical_invalid_debounce_count",
-                   optical_invalid_debounce_count_, 0);
-  private_nh.param("optical_max_next_xy_jump_m", optical_max_next_xy_jump_m_,
-                   3.0);
-  private_nh.param("optical_depth_min_m", optical_depth_min_m_, 0.3);
-  private_nh.param("optical_depth_max_m", optical_depth_max_m_, 12.0);
-  private_nh.param("optical_max_theta_deg", optical_max_theta_deg_, 30.0);
   private_nh.param("initial_mode", mode_, mode_);
   private_nh.param("auto_enter_closetodocking", auto_enter_closetodocking_,
                    false);
   private_nh.param("auto_enter_duration_sec", auto_enter_duration_sec_, 2.0);
-  private_nh.param("stationing_min_hold_sec", stationing_min_hold_sec_, 1.0);
-  private_nh.param("stationing_inner_ratio", stationing_inner_ratio_, 0.8);
-  private_nh.param("stationing_outer_ratio", stationing_outer_ratio_, 1.2);
-  private_nh.param("stationing_inner_min_distance",
-                   stationing_inner_min_distance_, 0.3);
-  private_nh.param("heading_align_delay_sec", heading_align_delay_sec_, 1.0);
 
   dfDockHeading_ = angle360(dfDockHeading_ + 90.0);
   m_dfFreq_ = 1.0 / nav_server_period_;
@@ -385,42 +305,20 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
 
   nPhaseNum_ = static_cast<int>(dfvAlignDepth_.size()) + 1;
   ROS_INFO_STREAM("[docking_nav] Loaded params: nav_server_period="
-                  << nav_server_period_ << " optical_timeout_sec="
-                  << optical_timeout_sec_ << " dock_depth=" << dfDockDepth_
+                  << nav_server_period_ << " dock_depth=" << dfDockDepth_
                   << " dock_heading=" << dfDockHeading_ << " dradius="
                   << dradius_ << " dinheading=" << dinheading_
-                  << " optical_invalid_debounce_count="
-                  << optical_invalid_debounce_count_
-                  << " optical_max_next_xy_jump_m="
-                  << optical_max_next_xy_jump_m_
-                  << " optical_depth_min_m=" << optical_depth_min_m_
-                  << " optical_depth_max_m=" << optical_depth_max_m_
-                  << " optical_max_theta_deg=" << optical_max_theta_deg_
                   << " align_depth_count=" << dfvAlignDepth_.size()
                   << " initial_mode=" << mode_
                   << " auto_enter_closetodocking="
                   << (auto_enter_closetodocking_ ? "true" : "false")
-                  << " auto_enter_duration_sec=" << auto_enter_duration_sec_
-                  << " stationing_min_hold_sec=" << stationing_min_hold_sec_
-                  << " stationing_inner_ratio=" << stationing_inner_ratio_
-                  << " stationing_outer_ratio=" << stationing_outer_ratio_
-                  << " stationing_inner_min_distance="
-                  << stationing_inner_min_distance_
-                  << " heading_align_delay_sec=" << heading_align_delay_sec_);
+                  << " auto_enter_duration_sec=" << auto_enter_duration_sec_);
   return true;
 }
 
 bool DockingNavServer::shouldAutoEnterCloseToDocking(double &distance) const
 {
   if (!auto_enter_closetodocking_ || dfvAlignDepth_.empty() || !bDataFlag_)
-  {
-    distance = 0.0;
-    return false;
-  }
-
-  double depth_delta = 0.0;
-  std::string invalid_reason;
-  if (!opticalGeometryValid(depth_delta, invalid_reason))
   {
     distance = 0.0;
     return false;
@@ -445,59 +343,9 @@ bool DockingNavServer::shouldAutoEnterCloseToDocking(double &distance) const
   return distance <= first_phase.outer_radius;
 }
 
-bool DockingNavServer::opticalGeometryValid(double &depth_delta,
-                                            std::string &reason) const
-{
-  depth_delta = dfLightDepth_ - dfCameraDepth_;
-  if (!std::isfinite(depth_delta))
-  {
-    reason = "depth_delta_nan";
-    return false;
-  }
-  if (depth_delta < optical_depth_min_m_ || depth_delta > optical_depth_max_m_)
-  {
-    reason = "depth_delta_out_of_range";
-    return false;
-  }
-  if (!std::isfinite(dfOpticalNavLoc_[1]) ||
-      !std::isfinite(dfOpticalNavLoc_[2]))
-  {
-    reason = "theta_nan";
-    return false;
-  }
-  if (std::abs(dfOpticalNavLoc_[1]) > optical_max_theta_deg_ ||
-      std::abs(dfOpticalNavLoc_[2]) > optical_max_theta_deg_)
-  {
-    reason = "theta_out_of_range";
-    return false;
-  }
-  return true;
-}
-
 void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
 {
-  double depth_delta = 0.0;
-  std::string geometry_reason;
-  const bool geometry_valid =
-      opticalGeometryValid(depth_delta, geometry_reason);
-  if (bDataFlag_ && !geometry_valid)
-  {
-    ROS_WARN_STREAM_THROTTLE(
-        1.0, "[docking_nav] Optical geometry invalid (" << geometry_reason
-                                                        << ") depth_delta="
-                                                        << depth_delta
-                                                        << " theta_x_deg="
-                                                        << dfOpticalNavLoc_[1]
-                                                        << " theta_y_deg="
-                                                        << dfOpticalNavLoc_[2]
-                                                        << " depth_range=["
-                                                        << optical_depth_min_m_
-                                                        << ","
-                                                        << optical_depth_max_m_
-                                                        << "] theta_limit="
-                                                        << optical_max_theta_deg_);
-  }
-  bool optical_valid = bDataFlag_ && geometry_valid;
+  bool optical_valid = bDataFlag_;
   if (optical_valid)
   {
     ++nCntuDockingCount_;
@@ -537,50 +385,11 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
 
     dfNextX = dfDY_;
     dfNextY = dfDX_;
-
-    const double candidate_x = dfNextX;
-    const double candidate_y = dfNextY;
-    const double jump_distance =
-        have_last_valid_next_xy_
-            ? distToPoint(last_valid_next_x_, last_valid_next_y_, candidate_x,
-                          candidate_y)
-            : 0.0;
-    if (have_last_valid_next_xy_ &&
-        jump_distance > optical_max_next_xy_jump_m_)
-    {
-      optical_valid = false;
-      dfNextX = last_valid_next_x_;
-      dfNextY = last_valid_next_y_;
-      ROS_WARN_STREAM_THROTTLE(
-          1.0,
-          "[docking_nav] Rejecting optical outlier next_xy=(" << candidate_x
-                                                             << ","
-                                                             << candidate_y
-                                                             << ") last=("
-                                                             << last_valid_next_x_
-                                                             << ","
-                                                             << last_valid_next_y_
-                                                             << ") jump="
-                                                             << jump_distance
-                                                             << " > "
-                                                             << optical_max_next_xy_jump_m_);
-    }
-    else
-    {
-      have_last_valid_next_xy_ = true;
-      last_valid_next_x_ = dfNextX;
-      last_valid_next_y_ = dfNextY;
-    }
   }
   else
   {
     dfNextX = dfOpticalNavLoc_[1];
     dfNextY = dfOpticalNavLoc_[2];
-    if (have_last_valid_next_xy_)
-    {
-      dfNextX = last_valid_next_x_;
-      dfNextY = last_valid_next_y_;
-    }
   }
 
   distance_ = distToPoint(0, 0, dfNextX, dfNextY);
@@ -621,8 +430,6 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
         injectHeadingUpdate("pwt=1");
         stationing_ = true;
         injectBool("STATIONING", stationing_);
-        inner_ring_active_ = false;
-        last_stationing_change_ = stamp;
         dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
         dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
         if (nPhaseCount_ == nPhaseNum_ - 1)
@@ -632,54 +439,24 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
       }
       else if (optical_valid && nPhaseCount_ == nPhaseNum_ - 1)
       {
-        if (last_stationing_change_.isZero())
+        if (distance_ < dfInnerRadius_ * kStationingInnerRatio &&
+            distance_ > kStationingMinDistance)
         {
-          last_stationing_change_ = stamp;
-        }
-        const double inner_enter_radius = dfInnerRadius_ * stationing_inner_ratio_;
-        const double outer_exit_radius = dfInnerRadius_ * stationing_outer_ratio_;
-        const bool inside_inner = distance_ < inner_enter_radius;
-        if (inside_inner)
-        {
-          if (!inner_ring_active_)
-          {
-            inner_ring_active_ = true;
-            inner_ring_entry_time_ = stamp;
-          }
-        }
-        else
-        {
-          inner_ring_active_ = false;
-        }
-
-        const bool ready_for_heading =
-            inside_inner &&
-            distance_ > stationing_inner_min_distance_ &&
-            (stamp - inner_ring_entry_time_).toSec() >= heading_align_delay_sec_;
-        bool want_stationing = stationing_;
-        if (ready_for_heading)
-        {
-          want_stationing = false;
-        }
-        else if (distance_ > outer_exit_radius)
-        {
-          want_stationing = true;
-        }
-
-        if (want_stationing != stationing_ &&
-            (stamp - last_stationing_change_).toSec() >= stationing_min_hold_sec_)
-        {
-          stationing_ = want_stationing;
-          last_stationing_change_ = stamp;
-          injectBool("STATIONING", stationing_);
           if (stationing_)
           {
-            injectHeadingUpdate("pwt=1");
-          }
-          else
-          {
+            stationing_ = false;
+            injectBool("STATIONING", stationing_);
             injectHeadingUpdate(
                 "pwt=50,heading=" + std::to_string(dfDockHeading_));
+          }
+        }
+        else if (distance_ > dfInnerRadius_ * kStationingOuterRatio)
+        {
+          if (!stationing_)
+          {
+            stationing_ = true;
+            injectBool("STATIONING", stationing_);
+            injectHeadingUpdate("pwt=1");
           }
         }
         if ((desired_speed_ * 7 + distance_) < dradius_)
@@ -722,8 +499,6 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
           injectHeadingUpdate("pwt=1");
           stationing_ = true;
           injectBool("STATIONING", stationing_);
-          inner_ring_active_ = false;
-          last_stationing_change_ = stamp;
           docking_falling_ = false;
           injectBool("DOCKING_FALLING", docking_falling_);
           dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
