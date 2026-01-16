@@ -1,9 +1,13 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
+#include <ctime>
 #include <unordered_map>
 
+#include <boost/filesystem.hpp>
+
 #include <ros/ros.h>
+#include <ros/package.h>
 #include <common_msgs/Float64Stamped.h>
 #include <docking_optical_msgs/OpticalMeasurement.h>
 #include <geometry_msgs/PointStamped.h>
@@ -16,6 +20,19 @@
 
 namespace
 {
+std::string defaultDebugLogPath()
+{
+  const std::string package_path = ros::package::getPath("docking_nav");
+  const std::string base_dir =
+      package_path.empty() ? std::string("/tmp/docking_nav") : package_path;
+  const std::string log_dir = base_dir + "/log";
+  std::time_t now = std::time(nullptr);
+  std::tm local_time = *std::localtime(&now);
+  char stamp[32];
+  std::strftime(stamp, sizeof(stamp), "%Y%m%d_%H%M%S", &local_time);
+  return log_dir + "/docking_nav_" + std::string(stamp) + ".txt";
+}
+
 struct DockingNavTopics
 {
   std::string optical_measurement_topic{"/docking/optical_measurement"};
@@ -116,7 +133,15 @@ public:
   bool initialize()
   {
     private_nh_.param("debug_log_path", debug_log_path_,
-                      std::string("/tmp/docking_nav_debug.txt"));
+                      defaultDebugLogPath());
+    if (!debug_log_path_.empty())
+    {
+      boost::filesystem::path log_path(debug_log_path_);
+      if (log_path.has_parent_path())
+      {
+        boost::filesystem::create_directories(log_path.parent_path());
+      }
+    }
     debug_log_.open(debug_log_path_, std::ios::app);
     if (debug_log_.is_open())
     {
