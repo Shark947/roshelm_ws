@@ -32,7 +32,7 @@ depth_camera_bias: 0.83
 # ====== 分层对准 ======
 # AlignDepth (AlignDepth): 例 "5:4" 表示 a_i 序列，真实对准深度为 D_light - a_i
 # ROS里用数组表达
-align_depth_offsets: [5.0, 4.0, 3.0]
+align_depth_offsets: [5.0, 4.0]
 
 # PhaseDepth (PhaseDepth): MOOS配置里有，但原代码里 push_back 被注释了（先保留，后续ROS版决定是否启用）
 phase_depth_list: [0.0, 3.0]
@@ -42,7 +42,7 @@ phase_depth_list: [0.0, 3.0]
 fall_depth: 0.3
 
 # dradius (dradius): 最终触发半径 r_d，米
-dradius: 1
+dradius: 0.7
 # dinheading (dinheading): 航向误差门限 Δψ_max，deg
 dinheading_deg: 20.0
 
