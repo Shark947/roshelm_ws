@@ -74,3 +74,15 @@ optical_timeout_sec: 0.5
 # 当光学数据稳定且距离进入首层外圈时，自动切换 MODE=CLOSETODOCKING
 auto_enter_closetodocking: true
 auto_enter_duration_sec: 2.0
+
+# ====== 入坞末端控制迟滞/稳定性 ======
+# STATIONING最短保持时间（秒），避免内外圈阈值附近频繁切换
+stationing_min_hold_sec: 1.5
+# 内圈判定比例（< inner_radius * ratio 才认为进入内圈）
+stationing_inner_ratio: 0.85
+# 退出内圈判定比例（> inner_radius * ratio 才认为退出内圈）
+stationing_outer_ratio: 1.25
+# 内圈内保持一定距离，避免过近导致误触发
+stationing_inner_min_distance: 0.3
+# 进入内圈后保持一段时间再进入航向对准（秒）
+heading_align_delay_sec: 1.5

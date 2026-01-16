@@ -153,6 +153,16 @@ private:
   double auto_enter_duration_sec_{2.0};
   int auto_enter_count_{0};
 
+  double stationing_min_hold_sec_{1.0};
+  double stationing_inner_ratio_{0.8};
+  double stationing_outer_ratio_{1.2};
+  double stationing_inner_min_distance_{0.3};
+  double heading_align_delay_sec_{1.0};
+
+  ros::Time last_stationing_change_;
+  ros::Time inner_ring_entry_time_;
+  bool inner_ring_active_{false};
+
   bool last_data_flag_{false};
   int last_phase_count_{0};
   bool last_stationing_{true};

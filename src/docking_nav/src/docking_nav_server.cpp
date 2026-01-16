@@ -295,6 +295,12 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
   private_nh.param("auto_enter_closetodocking", auto_enter_closetodocking_,
                    false);
   private_nh.param("auto_enter_duration_sec", auto_enter_duration_sec_, 2.0);
+  private_nh.param("stationing_min_hold_sec", stationing_min_hold_sec_, 1.0);
+  private_nh.param("stationing_inner_ratio", stationing_inner_ratio_, 0.8);
+  private_nh.param("stationing_outer_ratio", stationing_outer_ratio_, 1.2);
+  private_nh.param("stationing_inner_min_distance",
+                   stationing_inner_min_distance_, 0.3);
+  private_nh.param("heading_align_delay_sec", heading_align_delay_sec_, 1.0);
 
   dfDockHeading_ = angle360(dfDockHeading_ + 90.0);
   m_dfFreq_ = 1.0 / nav_server_period_;
@@ -338,7 +344,13 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
                   << " initial_mode=" << mode_
                   << " auto_enter_closetodocking="
                   << (auto_enter_closetodocking_ ? "true" : "false")
-                  << " auto_enter_duration_sec=" << auto_enter_duration_sec_);
+                  << " auto_enter_duration_sec=" << auto_enter_duration_sec_
+                  << " stationing_min_hold_sec=" << stationing_min_hold_sec_
+                  << " stationing_inner_ratio=" << stationing_inner_ratio_
+                  << " stationing_outer_ratio=" << stationing_outer_ratio_
+                  << " stationing_inner_min_distance="
+                  << stationing_inner_min_distance_
+                  << " heading_align_delay_sec=" << heading_align_delay_sec_);
   return true;
 }
 
@@ -455,6 +467,8 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
         injectHeadingUpdate("pwt=1");
         stationing_ = true;
         injectBool("STATIONING", stationing_);
+        inner_ring_active_ = false;
+        last_stationing_change_ = stamp;
         dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
         dfOuterRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].outer_radius;
         if (nPhaseCount_ == nPhaseNum_ - 1)
@@ -464,18 +478,55 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
       }
       else if (bDataFlag_ && nPhaseCount_ == nPhaseNum_ - 1)
       {
-        if (distance_ < dfInnerRadius_ * 0.8 && distance_ > 0.3)
+        if (last_stationing_change_.isZero())
         {
-          stationing_ = false;
-          injectBool("STATIONING", stationing_);
-          injectHeadingUpdate(
-              "pwt=50,heading=" + std::to_string(dfDockHeading_));
+          last_stationing_change_ = stamp;
         }
-        else if (distance_ > dfInnerRadius_ * 1.2)
+        const double inner_enter_radius = dfInnerRadius_ * stationing_inner_ratio_;
+        const double outer_exit_radius = dfInnerRadius_ * stationing_outer_ratio_;
+        const bool inside_inner = distance_ < inner_enter_radius;
+        if (inside_inner)
         {
-          stationing_ = true;
+          if (!inner_ring_active_)
+          {
+            inner_ring_active_ = true;
+            inner_ring_entry_time_ = stamp;
+          }
+        }
+        else
+        {
+          inner_ring_active_ = false;
+        }
+
+        const bool ready_for_heading =
+            inside_inner &&
+            distance_ > stationing_inner_min_distance_ &&
+            (stamp - inner_ring_entry_time_).toSec() >= heading_align_delay_sec_;
+        bool want_stationing = stationing_;
+        if (ready_for_heading)
+        {
+          want_stationing = false;
+        }
+        else if (distance_ > outer_exit_radius)
+        {
+          want_stationing = true;
+        }
+
+        if (want_stationing != stationing_ &&
+            (stamp - last_stationing_change_).toSec() >= stationing_min_hold_sec_)
+        {
+          stationing_ = want_stationing;
+          last_stationing_change_ = stamp;
           injectBool("STATIONING", stationing_);
-          injectHeadingUpdate("pwt=1");
+          if (stationing_)
+          {
+            injectHeadingUpdate("pwt=1");
+          }
+          else
+          {
+            injectHeadingUpdate(
+                "pwt=50,heading=" + std::to_string(dfDockHeading_));
+          }
         }
         if ((desired_speed_ * 7 + distance_) < dradius_)
         {
@@ -517,6 +568,8 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
           injectHeadingUpdate("pwt=1");
           stationing_ = true;
           injectBool("STATIONING", stationing_);
+          inner_ring_active_ = false;
+          last_stationing_change_ = stamp;
           docking_falling_ = false;
           injectBool("DOCKING_FALLING", docking_falling_);
           dfInnerRadius_ = dfvAlignDepth_[nPhaseCount_ - 1].inner_radius;
