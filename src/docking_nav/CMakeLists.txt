@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   nav_msgs
   ros_helm
+  roslib
   roscpp
   sensor_msgs
   std_msgs
@@ -21,7 +22,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS filesystem system)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -111,7 +112,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   CATKIN_DEPENDS common_msgs docking_optical_msgs geometry_msgs nav_msgs
-                 ros_helm roscpp sensor_msgs std_msgs tf2 tf2_ros
+                 ros_helm roslib roscpp sensor_msgs std_msgs tf2 tf2_ros
 )
 
 ###########
@@ -122,6 +123,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   include
+  ${Boost_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -160,6 +162,7 @@ add_dependencies(docking_nav_main_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${cat
 ## Specify libraries to link a library or executable target against
 target_link_libraries(docking_nav_main_node
   ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 #############

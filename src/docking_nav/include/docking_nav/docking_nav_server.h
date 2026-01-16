@@ -16,6 +16,7 @@ public:
       std::function<void(const std::string &, bool value)>;
   using StringCommandCallback =
       std::function<void(const std::string &, const std::string &)>;
+  using DebugLogCallback = std::function<void(const std::string &)>;
 
   struct Outputs
   {
@@ -29,6 +30,7 @@ public:
   bool initialize(ros::NodeHandle &private_nh);
   void setCommandCallbacks(BoolCommandCallback bool_callback,
                            StringCommandCallback string_callback);
+  void setDebugLogCallback(DebugLogCallback debug_callback);
 
   void setOpticalMeasurement(
       const docking_optical_msgs::OpticalMeasurement &msg);
@@ -72,6 +74,7 @@ private:
 
   BoolCommandCallback bool_callback_;
   StringCommandCallback string_callback_;
+  DebugLogCallback debug_log_callback_;
 
   double nav_server_period_{0.1};
   double optical_timeout_sec_{0.5};

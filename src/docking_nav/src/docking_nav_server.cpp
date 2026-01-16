@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iterator>
+#include <sstream>
 #include <set>
 
 namespace
@@ -55,6 +56,11 @@ void DockingNavServer::setCommandCallbacks(BoolCommandCallback bool_callback,
   string_callback_ = std::move(string_callback);
 }
 
+void DockingNavServer::setDebugLogCallback(DebugLogCallback debug_callback)
+{
+  debug_log_callback_ = std::move(debug_callback);
+}
+
 void DockingNavServer::setOpticalMeasurement(
     const docking_optical_msgs::OpticalMeasurement &msg)
 {
@@ -77,6 +83,20 @@ void DockingNavServer::setOpticalMeasurement(
                                                       << " fallback=("
                                                       << fallback_x_ << ","
                                                       << fallback_y_ << ")");
+  static ros::Time last_log_time;
+  const ros::Time now = ros::Time::now();
+  if (debug_log_callback_ && (now - last_log_time).toSec() >= 1.0)
+  {
+    last_log_time = now;
+    std::ostringstream stream;
+    stream << "[docking_nav] Optical measurement valid="
+           << (bDataFlag_ ? "true" : "false")
+           << " d_heading_deg=" << dfOpticalNavLoc_[0]
+           << " theta_x_deg=" << dfOpticalNavLoc_[1]
+           << " theta_y_deg=" << dfOpticalNavLoc_[2]
+           << " fallback=(" << fallback_x_ << "," << fallback_y_ << ")";
+    debug_log_callback_(stream.str());
+  }
 }
 
 void DockingNavServer::setNavHeading(double heading_deg)
@@ -142,6 +162,16 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
     ROS_DEBUG_STREAM_THROTTLE(
         1.0, "[docking_nav] Using fallback optical XY=(" << fallback_x_ << ","
                                                          << fallback_y_ << ")");
+    static ros::Time last_fallback_log_time;
+    const ros::Time now = ros::Time::now();
+    if (debug_log_callback_ && (now - last_fallback_log_time).toSec() >= 1.0)
+    {
+      last_fallback_log_time = now;
+      std::ostringstream stream;
+      stream << "[docking_nav] Using fallback optical XY=(" << fallback_x_
+             << "," << fallback_y_ << ")";
+      debug_log_callback_(stream.str());
+    }
   }
 
   dfCameraDepth_ = dfNavDepth_ + m_dfDepthBias_ + m_dfDepthCameraBias_;
@@ -181,6 +211,15 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
     fillOpticalXY(outputs, 0.0, 0.0, stamp);
     ROS_DEBUG_STREAM_THROTTLE(
         2.0, "[docking_nav] Mode=" << mode_ << " (no docking logic)");
+    static ros::Time last_mode_log_time;
+    const ros::Time now = ros::Time::now();
+    if (debug_log_callback_ && (now - last_mode_log_time).toSec() >= 2.0)
+    {
+      last_mode_log_time = now;
+      std::ostringstream stream;
+      stream << "[docking_nav] Mode=" << mode_ << " (no docking logic)";
+      debug_log_callback_(stream.str());
+    }
   }
 
   if (last_phase_count_ != nPhaseCount_)
@@ -384,6 +423,17 @@ void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
                                               << ") distance=" << distance_
                                               << " heading=" << dfNavHeading_
                                               << " depth=" << dfNavDepth_);
+  static ros::Time last_xy_log_time;
+  const ros::Time now = ros::Time::now();
+  if (debug_log_callback_ && (now - last_xy_log_time).toSec() >= 1.0)
+  {
+    last_xy_log_time = now;
+    std::ostringstream stream;
+    stream << "[docking_nav] Computed next_xy=(" << dfNextX << "," << dfNextY
+           << ") distance=" << distance_ << " heading=" << dfNavHeading_
+           << " depth=" << dfNavDepth_;
+    debug_log_callback_(stream.str());
+  }
 
   if (nPhaseCount_ > 0 && nPhaseCount_ < nPhaseNum_)
   {
