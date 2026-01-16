@@ -70,7 +70,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
-        depth = 76
+        depth = 77
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
@@ -175,7 +175,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
-        depth = 76
+        depth = 77
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
@@ -328,7 +328,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DETECT_DEPTH_UPDATE
 
-        depth = 77.3
+        depth = 77
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
