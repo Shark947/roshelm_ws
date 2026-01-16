@@ -1,0 +1,850 @@
+0.000 [docking_nav] Publish bool command CONSTHEIGHT=true
+0.000 [docking_nav] Publish bool command STATIONING=true
+0.000 [docking_nav] Publish bool command DOCKING_FALLING=false
+0.000 [docking_nav] Publish bool command MOOS_MANUAL_OVERIDE=false
+0.000 [docking_nav] Publish bool command DOCKINGFAILED=false
+1.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+1.040 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-29.9036 theta_y_deg=-29.3222 fallback=(0,0)
+2.000 [docking_nav] Mode=LIFT (no docking logic)
+2.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+2.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-29.7464 theta_y_deg=-28.9785 fallback=(0,0)
+3.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+3.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-29.6352 theta_y_deg=-28.2403 fallback=(0,0)
+4.000 [docking_nav] Mode=LIFT (no docking logic)
+4.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+4.070 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-30.5918 theta_y_deg=-28.3233 fallback=(0,0)
+5.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+5.070 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-32.6191 theta_y_deg=-29.4035 fallback=(0,0)
+6.000 [docking_nav] Mode=LIFT (no docking logic)
+6.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+6.110 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-34.5878 theta_y_deg=-30.4741 fallback=(0,0)
+6.600 [docking_nav] Using fallback optical XY=(0,0)
+7.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+7.130 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+7.600 [docking_nav] Using fallback optical XY=(0,0)
+8.000 [docking_nav] Mode=LIFT (no docking logic)
+8.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+8.150 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+8.600 [docking_nav] Using fallback optical XY=(0,0)
+9.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+9.170 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+9.600 [docking_nav] Using fallback optical XY=(0,0)
+10.000 [docking_nav] Mode=LIFT (no docking logic)
+10.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+10.170 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+10.600 [docking_nav] Using fallback optical XY=(0,0)
+11.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+11.190 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+11.600 [docking_nav] Using fallback optical XY=(0,0)
+12.000 [docking_nav] Mode=LIFT (no docking logic)
+12.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+12.190 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+12.600 [docking_nav] Using fallback optical XY=(0,0)
+13.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+13.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+13.600 [docking_nav] Using fallback optical XY=(0,0)
+14.000 [docking_nav] Mode=LIFT (no docking logic)
+14.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+14.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+14.600 [docking_nav] Using fallback optical XY=(0,0)
+15.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+15.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+15.600 [docking_nav] Using fallback optical XY=(0,0)
+16.000 [docking_nav] Mode=LIFT (no docking logic)
+16.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+16.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+16.600 [docking_nav] Using fallback optical XY=(0,0)
+17.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+17.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+17.600 [docking_nav] Using fallback optical XY=(0,0)
+18.000 [docking_nav] Mode=LIFT (no docking logic)
+18.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+18.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+18.600 [docking_nav] Using fallback optical XY=(0,0)
+19.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+19.230 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+19.600 [docking_nav] Using fallback optical XY=(0,0)
+20.000 [docking_nav] Mode=LIFT (no docking logic)
+20.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+20.250 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+20.600 [docking_nav] Using fallback optical XY=(0,0)
+21.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+21.270 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+21.600 [docking_nav] Using fallback optical XY=(0,0)
+22.000 [docking_nav] Mode=LIFT (no docking logic)
+22.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+22.290 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+22.600 [docking_nav] Using fallback optical XY=(0,0)
+23.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+23.300 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+23.600 [docking_nav] Using fallback optical XY=(0,0)
+24.000 [docking_nav] Mode=LIFT (no docking logic)
+24.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+24.310 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+24.600 [docking_nav] Using fallback optical XY=(0,0)
+25.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+25.320 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+25.600 [docking_nav] Using fallback optical XY=(0,0)
+26.000 [docking_nav] Mode=LIFT (no docking logic)
+26.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+26.350 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+26.600 [docking_nav] Using fallback optical XY=(0,0)
+27.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+27.360 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+27.600 [docking_nav] Using fallback optical XY=(0,0)
+28.000 [docking_nav] Mode=LIFT (no docking logic)
+28.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+28.370 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+28.600 [docking_nav] Using fallback optical XY=(0,0)
+29.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+29.380 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+29.600 [docking_nav] Using fallback optical XY=(0,0)
+30.000 [docking_nav] Mode=LIFT (no docking logic)
+30.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+30.390 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+30.600 [docking_nav] Using fallback optical XY=(0,0)
+31.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+31.410 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+31.600 [docking_nav] Using fallback optical XY=(0,0)
+32.000 [docking_nav] Mode=LIFT (no docking logic)
+32.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+32.410 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+32.600 [docking_nav] Using fallback optical XY=(0,0)
+33.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+33.410 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+33.600 [docking_nav] Using fallback optical XY=(0,0)
+34.000 [docking_nav] Mode=LIFT (no docking logic)
+34.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+34.420 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+34.600 [docking_nav] Using fallback optical XY=(0,0)
+35.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+35.470 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+35.600 [docking_nav] Using fallback optical XY=(0,0)
+36.000 [docking_nav] Mode=LIFT (no docking logic)
+36.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+36.470 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+36.600 [docking_nav] Using fallback optical XY=(0,0)
+37.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+37.500 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+37.600 [docking_nav] Using fallback optical XY=(0,0)
+38.000 [docking_nav] Mode=LIFT (no docking logic)
+38.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+38.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+38.600 [docking_nav] Using fallback optical XY=(0,0)
+39.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+39.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+39.600 [docking_nav] Using fallback optical XY=(0,0)
+40.000 [docking_nav] Mode=LIFT (no docking logic)
+40.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+40.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+40.600 [docking_nav] Using fallback optical XY=(0,0)
+41.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+41.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+41.600 [docking_nav] Using fallback optical XY=(0,0)
+42.000 [docking_nav] Mode=LIFT (no docking logic)
+42.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+42.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+42.600 [docking_nav] Using fallback optical XY=(0,0)
+43.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+43.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+43.600 [docking_nav] Using fallback optical XY=(0,0)
+44.000 [docking_nav] Mode=LIFT (no docking logic)
+44.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+44.540 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+44.600 [docking_nav] Using fallback optical XY=(0,0)
+45.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+45.570 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+45.600 [docking_nav] Using fallback optical XY=(0,0)
+46.000 [docking_nav] Mode=LIFT (no docking logic)
+46.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+46.570 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+46.600 [docking_nav] Using fallback optical XY=(0,0)
+47.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+47.570 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+47.600 [docking_nav] Using fallback optical XY=(0,0)
+48.000 [docking_nav] Mode=LIFT (no docking logic)
+48.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+48.570 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+48.600 [docking_nav] Using fallback optical XY=(0,0)
+49.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+49.600 [docking_nav] Using fallback optical XY=(0,0)
+49.600 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+50.000 [docking_nav] Mode=LIFT (no docking logic)
+50.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+50.600 [docking_nav] Using fallback optical XY=(0,0)
+50.610 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+51.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+51.600 [docking_nav] Using fallback optical XY=(0,0)
+51.610 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+52.000 [docking_nav] Mode=LIFT (no docking logic)
+52.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+52.600 [docking_nav] Using fallback optical XY=(0,0)
+52.630 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+53.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+53.600 [docking_nav] Using fallback optical XY=(0,0)
+53.630 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+54.000 [docking_nav] Mode=LIFT (no docking logic)
+54.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+54.600 [docking_nav] Using fallback optical XY=(0,0)
+54.650 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+55.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+55.600 [docking_nav] Using fallback optical XY=(0,0)
+55.650 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+56.000 [docking_nav] Mode=LIFT (no docking logic)
+56.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+56.600 [docking_nav] Using fallback optical XY=(0,0)
+56.670 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+57.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+57.600 [docking_nav] Using fallback optical XY=(0,0)
+57.670 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+58.000 [docking_nav] Mode=LIFT (no docking logic)
+58.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+58.600 [docking_nav] Using fallback optical XY=(0,0)
+58.670 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+59.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+59.600 [docking_nav] Using fallback optical XY=(0,0)
+59.670 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+60.000 [docking_nav] Mode=LIFT (no docking logic)
+60.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+60.600 [docking_nav] Using fallback optical XY=(0,0)
+60.680 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+61.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+61.600 [docking_nav] Using fallback optical XY=(0,0)
+61.710 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+62.000 [docking_nav] Mode=LIFT (no docking logic)
+62.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+62.600 [docking_nav] Using fallback optical XY=(0,0)
+62.730 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+63.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+63.600 [docking_nav] Using fallback optical XY=(0,0)
+63.730 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+64.000 [docking_nav] Mode=LIFT (no docking logic)
+64.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+64.600 [docking_nav] Using fallback optical XY=(0,0)
+64.730 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+65.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+65.600 [docking_nav] Using fallback optical XY=(0,0)
+65.730 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+66.000 [docking_nav] Mode=LIFT (no docking logic)
+66.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+66.600 [docking_nav] Using fallback optical XY=(0,0)
+66.740 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+67.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+67.600 [docking_nav] Using fallback optical XY=(0,0)
+67.750 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+68.000 [docking_nav] Mode=LIFT (no docking logic)
+68.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+68.600 [docking_nav] Using fallback optical XY=(0,0)
+68.760 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+69.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+69.600 [docking_nav] Using fallback optical XY=(0,0)
+69.770 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+70.000 [docking_nav] Mode=LIFT (no docking logic)
+70.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+70.600 [docking_nav] Using fallback optical XY=(0,0)
+70.790 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+71.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+71.600 [docking_nav] Using fallback optical XY=(0,0)
+71.800 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+72.000 [docking_nav] Mode=LIFT (no docking logic)
+72.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+72.600 [docking_nav] Using fallback optical XY=(0,0)
+72.830 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+73.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+73.600 [docking_nav] Using fallback optical XY=(0,0)
+73.860 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+74.000 [docking_nav] Mode=LIFT (no docking logic)
+74.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+74.600 [docking_nav] Using fallback optical XY=(0,0)
+74.870 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+75.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+75.600 [docking_nav] Using fallback optical XY=(0,0)
+75.880 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+76.000 [docking_nav] Mode=LIFT (no docking logic)
+76.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+76.600 [docking_nav] Using fallback optical XY=(0,0)
+76.910 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+77.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+77.600 [docking_nav] Using fallback optical XY=(0,0)
+77.910 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+78.000 [docking_nav] Mode=LIFT (no docking logic)
+78.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+78.600 [docking_nav] Using fallback optical XY=(0,0)
+78.920 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+79.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+79.930 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-7.02662 theta_y_deg=-30.2698 fallback=(0,0)
+80.000 [docking_nav] Mode=LIFT (no docking logic)
+80.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+80.950 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-4.55278 theta_y_deg=-29.9222 fallback=(0,0)
+81.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+81.400 [docking_nav] Publish bool command CONSTHEIGHT=true
+81.400 [docking_nav] Computed next_xy=(0.826769,1.4492) distance=1.66845 heading=17.774 depth=76.0314
+81.970 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-5.20854 theta_y_deg=-29.6799 fallback=(0,0)
+82.000 [docking_nav] Outputs: phase=0 optical_xy=(0.728758,1.46727)
+82.400 [docking_nav] Computed next_xy=(0.75944,1.44437) distance=1.63186 heading=17.022 depth=76.0317
+82.990 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=0.315377 theta_y_deg=-29.7481 fallback=(0,0)
+83.000 [docking_nav] Outputs: phase=0 optical_xy=(0.446962,1.55923)
+83.400 [docking_nav] Computed next_xy=(0.310343,1.61229) distance=1.64189 heading=16.2378 depth=76.0322
+84.000 [docking_nav] Outputs: phase=0 optical_xy=(0.157551,1.62788)
+84.010 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=3.6237 theta_y_deg=-28.9968 fallback=(0,0)
+84.400 [docking_nav] Computed next_xy=(0.239766,1.52925) distance=1.54793 heading=15.3783 depth=76.0328
+85.000 [docking_nav] Outputs: phase=0 optical_xy=(0.446854,1.33944)
+85.010 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=1.83818 theta_y_deg=-27.1888 fallback=(0,0)
+85.400 [docking_nav] Computed next_xy=(0.533634,1.26235) distance=1.37051 heading=14.5009 depth=76.0334
+86.000 [docking_nav] Outputs: phase=0 optical_xy=(0.536865,1.55449)
+86.030 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-2.76523 theta_y_deg=-30.3711 fallback=(0,0)
+86.400 [docking_nav] Computed next_xy=(0.500915,1.61402) distance=1.68996 heading=13.5981 depth=76.0339
+87.000 [docking_nav] Outputs: phase=0 optical_xy=(-0.119127,1.72667)
+87.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=1.74623 theta_y_deg=-30.3436 fallback=(0,0)
+87.400 [docking_nav] Computed next_xy=(0.502477,1.57786) distance=1.65594 heading=12.611 depth=76.0342
+88.000 [docking_nav] Outputs: phase=0 optical_xy=(0.487607,1.5571)
+88.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-3.13883 theta_y_deg=-29.7688 fallback=(0,0)
+88.400 [docking_nav] Computed next_xy=(0.47775,1.54429) distance=1.6165 heading=11.5801 depth=76.0343
+89.000 [docking_nav] Outputs: phase=0 optical_xy=(0.458592,1.5274)
+89.080 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-3.3544 theta_y_deg=-29.1373 fallback=(0,0)
+89.400 [docking_nav] Computed next_xy=(0.451294,1.51405) distance=1.57987 heading=10.4511 depth=76.0343
+90.000 [docking_nav] Outputs: phase=0 optical_xy=(0.432883,1.49654)
+90.080 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-3.48941 theta_y_deg=-28.5763 fallback=(0,0)
+90.400 [docking_nav] Computed next_xy=(0.413051,1.48776) distance=1.54404 heading=9.27927 depth=76.0341
+91.000 [docking_nav] Outputs: phase=0 optical_xy=(0.377608,1.45789)
+91.120 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=0.701714 theta_y_deg=-24.3295 fallback=(0,0)
+91.400 [docking_nav] Computed next_xy=(0.427561,1.44773) distance=1.50955 heading=8.05473 depth=76.0339
+92.000 [docking_nav] Outputs: phase=0 optical_xy=(0.337657,1.42176)
+92.150 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-3.30246 theta_y_deg=-27.2982 fallback=(0,0)
+92.400 [docking_nav] Computed next_xy=(-0.0684381,1.19675) distance=1.19871 heading=6.74944 depth=76.0336
+93.000 [docking_nav] Outputs: phase=0 optical_xy=(0.0907462,1.15274)
+93.150 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-0.153569 theta_y_deg=-22.3609 fallback=(0,0)
+93.400 [docking_nav] Computed next_xy=(0.076956,1.09517) distance=1.09787 heading=5.30078 depth=76.0333
+94.000 [docking_nav] Outputs: phase=0 optical_xy=(0.32373,0.92864)
+94.150 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=3.62804 theta_y_deg=-14.3527 fallback=(0,0)
+94.400 [docking_nav] Computed next_xy=(0.300554,0.941935) distance=0.988724 heading=3.73847 depth=76.033
+95.000 [docking_nav] Outputs: phase=0 optical_xy=(-0.133644,0.72481)
+95.150 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=4.32114 theta_y_deg=-12.2317 fallback=(0,0)
+95.400 [docking_nav] Computed next_xy=(0.313761,0.633746) distance=0.707163 heading=1.88186 depth=76.0329
+96.000 [docking_nav] Outputs: phase=0 optical_xy=(-0.0836763,0.538505)
+96.170 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=3.87267 theta_y_deg=-10.9579 fallback=(0,0)
+96.400 [docking_nav] Publish bool command CONSTHEIGHT=false
+96.400 [docking_nav] Computed next_xy=(-0.191271,0.493608) distance=0.529371 heading=359.829 depth=76.0328
+96.400 [docking_nav] Publish bool command STATIONING=true
+96.500 [docking_nav] Publish bool command STATIONING=true
+96.600 [docking_nav] Publish bool command STATIONING=false
+96.700 [docking_nav] Publish bool command STATIONING=false
+96.800 [docking_nav] Publish bool command STATIONING=false
+96.900 [docking_nav] Publish bool command STATIONING=false
+97.000 [docking_nav] Publish bool command STATIONING=false
+97.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.181713,0.42656)
+97.100 [docking_nav] Publish bool command STATIONING=false
+97.190 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=3.27117 theta_y_deg=-8.29565 fallback=(0,0)
+97.200 [docking_nav] Publish bool command STATIONING=false
+97.300 [docking_nav] Publish bool command STATIONING=false
+97.400 [docking_nav] Computed next_xy=(0.412659,0.590948) distance=0.720768 heading=359.045 depth=76.086
+97.500 [docking_nav] Publish bool command STATIONING=false
+97.600 [docking_nav] Publish bool command STATIONING=false
+97.800 [docking_nav] Publish bool command STATIONING=false
+97.900 [docking_nav] Publish bool command STATIONING=false
+98.000 [docking_nav] Publish bool command STATIONING=false
+98.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.0340754,0.361692)
+98.100 [docking_nav] Publish bool command STATIONING=false
+98.190 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=1.52632 theta_y_deg=-7.48502 fallback=(0,0)
+98.200 [docking_nav] Publish bool command STATIONING=false
+98.300 [docking_nav] Publish bool command STATIONING=false
+98.400 [docking_nav] Computed next_xy=(0.458371,0.412944) distance=0.61695 heading=6.07457 depth=76.3309
+98.400 [docking_nav] Publish bool command STATIONING=false
+98.500 [docking_nav] Publish bool command STATIONING=false
+98.600 [docking_nav] Publish bool command STATIONING=false
+98.700 [docking_nav] Publish bool command STATIONING=false
+98.900 [docking_nav] Publish bool command STATIONING=false
+99.000 [docking_nav] Publish bool command STATIONING=true
+99.000 [docking_nav] Outputs: phase=3 optical_xy=(1.17058,0.42211)
+99.100 [docking_nav] Publish bool command STATIONING=true
+99.190 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-28.2867 theta_y_deg=-10.2495 fallback=(0,0)
+99.200 [docking_nav] Publish bool command STATIONING=true
+99.300 [docking_nav] Publish bool command STATIONING=true
+99.400 [docking_nav] Computed next_xy=(1.01651,0.0422706) distance=1.01738 heading=17.7942 depth=76.5723
+99.400 [docking_nav] Publish bool command STATIONING=true
+99.500 [docking_nav] Publish bool command STATIONING=true
+99.600 [docking_nav] Publish bool command STATIONING=true
+99.700 [docking_nav] Publish bool command STATIONING=true
+99.800 [docking_nav] Publish bool command STATIONING=true
+99.900 [docking_nav] Publish bool command STATIONING=true
+100.000 [docking_nav] Publish bool command STATIONING=true
+100.000 [docking_nav] Outputs: phase=3 optical_xy=(1.34861,-0.257722)
+100.100 [docking_nav] Publish bool command STATIONING=true
+100.200 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-21.6311 theta_y_deg=-10.1296 fallback=(0,0)
+100.300 [docking_nav] Publish bool command STATIONING=true
+100.400 [docking_nav] Computed next_xy=(1.03929,-0.0470773) distance=1.04036 heading=23.9169 depth=76.7782
+100.400 [docking_nav] Publish bool command STATIONING=true
+100.600 [docking_nav] Publish bool command STATIONING=true
+101.000 [docking_nav] Publish bool command STATIONING=false
+101.000 [docking_nav] Outputs: phase=3 optical_xy=(0.50028,0.292461)
+101.200 [docking_nav] Publish bool command STATIONING=false
+101.220 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-21.3627 theta_y_deg=-8.90233 fallback=(0,0)
+101.300 [docking_nav] Publish bool command STATIONING=true
+101.400 [docking_nav] Computed next_xy=(0.784642,-0.0887415) distance=0.789644 heading=22.5621 depth=76.9423
+101.600 [docking_nav] Publish bool command STATIONING=false
+101.700 [docking_nav] Publish bool command STATIONING=false
+101.900 [docking_nav] Publish bool command STATIONING=true
+102.000 [docking_nav] Outputs: phase=3 optical_xy=(0.874909,-0.32707)
+102.100 [docking_nav] Publish bool command STATIONING=false
+102.200 [docking_nav] Publish bool command STATIONING=true
+102.230 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-33.8223 theta_y_deg=-0.0663806 fallback=(0,0)
+102.300 [docking_nav] Publish bool command STATIONING=true
+102.400 [docking_nav] Computed next_xy=(1.2484,-0.492549) distance=1.34205 heading=21.1988 depth=77.0635
+102.400 [docking_nav] Publish bool command STATIONING=true
+102.500 [docking_nav] Publish bool command STATIONING=true
+102.600 [docking_nav] Publish bool command STATIONING=true
+102.700 [docking_nav] Publish bool command STATIONING=true
+102.800 [docking_nav] Publish bool command STATIONING=true
+102.900 [docking_nav] Publish bool command STATIONING=true
+103.000 [docking_nav] Publish bool command STATIONING=true
+103.000 [docking_nav] Outputs: phase=3 optical_xy=(1.23073,-0.302336)
+103.250 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-20.693 theta_y_deg=3.36651 fallback=(0,0)
+103.400 [docking_nav] Computed next_xy=(0.519474,-0.319486) distance=0.609856 heading=13.3943 depth=77.1427
+103.400 [docking_nav] Publish bool command STATIONING=false
+103.500 [docking_nav] Publish bool command STATIONING=false
+103.600 [docking_nav] Publish bool command STATIONING=false
+103.900 [docking_nav] Publish bool command STATIONING=false
+104.000 [docking_nav] Outputs: phase=3 optical_xy=(0.270652,-0.0328908)
+104.250 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-0.0876422 theta_y_deg=-5.09963 fallback=(0,0)
+104.400 [docking_nav] Computed next_xy=(0.182699,0.00948718) distance=0.182945 heading=5.21776 depth=77.1835
+104.500 [docking_nav] Publish bool command STATIONING=true
+104.600 [docking_nav] Publish bool command STATIONING=true
+104.800 [docking_nav] Publish bool command STATIONING=true
+104.900 [docking_nav] Publish bool command STATIONING=true
+105.000 [docking_nav] Outputs: phase=3 optical_xy=(0.941638,0.0184217)
+105.100 [docking_nav] Publish bool command STATIONING=false
+105.200 [docking_nav] Publish bool command STATIONING=false
+105.270 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-21.688 theta_y_deg=-2.84617 fallback=(0,0)
+105.400 [docking_nav] Computed next_xy=(0.0664056,0.0679058) distance=0.0949784 heading=4.75642 depth=77.1913
+105.900 [docking_nav] Publish bool command STATIONING=false
+106.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.0314171,0.147139)
+106.280 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-8.61247 theta_y_deg=0.37198 fallback=(0,0)
+106.400 [docking_nav] Computed next_xy=(0.0449379,-0.0195957) distance=0.0490246 heading=6.33517 depth=77.1729
+106.600 [docking_nav] Publish bool command STATIONING=false
+106.700 [docking_nav] Publish bool command STATIONING=true
+106.800 [docking_nav] Publish bool command STATIONING=false
+106.900 [docking_nav] Publish bool command STATIONING=false
+107.000 [docking_nav] Publish bool command STATIONING=false
+107.000 [docking_nav] Outputs: phase=3 optical_xy=(0.325229,-0.379702)
+107.310 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-1.45176 theta_y_deg=-8.09049 fallback=(0,0)
+107.400 [docking_nav] Computed next_xy=(0.167324,0.336343) distance=0.375664 heading=14.385 depth=77.1375
+107.400 [docking_nav] Publish bool command STATIONING=false
+107.600 [docking_nav] Publish bool command STATIONING=false
+107.700 [docking_nav] Publish bool command STATIONING=false
+107.800 [docking_nav] Publish bool command STATIONING=false
+107.900 [docking_nav] Publish bool command STATIONING=false
+108.000 [docking_nav] Publish bool command STATIONING=false
+108.000 [docking_nav] Outputs: phase=3 optical_xy=(0.263404,0.308976)
+108.300 [docking_nav] Publish bool command STATIONING=false
+108.330 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-14.0428 theta_y_deg=-2.65347 fallback=(0,0)
+108.400 [docking_nav] Computed next_xy=(0.380049,0.0245329) distance=0.38084 heading=24.1195 depth=77.0944
+108.400 [docking_nav] Publish bool command STATIONING=false
+108.500 [docking_nav] Publish bool command STATIONING=false
+108.600 [docking_nav] Publish bool command STATIONING=false
+108.700 [docking_nav] Publish bool command STATIONING=false
+108.800 [docking_nav] Publish bool command STATIONING=false
+108.900 [docking_nav] Publish bool command STATIONING=true
+109.000 [docking_nav] Publish bool command STATIONING=false
+109.000 [docking_nav] Outputs: phase=3 optical_xy=(0.384023,-0.301985)
+109.100 [docking_nav] Publish bool command STATIONING=true
+109.300 [docking_nav] Publish bool command STATIONING=false
+109.350 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-9.24306 theta_y_deg=-3.7857 fallback=(0,0)
+109.400 [docking_nav] Computed next_xy=(0.30552,-0.0392492) distance=0.308031 heading=35.5843 depth=77.0522
+109.400 [docking_nav] Publish bool command STATIONING=false
+109.500 [docking_nav] Publish bool command STATIONING=true
+109.600 [docking_nav] Publish bool command STATIONING=false
+109.700 [docking_nav] Publish bool command STATIONING=false
+109.800 [docking_nav] Publish bool command STATIONING=false
+110.000 [docking_nav] Outputs: phase=3 optical_xy=(0.177457,-0.125185)
+110.370 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-0.991476 theta_y_deg=7.61138 fallback=(0,0)
+110.400 [docking_nav] Computed next_xy=(-0.150316,-0.199378) distance=0.249693 heading=44.3928 depth=77.0169
+110.600 [docking_nav] Publish bool command STATIONING=false
+110.800 [docking_nav] Publish bool command STATIONING=false
+110.900 [docking_nav] Publish bool command STATIONING=false
+111.000 [docking_nav] Publish bool command STATIONING=false
+111.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.322544,-0.138923)
+111.100 [docking_nav] Publish bool command STATIONING=false
+111.200 [docking_nav] Publish bool command STATIONING=false
+111.300 [docking_nav] Publish bool command STATIONING=false
+111.370 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=6.87942 theta_y_deg=11.6694 fallback=(0,0)
+111.400 [docking_nav] Computed next_xy=(-0.44657,-0.0483502) distance=0.44918 heading=53.5287 depth=76.9921
+111.400 [docking_nav] Publish bool command STATIONING=false
+111.700 [docking_nav] Publish bool command STATIONING=false
+111.800 [docking_nav] Publish bool command STATIONING=false
+111.900 [docking_nav] Publish bool command STATIONING=false
+112.000 [docking_nav] Publish bool command STATIONING=false
+112.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.476003,0.0198498)
+112.100 [docking_nav] Publish bool command STATIONING=false
+112.200 [docking_nav] Publish bool command STATIONING=false
+112.300 [docking_nav] Publish bool command STATIONING=false
+112.390 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=3.77425 theta_y_deg=9.7346 fallback=(0,0)
+112.400 [docking_nav] Computed next_xy=(-0.345166,-0.0410513) distance=0.347598 heading=62.1841 depth=76.9788
+112.400 [docking_nav] Publish bool command STATIONING=false
+112.500 [docking_nav] Publish bool command STATIONING=false
+112.800 [docking_nav] Publish bool command STATIONING=false
+112.900 [docking_nav] Publish bool command STATIONING=false
+113.000 [docking_nav] Publish bool command STATIONING=false
+113.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.501216,-0.0250517)
+113.100 [docking_nav] Publish bool command STATIONING=false
+113.200 [docking_nav] Publish bool command STATIONING=false
+113.400 [docking_nav] Computed next_xy=(-0.388662,0.0272296) distance=0.389615 heading=69.6784 depth=76.9768
+113.400 [docking_nav] Publish bool command STATIONING=false
+113.410 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=2.03921 theta_y_deg=9.69541 fallback=(0,0)
+113.700 [docking_nav] Publish bool command STATIONING=false
+113.800 [docking_nav] Publish bool command STATIONING=false
+113.900 [docking_nav] Publish bool command STATIONING=false
+114.000 [docking_nav] Publish bool command STATIONING=false
+114.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.347319,-0.0291238)
+114.100 [docking_nav] Publish bool command STATIONING=false
+114.200 [docking_nav] Publish bool command STATIONING=false
+114.300 [docking_nav] Publish bool command STATIONING=false
+114.400 [docking_nav] Computed next_xy=(-0.585683,0.178797) distance=0.612367 heading=75.8498 depth=76.984
+114.400 [docking_nav] Publish bool command STATIONING=false
+114.420 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=5.98349 theta_y_deg=13.4731 fallback=(0,0)
+114.500 [docking_nav] Publish bool command STATIONING=false
+114.600 [docking_nav] Publish bool command STATIONING=false
+114.700 [docking_nav] Publish bool command STATIONING=false
+114.800 [docking_nav] Publish bool command STATIONING=false
+114.900 [docking_nav] Publish bool command STATIONING=false
+115.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.579895,0.285299)
+115.400 [docking_nav] Computed next_xy=(-0.513247,0.355288) distance=0.624221 heading=80.7002 depth=76.9976
+115.400 [docking_nav] Publish bool command STATIONING=false
+115.430 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=1.99989 theta_y_deg=20.2532 fallback=(0,0)
+115.500 [docking_nav] Publish bool command STATIONING=false
+116.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.576518,0.657548)
+116.400 [docking_nav] Computed next_xy=(-0.573642,0.720071) distance=0.920634 heading=84.4001 depth=77.014
+116.430 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=22.7084 theta_y_deg=15.1306 fallback=(0,0)
+116.900 [docking_nav] Publish bool command STATIONING=true
+117.000 [docking_nav] Publish bool command STATIONING=true
+117.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.569675,0.791505)
+117.100 [docking_nav] Publish bool command STATIONING=true
+117.200 [docking_nav] Publish bool command STATIONING=true
+117.300 [docking_nav] Publish bool command STATIONING=true
+117.400 [docking_nav] Computed next_xy=(-0.564682,0.842896) distance=1.01456 heading=87.3023 depth=77.0301
+117.400 [docking_nav] Publish bool command STATIONING=true
+117.450 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=25.509 theta_y_deg=15.8852 fallback=(0,0)
+117.500 [docking_nav] Publish bool command STATIONING=true
+118.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.71139,0.434121)
+118.400 [docking_nav] Computed next_xy=(-0.753232,0.330032) distance=0.822362 heading=97.7331 depth=77.0447
+118.470 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=12.3857 theta_y_deg=18.012 fallback=(0,0)
+118.700 [docking_nav] Publish bool command STATIONING=true
+118.800 [docking_nav] Publish bool command STATIONING=true
+119.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.222079,0.732393)
+119.400 [docking_nav] Computed next_xy=(-0.284833,1.05795) distance=1.09562 heading=116.441 depth=77.0582
+119.400 [docking_nav] Publish bool command STATIONING=true
+119.500 [docking_nav] Publish bool command STATIONING=true
+119.500 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=30.0859 theta_y_deg=22.671 fallback=(0,0)
+119.600 [docking_nav] Publish bool command STATIONING=true
+119.700 [docking_nav] Publish bool command STATIONING=true
+119.800 [docking_nav] Publish bool command STATIONING=true
+119.900 [docking_nav] Publish bool command STATIONING=true
+120.000 [docking_nav] Publish bool command STATIONING=true
+120.000 [docking_nav] Outputs: phase=3 optical_xy=(0.407565,1.44479)
+120.100 [docking_nav] Publish bool command STATIONING=true
+120.200 [docking_nav] Publish bool command STATIONING=true
+120.300 [docking_nav] Publish bool command STATIONING=true
+120.400 [docking_nav] Computed next_xy=(0.472051,1.50046) distance=1.57296 heading=138.212 depth=77.0676
+120.400 [docking_nav] Publish bool command STATIONING=true
+120.500 [docking_nav] Publish bool command STATIONING=true
+120.500 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=37.9434 theta_y_deg=15.302 fallback=(0,0)
+120.600 [docking_nav] Publish bool command STATIONING=true
+120.700 [docking_nav] Publish bool command STATIONING=true
+120.800 [docking_nav] Publish bool command STATIONING=true
+120.900 [docking_nav] Publish bool command STATIONING=true
+121.000 [docking_nav] Publish bool command STATIONING=true
+121.000 [docking_nav] Outputs: phase=3 optical_xy=(1.30566,0.701719)
+121.100 [docking_nav] Publish bool command STATIONING=true
+121.200 [docking_nav] Publish bool command STATIONING=true
+121.300 [docking_nav] Publish bool command STATIONING=true
+121.400 [docking_nav] Computed next_xy=(1.32497,-0.272658) distance=1.35274 heading=158.312 depth=77.0727
+121.400 [docking_nav] Publish bool command STATIONING=true
+121.500 [docking_nav] Publish bool command STATIONING=true
+121.530 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=36.4719 theta_y_deg=-5.28165 fallback=(0,0)
+121.600 [docking_nav] Publish bool command STATIONING=true
+121.700 [docking_nav] Publish bool command STATIONING=true
+121.800 [docking_nav] Publish bool command STATIONING=true
+121.900 [docking_nav] Publish bool command STATIONING=true
+122.000 [docking_nav] Publish bool command STATIONING=true
+122.000 [docking_nav] Outputs: phase=3 optical_xy=(1.18693,-0.103425)
+122.100 [docking_nav] Publish bool command STATIONING=true
+122.200 [docking_nav] Publish bool command STATIONING=true
+122.300 [docking_nav] Publish bool command STATIONING=true
+122.400 [docking_nav] Computed next_xy=(1.34927,-0.235707) distance=1.3697 heading=174.899 depth=77.0792
+122.400 [docking_nav] Publish bool command STATIONING=true
+122.500 [docking_nav] Publish bool command STATIONING=true
+122.550 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=37.6499 theta_y_deg=-10.5307 fallback=(0,0)
+122.600 [docking_nav] Publish bool command STATIONING=true
+122.700 [docking_nav] Publish bool command STATIONING=true
+122.800 [docking_nav] Publish bool command STATIONING=true
+122.900 [docking_nav] Publish bool command STATIONING=true
+123.000 [docking_nav] Publish bool command STATIONING=true
+123.000 [docking_nav] Outputs: phase=3 optical_xy=(0.857236,-0.944874)
+123.100 [docking_nav] Publish bool command STATIONING=true
+123.200 [docking_nav] Publish bool command STATIONING=true
+123.300 [docking_nav] Publish bool command STATIONING=true
+123.400 [docking_nav] Computed next_xy=(0.562654,-1.16959) distance=1.29789 heading=191.559 depth=77.0805
+123.400 [docking_nav] Publish bool command STATIONING=true
+123.500 [docking_nav] Publish bool command STATIONING=true
+123.590 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=23.3003 theta_y_deg=-29.5729 fallback=(0,0)
+123.600 [docking_nav] Publish bool command STATIONING=true
+123.700 [docking_nav] Publish bool command STATIONING=true
+123.800 [docking_nav] Publish bool command STATIONING=true
+123.900 [docking_nav] Publish bool command STATIONING=true
+124.000 [docking_nav] Publish bool command STATIONING=true
+124.000 [docking_nav] Outputs: phase=3 optical_xy=(0.47933,-1.04215)
+124.100 [docking_nav] Publish bool command STATIONING=true
+124.200 [docking_nav] Publish bool command STATIONING=true
+124.300 [docking_nav] Publish bool command STATIONING=true
+124.400 [docking_nav] Computed next_xy=(0.615753,-1.24276) distance=1.38694 heading=207.624 depth=77.0775
+124.400 [docking_nav] Publish bool command STATIONING=true
+124.500 [docking_nav] Publish bool command STATIONING=true
+124.600 [docking_nav] Publish bool command STATIONING=true
+124.630 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=29.9808 theta_y_deg=-25.4872 fallback=(0,0)
+124.700 [docking_nav] Publish bool command STATIONING=true
+124.800 [docking_nav] Publish bool command STATIONING=true
+124.900 [docking_nav] Publish bool command STATIONING=true
+125.000 [docking_nav] Publish bool command STATIONING=true
+125.000 [docking_nav] Outputs: phase=3 optical_xy=(0.39388,-1.46161)
+125.100 [docking_nav] Publish bool command STATIONING=true
+125.200 [docking_nav] Publish bool command STATIONING=true
+125.300 [docking_nav] Publish bool command STATIONING=true
+125.400 [docking_nav] Computed next_xy=(0.182427,-1.55777) distance=1.56842 heading=222.727 depth=77.0708
+125.400 [docking_nav] Publish bool command STATIONING=true
+125.500 [docking_nav] Publish bool command STATIONING=true
+125.600 [docking_nav] Publish bool command STATIONING=true
+125.650 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=35.5431 theta_y_deg=-29.2507 fallback=(0,0)
+125.700 [docking_nav] Publish bool command STATIONING=true
+125.800 [docking_nav] Publish bool command STATIONING=true
+125.900 [docking_nav] Publish bool command STATIONING=true
+126.000 [docking_nav] Publish bool command STATIONING=true
+126.000 [docking_nav] Outputs: phase=3 optical_xy=(0.0622453,-1.66552)
+126.100 [docking_nav] Publish bool command STATIONING=true
+126.200 [docking_nav] Publish bool command STATIONING=true
+126.300 [docking_nav] Publish bool command STATIONING=true
+126.400 [docking_nav] Computed next_xy=(-0.0961084,-1.74662) distance=1.74926 heading=236.44 depth=77.0616
+126.400 [docking_nav] Publish bool command STATIONING=true
+126.500 [docking_nav] Publish bool command STATIONING=true
+126.600 [docking_nav] Publish bool command STATIONING=true
+126.670 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=31.4665 theta_y_deg=-30.445 fallback=(0,0)
+126.700 [docking_nav] Publish bool command STATIONING=true
+126.800 [docking_nav] Publish bool command STATIONING=true
+126.900 [docking_nav] Publish bool command STATIONING=true
+127.000 [docking_nav] Publish bool command STATIONING=true
+127.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.43663,-1.52015)
+127.100 [docking_nav] Publish bool command STATIONING=true
+127.200 [docking_nav] Publish bool command STATIONING=true
+127.300 [docking_nav] Publish bool command STATIONING=true
+127.400 [docking_nav] Computed next_xy=(-0.630836,-1.13783) distance=1.301 heading=248.314 depth=77.0516
+127.400 [docking_nav] Publish bool command STATIONING=true
+127.500 [docking_nav] Publish bool command STATIONING=true
+127.600 [docking_nav] Publish bool command STATIONING=true
+127.670 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=27.2523 theta_y_deg=-29.0192 fallback=(0,0)
+127.700 [docking_nav] Publish bool command STATIONING=true
+127.800 [docking_nav] Publish bool command STATIONING=true
+127.900 [docking_nav] Publish bool command STATIONING=true
+128.000 [docking_nav] Publish bool command STATIONING=true
+128.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.734032,-1.20212)
+128.100 [docking_nav] Publish bool command STATIONING=true
+128.200 [docking_nav] Publish bool command STATIONING=true
+128.300 [docking_nav] Publish bool command STATIONING=true
+128.400 [docking_nav] Computed next_xy=(-0.834491,-1.15858) distance=1.42783 heading=258.609 depth=77.0426
+128.400 [docking_nav] Publish bool command STATIONING=true
+128.500 [docking_nav] Publish bool command STATIONING=true
+128.600 [docking_nav] Publish bool command STATIONING=true
+128.700 [docking_nav] Publish bool command STATIONING=true
+128.730 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=28.101 theta_y_deg=-30.0915 fallback=(0,0)
+128.800 [docking_nav] Publish bool command STATIONING=true
+128.900 [docking_nav] Publish bool command STATIONING=true
+129.000 [docking_nav] Publish bool command STATIONING=true
+129.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.970972,-0.982916)
+129.100 [docking_nav] Publish bool command STATIONING=true
+129.200 [docking_nav] Publish bool command STATIONING=true
+129.300 [docking_nav] Publish bool command STATIONING=true
+129.400 [docking_nav] Computed next_xy=(-1.03448,-0.800931) distance=1.3083 heading=267.473 depth=77.0357
+129.400 [docking_nav] Publish bool command STATIONING=true
+129.500 [docking_nav] Publish bool command STATIONING=true
+129.600 [docking_nav] Publish bool command STATIONING=true
+129.700 [docking_nav] Publish bool command STATIONING=true
+129.730 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=17.9464 theta_y_deg=-29.8888 fallback=(0,0)
+129.800 [docking_nav] Publish bool command STATIONING=true
+129.900 [docking_nav] Publish bool command STATIONING=true
+130.000 [docking_nav] Publish bool command STATIONING=true
+130.000 [docking_nav] Outputs: phase=3 optical_xy=(-1.07704,-0.557789)
+130.100 [docking_nav] Publish bool command STATIONING=true
+130.200 [docking_nav] Publish bool command STATIONING=true
+130.300 [docking_nav] Publish bool command STATIONING=true
+130.400 [docking_nav] Computed next_xy=(-1.10433,-0.513673) distance=1.21795 heading=275.468 depth=77.0315
+130.400 [docking_nav] Publish bool command STATIONING=true
+130.500 [docking_nav] Publish bool command STATIONING=true
+130.600 [docking_nav] Publish bool command STATIONING=true
+130.700 [docking_nav] Publish bool command STATIONING=true
+130.730 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=18.8891 theta_y_deg=-29.6452 fallback=(0,0)
+130.800 [docking_nav] Publish bool command STATIONING=true
+130.900 [docking_nav] Publish bool command STATIONING=true
+131.000 [docking_nav] Publish bool command STATIONING=true
+131.000 [docking_nav] Outputs: phase=3 optical_xy=(-1.1387,-0.448718)
+131.100 [docking_nav] Publish bool command STATIONING=true
+131.200 [docking_nav] Publish bool command STATIONING=true
+131.300 [docking_nav] Publish bool command STATIONING=true
+131.400 [docking_nav] Computed next_xy=(-1.15741,-0.409864) distance=1.22784 heading=282.815 depth=77.0295
+131.400 [docking_nav] Publish bool command STATIONING=true
+131.500 [docking_nav] Publish bool command STATIONING=true
+131.600 [docking_nav] Publish bool command STATIONING=true
+131.700 [docking_nav] Publish bool command STATIONING=true
+131.730 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=2.98432 theta_y_deg=-30.08 fallback=(0,0)
+131.800 [docking_nav] Publish bool command STATIONING=true
+131.900 [docking_nav] Publish bool command STATIONING=true
+132.000 [docking_nav] Publish bool command STATIONING=true
+132.000 [docking_nav] Outputs: phase=3 optical_xy=(-1.04502,0.221483)
+132.100 [docking_nav] Publish bool command STATIONING=true
+132.200 [docking_nav] Publish bool command STATIONING=true
+132.300 [docking_nav] Publish bool command STATIONING=true
+132.400 [docking_nav] Computed next_xy=(-1.03913,0.201587) distance=1.0585 heading=289.635 depth=77.0294
+132.400 [docking_nav] Publish bool command STATIONING=true
+132.500 [docking_nav] Publish bool command STATIONING=true
+132.600 [docking_nav] Publish bool command STATIONING=true
+132.700 [docking_nav] Publish bool command STATIONING=true
+132.760 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=6.66367 theta_y_deg=-29.1579 fallback=(0,0)
+132.800 [docking_nav] Publish bool command STATIONING=true
+132.900 [docking_nav] Publish bool command STATIONING=true
+133.000 [docking_nav] Publish bool command STATIONING=true
+133.000 [docking_nav] Outputs: phase=3 optical_xy=(-1.02676,0.186037)
+133.100 [docking_nav] Publish bool command STATIONING=true
+133.200 [docking_nav] Publish bool command STATIONING=true
+133.300 [docking_nav] Publish bool command STATIONING=true
+133.400 [docking_nav] Computed next_xy=(-1.03997,0.169103) distance=1.05363 heading=296.171 depth=77.0304
+133.400 [docking_nav] Publish bool command STATIONING=true
+133.500 [docking_nav] Publish bool command STATIONING=true
+133.600 [docking_nav] Publish bool command STATIONING=true
+133.700 [docking_nav] Publish bool command STATIONING=true
+133.790 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=10.3351 theta_y_deg=-27.9853 fallback=(0,0)
+133.800 [docking_nav] Publish bool command STATIONING=true
+133.900 [docking_nav] Publish bool command STATIONING=true
+134.000 [docking_nav] Publish bool command STATIONING=true
+134.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.914997,0.530145)
+134.100 [docking_nav] Publish bool command STATIONING=true
+134.200 [docking_nav] Publish bool command STATIONING=true
+134.300 [docking_nav] Publish bool command STATIONING=true
+134.400 [docking_nav] Computed next_xy=(-0.869627,0.541667) distance=1.02453 heading=302.811 depth=77.0321
+134.400 [docking_nav] Publish bool command STATIONING=true
+134.500 [docking_nav] Publish bool command STATIONING=true
+134.600 [docking_nav] Publish bool command STATIONING=true
+134.700 [docking_nav] Publish bool command STATIONING=true
+134.800 [docking_nav] Publish bool command STATIONING=true
+134.800 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=6.05113 theta_y_deg=-28.4485 fallback=(0,0)
+134.900 [docking_nav] Publish bool command STATIONING=true
+135.000 [docking_nav] Publish bool command STATIONING=true
+135.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.884208,0.476956)
+135.100 [docking_nav] Publish bool command STATIONING=true
+135.200 [docking_nav] Publish bool command STATIONING=true
+135.300 [docking_nav] Publish bool command STATIONING=true
+135.400 [docking_nav] Computed next_xy=(-1.09561,0.198883) distance=1.11352 heading=309.274 depth=77.0339
+135.400 [docking_nav] Publish bool command STATIONING=true
+135.500 [docking_nav] Publish bool command STATIONING=true
+135.600 [docking_nav] Publish bool command STATIONING=true
+135.800 [docking_nav] Publish bool command STATIONING=true
+135.830 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=8.07567 theta_y_deg=-29.6626 fallback=(0,0)
+135.900 [docking_nav] Publish bool command STATIONING=true
+136.000 [docking_nav] Publish bool command STATIONING=true
+136.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.955233,0.540946)
+136.100 [docking_nav] Publish bool command STATIONING=true
+136.200 [docking_nav] Publish bool command STATIONING=true
+136.300 [docking_nav] Publish bool command STATIONING=true
+136.400 [docking_nav] Computed next_xy=(-0.936714,0.554963) distance=1.08877 heading=315.342 depth=77.0354
+136.400 [docking_nav] Publish bool command STATIONING=true
+136.500 [docking_nav] Publish bool command STATIONING=true
+136.600 [docking_nav] Publish bool command STATIONING=true
+136.700 [docking_nav] Publish bool command STATIONING=true
+136.800 [docking_nav] Publish bool command STATIONING=true
+136.860 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=9.46026 theta_y_deg=-29.0062 fallback=(0,0)
+136.900 [docking_nav] Publish bool command STATIONING=true
+137.000 [docking_nav] Publish bool command STATIONING=true
+137.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.896872,0.555906)
+137.100 [docking_nav] Publish bool command STATIONING=true
+137.200 [docking_nav] Publish bool command STATIONING=true
+137.300 [docking_nav] Publish bool command STATIONING=true
+137.400 [docking_nav] Computed next_xy=(-0.873907,0.554902) distance=1.0352 heading=321.272 depth=77.0365
+137.400 [docking_nav] Publish bool command STATIONING=true
+137.500 [docking_nav] Publish bool command STATIONING=true
+137.600 [docking_nav] Publish bool command STATIONING=true
+137.700 [docking_nav] Publish bool command STATIONING=true
+137.800 [docking_nav] Publish bool command STATIONING=true
+137.880 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=6.25102 theta_y_deg=-27.6235 fallback=(0,0)
+137.900 [docking_nav] Publish bool command STATIONING=true
+138.000 [docking_nav] Publish bool command STATIONING=true
+138.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.796642,0.589878)
+138.100 [docking_nav] Publish bool command STATIONING=true
+138.200 [docking_nav] Publish bool command STATIONING=true
+138.400 [docking_nav] Computed next_xy=(-0.450809,0.816712) distance=0.93287 heading=327.218 depth=77.037
+138.890 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-3.88654 theta_y_deg=-24.7059 fallback=(0,0)
+139.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.393197,0.730891)
+139.400 [docking_nav] Computed next_xy=(-0.783021,0.62949) distance=1.00468 heading=332.154 depth=77.0396
+139.400 [docking_nav] Publish bool command STATIONING=true
+139.600 [docking_nav] Publish bool command STATIONING=true
+139.800 [docking_nav] Publish bool command STATIONING=true
+139.900 [docking_nav] Publish bool command STATIONING=true
+139.900 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=6.47054 theta_y_deg=-25.1728 fallback=(0,0)
+140.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.415754,0.713018)
+140.100 [docking_nav] Publish bool command STATIONING=true
+140.200 [docking_nav] Publish bool command STATIONING=true
+140.300 [docking_nav] Publish bool command STATIONING=true
+140.400 [docking_nav] Computed next_xy=(-1.25579,0.54151) distance=1.36756 heading=335.03 depth=77.0497
+140.400 [docking_nav] Publish bool command STATIONING=true
+140.500 [docking_nav] Publish bool command STATIONING=true
+140.900 [docking_nav] Publish bool command STATIONING=true
+140.930 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=13.9542 theta_y_deg=-27.0329 fallback=(0,0)
+141.000 [docking_nav] Publish bool command STATIONING=true
+141.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.764673,0.74295)
+141.100 [docking_nav] Publish bool command STATIONING=true
+141.200 [docking_nav] Publish bool command STATIONING=true
+141.300 [docking_nav] Publish bool command STATIONING=true
+141.400 [docking_nav] Computed next_xy=(-0.902937,0.67236) distance=1.12577 heading=337.795 depth=77.0656
+141.400 [docking_nav] Publish bool command STATIONING=true
+141.500 [docking_nav] Publish bool command STATIONING=true
+141.600 [docking_nav] Publish bool command STATIONING=true
+141.700 [docking_nav] Publish bool command STATIONING=true
+141.800 [docking_nav] Publish bool command STATIONING=true
+141.900 [docking_nav] Publish bool command STATIONING=true
+141.950 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=13.0884 theta_y_deg=-29.7332 fallback=(0,0)
+142.000 [docking_nav] Publish bool command STATIONING=true
+142.000 [docking_nav] Outputs: phase=3 optical_xy=(-0.632993,0.866956)
+142.100 [docking_nav] Publish bool command STATIONING=true
+142.200 [docking_nav] Publish bool command STATIONING=true
+142.300 [docking_nav] Publish bool command STATIONING=true
+142.400 [docking_nav] Computed next_xy=(-0.98123,0.710355) distance=1.21137 heading=339.029 depth=77.1126
+142.400 [docking_nav] Publish bool command STATIONING=true
+142.500 [docking_nav] Publish bool command STATIONING=true
+142.600 [docking_nav] Publish bool command STATIONING=true
+142.700 [docking_nav] Publish bool command STATIONING=true
+142.800 [docking_nav] Publish bool command STATIONING=true
+142.900 [docking_nav] Using fallback optical XY=(0,0)
+142.970 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+143.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+143.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=336.537 depth=77.1908
+143.900 [docking_nav] Using fallback optical XY=(0,0)
+143.980 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+144.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+144.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=332.904 depth=77.2764
+144.900 [docking_nav] Using fallback optical XY=(0,0)
+144.980 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+145.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+145.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=330.234 depth=77.3595
+145.900 [docking_nav] Using fallback optical XY=(0,0)
+145.990 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+146.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+146.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=328.633 depth=77.4369
+146.900 [docking_nav] Using fallback optical XY=(0,0)
+147.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+147.010 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+147.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=327.682 depth=77.5093
+147.900 [docking_nav] Using fallback optical XY=(0,0)
+148.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+148.020 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+148.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=327.264 depth=77.5789
+148.900 [docking_nav] Using fallback optical XY=(0,0)
+149.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+149.030 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)
+149.400 [docking_nav] Computed next_xy=(0,0) distance=0 heading=327.339 depth=77.6472
+149.900 [docking_nav] Using fallback optical XY=(0,0)
+150.000 [docking_nav] Outputs: phase=3 optical_xy=(0,0)
+150.040 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0 fallback=(0,0)

@@ -42,7 +42,7 @@ phase_depth_list: [0.0, 3.0]
 fall_depth: 0.3
 
 # dradius (dradius): 最终触发半径 r_d，米
-dradius: 0.7
+dradius: 0.8
 # dinheading (dinheading): 航向误差门限 Δψ_max，deg
 dinheading_deg: 20.0
 
