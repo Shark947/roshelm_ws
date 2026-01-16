@@ -73,6 +73,12 @@ optical_timeout_sec: 0.5
 optical_invalid_debounce_count: 3
 # 连续帧 next_xy 最大跳变阈值（m）
 optical_max_next_xy_jump_m: 1.0
+# 光学几何有效性约束（通过高度差与视场角过滤远距离误触发）
+# depth_delta = light_depth - camera_depth
+optical_depth_min_m: 1.0
+optical_depth_max_m: 6.0
+# 光轴角度上限（deg），避免视场边缘噪声
+optical_max_theta_deg: 25.0
 
 # ====== 光学自动进入入坞阶段 ======
 # 当光学数据稳定且距离进入首层外圈时，自动切换 MODE=CLOSETODOCKING

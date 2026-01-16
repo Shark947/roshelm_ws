@@ -60,6 +60,7 @@ private:
   void setMode(const std::string &mode, bool force = false);
   void setModeInternal(const std::string &mode, bool publish, bool force);
   bool shouldAutoEnterCloseToDocking(double &distance) const;
+  bool opticalGeometryValid(double &depth_delta, std::string &reason) const;
 
   void injectDepthUpdate(double depth);
   void injectHeadingUpdate(const std::string &update);
@@ -80,6 +81,9 @@ private:
   double optical_timeout_sec_{0.5};
   int optical_invalid_debounce_count_{0};
   double optical_max_next_xy_jump_m_{3.0};
+  double optical_depth_min_m_{0.3};
+  double optical_depth_max_m_{12.0};
+  double optical_max_theta_deg_{30.0};
 
   double dfDockHeading_{0.0};
   double dfDockPitch_{0.0};
