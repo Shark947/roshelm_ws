@@ -1,3 +1,6 @@
+#include <fstream>
+#include <iomanip>
+#include <sstream>
 #include <unordered_map>
 
 #include <ros/ros.h>
@@ -105,10 +108,26 @@ public:
         [this](const std::string &key, const std::string &value) {
           this->publishStringCommand(key, value);
         });
+    server_.setDebugLogCallback([this](const std::string &message) {
+      this->logDebug(message);
+    });
   }
 
   bool initialize()
   {
+    private_nh_.param("debug_log_path", debug_log_path_,
+                      std::string("/tmp/docking_nav_debug.txt"));
+    debug_log_.open(debug_log_path_, std::ios::app);
+    if (debug_log_.is_open())
+    {
+      ROS_INFO_STREAM("[docking_nav] Debug log file=" << debug_log_path_);
+    }
+    else
+    {
+      ROS_WARN_STREAM("[docking_nav] Failed to open debug log file="
+                      << debug_log_path_);
+    }
+
     initCommandPublishers();
 
     if (!server_.initialize(private_nh_))
@@ -198,6 +217,8 @@ private:
     ROS_DEBUG_STREAM("[docking_nav] Publish bool command " << key << "="
                                                            << (value ? "true"
                                                                      : "false"));
+    logDebug(std::string("[docking_nav] Publish bool command ") + key + "=" +
+             (value ? "true" : "false"));
   }
 
   void publishStringCommand(const std::string &key, const std::string &value)
@@ -272,6 +293,27 @@ private:
                                              << ","
                                              << outputs.optical_xy.point.y
                                              << ")");
+    const ros::Time now = ros::Time::now();
+    if ((now - last_debug_log_time_).toSec() >= 1.0)
+    {
+      last_debug_log_time_ = now;
+      std::ostringstream stream;
+      stream << "[docking_nav] Outputs: phase=" << outputs.phase
+             << " optical_xy=(" << outputs.optical_xy.point.x << ","
+             << outputs.optical_xy.point.y << ")";
+      logDebug(stream.str());
+    }
+  }
+
+  void logDebug(const std::string &message)
+  {
+    if (!debug_log_.is_open())
+    {
+      return;
+    }
+    debug_log_ << std::fixed << std::setprecision(3) << ros::Time::now().toSec()
+               << " " << message << '\n';
+    debug_log_.flush();
   }
 
   ros::NodeHandle nh_;
@@ -297,6 +339,10 @@ private:
 
   std::unordered_map<std::string, ros::Publisher> bool_publishers_;
   std::unordered_map<std::string, ros::Publisher> string_publishers_;
+
+  std::string debug_log_path_;
+  std::ofstream debug_log_;
+  ros::Time last_debug_log_time_;
 };
 
 int main(int argc, char **argv)
