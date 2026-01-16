@@ -47,7 +47,7 @@ max_blob_area: 0              # 最大连通域面积（像素）
 min_brightness: 0            # 亮度门限，过滤弱反光
 max_pixel_jump: 0             # 像素跳变限制（0 表示不限制）
 ema_alpha: 0                   # 角度 EMA 平滑系数（0~1）
-choose_mode: "brightest"         # "largest" 或 "brightest"
+choose_mode: "center"            # "largest" / "brightest" / "center"
 
 # ====== 光学几何辅助参数 ======
 optical_camera_delta_l: 0        # 相机与艇体参考点的水平偏移量 ΔL
