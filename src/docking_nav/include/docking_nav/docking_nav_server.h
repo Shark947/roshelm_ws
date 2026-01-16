@@ -78,6 +78,7 @@ private:
 
   double nav_server_period_{0.1};
   double optical_timeout_sec_{0.5};
+  int optical_invalid_debounce_count_{0};
 
   double dfDockHeading_{0.0};
   double dfDockPitch_{0.0};
@@ -148,6 +149,11 @@ private:
   ros::Time last_optical_stamp_;
   double fallback_x_{0.0};
   double fallback_y_{0.0};
+  int optical_invalid_count_{0};
+  bool have_last_valid_optical_{false};
+  double last_valid_optical_heading_{0.0};
+  double last_valid_optical_x_{0.0};
+  double last_valid_optical_y_{0.0};
 
   bool auto_enter_closetodocking_{false};
   double auto_enter_duration_sec_{2.0};

@@ -69,6 +69,8 @@ docking_max_try: 3
 # ====== 视觉数据超时 ======
 # 超时未收到视觉数据则视为无效
 optical_timeout_sec: 0.5
+# 短时无效去抖：连续无效次数达到阈值才进入 fallback（0 表示关闭）
+optical_invalid_debounce_count: 3
 
 # ====== 光学自动进入入坞阶段 ======
 # 当光学数据稳定且距离进入首层外圈时，自动切换 MODE=CLOSETODOCKING

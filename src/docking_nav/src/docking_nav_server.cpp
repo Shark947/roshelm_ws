@@ -72,6 +72,13 @@ void DockingNavServer::setOpticalMeasurement(
   fallback_x_ = msg.fallback_x;
   fallback_y_ = msg.fallback_y;
   bDataFlag_ = msg.valid;
+  if (bDataFlag_)
+  {
+    have_last_valid_optical_ = true;
+    last_valid_optical_heading_ = msg.d_heading_deg;
+    last_valid_optical_x_ = msg.theta_x_deg;
+    last_valid_optical_y_ = msg.theta_y_deg;
+  }
   ROS_DEBUG_STREAM_THROTTLE(
       1.0, "[docking_nav] Optical measurement valid=" << (bDataFlag_ ? "true" : "false")
                                                       << " d_heading_deg="
@@ -155,7 +162,21 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
                     << (bDataFlag_ ? "true" : "false"));
   }
 
-  if (!bDataFlag_)
+  if (bDataFlag_)
+  {
+    optical_invalid_count_ = 0;
+  }
+  else
+  {
+    ++optical_invalid_count_;
+  }
+
+  const bool use_fallback =
+      !bDataFlag_ &&
+      (optical_invalid_debounce_count_ == 0 ||
+       optical_invalid_count_ >= optical_invalid_debounce_count_);
+
+  if (use_fallback)
   {
     dfOpticalNavLoc_[1] = fallback_x_;
     dfOpticalNavLoc_[2] = fallback_y_;
@@ -170,6 +191,27 @@ DockingNavServer::Outputs DockingNavServer::update(const ros::Time &stamp)
       std::ostringstream stream;
       stream << "[docking_nav] Using fallback optical XY=(" << fallback_x_
              << "," << fallback_y_ << ")";
+      debug_log_callback_(stream.str());
+    }
+  }
+  else if (!bDataFlag_ && have_last_valid_optical_)
+  {
+    dfOpticalNavLoc_[0] = last_valid_optical_heading_;
+    dfOpticalNavLoc_[1] = last_valid_optical_x_;
+    dfOpticalNavLoc_[2] = last_valid_optical_y_;
+    ROS_DEBUG_STREAM_THROTTLE(
+        1.0, "[docking_nav] Holding last valid optical XY=("
+                 << last_valid_optical_x_ << "," << last_valid_optical_y_
+                 << ") invalid_count=" << optical_invalid_count_);
+    static ros::Time last_hold_log_time;
+    const ros::Time now = ros::Time::now();
+    if (debug_log_callback_ && (now - last_hold_log_time).toSec() >= 1.0)
+    {
+      last_hold_log_time = now;
+      std::ostringstream stream;
+      stream << "[docking_nav] Holding last valid optical XY=("
+             << last_valid_optical_x_ << "," << last_valid_optical_y_
+             << ") invalid_count=" << optical_invalid_count_;
       debug_log_callback_(stream.str());
     }
   }
@@ -291,6 +333,8 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
   private_nh.param("transimit_duration_sec", m_nTransimitDuration_, 30);
   private_nh.param("docking_max_try", m_nDockingMaxTry_, 3);
   private_nh.param("optical_timeout_sec", optical_timeout_sec_, 0.5);
+  private_nh.param("optical_invalid_debounce_count",
+                   optical_invalid_debounce_count_, 0);
   private_nh.param("initial_mode", mode_, mode_);
   private_nh.param("auto_enter_closetodocking", auto_enter_closetodocking_,
                    false);
@@ -340,6 +384,8 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
                   << optical_timeout_sec_ << " dock_depth=" << dfDockDepth_
                   << " dock_heading=" << dfDockHeading_ << " dradius="
                   << dradius_ << " dinheading=" << dinheading_
+                  << " optical_invalid_debounce_count="
+                  << optical_invalid_debounce_count_
                   << " align_depth_count=" << dfvAlignDepth_.size()
                   << " initial_mode=" << mode_
                   << " auto_enter_closetodocking="
