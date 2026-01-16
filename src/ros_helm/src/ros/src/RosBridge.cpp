@@ -724,10 +724,7 @@ void RosBridge::logDebugLine(const std::string &message,
   if (log_time.isZero())
     log_time = ros::Time::now();
 
-  const double elapsed =
-      start_time_.isZero() ? 0.0 : (log_time - start_time_).toSec();
-
   debug_log_stream_ << std::fixed << std::setprecision(3)
-                    << elapsed << ' ' << message << '\n';
+                    << log_time.toSec() << ' ' << message << '\n';
   debug_log_stream_.flush();
 }
