@@ -337,6 +337,9 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
                    optical_invalid_debounce_count_, 0);
   private_nh.param("optical_max_next_xy_jump_m", optical_max_next_xy_jump_m_,
                    3.0);
+  private_nh.param("optical_depth_min_m", optical_depth_min_m_, 0.3);
+  private_nh.param("optical_depth_max_m", optical_depth_max_m_, 12.0);
+  private_nh.param("optical_max_theta_deg", optical_max_theta_deg_, 30.0);
   private_nh.param("initial_mode", mode_, mode_);
   private_nh.param("auto_enter_closetodocking", auto_enter_closetodocking_,
                    false);
@@ -390,6 +393,9 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
                   << optical_invalid_debounce_count_
                   << " optical_max_next_xy_jump_m="
                   << optical_max_next_xy_jump_m_
+                  << " optical_depth_min_m=" << optical_depth_min_m_
+                  << " optical_depth_max_m=" << optical_depth_max_m_
+                  << " optical_max_theta_deg=" << optical_max_theta_deg_
                   << " align_depth_count=" << dfvAlignDepth_.size()
                   << " initial_mode=" << mode_
                   << " auto_enter_closetodocking="
@@ -407,6 +413,14 @@ bool DockingNavServer::loadParams(ros::NodeHandle &private_nh)
 bool DockingNavServer::shouldAutoEnterCloseToDocking(double &distance) const
 {
   if (!auto_enter_closetodocking_ || dfvAlignDepth_.empty() || !bDataFlag_)
+  {
+    distance = 0.0;
+    return false;
+  }
+
+  double depth_delta = 0.0;
+  std::string invalid_reason;
+  if (!opticalGeometryValid(depth_delta, invalid_reason))
   {
     distance = 0.0;
     return false;
@@ -431,9 +445,59 @@ bool DockingNavServer::shouldAutoEnterCloseToDocking(double &distance) const
   return distance <= first_phase.outer_radius;
 }
 
+bool DockingNavServer::opticalGeometryValid(double &depth_delta,
+                                            std::string &reason) const
+{
+  depth_delta = dfLightDepth_ - dfCameraDepth_;
+  if (!std::isfinite(depth_delta))
+  {
+    reason = "depth_delta_nan";
+    return false;
+  }
+  if (depth_delta < optical_depth_min_m_ || depth_delta > optical_depth_max_m_)
+  {
+    reason = "depth_delta_out_of_range";
+    return false;
+  }
+  if (!std::isfinite(dfOpticalNavLoc_[1]) ||
+      !std::isfinite(dfOpticalNavLoc_[2]))
+  {
+    reason = "theta_nan";
+    return false;
+  }
+  if (std::abs(dfOpticalNavLoc_[1]) > optical_max_theta_deg_ ||
+      std::abs(dfOpticalNavLoc_[2]) > optical_max_theta_deg_)
+  {
+    reason = "theta_out_of_range";
+    return false;
+  }
+  return true;
+}
+
 void DockingNavServer::handleDocking(const ros::Time &stamp, Outputs &outputs)
 {
-  bool optical_valid = bDataFlag_;
+  double depth_delta = 0.0;
+  std::string geometry_reason;
+  const bool geometry_valid =
+      opticalGeometryValid(depth_delta, geometry_reason);
+  if (bDataFlag_ && !geometry_valid)
+  {
+    ROS_WARN_STREAM_THROTTLE(
+        1.0, "[docking_nav] Optical geometry invalid (" << geometry_reason
+                                                        << ") depth_delta="
+                                                        << depth_delta
+                                                        << " theta_x_deg="
+                                                        << dfOpticalNavLoc_[1]
+                                                        << " theta_y_deg="
+                                                        << dfOpticalNavLoc_[2]
+                                                        << " depth_range=["
+                                                        << optical_depth_min_m_
+                                                        << ","
+                                                        << optical_depth_max_m_
+                                                        << "] theta_limit="
+                                                        << optical_max_theta_deg_);
+  }
+  bool optical_valid = bDataFlag_ && geometry_valid;
   if (optical_valid)
   {
     ++nCntuDockingCount_;
