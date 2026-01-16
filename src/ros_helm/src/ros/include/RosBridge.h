@@ -56,6 +56,7 @@ private:
                             const std::string &nav_key);
   bool setupLogDirectory();
   void logValue(const std::string &name, double value, const ros::Time &stamp);
+  void logDebugLine(const std::string &message, const ros::Time &stamp);
 
   struct AttitudeCache
   {
@@ -136,6 +137,8 @@ private:
 
   std::string log_directory_;
   std::map<std::string, std::ofstream> log_streams_;
+  std::ofstream debug_log_stream_;
+  std::string debug_log_path_;
   std::mutex log_mutex_;
   std::size_t log_lines_since_flush_{0};
   ros::Time last_log_flush_time_;

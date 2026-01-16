@@ -154,6 +154,8 @@ void RosBridge::enqueueBoolValue(const std::string &key, bool value,
     std::lock_guard<std::mutex> status_guard(status_mutex_);
     bool_values_[key] = value;
   }
+
+  logDebugLine("[ros_helm] bool command " + key + "=" + text, stamp);
 }
 
 void RosBridge::enqueueStringValue(const std::string &key,
@@ -163,6 +165,8 @@ void RosBridge::enqueueStringValue(const std::string &key,
   std::lock_guard<std::mutex> guard(mail_mutex_);
   pending_mail_.emplace_back(static_cast<char>(MsgType::Notify), key, value,
                              stamp.toSec(), "ros_bridge");
+
+  logDebugLine("[ros_helm] string command " + key + "=" + value, stamp);
 }
 
 ros::Subscriber RosBridge::subscribeCurrent(const std::string &topic,
@@ -583,6 +587,7 @@ void RosBridge::logStatusIfNeeded(const HelmIvP &helm)
          << " NAV={" << (nav_text.empty() ? "none" : nav_text) << "}";
 
   ROS_INFO_STREAM(status.str());
+  logDebugLine(status.str(), now);
 }
 
 std::map<std::string, double> RosBridge::collectDesiredDoubles(
@@ -620,18 +625,20 @@ bool RosBridge::setupLogDirectory()
       "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
 
   const std::string package_path = ros::package::getPath("ros_helm");
-  const std::string base_dir = package_path.empty() ? "log"
-                                                    : package_path + "/log";
+  const std::string base_dir = package_path.empty()
+                                   ? "log"
+                                   : package_path + "/src/ros/log";
 
   const auto now = std::chrono::system_clock::now();
   const std::time_t now_time = std::chrono::system_clock::to_time_t(now);
   std::tm tm_buffer;
   localtime_r(&now_time, &tm_buffer);
 
-  std::ostringstream folder_name;
-  folder_name << std::put_time(&tm_buffer, "%Y_%m_%d_%H_%M") << "_log";
+  std::ostringstream timestamp;
+  timestamp << std::put_time(&tm_buffer, "%Y%m%d_%H%M%S");
 
-  log_directory_ = base_dir + "/" + folder_name.str();
+  log_directory_ = base_dir + "/" + timestamp.str();
+  debug_log_path_ = log_directory_ + "/ros_helm_" + timestamp.str() + ".txt";
 
   auto create_directory = [](const std::string &path) {
     if (mkdir(path.c_str(), 0755) != 0 && errno != EEXIST)
@@ -647,6 +654,13 @@ bool RosBridge::setupLogDirectory()
     return false;
   if (!create_directory(log_directory_))
     return false;
+
+  debug_log_stream_.open(debug_log_path_, std::ios::trunc);
+  if (!debug_log_stream_.is_open())
+  {
+    ROS_ERROR_STREAM("Failed to open debug log file: " << debug_log_path_);
+    return false;
+  }
 
   for (const auto &key : kLogKeys)
   {
@@ -692,4 +706,23 @@ void RosBridge::logValue(const std::string &name, double value,
     log_lines_since_flush_ = 0;
     last_log_flush_time_ = flush_time;
   }
+}
+
+void RosBridge::logDebugLine(const std::string &message,
+                             const ros::Time &stamp)
+{
+  std::lock_guard<std::mutex> guard(log_mutex_);
+  if (!debug_log_stream_.is_open())
+    return;
+
+  ros::Time log_time = stamp;
+  if (log_time.isZero())
+    log_time = ros::Time::now();
+
+  const double elapsed =
+      start_time_.isZero() ? 0.0 : (log_time - start_time_).toSec();
+
+  debug_log_stream_ << std::fixed << std::setprecision(3)
+                    << elapsed << ' ' << message << '\n';
+  debug_log_stream_.flush();
 }
