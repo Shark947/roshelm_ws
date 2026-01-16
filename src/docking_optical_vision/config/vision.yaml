@@ -17,8 +17,8 @@ dock_depth_topic: "/docking/dock_depth"
 print_every_n: 30
 print_camera_info_every_n: 120
 print_detection_every_n: 10      # 每N次检测输出一次结果（避免刷屏）
-min_consecutive_detections: 3    # 连续检测到白点才认为 valid=true
-max_consecutive_misses: 3       # 连续丢失白点才认为 valid=false
+min_consecutive_detections: 1    # 连续检测到白点才认为 valid=true
+max_consecutive_misses: 1       # 连续丢失白点才认为 valid=false
 optical_timeout_sec: 1         # 超时未收到图像则触发 invalid
 
 # ====== 白点检测参数 ======
@@ -29,29 +29,25 @@ roi_y: 0
 roi_w: 768
 roi_h: 492
 
-blur_kernel: 3                   # 高斯模糊核大小（奇数，0表示不模糊）
+blur_kernel: 0                   # 高斯模糊核大小（奇数，0表示不模糊）
 
 # 2) 阈值分割
-threshold_value: 190             # 灰度阈值
-use_adaptive_threshold: true    # 如果光照不稳再开
+threshold_value: 200             # 灰度阈值
+use_adaptive_threshold: false    # 如果光照不稳再开
 adaptive_block_size: 31          # 奇数
 adaptive_c: -5
 
 # 3) 形态学
-morph_open_kernel: 3             # 去掉孤立噪点（0表示不做）
+morph_open_kernel: 0             # 去掉孤立噪点（0表示不做）
 morph_close_kernel: 0            # 填补白点空洞（0表示不做）
 
 # 4) 目标筛选
 min_blob_area: 100                 # 最小连通域面积（像素）
-max_blob_area: 30000              # 最大连通域面积（像素）
-min_brightness: 200.0            # 亮度门限，过滤弱反光
+max_blob_area: 0              # 最大连通域面积（像素）
+min_brightness: 0            # 亮度门限，过滤弱反光
 max_pixel_jump: 0             # 像素跳变限制（0 表示不限制）
-ema_alpha: 0.4                   # 角度 EMA 平滑系数（0~1）
+ema_alpha: 0                   # 角度 EMA 平滑系数（0~1）
 choose_mode: "brightest"         # "largest" 或 "brightest"
-optical_max_theta_deg: 25.0      # 光轴角度上限（deg）
-optical_depth_min_m: 1.0         # depth_delta = light_depth - camera_depth
-optical_depth_max_m: 6.0
-optical_max_next_xy_jump_m: 0.5  # 连续帧 next_xy 最大跳变阈值（m）
 
 # ====== 光学几何辅助参数 ======
 optical_camera_delta_l: 0        # 相机与艇体参考点的水平偏移量 ΔL
