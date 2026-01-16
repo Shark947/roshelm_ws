@@ -37,6 +37,8 @@ public:
     pnh.param<int>("print_detection_every_n", print_detection_every_n_, 10);
     pnh.param<int>("min_consecutive_detections", min_consecutive_detections_, 2);
     pnh.param<int>("max_consecutive_misses", max_consecutive_misses_, 2);
+    pnh.param<double>("valid_hold_sec", valid_hold_sec_, 0.3);
+    pnh.param<double>("invalid_hold_sec", invalid_hold_sec_, 0.3);
     pnh.param<double>("optical_timeout_sec", optical_timeout_sec_, 0.5);
 
     // ROI
@@ -122,6 +124,8 @@ public:
                     << optical_depth_max_m_ << "] max_next_xy_jump="
                     << optical_max_next_xy_jump_m_ << " timeout_sec="
                     << optical_timeout_sec_);
+    ROS_INFO_STREAM("[docking_optical_vision] valid_hold_sec=" << valid_hold_sec_
+                    << " invalid_hold_sec=" << invalid_hold_sec_);
   }
 
 private:
@@ -159,12 +163,12 @@ private:
       return;
     }
     last_timeout_publish_ = now;
-    filtered_valid_ = false;
     consecutive_detects_ = 0;
     consecutive_misses_ = max_consecutive_misses_;
     std_msgs::Header header;
     header.stamp = now;
     header.frame_id = last_frame_id_;
+    updateFilteredValid(false, now);
     publishMeasurement(header, 0.0, 0.0);
   }
 
@@ -207,7 +211,7 @@ private:
     if (!has_caminfo_)
     {
       ROS_WARN_THROTTLE(2.0, "[vision] No CameraInfo yet. Publish valid=false.");
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
@@ -222,7 +226,7 @@ private:
     catch (const cv_bridge::Exception& e)
     {
       ROS_ERROR_STREAM("[vision] cv_bridge exception: " << e.what());
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
@@ -230,7 +234,7 @@ private:
     cv::Mat rgb = cv_ptr->image;
     if (rgb.empty())
     {
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
@@ -295,7 +299,7 @@ private:
     if (contours.empty())
     {
       // 没检测到白点
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
@@ -343,7 +347,7 @@ private:
 
     if (best_idx < 0)
     {
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
@@ -362,7 +366,7 @@ private:
       double dist = std::hypot(u - last_u_, v - last_v_);
       if (dist > max_pixel_jump_)
       {
-        markDetectionResult(false);
+        markDetectionResult(false, msg->header.stamp);
         publishMeasurement(msg->header, 0.0, 0.0);
         return;
       }
@@ -382,7 +386,7 @@ private:
         (std::abs(theta_x) > optical_max_theta_deg_ ||
          std::abs(theta_y) > optical_max_theta_deg_))
     {
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
@@ -400,13 +404,13 @@ private:
     has_last_detection_ = true;
     if (!opticalGeometryValid(theta_x, theta_y))
     {
-      markDetectionResult(false);
+      markDetectionResult(false, msg->header.stamp);
       publishMeasurement(msg->header, 0.0, 0.0);
       return;
     }
 
     // ---- 11) 发布 OpticalMeasurement ----
-    markDetectionResult(true);
+    markDetectionResult(true, msg->header.stamp);
     publishMeasurement(msg->header, theta_x, theta_y);
 
     // ---- 12) 控制台输出（节流）----
@@ -421,7 +425,7 @@ private:
     }
   }
 
-  void markDetectionResult(bool detected)
+  void markDetectionResult(bool detected, const ros::Time& stamp)
   {
     if (detected)
     {
@@ -429,7 +433,7 @@ private:
       consecutive_misses_ = 0;
       if (consecutive_detects_ >= min_consecutive_detections_)
       {
-        filtered_valid_ = true;
+        updateFilteredValid(true, stamp);
       }
     }
     else
@@ -438,8 +442,30 @@ private:
       consecutive_detects_ = 0;
       if (consecutive_misses_ >= max_consecutive_misses_)
       {
-        filtered_valid_ = false;
+        updateFilteredValid(false, stamp);
       }
+    }
+  }
+
+  void updateFilteredValid(bool desired, const ros::Time& stamp)
+  {
+    if (desired == filtered_valid_)
+    {
+      return;
+    }
+
+    const double hold_sec = desired ? valid_hold_sec_ : invalid_hold_sec_;
+    if (hold_sec <= 0.0 || last_state_change_time_.isZero())
+    {
+      filtered_valid_ = desired;
+      last_state_change_time_ = stamp;
+      return;
+    }
+
+    if ((stamp - last_state_change_time_).toSec() >= hold_sec)
+    {
+      filtered_valid_ = desired;
+      last_state_change_time_ = stamp;
     }
   }
 
@@ -540,6 +566,8 @@ private:
   int print_detection_every_n_{10};
   int min_consecutive_detections_{2};
   int max_consecutive_misses_{2};
+  double valid_hold_sec_{0.3};
+  double invalid_hold_sec_{0.3};
   double optical_timeout_sec_{0.5};
 
   // ROI params
@@ -587,6 +615,7 @@ private:
   int consecutive_detects_{0};
   int consecutive_misses_{0};
   bool filtered_valid_{false};
+  ros::Time last_state_change_time_;
   bool has_last_detection_{false};
   double last_u_{0.0};
   double last_v_{0.0};
