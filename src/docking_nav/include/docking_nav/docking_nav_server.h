@@ -34,6 +34,7 @@ public:
       const docking_optical_msgs::OpticalMeasurement &msg);
   void setNavHeading(double heading_deg);
   void setNavDepth(double depth_m);
+  void setDockDepth(double depth_m);
   void setNavPitch(double pitch_rad);
   void setNavRoll(double roll_rad);
   void setDesiredSpeed(double speed_mps);

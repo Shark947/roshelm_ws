@@ -25,6 +25,7 @@ struct DockingNavTopics
   std::string nav_pitch_topic{"/auh/NAV_PITCH"};
   std::string nav_roll_topic{"/auh/NAV_ROLL"};
   std::string desired_speed_topic{"/auh/desired_speed"};
+  std::string dock_depth_topic{"/docking/dock_depth"};
 };
 
 struct DockingCommandTopics
@@ -61,6 +62,8 @@ DockingNavTopics loadDockingNavTopics(ros::NodeHandle &private_nh)
                    topics.nav_roll_topic);
   private_nh.param("desired_speed_topic", topics.desired_speed_topic,
                    topics.desired_speed_topic);
+  private_nh.param("dock_depth_topic", topics.dock_depth_topic,
+                   topics.dock_depth_topic);
   return topics;
 }
 
@@ -125,6 +128,8 @@ public:
         topics_.nav_heading_topic, 10, &DockingNavMain::headingCallback, this);
     depth_sub_ = nh_.subscribe(
         topics_.nav_depth_topic, 10, &DockingNavMain::depthCallback, this);
+    dock_depth_sub_ = nh_.subscribe(
+        topics_.dock_depth_topic, 10, &DockingNavMain::dockDepthCallback, this);
     pitch_sub_ = nh_.subscribe(
         topics_.nav_pitch_topic, 10, &DockingNavMain::pitchCallback, this);
     roll_sub_ = nh_.subscribe(
@@ -147,6 +152,7 @@ public:
                     << " mode_state=" << topics_.mode_state_topic
                     << " heading=" << topics_.nav_heading_topic
                     << " depth=" << topics_.nav_depth_topic
+                    << " dock_depth=" << topics_.dock_depth_topic
                     << " pitch=" << topics_.nav_pitch_topic
                     << " roll=" << topics_.nav_roll_topic
                     << " desired_speed=" << topics_.desired_speed_topic);
@@ -229,6 +235,11 @@ private:
     server_.setNavDepth(msg->data);
   }
 
+  void dockDepthCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
+  {
+    server_.setDockDepth(msg->data);
+  }
+
   void pitchCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
   {
     server_.setNavPitch(msg->data);
@@ -272,6 +283,7 @@ private:
   ros::Subscriber optical_sub_;
   ros::Subscriber heading_sub_;
   ros::Subscriber depth_sub_;
+  ros::Subscriber dock_depth_sub_;
   ros::Subscriber pitch_sub_;
   ros::Subscriber roll_sub_;
   ros::Subscriber desired_speed_sub_;
