@@ -1,3 +1,4 @@
 build/
 devel/
 src/ros_helm/log
+src/docking_optical_vision/debug
