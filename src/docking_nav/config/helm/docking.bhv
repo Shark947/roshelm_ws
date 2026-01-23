@@ -29,7 +29,7 @@ Behavior = BHV_GoToDepth
   // ------------------------------------
     capture_delta = 0.5                      // default (meters)
      //capture_flag = MODE=SURVEY            // example
-            depth = 75,20		    // example
+            depth = 74,20		    // example
            repeat = 0                      // default
 }
 
@@ -45,7 +45,7 @@ Behavior=BHV_ConstantSpeed
   updates    = SPEED_UPDATE
   endflag    = SPD = false
 
-                   speed = 0.12
+                   speed = 0.1
 
             //    basewidth = 0.5
             //    peakwidth = 0.3
@@ -70,7 +70,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
-        depth = 77
+        depth = 75
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
@@ -152,7 +152,7 @@ Behavior = BHV_Waypoint
       //  lead_to_start = true
                speed = 0.05  // meters per second
         capture_line = true
-      capture_radius = 0.01
+      capture_radius = 0.1
          slip_radius = 2
   efficiency_measure = all
 
@@ -175,7 +175,7 @@ Behavior = BHV_ConstantDepth
   condition = GOTO_DEPTH != true
   updates   = DEPTH_UPDATE
 
-        depth = 77
+        depth = 75
     peakwidth = 1
     basewidth = 1.5
   summitdelta = 20
@@ -286,7 +286,7 @@ Behavior = BHV_GoToDepth
   // ------------------------------------
     capture_delta = 0.5                      // default (meters)
      //capture_flag = MODE=SURVEY            // example
-            depth = 75,30        // example
+            depth = 74,30        // example
            repeat = 0                      // default
 }
 
@@ -302,7 +302,7 @@ Behavior=BHV_ConstantSpeed
   updates    = DETECT_SPEED_UPDATE
   endflag    = SPD = false
 
-                   speed = 0.12
+                   speed = 0.1
 
             //    basewidth = 0.5
             //    peakwidth = 0.3

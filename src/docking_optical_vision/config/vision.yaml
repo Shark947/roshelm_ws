@@ -29,7 +29,7 @@ roi_y: 0
 roi_w: 768
 roi_h: 492
 
-blur_kernel: 0                   # 高斯模糊核大小（奇数，0表示不模糊）
+blur_kernel: 5                   # 高斯模糊核大小（奇数，0表示不模糊）
 
 # 2) 阈值分割
 threshold_value: 200             # 灰度阈值
@@ -38,13 +38,13 @@ adaptive_block_size: 31          # 奇数
 adaptive_c: -5
 
 # 3) 形态学
-morph_open_kernel: 0             # 去掉孤立噪点（0表示不做）
-morph_close_kernel: 0            # 填补白点空洞（0表示不做）
+morph_open_kernel: 5             # 去掉孤立噪点（0表示不做）
+morph_close_kernel: 5            # 填补白点空洞（0表示不做）
 
 # 4) 目标筛选
 min_blob_area: 100                 # 最小连通域面积（像素）
 max_blob_area: 0              # 最大连通域面积（像素）
-min_brightness: 0            # 亮度门限，过滤弱反光
+min_brightness: 100            # 亮度门限，过滤弱反光
 max_pixel_jump: 0             # 像素跳变限制（0 表示不限制）
 ema_alpha: 0                   # 角度 EMA 平滑系数（0~1）
 choose_mode: "center"            # "largest" / "brightest" / "center"
