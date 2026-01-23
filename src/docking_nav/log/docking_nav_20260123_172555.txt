@@ -1,0 +1,241 @@
+0.000 [docking_nav] Publish bool command CONSTHEIGHT=true
+0.000 [docking_nav] Publish bool command STATIONING=true
+0.000 [docking_nav] Publish bool command DOCKING_FALLING=false
+0.000 [docking_nav] Publish bool command MOOS_MANUAL_OVERIDE=false
+0.000 [docking_nav] Publish bool command DOCKINGFAILED=false
+1.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+1.010 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-29.8687 theta_y_deg=-29.1731
+2.000 [docking_nav] Mode=LIFT (no docking logic)
+2.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+2.040 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-30.0811 theta_y_deg=-28.8216
+3.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+3.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-29.517 theta_y_deg=-28.0475
+4.000 [docking_nav] Mode=LIFT (no docking logic)
+4.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+4.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-29.4377 theta_y_deg=-27.7911
+5.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+5.080 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-30.3388 theta_y_deg=-28.0172
+6.000 [docking_nav] Mode=LIFT (no docking logic)
+6.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+6.090 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-32.092 theta_y_deg=-29.5128
+7.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+7.090 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-33.0812 theta_y_deg=-29.9949
+8.000 [docking_nav] Mode=LIFT (no docking logic)
+8.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+8.120 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+9.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+9.130 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+10.000 [docking_nav] Mode=LIFT (no docking logic)
+10.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+10.130 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+11.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+11.160 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+12.000 [docking_nav] Mode=LIFT (no docking logic)
+12.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+12.160 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+13.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+13.160 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+14.000 [docking_nav] Mode=LIFT (no docking logic)
+14.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+14.180 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+15.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+15.210 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+16.000 [docking_nav] Mode=LIFT (no docking logic)
+16.000 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+16.230 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+17.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+17.240 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+18.070 [docking_nav] Mode=LIFT (no docking logic)
+18.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+18.260 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+19.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+19.260 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+20.070 [docking_nav] Mode=LIFT (no docking logic)
+20.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+20.260 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+21.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+21.300 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+22.070 [docking_nav] Mode=LIFT (no docking logic)
+22.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+22.320 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+23.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+23.320 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+24.070 [docking_nav] Mode=LIFT (no docking logic)
+24.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+24.320 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+25.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+25.320 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+26.070 [docking_nav] Mode=LIFT (no docking logic)
+26.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+26.340 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+27.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+27.370 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+28.070 [docking_nav] Mode=LIFT (no docking logic)
+28.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+28.380 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+29.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+29.400 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+30.070 [docking_nav] Mode=LIFT (no docking logic)
+30.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+30.400 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+31.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+31.400 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+32.070 [docking_nav] Mode=LIFT (no docking logic)
+32.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+32.420 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+33.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+33.440 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+34.070 [docking_nav] Mode=LIFT (no docking logic)
+34.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+34.440 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+35.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+35.440 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+36.070 [docking_nav] Mode=LIFT (no docking logic)
+36.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+36.440 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+37.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+37.460 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+38.070 [docking_nav] Mode=LIFT (no docking logic)
+38.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+38.460 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+39.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+39.480 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+40.070 [docking_nav] Mode=LIFT (no docking logic)
+40.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+40.510 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+41.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+41.530 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+42.070 [docking_nav] Mode=LIFT (no docking logic)
+42.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+42.550 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+43.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+43.550 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+44.070 [docking_nav] Mode=LIFT (no docking logic)
+44.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+44.610 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+45.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+45.620 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+46.070 [docking_nav] Mode=LIFT (no docking logic)
+46.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+46.640 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+47.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+47.640 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+48.070 [docking_nav] Mode=LIFT (no docking logic)
+48.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+48.660 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+49.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+49.660 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+50.070 [docking_nav] Mode=LIFT (no docking logic)
+50.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+50.660 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+51.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+51.660 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+52.070 [docking_nav] Mode=LIFT (no docking logic)
+52.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+52.690 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+53.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+53.700 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+54.070 [docking_nav] Mode=LIFT (no docking logic)
+54.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+54.700 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+55.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+55.700 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+56.070 [docking_nav] Mode=LIFT (no docking logic)
+56.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+56.720 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+57.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+57.730 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+58.070 [docking_nav] Mode=LIFT (no docking logic)
+58.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+58.750 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+59.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+59.780 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+60.070 [docking_nav] Mode=LIFT (no docking logic)
+60.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+60.780 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+61.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+61.780 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+62.070 [docking_nav] Mode=LIFT (no docking logic)
+62.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+62.780 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+63.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+63.800 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+64.070 [docking_nav] Mode=LIFT (no docking logic)
+64.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+64.820 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-27.727 theta_y_deg=-30.9
+65.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+65.830 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-27.0946 theta_y_deg=-30.5596
+66.070 [docking_nav] Mode=LIFT (no docking logic)
+66.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+66.840 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-26.78 theta_y_deg=-30.4037
+67.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+67.880 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-25.8916 theta_y_deg=-29.7922
+68.070 [docking_nav] Mode=LIFT (no docking logic)
+68.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+68.880 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-25.9837 theta_y_deg=-29.3657
+69.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+69.880 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-24.7533 theta_y_deg=-29.6109
+70.070 [docking_nav] Mode=LIFT (no docking logic)
+70.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+70.900 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-24.5876 theta_y_deg=-29.0908
+71.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+71.940 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-24.1012 theta_y_deg=-28.5845
+72.070 [docking_nav] Mode=LIFT (no docking logic)
+72.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+72.950 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-23.5248 theta_y_deg=-27.9796
+73.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+73.970 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-23.1289 theta_y_deg=-27.4022
+74.070 [docking_nav] Mode=LIFT (no docking logic)
+74.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+74.980 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-22.6404 theta_y_deg=-26.8323
+75.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+75.980 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-22.3207 theta_y_deg=-26.4309
+76.070 [docking_nav] Mode=LIFT (no docking logic)
+76.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+76.990 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-21.9449 theta_y_deg=-25.8705
+77.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+78.020 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-21.28 theta_y_deg=-25.3818
+78.070 [docking_nav] Mode=LIFT (no docking logic)
+78.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+79.020 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-20.4727 theta_y_deg=-24.8771
+79.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+80.030 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-20.4639 theta_y_deg=-24.2571
+80.070 [docking_nav] Mode=LIFT (no docking logic)
+80.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+81.040 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-20.3251 theta_y_deg=-23.5824
+81.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+82.040 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-19.8909 theta_y_deg=-23.4223
+82.070 [docking_nav] Mode=LIFT (no docking logic)
+82.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+83.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-20.1337 theta_y_deg=-22.8383
+83.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+84.050 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-19.328 theta_y_deg=-22.2914
+84.070 [docking_nav] Mode=LIFT (no docking logic)
+84.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+85.060 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-19.2909 theta_y_deg=-22.8161
+85.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+86.070 [docking_nav] Mode=LIFT (no docking logic)
+86.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+86.080 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-19.137 theta_y_deg=-20.6429
+87.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+87.080 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-17.761 theta_y_deg=-22.0727
+88.070 [docking_nav] Mode=LIFT (no docking logic)
+88.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+88.100 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-17.6729 theta_y_deg=-20.5244
+89.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+89.100 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
+90.070 [docking_nav] Mode=LIFT (no docking logic)
+90.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+90.110 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-17.2754 theta_y_deg=-19.8615
+91.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+91.120 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-16.9321 theta_y_deg=-19.3523
+92.070 [docking_nav] Mode=LIFT (no docking logic)
+92.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+92.140 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-16.6705 theta_y_deg=-17.9838
+93.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+93.150 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-16.4397 theta_y_deg=-17.6111
+94.070 [docking_nav] Mode=LIFT (no docking logic)
+94.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+94.150 [docking_nav] Optical measurement valid=true d_heading_deg=0 theta_x_deg=-16.2186 theta_y_deg=-18.2112
+95.070 [docking_nav] Outputs: phase=0 optical_xy=(0,0)
+95.160 [docking_nav] Optical measurement valid=false d_heading_deg=0 theta_x_deg=0 theta_y_deg=0
