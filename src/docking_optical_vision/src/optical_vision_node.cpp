@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <ros/package.h>
 #include <sensor_msgs/Image.h>
 #include <sensor_msgs/CameraInfo.h>
 #include <image_transport/image_transport.h>
@@ -10,6 +11,9 @@
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
+#include <opencv2/imgcodecs/imgcodecs.hpp>
+
+#include <boost/filesystem.hpp>
 
 #include <cmath>
 #include <limits>
@@ -35,6 +39,9 @@ public:
     pnh.param<int>("print_every_n", print_every_n_, 30);
     pnh.param<int>("print_camera_info_every_n", print_caminfo_every_n_, 120);
     pnh.param<int>("print_detection_every_n", print_detection_every_n_, 10);
+    pnh.param<int>("save_debug_every_n", save_debug_every_n_, 60);
+    pnh.param<std::string>("debug_save_dir", debug_save_dir_,
+                           std::string("$(find docking_optical_vision)/debug"));
     pnh.param<int>("min_consecutive_detections", min_consecutive_detections_, 2);
     pnh.param<int>("max_consecutive_misses", max_consecutive_misses_, 2);
     pnh.param<double>("valid_hold_sec", valid_hold_sec_, 0.3);
@@ -90,6 +97,20 @@ public:
     if (ema_alpha_ < 0.0) ema_alpha_ = 0.0;
     if (ema_alpha_ > 1.0) ema_alpha_ = 1.0;
 
+    if (debug_save_dir_.find("$(find docking_optical_vision)") != std::string::npos)
+    {
+      const std::string package_path = ros::package::getPath("docking_optical_vision");
+      if (!package_path.empty())
+      {
+        const std::string token = "$(find docking_optical_vision)";
+        debug_save_dir_.replace(debug_save_dir_.find(token), token.size(), package_path);
+      }
+    }
+    if (!debug_save_dir_.empty())
+    {
+      boost::filesystem::create_directories(debug_save_dir_);
+    }
+
     // ====== 2) 订阅 ======
     img_sub_ = it_.subscribe(camera_topic_, queue_size_, &OpticalVisionNode::imageCb, this);
     caminfo_sub_ = nh.subscribe(camera_info_topic_, 1, &OpticalVisionNode::cameraInfoCb, this);
@@ -126,6 +147,8 @@ public:
                     << optical_timeout_sec_);
     ROS_INFO_STREAM("[docking_optical_vision] valid_hold_sec=" << valid_hold_sec_
                     << " invalid_hold_sec=" << invalid_hold_sec_);
+    ROS_INFO_STREAM("[docking_optical_vision] debug_save_dir=" << debug_save_dir_
+                    << " save_debug_every_n=" << save_debug_every_n_);
   }
 
 private:
@@ -277,6 +300,8 @@ private:
     {
       cv::threshold(gray, bin, threshold_value_, 255, cv::THRESH_BINARY);
     }
+
+    saveDebugImages(msg->header.stamp, rgb_roi, gray, bin);
 
     // ---- 6) 形态学（可选）----
     if (morph_open_kernel_ >= 3)
@@ -471,6 +496,36 @@ private:
     meas_pub_.publish(meas);
   }
 
+  void saveDebugImages(const ros::Time& stamp, const cv::Mat& rgb,
+                       const cv::Mat& gray, const cv::Mat& bin)
+  {
+    if (save_debug_every_n_ <= 0)
+    {
+      return;
+    }
+    if ((frame_count_ % save_debug_every_n_) != 0)
+    {
+      return;
+    }
+    if (debug_save_dir_.empty())
+    {
+      return;
+    }
+
+    const double stamp_sec = stamp.toSec();
+    const std::string base_name = debug_save_dir_ + "/frame_" + std::to_string(stamp_sec);
+    try
+    {
+      cv::imwrite(base_name + "_rgb.png", rgb);
+      cv::imwrite(base_name + "_gray.png", gray);
+      cv::imwrite(base_name + "_bin.png", bin);
+    }
+    catch (const cv::Exception& e)
+    {
+      ROS_WARN_STREAM("[docking_optical_vision] Failed to save debug images: " << e.what());
+    }
+  }
+
 private:
   image_transport::ImageTransport it_;
   image_transport::Subscriber img_sub_;
@@ -494,6 +549,8 @@ private:
   int print_every_n_{30};
   int print_caminfo_every_n_{120};
   int print_detection_every_n_{10};
+  int save_debug_every_n_{60};
+  std::string debug_save_dir_;
   int min_consecutive_detections_{2};
   int max_consecutive_misses_{2};
   double valid_hold_sec_{0.3};
