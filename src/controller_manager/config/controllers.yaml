@@ -25,7 +25,7 @@ controllers:
   pid_speed:
     controller_type: pid
     controlled_variable: speed
-    Kp: 1
+    Kp: 5
     Ki: 0.1
     Kd: 0.5
     integral_limit: 1.0
