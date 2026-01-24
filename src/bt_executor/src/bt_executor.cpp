@@ -153,7 +153,7 @@ void BTExecutor::registerNodes()
                                                               helm_adapter_, docking_manager_,
                                                               outputs_publisher_, command_publisher_);
       });
-  factory_.registerNodeType<AlwaysSuccessCondition>("AlwaysSuccess");
+  factory_.registerNodeType<AlwaysSuccessCondition>("AlwaysSuccessLeaf");
 
   factory_.registerBuilder<ActivateBehaviorAction>(
       "ActivateBehavior", [this](const std::string &name, const BT::NodeConfiguration &config) {
