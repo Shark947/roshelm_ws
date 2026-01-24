@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root main_tree_to_execute="DockingTree">
+  <BehaviorTree ID="DockingTree">
+    <Fallback name="MissionRoot">
+      <Sequence name="MissionActive">
+        <DockingPhaseUpdate/>
+        <DeployReady require_no_override="true" require_no_failure="true"/>
+        <Fallback name="ModeDispatch">
+          <Sequence name="LiftMode">
+            <ModeIs mode="LIFT"/>
+            <ActivateBehavior behavior="gotodepth_lift"/>
+          </Sequence>
+
+          <Sequence name="SurveyMode">
+            <ModeIs mode="SURVEY"/>
+            <ActivateBehavior behavior="const_speed_survey"/>
+            <ActivateBehavior behavior="const_depth_survey"/>
+            <ActivateBehavior behavior="waypt_survey"/>
+          </Sequence>
+
+          <Sequence name="ReturnMode">
+            <ModeIn modes="CLOSETODOCKING;RETURNING"/>
+            <ActivateBehavior behavior="const_speed_return"/>
+            <ActivateBehavior behavior="const_depth_return"/>
+            <ActivateBehavior behavior="waypt_returning"/>
+          </Sequence>
+
+          <Sequence name="DockingMode">
+            <ModeIs mode="DOCKING"/>
+            <ActivateBehavior behavior="bhv_depth"/>
+            <Fallback name="DockingHeadingSelector">
+              <Sequence name="StationKeeping">
+                <FlagIs flag="stationing" value="true"/>
+                <ActivateBehavior behavior="station_keep"/>
+              </Sequence>
+              <Sequence name="DockHeading">
+                <FlagIs flag="stationing" value="false"/>
+                <ActivateBehavior behavior="const_hdg"/>
+              </Sequence>
+            </Fallback>
+            <Fallback name="DockingSpeed">
+              <Sequence name="DockingSpeedActive">
+                <FlagIs flag="stationing" value="false"/>
+                <FlagIs flag="docking_falling" value="false"/>
+                <ActivateBehavior behavior="const_speed_docking"/>
+              </Sequence>
+              <AlwaysSuccess/>
+            </Fallback>
+            <Fallback name="DockingFallSpeed">
+              <Sequence name="DockingFallSpeedActive">
+                <FlagIs flag="docking_falling" value="true"/>
+                <ActivateBehavior behavior="const_speed_fall"/>
+              </Sequence>
+              <AlwaysSuccess/>
+            </Fallback>
+          </Sequence>
+
+          <Sequence name="GoToDetectMode">
+            <ModeIs mode="GOTODETECT"/>
+            <ActivateBehavior behavior="gotodepth_detect"/>
+          </Sequence>
+
+          <Sequence name="DetectingMode">
+            <ModeIs mode="DETECTING"/>
+            <ActivateBehavior behavior="const_speed_detect"/>
+            <ActivateBehavior behavior="const_depth_detect"/>
+            <ActivateBehavior behavior="waypt_detect"/>
+          </Sequence>
+        </Fallback>
+      </Sequence>
+
+      <DockingPhaseUpdate/>
+    </Fallback>
+  </BehaviorTree>
+</root>

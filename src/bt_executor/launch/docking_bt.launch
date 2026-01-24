@@ -1,0 +1,7 @@
+<launch>
+  <arg name="config_file" default="$(find bt_executor)/config/docking_bt.yaml"/>
+
+  <rosparam command="load" file="$(arg config_file)" ns="bt_executor_node"/>
+
+  <node pkg="bt_executor" type="bt_executor_node" name="bt_executor_node" output="screen"/>
+</launch>
