@@ -27,12 +27,27 @@ include_directories(
 )
 
 add_library(bt_executor_core
-  src/bt_executor.cpp
-  src/helm_adapter.cpp
-  src/docking_phase_manager.cpp
-  src/utils.cpp
-  src/nodes/actions.cpp
-  src/nodes/conditions.cpp
+  src/core/bt_executor_core.cpp
+  src/ros/bt_executor_ros_node.cpp
+  src/ros/ros_io.cpp
+  src/adapters/helm_adapter.cpp
+  src/adapters/docking_phase_manager.cpp
+  src/utils/utils.cpp
+  src/nodes/node_context.cpp
+  src/nodes/core/set_mode_node.cpp
+  src/nodes/core/set_flag_node.cpp
+  src/nodes/core/deploy_ready_condition.cpp
+  src/nodes/core/mode_condition.cpp
+  src/nodes/core/any_mode_condition.cpp
+  src/nodes/core/flag_condition.cpp
+  src/nodes/core/phase_condition.cpp
+  src/nodes/helm/activate_behavior_node.cpp
+  src/nodes/helm/helm_pre_tick_node.cpp
+  src/nodes/helm/helm_post_tick_node.cpp
+  src/nodes/docking/docking_phase_update_node.cpp
+  src/plugins/register_core_nodes.cpp
+  src/plugins/register_helm_nodes.cpp
+  src/plugins/register_docking_nodes.cpp
 )
 
 target_link_libraries(bt_executor_core

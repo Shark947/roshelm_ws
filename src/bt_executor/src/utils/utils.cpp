@@ -2,7 +2,10 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cmath>
 #include <sstream>
+
+#include <VarDataPair.h>
 
 namespace bt_executor
 {
@@ -100,6 +103,32 @@ std::optional<double> parseDockDepthUpdate(const std::string &input)
 {
   const auto data = parseKeyValueList(input);
   return parseDouble(data, "depth");
+}
+
+bool parseVarDataPairBool(const ::VarDataPair &pair, bool &value)
+{
+  if (!pair.is_string())
+  {
+    value = std::abs(pair.get_ddata()) > 1e-6;
+    return true;
+  }
+
+  std::string text = pair.get_sdata();
+  std::transform(text.begin(), text.end(), text.begin(), [](unsigned char ch) {
+    return static_cast<char>(std::tolower(ch));
+  });
+
+  if (text == "true" || text == "1")
+  {
+    value = true;
+    return true;
+  }
+  if (text == "false" || text == "0")
+  {
+    value = false;
+    return true;
+  }
+  return false;
 }
 
 }  // namespace bt_executor
