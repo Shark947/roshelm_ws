@@ -128,27 +128,27 @@ bool BTExecutor::initialize()
 void BTExecutor::registerNodes()
 {
   factory_.registerBuilder<DeployReadyCondition>(
-      "DeployReady", [this](const std::string &name, const BT::NodeConfig &config) {
+      "DeployReady", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<DeployReadyCondition>(name, config, mission_state_);
       });
   factory_.registerBuilder<ModeCondition>(
-      "ModeIs", [this](const std::string &name, const BT::NodeConfig &config) {
+      "ModeIs", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<ModeCondition>(name, config, mission_state_);
       });
   factory_.registerBuilder<AnyModeCondition>(
-      "ModeIn", [this](const std::string &name, const BT::NodeConfig &config) {
+      "ModeIn", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<AnyModeCondition>(name, config, mission_state_);
       });
   factory_.registerBuilder<FlagCondition>(
-      "FlagIs", [this](const std::string &name, const BT::NodeConfig &config) {
+      "FlagIs", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<FlagCondition>(name, config, mission_state_);
       });
   factory_.registerBuilder<PhaseCondition>(
-      "PhaseIs", [this](const std::string &name, const BT::NodeConfig &config) {
+      "PhaseIs", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<PhaseCondition>(name, config, mission_state_);
       });
   factory_.registerBuilder<DockingPhaseUpdateCondition>(
-      "DockingPhaseUpdate", [this](const std::string &name, const BT::NodeConfig &config) {
+      "DockingPhaseUpdate", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<DockingPhaseUpdateCondition>(name, config, mission_state_, nav_state_,
                                                               helm_adapter_, docking_manager_,
                                                               outputs_publisher_, command_publisher_);
@@ -156,15 +156,15 @@ void BTExecutor::registerNodes()
   factory_.registerNodeType<AlwaysSuccessCondition>("AlwaysSuccess");
 
   factory_.registerBuilder<ActivateBehaviorAction>(
-      "ActivateBehavior", [this](const std::string &name, const BT::NodeConfig &config) {
+      "ActivateBehavior", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<ActivateBehaviorAction>(name, config, helm_adapter_);
       });
   factory_.registerBuilder<SetModeAction>(
-      "SetMode", [this](const std::string &name, const BT::NodeConfig &config) {
+      "SetMode", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<SetModeAction>(name, config, mission_state_, helm_adapter_);
       });
   factory_.registerBuilder<SetFlagAction>(
-      "SetFlag", [this](const std::string &name, const BT::NodeConfig &config) {
+      "SetFlag", [this](const std::string &name, const BT::NodeConfiguration &config) {
         return std::make_unique<SetFlagAction>(name, config, mission_state_, helm_adapter_);
       });
 }
