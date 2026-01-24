@@ -44,14 +44,14 @@
                 <FlagIs flag="docking_falling" value="false"/>
                 <ActivateBehavior behavior="const_speed_docking"/>
               </Sequence>
-              <AlwaysSuccess/>
+              <AlwaysSuccessLeaf/>
             </Fallback>
             <Fallback name="DockingFallSpeed">
               <Sequence name="DockingFallSpeedActive">
                 <FlagIs flag="docking_falling" value="true"/>
                 <ActivateBehavior behavior="const_speed_fall"/>
               </Sequence>
-              <AlwaysSuccess/>
+              <AlwaysSuccessLeaf/>
             </Fallback>
           </Sequence>
 
