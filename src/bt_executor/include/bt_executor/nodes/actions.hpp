@@ -14,7 +14,7 @@ namespace bt_executor
 class ActivateBehaviorAction : public BT::SyncActionNode
 {
 public:
-  ActivateBehaviorAction(const std::string &name, const BT::NodeConfig &config,
+  ActivateBehaviorAction(const std::string &name, const BT::NodeConfiguration &config,
                          std::shared_ptr<HelmAdapter> helm_adapter)
     : BT::SyncActionNode(name, config), helm_adapter_(std::move(helm_adapter))
   {
@@ -30,7 +30,7 @@ private:
 class SetModeAction : public BT::SyncActionNode
 {
 public:
-  SetModeAction(const std::string &name, const BT::NodeConfig &config,
+  SetModeAction(const std::string &name, const BT::NodeConfiguration &config,
                 std::shared_ptr<MissionState> mission_state,
                 std::shared_ptr<HelmAdapter> helm_adapter)
     : BT::SyncActionNode(name, config), mission_state_(std::move(mission_state)),
@@ -49,7 +49,7 @@ private:
 class SetFlagAction : public BT::SyncActionNode
 {
 public:
-  SetFlagAction(const std::string &name, const BT::NodeConfig &config,
+  SetFlagAction(const std::string &name, const BT::NodeConfiguration &config,
                 std::shared_ptr<MissionState> mission_state,
                 std::shared_ptr<HelmAdapter> helm_adapter)
     : BT::SyncActionNode(name, config), mission_state_(std::move(mission_state)),
