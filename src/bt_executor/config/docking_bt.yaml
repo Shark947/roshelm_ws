@@ -1,0 +1,305 @@
+loop_frequency: 10.0
+tree_path: behavior_trees/docking.xml
+initial_mode: LIFT
+
+deploy_default: false
+return_default: false
+
+topics:
+  nav_x_topic: /auh/NAV_X
+  nav_y_topic: /auh/NAV_Y
+  nav_depth_topic: /auh/NAV_DEPTH
+  nav_heading_topic: /auh/NAV_HEADING
+  nav_speed_topic: /auh/NAV_SPEED
+  nav_pitch_topic: /auh/NAV_PITCH
+  nav_roll_topic: /auh/NAV_ROLL
+
+  deploy_topic: /auh/DEPLOY
+  return_topic: /auh/RETURN
+
+  mode_topic: /docking/mode
+  mode_state_topic: /docking/mode_state
+  stationing_topic: /docking/stationing
+  constheight_topic: /docking/constheight
+  docking_falling_topic: /docking/docking_falling
+  manual_override_topic: /docking/manual_override
+  docking_failed_topic: /docking/docking_failed
+  dockdepth_update_topic: /docking/dockdepth_update
+  dockhdg_updates_topic: /docking/dockhdg_updates
+
+  optical_measurement_topic: /docking/optical_measurement
+  phase_topic: /docking/phase
+  optical_xy_topic: /docking/optical_xy
+  optical_feedback_topic: /docking/optical_feedback
+  dock_depth_topic: /docking/dock_depth
+
+  desired_heading_topic: /auh/desired_heading
+  desired_speed_topic: /auh/desired_speed
+  desired_depth_topic: /auh/desired_depth
+
+helm:
+  ownship: auh
+  decision_vars:
+    heading: course
+    speed: speed
+    depth: depth
+  domain:
+    - course: "0:359:360"
+    - speed: "0:4:41"
+    - depth: "0:1000:1001"
+  initial_doubles:
+    NAV_X: 0.0
+    NAV_Y: 0.0
+    NAV_HEADING: 0.0
+    NAV_SPEED: 0.0
+    NAV_DEPTH: 0.0
+  behaviors:
+    - name: gotodepth_lift
+      type: GoToDepth
+      params:
+        pwt: 100
+        capture_delta: 0.5
+        depth: 74
+        repeat: 0
+        perpetual: true
+      runflags:
+        - GOTO_DEPTH=true
+        - DET_LIGPOWER=true
+        - DET_CAMSONPOWER=true
+        - DET_MAGPOWER=true
+      endflags:
+        - GOTO_DEPTH=false
+        - MODE=SURVEY
+
+    - name: const_speed_survey
+      type: ConstantSpeed
+      update_var: SPEED_UPDATE
+      params:
+        pwt: 100
+        speed: 0.1
+        perpetual: false
+        duration: no-time-limit
+        duration_reset: CONST_SPD_RESET=true
+
+    - name: const_depth_survey
+      type: ConstantDepth
+      update_var: DEPTH_UPDATE
+      conditions:
+        - GOTO_DEPTH!=true
+      params:
+        pwt: 100
+        duration: no-time-limit
+        depth: 75
+        peakwidth: 1
+        basewidth: 1.5
+        summitdelta: 20
+
+    - name: waypt_survey
+      type: Waypoint
+      update_var: WPT_UPDATE
+      params:
+        pwt: 100
+        speed: 0.05
+        capture_line: true
+        capture_radius: 2
+        slip_radius: 4
+        efficiency_measure: all
+        polygon: -3,-3
+        order: normal
+        repeat: 0
+        perpetual: true
+      runflags:
+        - DET_CAMSONPOWER=true
+        - DET_LIGPOWER=true
+      endflags:
+        - DET_CAMSONPOWER=false
+        - DET_LIGPOWER=false
+        - DET_MAGPOWER=false
+        - MODE=RETURNING
+
+    - name: const_speed_return
+      type: ConstantSpeed
+      update_var: SPEED_UPDATE
+      params:
+        pwt: 100
+        speed: 0.1
+        perpetual: false
+        duration: no-time-limit
+        duration_reset: CONST_SPD_RESET=true
+
+    - name: waypt_returning
+      type: Waypoint
+      update_var: WPT_UPDATE
+      params:
+        pwt: 100
+        speed: 0.05
+        capture_line: true
+        capture_radius: 0.1
+        slip_radius: 2
+        efficiency_measure: all
+        polygon: 0,0
+        order: normal
+        repeat: 100000
+        perpetual: true
+      runflags:
+        - DET_CAMSONPOWER=true
+        - DET_LIGPOWER=true
+      endflags:
+        - DET_CAMSONPOWER=false
+        - DET_LIGPOWER=false
+        - RETURN1=true
+
+    - name: const_depth_return
+      type: ConstantDepth
+      update_var: DEPTH_UPDATE
+      conditions:
+        - GOTO_DEPTH!=true
+      params:
+        pwt: 100
+        duration: no-time-limit
+        depth: 75
+        peakwidth: 1
+        basewidth: 1.5
+        summitdelta: 20
+
+    - name: station_keep
+      type: StationKeep
+      params:
+        pwt: 100
+        center_activate: false
+        hibernation_radius: -1
+        inner_radius: 0.3
+        outer_radius: 1.5
+        outer_speed: 0.15
+        transit_speed: 0.2
+        station_pt: 0,0
+        swing_time: 0
+
+    - name: bhv_depth
+      type: ConstantDepth
+      update_var: DOCKDEPTH_UPDATE
+      params:
+        pwt: 120
+        duration: no-time-limit
+        depth: 0
+        peakwidth: 1
+        basewidth: 1.5
+        summitdelta: 20
+
+    - name: const_hdg
+      type: ConstantHeading
+      update_var: DOCKHDG_UPDATES
+      params:
+        pwt: 1
+        duration: no-time-limit
+        basewidth: 10
+        heading: 90
+        heading_mismatch_var: HDG_DIFF
+        peakwidth: 10
+        summitdelta: 25
+        perpetual: true
+
+    - name: const_speed_docking
+      type: ConstantSpeed
+      params:
+        pwt: 40
+        speed: 0.05
+        duration: no-time-limit
+        perpetual: true
+
+    - name: const_speed_fall
+      type: ConstantSpeed
+      params:
+        pwt: 200
+        speed: 0.0
+        duration: no-time-limit
+        perpetual: true
+
+    - name: gotodepth_detect
+      type: GoToDepth
+      params:
+        pwt: 100
+        capture_delta: 0.5
+        depth: 74
+        repeat: 0
+        perpetual: true
+      runflags:
+        - GOTO_DEPTH=true
+        - CONSTHEIGHT=true
+        - DET_LIGPOWER=true
+        - DET_CAMSONPOWER=true
+      endflags:
+        - GOTO_DEPTH=false
+        - MODE=DETECTING
+
+    - name: const_speed_detect
+      type: ConstantSpeed
+      update_var: DETECT_SPEED_UPDATE
+      params:
+        pwt: 100
+        speed: 0.1
+        perpetual: false
+        duration: no-time-limit
+        duration_reset: CONST_SPD_RESET=true
+
+    - name: const_depth_detect
+      type: ConstantDepth
+      update_var: DETECT_DEPTH_UPDATE
+      conditions:
+        - GOTO_DEPTH!=true
+      params:
+        pwt: 100
+        duration: no-time-limit
+        depth: 77
+        peakwidth: 1
+        basewidth: 1.5
+        summitdelta: 20
+
+    - name: waypt_detect
+      type: Waypoint
+      update_var: DETECT_WPT_UPDATE
+      params:
+        pwt: 100
+        speed: 0.05
+        capture_line: true
+        capture_radius: 2
+        slip_radius: 4
+        efficiency_measure: all
+        polygon: 3,3
+        order: normal
+        repeat: 0
+        perpetual: true
+      runflags:
+        - DET_CAMSONPOWER=true
+        - DET_LIGPOWER=true
+      endflags:
+        - DET_CAMSONPOWER=false
+        - DET_LIGPOWER=false
+        - MODE=UPFLOAT
+
+docking:
+  nav_server_period: 0.1
+  optical_camera_delta_l: 0.0
+  camera_view_angle_deg: 31.15
+  dock_depth: 79.8
+  dock_panel: 0.1
+  dock_heading_deg: 0.0
+  dock_pitch_deg: 0.0
+  dock_roll_deg: 0.0
+  depth_bias: 0.0
+  depth_ground_bias: 0.0
+  depth_camera_bias: 0.83
+  align_depth_offsets: [5.0, 4.0]
+  fall_depth: 0.3
+  dradius: 0.7
+  dinheading_deg: 20.0
+  distance_bias: 0.5
+  angle_bias_deg: 5.0
+  radius1th: 0.0
+  maxtry_minute_num: 1
+  constant_depth_minute_num: 1
+  last_phase_float_time_ms: 5000
+  transimit_duration_sec: 15
+  docking_max_try: 3
+  auto_enter_closetodocking: true
+  auto_enter_duration_sec: 4.0
