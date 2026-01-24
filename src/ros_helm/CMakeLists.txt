@@ -102,7 +102,7 @@ include_directories(${IVP_INCLUDE_DIRS})
 catkin_package(
   INCLUDE_DIRS
     ${ROS_HELM_PUBLIC_INCLUDE_DIRS}
-  LIBRARIES helm_core ros_helm_bridge
+  LIBRARIES helm_core ros_helm_bridge dep_behaviors helmivp
   CATKIN_DEPENDS
     geometry_msgs
     nav_msgs
