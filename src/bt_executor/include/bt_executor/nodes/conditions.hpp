@@ -18,7 +18,7 @@ namespace bt_executor
 class DeployReadyCondition : public BT::ConditionNode
 {
 public:
-  DeployReadyCondition(const std::string &name, const BT::NodeConfig &config,
+  DeployReadyCondition(const std::string &name, const BT::NodeConfiguration &config,
                        std::shared_ptr<MissionState> mission_state)
     : BT::ConditionNode(name, config), mission_state_(std::move(mission_state))
   {
@@ -34,7 +34,7 @@ private:
 class ModeCondition : public BT::ConditionNode
 {
 public:
-  ModeCondition(const std::string &name, const BT::NodeConfig &config,
+  ModeCondition(const std::string &name, const BT::NodeConfiguration &config,
                 std::shared_ptr<MissionState> mission_state)
     : BT::ConditionNode(name, config), mission_state_(std::move(mission_state))
   {
@@ -50,7 +50,7 @@ private:
 class AnyModeCondition : public BT::ConditionNode
 {
 public:
-  AnyModeCondition(const std::string &name, const BT::NodeConfig &config,
+  AnyModeCondition(const std::string &name, const BT::NodeConfiguration &config,
                    std::shared_ptr<MissionState> mission_state)
     : BT::ConditionNode(name, config), mission_state_(std::move(mission_state))
   {
@@ -66,7 +66,7 @@ private:
 class FlagCondition : public BT::ConditionNode
 {
 public:
-  FlagCondition(const std::string &name, const BT::NodeConfig &config,
+  FlagCondition(const std::string &name, const BT::NodeConfiguration &config,
                 std::shared_ptr<MissionState> mission_state)
     : BT::ConditionNode(name, config), mission_state_(std::move(mission_state))
   {
@@ -82,7 +82,7 @@ private:
 class PhaseCondition : public BT::ConditionNode
 {
 public:
-  PhaseCondition(const std::string &name, const BT::NodeConfig &config,
+  PhaseCondition(const std::string &name, const BT::NodeConfiguration &config,
                  std::shared_ptr<MissionState> mission_state)
     : BT::ConditionNode(name, config), mission_state_(std::move(mission_state))
   {
@@ -98,7 +98,7 @@ private:
 class DockingPhaseUpdateCondition : public BT::ConditionNode
 {
 public:
-  DockingPhaseUpdateCondition(const std::string &name, const BT::NodeConfig &config,
+  DockingPhaseUpdateCondition(const std::string &name, const BT::NodeConfiguration &config,
                               std::shared_ptr<MissionState> mission_state,
                               std::shared_ptr<NavState> nav_state,
                               std::shared_ptr<HelmAdapter> helm_adapter,
@@ -131,7 +131,7 @@ private:
 class AlwaysSuccessCondition : public BT::ConditionNode
 {
 public:
-  AlwaysSuccessCondition(const std::string &name, const BT::NodeConfig &config)
+  AlwaysSuccessCondition(const std::string &name, const BT::NodeConfiguration &config)
     : BT::ConditionNode(name, config)
   {
   }
