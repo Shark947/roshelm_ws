@@ -17,10 +17,12 @@
 
 核心组件：
 
-- `BTExecutor`：加载参数、构建黑板、注册节点并驱动行为树 tick，同时协调 helm 求解与指令发布。
+- `BTExecutorNode`：ROS 协调器（薄壳），负责加载参数、构造上下文与定时 tick。
+- `BTExecutorCore`：纯逻辑核心，负责注册节点与加载/驱动行为树。
+- `RosIO`：ROS 订阅/发布对接层，负责把外部输入写入上下文，并发布 helm/阶段输出。
 - `HelmAdapter`：构建 `IvPDomain`，实例化 `lib_behaviors-marine` 行为，管理 `InfoBuffer/BehaviorSet/HelmEngine`，并对外提供行为激活与求解接口。
-- `DockingPhaseManager`：从导航/视觉反馈推导 docking 阶段，并向 helm/info buffer 注入阶段相关的目标值与标志。
-- BT 节点（`nodes/actions.*`, `nodes/conditions.*`）：把阶段管理、行为激活、flag 检查等逻辑变成显式节点。
+- `DockingPhaseManager`：从导航/视觉反馈推导 docking 阶段，并输出阶段相关的目标值与标志更新。
+- BT 节点（`nodes/core/*`, `nodes/helm/*`, `nodes/docking/*`）：通过 blackboard 注入的 `BTContext` 访问共享状态与接口。
 
 ## 运行方式
 
@@ -100,8 +102,8 @@ roslaunch auh_launch auh_docking_bt.launch
 
 与 docking 过程可观测性直接相关的发布器位于：
 
-- `include/bt_executor/docking_outputs_publisher.hpp`
-- `src/docking_outputs_publisher` 的调用点在 `DockingPhaseUpdate` 条件节点中。
+- `include/bt_executor/ros/docking_outputs_publisher.hpp`
+- 调用点位于 `DockingPhaseUpdate` 节点（`nodes/docking/docking_phase_update_node.cpp`）。
 
 ## 开发与调试建议
 
