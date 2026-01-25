@@ -3,7 +3,7 @@
 #include "bt_executor/adapters/helm_adapter.hpp"
 #include "bt_executor/bt_context.hpp"
 #include "bt_executor/nodes/node_context.hpp"
-#include "bt_executor/ros_io.hpp"
+#include "bt_executor/ros/ros_io.hpp"
 
 namespace bt_executor
 {

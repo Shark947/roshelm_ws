@@ -8,7 +8,7 @@
 
 #include "bt_executor/adapters/docking_phase_manager.hpp"
 #include "bt_executor/bt_context.hpp"
-#include "bt_executor/bt_executor_core.hpp"
+#include "bt_executor/core/bt_executor_core.hpp"
 
 namespace bt_executor
 {
