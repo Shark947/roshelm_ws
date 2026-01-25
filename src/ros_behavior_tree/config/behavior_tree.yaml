@@ -1,5 +1,7 @@
 vehicle_name: auh
+bt_xml: "$(find ros_behavior_tree)/config/text.xml"
 loop_frequency: 5.0
+groot_enable: true
 
 # ROS-style topics
 ros_heading_topic: /auh/current_heading

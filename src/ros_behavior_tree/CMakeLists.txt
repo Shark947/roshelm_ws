@@ -19,6 +19,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+
 add_executable(behavior_tree_node
   src/behavior_tree_node.cpp
   src/bt_nodes.cpp
@@ -29,6 +32,8 @@ add_dependencies(behavior_tree_node ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(behavior_tree_node
   ${catkin_LIBRARIES}
+  behaviortree_cpp_v3
+  zmq
 )
 
 install(TARGETS behavior_tree_node
