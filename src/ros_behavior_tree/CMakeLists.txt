@@ -26,8 +26,11 @@ link_directories(/usr/local/lib)
 
 add_executable(behavior_tree_node
   src/behavior_tree_node.cpp
+  src/bt/register_nodes.cpp
   src/bt_nodes.cpp
   src/nav_subscriber.cpp
+  src/nodes/actions/dummy_action.cpp
+  src/nodes/conditions/common/deploy_triggered.cpp
 )
 
 add_dependencies(behavior_tree_node ${catkin_EXPORTED_TARGETS})
