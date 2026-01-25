@@ -62,6 +62,9 @@ ros_behavior_tree/
 - `groot_server_port`
 - `ros_*_topic`, `nav_*_topic`, `deploy_topic`, `return_topic`
 
+> 注意：`groot_publisher_port` 与 `groot_server_port` 必须不同；若相同将禁用
+> Groot ZMQ 发布器并输出错误日志。
+
 ## 运行
 
 ```bash

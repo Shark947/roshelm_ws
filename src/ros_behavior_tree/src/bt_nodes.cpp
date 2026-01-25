@@ -335,11 +335,21 @@ BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
 
   if (tree_loaded_ && groot_enable)
   {
-    groot_publisher_ = std::make_unique<BT::PublisherZMQ>(
-        tree_, groot_publisher_port, groot_server_port);
-    ROS_INFO_STREAM("[ros_behavior_tree] Groot ZMQ publisher enabled (pub="
-                    << groot_publisher_port << ", server=" << groot_server_port
-                    << ")");
+    if (groot_publisher_port == groot_server_port)
+    {
+      ROS_ERROR_STREAM(
+          "[ros_behavior_tree] Groot ports must be different (pub="
+          << groot_publisher_port << ", server=" << groot_server_port
+          << "). Disabling Groot publisher.");
+    }
+    else
+    {
+      groot_publisher_ = std::make_unique<BT::PublisherZMQ>(
+          tree_, groot_publisher_port, groot_server_port);
+      ROS_INFO_STREAM("[ros_behavior_tree] Groot ZMQ publisher enabled (pub="
+                      << groot_publisher_port
+                      << ", server=" << groot_server_port << ")");
+    }
   }
   ROS_INFO_STREAM("[ros_behavior_tree] Behavior tree loaded from " << bt_xml);
 }
