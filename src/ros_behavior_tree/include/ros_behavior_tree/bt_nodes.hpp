@@ -1,7 +1,13 @@
 #pragma once
 
-#include <ros/ros.h>
+#include <behaviortree_cpp_v3/bt_factory.h>
+#include <behaviortree_cpp_v3/loggers/bt_zmq_publisher.h>
+#include <behaviortree_cpp_v3/tree.h>
 #include <common_msgs/Float64Stamped.h>
+#include <ros/ros.h>
+
+#include <memory>
+#include <string>
 
 namespace ros_behavior_tree
 {
@@ -79,7 +85,16 @@ private:
 class BehaviorTreeManager
 {
 public:
+  BehaviorTreeManager(const ros::NodeHandle &nh, NavDataStore *store);
   void tick();
+
+private:
+  ros::NodeHandle nh_;
+  NavDataStore *store_{nullptr};
+  BT::BehaviorTreeFactory factory_;
+  BT::Tree tree_;
+  std::unique_ptr<BT::PublisherZMQ> groot_publisher_;
+  bool tree_loaded_{false};
 };
 
 }  // namespace ros_behavior_tree

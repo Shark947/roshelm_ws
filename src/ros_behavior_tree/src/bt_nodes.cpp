@@ -1,7 +1,81 @@
 #include "ros_behavior_tree/bt_nodes.hpp"
 
+#include <behaviortree_cpp_v3/action_node.h>
+#include <ros/package.h>
+
 namespace ros_behavior_tree
 {
+
+namespace
+{
+class DeployTriggered : public BT::ConditionNode
+{
+public:
+  DeployTriggered(const std::string &name,
+                  const BT::NodeConfiguration &config,
+                  const NavDataStore *store)
+      : BT::ConditionNode(name, config), store_(store)
+  {
+  }
+
+  static BT::PortsList providedPorts()
+  {
+    return {};
+  }
+
+  BT::NodeStatus tick() override
+  {
+    if (!store_)
+      return BT::NodeStatus::FAILURE;
+
+    bool value = false;
+    if (!store_->preferredDeploy(value, ros::Duration(0.0)))
+      return BT::NodeStatus::FAILURE;
+    return value ? BT::NodeStatus::SUCCESS : BT::NodeStatus::FAILURE;
+  }
+
+private:
+  const NavDataStore *store_{nullptr};
+};
+
+class DummyAction : public BT::StatefulActionNode
+{
+public:
+  DummyAction(const std::string &name, const BT::NodeConfiguration &config)
+      : BT::StatefulActionNode(name, config)
+  {
+  }
+
+  static BT::PortsList providedPorts()
+  {
+    return {BT::InputPort<double>("duration")};
+  }
+
+  BT::NodeStatus onStart() override
+  {
+    run_duration_ = 1.0;
+    getInput("duration", run_duration_);
+    start_time_ = ros::Time::now();
+    return BT::NodeStatus::RUNNING;
+  }
+
+  BT::NodeStatus onRunning() override
+  {
+    if ((ros::Time::now() - start_time_).toSec() >= run_duration_)
+      return BT::NodeStatus::SUCCESS;
+    return BT::NodeStatus::RUNNING;
+  }
+
+  void onHalted() override
+  {
+    start_time_ = ros::Time(0.0);
+  }
+
+private:
+  ros::Time start_time_;
+  double run_duration_{1.0};
+};
+}  // namespace
 
 void NavDataStore::updateHeading(double value, const ros::Time &stamp,
                                  bool nav_style)
@@ -220,6 +294,54 @@ bool NavDataStore::preferredReturn(bool &out,
 
 void BehaviorTreeManager::tick()
 {
+  if (!tree_loaded_)
+    return;
+  tree_.tickRoot();
+}
+
+BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
+                                         NavDataStore *store)
+    : nh_(nh), store_(store)
+{
+  std::string bt_xml;
+  std::string default_xml =
+      ros::package::getPath("ros_behavior_tree") + "/config/test.xml";
+  nh_.param("bt_xml", bt_xml, default_xml);
+
+  bool groot_enable = true;
+  int groot_publisher_port = 1666;
+  int groot_server_port = 1667;
+  nh_.param("groot_enable", groot_enable, true);
+  nh_.param("groot_publisher_port", groot_publisher_port, 1666);
+  nh_.param("groot_server_port", groot_server_port, 1667);
+
+  auto deploy_builder = [this](const std::string &name,
+                               const BT::NodeConfiguration &config) {
+    return std::make_unique<DeployTriggered>(name, config, store_);
+  };
+  factory_.registerBuilder<DeployTriggered>("DeployTriggered", deploy_builder);
+  factory_.registerNodeType<DummyAction>("DummyAction");
+
+  try
+  {
+    tree_ = factory_.createTreeFromFile(bt_xml);
+    tree_loaded_ = true;
+  }
+  catch (const std::exception &ex)
+  {
+    ROS_ERROR_STREAM("[ros_behavior_tree] Failed to load BT XML: " << ex.what());
+    tree_loaded_ = false;
+  }
+
+  if (tree_loaded_ && groot_enable)
+  {
+    groot_publisher_ = std::make_unique<BT::PublisherZMQ>(
+        tree_, groot_publisher_port, groot_server_port);
+    ROS_INFO_STREAM("[ros_behavior_tree] Groot ZMQ publisher enabled (pub="
+                    << groot_publisher_port << ", server=" << groot_server_port
+                    << ")");
+  }
+  ROS_INFO_STREAM("[ros_behavior_tree] Behavior tree loaded from " << bt_xml);
 }
 
 }  // namespace ros_behavior_tree

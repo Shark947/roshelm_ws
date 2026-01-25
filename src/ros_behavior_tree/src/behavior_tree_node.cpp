@@ -87,7 +87,7 @@ public:
                     << " y=" << topics.nav_y);
 
     nav_subscriber_ = std::make_shared<NavDataSubscriber>(nh_, topics, store_);
-    manager_ = std::make_shared<BehaviorTreeManager>();
+    manager_ = std::make_shared<BehaviorTreeManager>(private_nh_, &store_);
   }
 
   void spin()
