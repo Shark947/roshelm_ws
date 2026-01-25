@@ -2,7 +2,7 @@
 
 #include <behaviortree_cpp_v3/bt_factory.h>
 #include <behaviortree_cpp_v3/loggers/bt_zmq_publisher.h>
-#include <behaviortree_cpp_v3/tree.h>
+#include <behaviortree_cpp_v3/behavior_tree.h>
 #include <common_msgs/Float64Stamped.h>
 #include <ros/ros.h>
 

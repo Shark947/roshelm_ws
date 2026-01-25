@@ -4,6 +4,7 @@ project(ros_behavior_tree)
 add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
+  behaviortree_cpp_v3
   common_msgs
   roscpp
   roslib
@@ -11,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 catkin_package(
-  CATKIN_DEPENDS common_msgs roscpp roslib std_msgs
+  CATKIN_DEPENDS behaviortree_cpp_v3 common_msgs roscpp roslib std_msgs
   INCLUDE_DIRS include
 )
 
