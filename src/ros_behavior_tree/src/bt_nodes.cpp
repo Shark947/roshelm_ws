@@ -1,5 +1,6 @@
 #include "ros_behavior_tree/bt_nodes.hpp"
 
+#include <behaviortree_cpp_v3/action_node.h>
 #include <ros/package.h>
 
 namespace ros_behavior_tree
@@ -35,6 +36,44 @@ public:
 
 private:
   const NavDataStore *store_{nullptr};
+};
+
+class DummyAction : public BT::StatefulActionNode
+{
+public:
+  DummyAction(const std::string &name, const BT::NodeConfiguration &config)
+      : BT::StatefulActionNode(name, config)
+  {
+  }
+
+  static BT::PortsList providedPorts()
+  {
+    return {BT::InputPort<double>("duration")};
+  }
+
+  BT::NodeStatus onStart() override
+  {
+    run_duration_ = 1.0;
+    getInput("duration", run_duration_);
+    start_time_ = ros::Time::now();
+    return BT::NodeStatus::RUNNING;
+  }
+
+  BT::NodeStatus onRunning() override
+  {
+    if ((ros::Time::now() - start_time_).toSec() >= run_duration_)
+      return BT::NodeStatus::SUCCESS;
+    return BT::NodeStatus::RUNNING;
+  }
+
+  void onHalted() override
+  {
+    start_time_ = ros::Time(0.0);
+  }
+
+private:
+  ros::Time start_time_;
+  double run_duration_{1.0};
 };
 }  // namespace
 
@@ -281,6 +320,7 @@ BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
     return std::make_unique<DeployTriggered>(name, config, store_);
   };
   factory_.registerBuilder<DeployTriggered>("DeployTriggered", deploy_builder);
+  factory_.registerNodeType<DummyAction>("DummyAction");
 
   try
   {

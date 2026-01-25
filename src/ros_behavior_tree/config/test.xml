@@ -3,6 +3,7 @@
   <BehaviorTree ID="MainTree">
     <Sequence name="root_sequence">
       <DeployTriggered />
+      <DummyAction duration="1.0" />
     </Sequence>
   </BehaviorTree>
 </root>

@@ -41,9 +41,12 @@ ros_behavior_tree/
 
 节点会加载 BehaviorTree.CPP 的 XML 文件，并提供一个简易树用于在 Groot 中验证：
 
-- 默认的 `config/test.xml` 包含一个 `DeployTriggered` 条件节点。
+- 默认的 `config/test.xml` 包含一个 `DeployTriggered` 条件节点和一个
+  `DummyAction` 行为节点。
 - 当 `/auh/DEPLOY`（或配置的 `deploy_topic`）被发布 `data: true` 时，
-  `DeployTriggered` 返回 **SUCCESS**。
+  `DeployTriggered` 返回 **SUCCESS**，`DummyAction` 会先 **RUNNING** 一段
+  时间后再返回 **SUCCESS**。
+- 若 `DeployTriggered` 失败，序列节点会立刻返回失败，整个树直接失败。
 
 可以用该树验证 ROS 节点、BT 运行时与 Groot ZMQ 连接是否正确。
 
