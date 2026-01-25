@@ -85,12 +85,12 @@ private:
 class BehaviorTreeManager
 {
 public:
-  BehaviorTreeManager(const ros::NodeHandle &nh, NavDataStore *store);
+  BehaviorTreeManager(const ros::NodeHandle &nh, const NavDataStore *store);
   void tick();
 
 private:
   ros::NodeHandle nh_;
-  NavDataStore *store_{nullptr};
+  const NavDataStore *store_{nullptr};
   BT::BehaviorTreeFactory factory_;
   BT::Tree tree_;
   std::unique_ptr<BT::PublisherZMQ> groot_publisher_;
