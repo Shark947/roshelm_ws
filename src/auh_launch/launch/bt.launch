@@ -28,6 +28,6 @@
   <!-- 启动 ros_behavior_tree -->
   <arg name="config" default="$(find ros_behavior_tree)/config/behavior_tree.yaml" />
   <node pkg="ros_behavior_tree" type="behavior_tree_node" name="ros_behavior_tree" output="screen">
-    <rosparam command="load" file="$(arg config)" />
+    <rosparam command="load" file="$(arg config)" subst_value="true" />
   </node>
 </launch>
