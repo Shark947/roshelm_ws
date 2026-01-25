@@ -1,7 +1,9 @@
 vehicle_name: auh
-bt_xml: "$(find ros_behavior_tree)/config/text.xml"
+bt_xml: "$(find ros_behavior_tree)/config/test.xml"
 loop_frequency: 5.0
 groot_enable: true
+groot_publisher_port: 1666
+groot_server_port: 1667
 
 # ROS-style topics
 ros_heading_topic: /auh/current_heading

@@ -1,8 +1,8 @@
-# ROS Behavior Tree
+# ROS 行为树
 
-This package adds a lightweight behavior tree (BT) **foundation** for ROS1 **Melodic** on **Ubuntu 18.04**. It currently focuses on collecting navigation data from `ros_helm` topic conventions, with behavior logic to be added later.
+这个包为 ROS1 **Melodic**（**Ubuntu 18.04**）提供轻量级行为树（BT）**基础设施**。当前主要用于从 `ros_helm` 的话题规范采集导航数据，行为逻辑可在后续迭代中扩展。
 
-## Directory structure
+## 目录结构
 
 ```
 ros_behavior_tree/
@@ -24,33 +24,42 @@ ros_behavior_tree/
     └── nav_subscriber.cpp
 ```
 
-## Data sources
+## 数据来源
 
-The node subscribes to **two navigation data sets** (both are collected in parallel):
+该节点并行订阅 **两套导航数据**：
 
-- **ROS-style topics**: `/<vehicle>/current_heading`, `/current_speed`, `/current_depth`,
+- **ROS 风格话题**：`/<vehicle>/current_heading`, `/current_speed`, `/current_depth`,
   `/current_yaw`, `/current_pitch`, `/current_roll`, `/current_x`, `/current_y`
-- **NAV/MOOS-style topics**: `/<vehicle>/NAV_HEADING`, `/NAV_SPEED`, `/NAV_DEPTH`,
+- **NAV/MOOS 风格话题**：`/<vehicle>/NAV_HEADING`, `/NAV_SPEED`, `/NAV_DEPTH`,
   `/NAV_YAW`, `/NAV_PITCH`, `/NAV_ROLL`, `/NAV_X`, `/NAV_Y`
 
-Deploy/return topics are shared across both data sets: `/<vehicle>/DEPLOY` and
-`/<vehicle>/RETURN`.
+部署/返航话题在两套数据中共用：`/<vehicle>/DEPLOY` 与 `/<vehicle>/RETURN`。
 
-The defaults mirror the topic naming used in `ros_helm`'s ROS bridge configuration. Update the parameters if you remap the topics.
+默认值与 `ros_helm` 的 ROS bridge 配置中话题命名保持一致。若重映射话题，请同步调整参数。
 
-## Behavior tree flow
+## 行为树流程
 
-Behavior logic is intentionally **not implemented yet**. The current node only provides a data collection base and an empty tick loop to be extended in future iterations.
+节点会加载 BehaviorTree.CPP 的 XML 文件，并提供一个简易树用于在 Groot 中验证：
 
-## Configuration
+- 默认的 `config/test.xml` 包含一个 `DeployTriggered` 条件节点。
+- 当 `/auh/DEPLOY`（或配置的 `deploy_topic`）被发布 `data: true` 时，
+  `DeployTriggered` 返回 **SUCCESS**。
 
-See `config/behavior_tree.yaml` for default parameters:
+可以用该树验证 ROS 节点、BT 运行时与 Groot ZMQ 连接是否正确。
+
+## 配置
+
+默认参数见 `config/behavior_tree.yaml`：
 
 - `vehicle_name`
 - `loop_frequency`
+- `bt_xml`
+- `groot_enable`
+- `groot_publisher_port`
+- `groot_server_port`
 - `ros_*_topic`, `nav_*_topic`, `deploy_topic`, `return_topic`
 
-## Run
+## 运行
 
 ```bash
 roslaunch ros_behavior_tree behavior_tree.launch

@@ -6,11 +6,12 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   common_msgs
   roscpp
+  roslib
   std_msgs
 )
 
 catkin_package(
-  CATKIN_DEPENDS common_msgs roscpp std_msgs
+  CATKIN_DEPENDS common_msgs roscpp roslib std_msgs
   INCLUDE_DIRS include
 )
 
