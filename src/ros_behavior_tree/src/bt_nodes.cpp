@@ -230,7 +230,7 @@ void BehaviorTreeManager::tick()
 }
 
 BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
-                                         NavDataStore *store)
+                                         const NavDataStore *store)
     : nh_(nh), store_(store)
 {
   std::string bt_xml;
