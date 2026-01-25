@@ -21,8 +21,8 @@ struct NavTopics
   std::string ros_roll;
   std::string ros_x;
   std::string ros_y;
-  std::string ros_deploy;
-  std::string ros_return;
+  std::string deploy;
+  std::string return_home;
 
   std::string nav_heading;
   std::string nav_speed;
@@ -32,8 +32,6 @@ struct NavTopics
   std::string nav_roll;
   std::string nav_x;
   std::string nav_y;
-  std::string nav_deploy;
-  std::string nav_return;
 };
 
 class NavDataSubscriber
@@ -51,8 +49,6 @@ private:
   ros::Subscriber ros_roll_sub_;
   ros::Subscriber ros_x_sub_;
   ros::Subscriber ros_y_sub_;
-  ros::Subscriber ros_deploy_sub_;
-  ros::Subscriber ros_return_sub_;
 
   ros::Subscriber nav_heading_sub_;
   ros::Subscriber nav_speed_sub_;
@@ -62,8 +58,8 @@ private:
   ros::Subscriber nav_roll_sub_;
   ros::Subscriber nav_x_sub_;
   ros::Subscriber nav_y_sub_;
-  ros::Subscriber nav_deploy_sub_;
-  ros::Subscriber nav_return_sub_;
+  ros::Subscriber deploy_sub_;
+  ros::Subscriber return_sub_;
 };
 
 }  // namespace ros_behavior_tree

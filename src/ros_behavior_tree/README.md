@@ -29,10 +29,12 @@ ros_behavior_tree/
 The node subscribes to **two navigation data sets** (both are collected in parallel):
 
 - **ROS-style topics**: `/<vehicle>/current_heading`, `/current_speed`, `/current_depth`,
-  `/current_yaw`, `/current_pitch`, `/current_roll`, `/current_x`, `/current_y`,
-  `/DEPLOY`, `/RETURN`
+  `/current_yaw`, `/current_pitch`, `/current_roll`, `/current_x`, `/current_y`
 - **NAV/MOOS-style topics**: `/<vehicle>/NAV_HEADING`, `/NAV_SPEED`, `/NAV_DEPTH`,
-  `/NAV_YAW`, `/NAV_PITCH`, `/NAV_ROLL`, `/NAV_X`, `/NAV_Y`, `/DEPLOY`, `/RETURN`
+  `/NAV_YAW`, `/NAV_PITCH`, `/NAV_ROLL`, `/NAV_X`, `/NAV_Y`
+
+Deploy/return topics are shared across both data sets: `/<vehicle>/DEPLOY` and
+`/<vehicle>/RETURN`.
 
 The defaults mirror the topic naming used in `ros_helm`'s ROS bridge configuration. Update the parameters if you remap the topics.
 
@@ -46,7 +48,7 @@ See `config/behavior_tree.yaml` for default parameters:
 
 - `vehicle_name`
 - `loop_frequency`
-- `ros_*_topic`, `nav_*_topic`
+- `ros_*_topic`, `nav_*_topic`, `deploy_topic`, `return_topic`
 
 ## Run
 

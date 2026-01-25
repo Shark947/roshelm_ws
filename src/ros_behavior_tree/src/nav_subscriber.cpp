@@ -57,17 +57,6 @@ NavDataSubscriber::NavDataSubscriber(ros::NodeHandle &nh,
       [&store](const common_msgs::Float64Stamped::ConstPtr &msg) {
         store.updateY(msg->data, resolveStamp(msg), false);
       });
-  ros_deploy_sub_ = nh.subscribe<std_msgs::Bool>(
-      topics.ros_deploy, 10,
-      [&store](const std_msgs::Bool::ConstPtr &msg) {
-        store.updateDeploy(msg->data, ros::Time::now(), false);
-      });
-  ros_return_sub_ = nh.subscribe<std_msgs::Bool>(
-      topics.ros_return, 10,
-      [&store](const std_msgs::Bool::ConstPtr &msg) {
-        store.updateReturn(msg->data, ros::Time::now(), false);
-      });
-
   nav_heading_sub_ = nh.subscribe<common_msgs::Float64Stamped>(
       topics.nav_heading, 10,
       [&store](const common_msgs::Float64Stamped::ConstPtr &msg) {
@@ -108,15 +97,20 @@ NavDataSubscriber::NavDataSubscriber(ros::NodeHandle &nh,
       [&store](const common_msgs::Float64Stamped::ConstPtr &msg) {
         store.updateY(msg->data, resolveStamp(msg), true);
       });
-  nav_deploy_sub_ = nh.subscribe<std_msgs::Bool>(
-      topics.nav_deploy, 10,
+
+  deploy_sub_ = nh.subscribe<std_msgs::Bool>(
+      topics.deploy, 10,
       [&store](const std_msgs::Bool::ConstPtr &msg) {
-        store.updateDeploy(msg->data, ros::Time::now(), true);
+        const ros::Time stamp = ros::Time::now();
+        store.updateDeploy(msg->data, stamp, false);
+        store.updateDeploy(msg->data, stamp, true);
       });
-  nav_return_sub_ = nh.subscribe<std_msgs::Bool>(
-      topics.nav_return, 10,
+  return_sub_ = nh.subscribe<std_msgs::Bool>(
+      topics.return_home, 10,
       [&store](const std_msgs::Bool::ConstPtr &msg) {
-        store.updateReturn(msg->data, ros::Time::now(), true);
+        const ros::Time stamp = ros::Time::now();
+        store.updateReturn(msg->data, stamp, false);
+        store.updateReturn(msg->data, stamp, true);
       });
 }
 

@@ -44,9 +44,9 @@ public:
                       defaultTopic(vehicle_name_, "current_x"));
     private_nh_.param("ros_y_topic", topics.ros_y,
                       defaultTopic(vehicle_name_, "current_y"));
-    private_nh_.param("ros_deploy_topic", topics.ros_deploy,
+    private_nh_.param("deploy_topic", topics.deploy,
                       defaultTopic(vehicle_name_, "DEPLOY"));
-    private_nh_.param("ros_return_topic", topics.ros_return,
+    private_nh_.param("return_topic", topics.return_home,
                       defaultTopic(vehicle_name_, "RETURN"));
 
     private_nh_.param("nav_heading_topic", topics.nav_heading,
@@ -65,10 +65,6 @@ public:
                       defaultTopic(vehicle_name_, "NAV_X"));
     private_nh_.param("nav_y_topic", topics.nav_y,
                       defaultTopic(vehicle_name_, "NAV_Y"));
-    private_nh_.param("nav_deploy_topic", topics.nav_deploy,
-                      defaultTopic(vehicle_name_, "DEPLOY"));
-    private_nh_.param("nav_return_topic", topics.nav_return,
-                      defaultTopic(vehicle_name_, "RETURN"));
 
     ROS_INFO_STREAM("[ros_behavior_tree] vehicle_name=" << vehicle_name_);
     ROS_INFO_STREAM("[ros_behavior_tree] ROS topics: heading=" << topics.ros_heading
@@ -79,8 +75,8 @@ public:
                     << " roll=" << topics.ros_roll
                     << " x=" << topics.ros_x
                     << " y=" << topics.ros_y
-                    << " deploy=" << topics.ros_deploy
-                    << " return=" << topics.ros_return);
+                    << " deploy=" << topics.deploy
+                    << " return=" << topics.return_home);
     ROS_INFO_STREAM("[ros_behavior_tree] NAV topics: heading=" << topics.nav_heading
                     << " speed=" << topics.nav_speed
                     << " depth=" << topics.nav_depth
@@ -88,9 +84,7 @@ public:
                     << " pitch=" << topics.nav_pitch
                     << " roll=" << topics.nav_roll
                     << " x=" << topics.nav_x
-                    << " y=" << topics.nav_y
-                    << " deploy=" << topics.nav_deploy
-                    << " return=" << topics.nav_return);
+                    << " y=" << topics.nav_y);
 
     nav_subscriber_ = std::make_shared<NavDataSubscriber>(nh_, topics, store_);
     manager_ = std::make_shared<BehaviorTreeManager>();
