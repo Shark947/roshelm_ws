@@ -8,3 +8,5 @@ These instructions apply to files in `ros_behavior_tree/`.
 - Prefer `common_msgs/Float64Stamped` for navigation inputs and `std_msgs/Float64` for desired outputs to match existing topics.
 - When adding or changing parameters, update `config/behavior_tree.yaml` and `README.md` together.
 - Keep the behavior tree structure documented in `README.md` when logic changes.
+- Behavior tree nodes are organized under `include/ros_behavior_tree/nodes` and
+  registered via `src/bt/register_nodes.cpp` grouping functions.

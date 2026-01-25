@@ -14,14 +14,30 @@ ros_behavior_tree/
 │   └── behavior_tree.yaml
 ├── include/
 │   └── ros_behavior_tree/
+│       ├── bt/
+│       │   └── register_nodes.hpp
 │       ├── bt_nodes.hpp
-│       └── nav_subscriber.hpp
+│       ├── nav_subscriber.hpp
+│       └── nodes/
+│           ├── actions/
+│           │   └── dummy_action.hpp
+│           └── conditions/
+│               └── common/
+│                   └── deploy_triggered.hpp
 ├── launch/
 │   └── behavior_tree.launch
 └── src/
     ├── behavior_tree_node.cpp
+    ├── bt/
+    │   └── register_nodes.cpp
     ├── bt_nodes.cpp
-    └── nav_subscriber.cpp
+    ├── nav_subscriber.cpp
+    └── nodes/
+        ├── actions/
+        │   └── dummy_action.cpp
+        └── conditions/
+            └── common/
+                └── deploy_triggered.cpp
 ```
 
 ## 数据来源
