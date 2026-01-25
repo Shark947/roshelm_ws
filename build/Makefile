@@ -2573,6 +2573,19 @@ controller_manager/fast:
 .PHONY : controller_manager/fast
 
 #=============================================================================
+# Target rules for targets named behavior_tree_node
+
+# Build rule for target.
+behavior_tree_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 behavior_tree_node
+.PHONY : behavior_tree_node
+
+# fast build rule for target.
+behavior_tree_node/fast:
+	$(MAKE) -f ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build.make ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build
+.PHONY : behavior_tree_node/fast
+
+#=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -5201,6 +5214,7 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... controller_manager_node"
 	@echo "... controller_manager"
+	@echo "... behavior_tree_node"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_nodejs"

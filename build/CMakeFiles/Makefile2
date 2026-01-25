@@ -77,7 +77,7 @@ CMakeFiles/tests.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CM
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : CMakeFiles/tests.dir/rule
@@ -113,7 +113,7 @@ CMakeFiles/run_tests.dir/all: uuv_simulator/uuv_control/uuv_thruster_manager/CMa
 
 # Build rule for subdir invocation for target.
 CMakeFiles/run_tests.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/run_tests.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : CMakeFiles/run_tests.dir/rule
@@ -306,12 +306,12 @@ gtest/googlemock/preinstall: gtest/googlemock/gtest/preinstall
 gtest/googlemock/CMakeFiles/gmock_main.dir/all:
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=27 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target gmock_main"
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googlemock/CMakeFiles/gmock_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/CMakeFiles/gmock_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/rule
@@ -338,12 +338,12 @@ clean: gtest/googlemock/CMakeFiles/gmock_main.dir/clean
 gtest/googlemock/CMakeFiles/gmock.dir/all:
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=27 "Built target gmock"
 .PHONY : gtest/googlemock/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googlemock/CMakeFiles/gmock.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/CMakeFiles/gmock.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : gtest/googlemock/CMakeFiles/gmock.dir/rule
@@ -389,12 +389,12 @@ gtest/googlemock/gtest/preinstall:
 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all: gtest/googlemock/gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target gtest_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=28 "Built target gtest_main"
 .PHONY : gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all
 
 # Build rule for subdir invocation for target.
 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/rule
@@ -573,7 +573,7 @@ all: common_msgs/CMakeFiles/common_msgs_generate_messages.dir/all
 
 # Build rule for subdir invocation for target.
 common_msgs/CMakeFiles/common_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 common_msgs/CMakeFiles/common_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : common_msgs/CMakeFiles/common_msgs_generate_messages.dir/rule
@@ -637,7 +637,7 @@ common_msgs/CMakeFiles/common_msgs_genlisp.dir/all: common_msgs/CMakeFiles/commo
 
 # Build rule for subdir invocation for target.
 common_msgs/CMakeFiles/common_msgs_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 common_msgs/CMakeFiles/common_msgs_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : common_msgs/CMakeFiles/common_msgs_genlisp.dir/rule
@@ -1020,12 +1020,12 @@ common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all: common_msgs/C
 common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all: common_msgs/CMakeFiles/_common_msgs_generate_messages_check_deps_Float64Stamped.dir/all
 	$(MAKE) -f common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/build.make common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/build.make common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=11 "Built target common_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target common_msgs_generate_messages_lisp"
 .PHONY : common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/rule
@@ -1149,12 +1149,12 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/a
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/all: docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/all
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=15 "Built target docking_optical_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_optical_msgs_generate_messages_eus"
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_eus.dir/rule
@@ -1186,7 +1186,7 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/all: docking_
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/rule
@@ -1282,7 +1282,7 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_geneus.dir/all: docking_opt
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_geneus.dir/rule
@@ -1311,12 +1311,12 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/al
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all: docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/all
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/depend
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=16 "Built target docking_optical_msgs_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_optical_msgs_generate_messages_py"
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/rule
@@ -1357,7 +1357,7 @@ all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/rule
@@ -1484,12 +1484,12 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.di
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all: docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/all
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_optical_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=16 "Built target docking_optical_msgs_generate_messages_nodejs"
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/rule
@@ -1555,7 +1555,7 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/all: docking_opti
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/rule
@@ -1630,7 +1630,7 @@ all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_cont
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages.dir/rule
@@ -2020,7 +2020,7 @@ uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_a
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_genpy.dir/rule
@@ -2083,12 +2083,12 @@ uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_a
 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/all: uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/_uuv_auv_control_allocator_generate_messages_check_deps_AUVCommand.dir/all
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/build.make uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/build.make uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_auv_control_allocator_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=52 "Built target uuv_auv_control_allocator_generate_messages_py"
 .PHONY : uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_auv_control_allocator/CMakeFiles/uuv_auv_control_allocator_generate_messages_py.dir/rule
@@ -3091,12 +3091,12 @@ uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_
 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/all: uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/_uuv_control_msgs_generate_messages_check_deps_GetPIDParams.dir/all
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/build.make uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/build.make uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=62,63,64,65 "Built target uuv_control_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=63,64,65 "Built target uuv_control_msgs_generate_messages_nodejs"
 .PHONY : uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_nodejs.dir/rule
@@ -3192,7 +3192,7 @@ uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_genlisp.d
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_genlisp.dir/rule
@@ -3497,12 +3497,12 @@ uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_
 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/all: uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/_uuv_control_msgs_generate_messages_check_deps_GetPIDParams.dir/all
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/build.make uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/build.make uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=59,60,61 "Built target uuv_control_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=59,60,61,62 "Built target uuv_control_msgs_generate_messages_lisp"
 .PHONY : uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_generate_messages_lisp.dir/rule
@@ -3534,7 +3534,7 @@ uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_gennodejs
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_control_msgs/CMakeFiles/uuv_control_msgs_gennodejs.dir/rule
@@ -3636,7 +3636,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/preinstall:
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/all:
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target umbilical_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=51 "Built target umbilical_plugin"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/all
 
 # Include target in all.
@@ -3646,7 +3646,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_pl
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/umbilical_plugin.dir/rule
@@ -3679,7 +3679,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gaz
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins_gtest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins_gtest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins_gtest.dir/rule
@@ -3711,7 +3711,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gaz
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterConversionFcn_TEST.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterConversionFcn_TEST.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterConversionFcn_TEST.dir/rule
@@ -3750,7 +3750,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_thruster
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_thruster_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_thruster_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_thruster_plugin.dir/rule
@@ -3822,7 +3822,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_fin_plug
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_fin_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_fin_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_fin_plugin.dir/rule
@@ -3886,7 +3886,7 @@ clean: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_underw
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/all:
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_gazebo_plugins_msgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=70 "Built target uuv_gazebo_plugins_msgs"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/all
 
 # Include target in all.
@@ -3896,7 +3896,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_p
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_gazebo_plugins_msgs.dir/rule
@@ -3928,7 +3928,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gaz
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/run_tests_uuv_gazebo_plugins.dir/rule
@@ -3997,7 +3997,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_ga
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins.dir/rule
@@ -4030,7 +4030,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_ga
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest.dir/rule
@@ -4064,7 +4064,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_ga
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterConversionFcn_TEST.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterConversionFcn_TEST.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterConversionFcn_TEST.dir/rule
@@ -4130,7 +4130,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_ga
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterDynamics_TEST.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterDynamics_TEST.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/_run_tests_uuv_gazebo_plugins_gtest_UNIT_ThrusterDynamics_TEST.dir/rule
@@ -4165,7 +4165,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/UNIT_ThrusterConv
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/UNIT_ThrusterConversionFcn_TEST.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/UNIT_ThrusterConversionFcn_TEST.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/UNIT_ThrusterConversionFcn_TEST.dir/rule
@@ -4513,12 +4513,12 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gaze
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/_uuv_gazebo_ros_plugins_msgs_generate_messages_check_deps_SetUseGlobalCurrentVel.dir/all
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=75,76 "Built target uuv_gazebo_ros_plugins_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=76 "Built target uuv_gazebo_ros_plugins_msgs_generate_messages_eus"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_eus.dir/rule
@@ -4728,12 +4728,12 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gaze
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/_uuv_gazebo_ros_plugins_msgs_generate_messages_check_deps_SetUseGlobalCurrentVel.dir/all
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=74 "Built target uuv_gazebo_ros_plugins_msgs_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=74,75 "Built target uuv_gazebo_ros_plugins_msgs_generate_messages_cpp"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_generate_messages_cpp.dir/rule
@@ -4989,7 +4989,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_geneus.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_geneus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_geneus.dir/rule
@@ -5085,7 +5085,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins_msgs/CMakeFiles/uuv_gazebo_ros_plugins_msgs_gencpp.dir/rule
@@ -5225,12 +5225,12 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sens
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/_uuv_sensor_ros_plugins_msgs_generate_messages_check_deps_Salinity.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_sensor_ros_plugins_msgs_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=86 "Built target uuv_sensor_ros_plugins_msgs_generate_messages_cpp"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_cpp.dir/rule
@@ -5566,7 +5566,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sens
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_gencpp.dir/rule
@@ -5598,7 +5598,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sens
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_genlisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_genlisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_genlisp.dir/rule
@@ -5632,7 +5632,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sens
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_eus.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/_uuv_sensor_ros_plugins_msgs_generate_messages_check_deps_Salinity.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_eus.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_eus.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=86 "Built target uuv_sensor_ros_plugins_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=87 "Built target uuv_sensor_ros_plugins_msgs_generate_messages_eus"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
@@ -5671,12 +5671,12 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sens
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/_uuv_sensor_ros_plugins_msgs_generate_messages_check_deps_Salinity.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=87 "Built target uuv_sensor_ros_plugins_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_sensor_ros_plugins_msgs_generate_messages_lisp"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins_msgs/CMakeFiles/uuv_sensor_ros_plugins_msgs_generate_messages_lisp.dir/rule
@@ -6761,7 +6761,7 @@ clean: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/cl
 auh_thrust_manager/CMakeFiles/thrust_manager.dir/all:
 	$(MAKE) -f auh_thrust_manager/CMakeFiles/thrust_manager.dir/build.make auh_thrust_manager/CMakeFiles/thrust_manager.dir/depend
 	$(MAKE) -f auh_thrust_manager/CMakeFiles/thrust_manager.dir/build.make auh_thrust_manager/CMakeFiles/thrust_manager.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=49 "Built target thrust_manager"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target thrust_manager"
 .PHONY : auh_thrust_manager/CMakeFiles/thrust_manager.dir/all
 
 # Include target in all.
@@ -6771,7 +6771,7 @@ all: auh_thrust_manager/CMakeFiles/thrust_manager.dir/all
 
 # Build rule for subdir invocation for target.
 auh_thrust_manager/CMakeFiles/thrust_manager.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 auh_thrust_manager/CMakeFiles/thrust_manager.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : auh_thrust_manager/CMakeFiles/thrust_manager.dir/rule
@@ -6978,7 +6978,7 @@ controller_manager/preinstall:
 controller_manager/CMakeFiles/controller_manager_node.dir/all: controller_manager/CMakeFiles/controller_manager.dir/all
 	$(MAKE) -f controller_manager/CMakeFiles/controller_manager_node.dir/build.make controller_manager/CMakeFiles/controller_manager_node.dir/depend
 	$(MAKE) -f controller_manager/CMakeFiles/controller_manager_node.dir/build.make controller_manager/CMakeFiles/controller_manager_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target controller_manager_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=13 "Built target controller_manager_node"
 .PHONY : controller_manager/CMakeFiles/controller_manager_node.dir/all
 
 # Include target in all.
@@ -6988,7 +6988,7 @@ all: controller_manager/CMakeFiles/controller_manager_node.dir/all
 
 # Build rule for subdir invocation for target.
 controller_manager/CMakeFiles/controller_manager_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 controller_manager/CMakeFiles/controller_manager_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : controller_manager/CMakeFiles/controller_manager_node.dir/rule
@@ -7042,6 +7042,80 @@ controller_manager/CMakeFiles/controller_manager.dir/clean:
 
 # clean rule for target.
 clean: controller_manager/CMakeFiles/controller_manager.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory ros_behavior_tree
+
+# Convenience name for "all" pass in the directory.
+ros_behavior_tree/all: ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all
+
+.PHONY : ros_behavior_tree/all
+
+# Convenience name for "clean" pass in the directory.
+ros_behavior_tree/clean: ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/clean
+
+.PHONY : ros_behavior_tree/clean
+
+# Convenience name for "preinstall" pass in the directory.
+ros_behavior_tree/preinstall:
+
+.PHONY : ros_behavior_tree/preinstall
+
+#=============================================================================
+# Target rules for target ros_behavior_tree/CMakeFiles/behavior_tree_node.dir
+
+# All Build rule for target.
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_eus.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_py.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_lisp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: common_msgs/CMakeFiles/common_msgs_generate_messages_nodejs.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_eus.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_py.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/roscpp_generate_messages_lisp.dir/all
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all: auh_thrust_manager/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+	$(MAKE) -f ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build.make ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/depend
+	$(MAKE) -f ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build.make ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=1 "Built target behavior_tree_node"
+.PHONY : ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all
+
+# Include target in all.
+all: ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+.PHONY : ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/rule
+
+# Convenience name for target.
+behavior_tree_node: ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/rule
+
+.PHONY : behavior_tree_node
+
+# clean rule for target.
+ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/clean:
+	$(MAKE) -f ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build.make ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/clean
+.PHONY : ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/clean
+
+# clean rule for target.
+clean: ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/clean
 
 .PHONY : clean
 
@@ -7556,7 +7630,7 @@ clean: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean
 ros_moos_bridge/CMakeFiles/bridge_node.dir/all:
 	$(MAKE) -f ros_moos_bridge/CMakeFiles/bridge_node.dir/build.make ros_moos_bridge/CMakeFiles/bridge_node.dir/depend
 	$(MAKE) -f ros_moos_bridge/CMakeFiles/bridge_node.dir/build.make ros_moos_bridge/CMakeFiles/bridge_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target bridge_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=11 "Built target bridge_node"
 .PHONY : ros_moos_bridge/CMakeFiles/bridge_node.dir/all
 
 # Include target in all.
@@ -7566,7 +7640,7 @@ all: ros_moos_bridge/CMakeFiles/bridge_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_moos_bridge/CMakeFiles/bridge_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 ros_moos_bridge/CMakeFiles/bridge_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_moos_bridge/CMakeFiles/bridge_node.dir/rule
@@ -8101,7 +8175,7 @@ ivp/lib_behaviors/preinstall:
 ivp/lib_behaviors/CMakeFiles/behaviors.dir/all: ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 	$(MAKE) -f ivp/lib_behaviors/CMakeFiles/behaviors.dir/build.make ivp/lib_behaviors/CMakeFiles/behaviors.dir/depend
 	$(MAKE) -f ivp/lib_behaviors/CMakeFiles/behaviors.dir/build.make ivp/lib_behaviors/CMakeFiles/behaviors.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=1 "Built target behaviors"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=2 "Built target behaviors"
 .PHONY : ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 
 # Include target in all.
@@ -8111,7 +8185,7 @@ all: ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors/CMakeFiles/behaviors.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 31
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors/CMakeFiles/behaviors.dir/rule
@@ -8156,7 +8230,7 @@ ivp/lib_bhvutil/preinstall:
 ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
 	$(MAKE) -f ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/build.make ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/depend
 	$(MAKE) -f ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/build.make ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=8,9,10 "Built target bhvutil"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=9,10 "Built target bhvutil"
 .PHONY : ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/all
 
 # Include target in all.
@@ -8166,7 +8240,7 @@ all: ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_bhvutil/CMakeFiles/bhvutil.dir/rule
@@ -8211,7 +8285,7 @@ ivp/lib_behaviors-marine/preinstall:
 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all: ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 	$(MAKE) -f ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/build.make ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/depend
 	$(MAKE) -f ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/build.make ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=3,4,5,6,7 "Built target behaviors-marine"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=4,5,6,7,8 "Built target behaviors-marine"
 .PHONY : ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 
 # Include target in all.
@@ -8221,7 +8295,7 @@ all: ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 30
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 27
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/rule
@@ -8331,7 +8405,7 @@ all: ivp/lib_geometry/CMakeFiles/geometry.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_geometry/CMakeFiles/geometry.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 13
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_geometry/CMakeFiles/geometry.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_geometry/CMakeFiles/geometry.dir/rule
@@ -8385,7 +8459,7 @@ ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all: ivp/lib_mbutil/C
 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
 	$(MAKE) -f ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/build.make ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/depend
 	$(MAKE) -f ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/build.make ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=2 "Built target behaviors-colregs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=3 "Built target behaviors-colregs"
 .PHONY : ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 
 # Include target in all.
@@ -8395,7 +8469,7 @@ all: ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 32
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/rule
@@ -8440,7 +8514,7 @@ ivp/lib_polar/preinstall:
 ivp/lib_polar/CMakeFiles/polar.dir/all:
 	$(MAKE) -f ivp/lib_polar/CMakeFiles/polar.dir/build.make ivp/lib_polar/CMakeFiles/polar.dir/depend
 	$(MAKE) -f ivp/lib_polar/CMakeFiles/polar.dir/build.make ivp/lib_polar/CMakeFiles/polar.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=46 "Built target polar"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target polar"
 .PHONY : ivp/lib_polar/CMakeFiles/polar.dir/all
 
 # Include target in all.
@@ -8450,7 +8524,7 @@ all: ivp/lib_polar/CMakeFiles/polar.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_polar/CMakeFiles/polar.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_polar/CMakeFiles/polar.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_polar/CMakeFiles/polar.dir/rule
@@ -8503,7 +8577,7 @@ ivp/lib_helmivp/CMakeFiles/helmivp.dir/all: ivp/lib_mbutil/CMakeFiles/mbutil.dir
 ivp/lib_helmivp/CMakeFiles/helmivp.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
 	$(MAKE) -f ivp/lib_helmivp/CMakeFiles/helmivp.dir/build.make ivp/lib_helmivp/CMakeFiles/helmivp.dir/depend
 	$(MAKE) -f ivp/lib_helmivp/CMakeFiles/helmivp.dir/build.make ivp/lib_helmivp/CMakeFiles/helmivp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=29,30 "Built target helmivp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=30,31 "Built target helmivp"
 .PHONY : ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 
 # Include target in all.
@@ -8513,7 +8587,7 @@ all: ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_helmivp/CMakeFiles/helmivp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 25
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_helmivp/CMakeFiles/helmivp.dir/rule
@@ -8559,7 +8633,7 @@ ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all: ivp/lib_ivpsolve/CMakeFiles/ivpsol
 ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all: ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
 	$(MAKE) -f ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/build.make ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/depend
 	$(MAKE) -f ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/build.make ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=31,32,33,34,35 "Built target ivpbuild"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=32,33,34,35 "Built target ivpbuild"
 .PHONY : ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
 
 # Include target in all.
@@ -8569,7 +8643,7 @@ all: ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/rule
@@ -8614,7 +8688,7 @@ ivp/lib_ivpsolve/preinstall:
 ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/all:
 	$(MAKE) -f ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/build.make ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/depend
 	$(MAKE) -f ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/build.make ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=36 "Built target ivpsolve"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target ivpsolve"
 .PHONY : ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/all
 
 # Include target in all.
@@ -8624,7 +8698,7 @@ all: ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_ivpsolve/CMakeFiles/ivpsolve.dir/rule
@@ -8669,7 +8743,7 @@ ivp/lib_logic/preinstall:
 ivp/lib_logic/CMakeFiles/logic.dir/all:
 	$(MAKE) -f ivp/lib_logic/CMakeFiles/logic.dir/build.make ivp/lib_logic/CMakeFiles/logic.dir/depend
 	$(MAKE) -f ivp/lib_logic/CMakeFiles/logic.dir/build.make ivp/lib_logic/CMakeFiles/logic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=37 "Built target logic"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=38 "Built target logic"
 .PHONY : ivp/lib_logic/CMakeFiles/logic.dir/all
 
 # Include target in all.
@@ -8724,7 +8798,7 @@ ivp/lib_ivpcore/preinstall:
 ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all:
 	$(MAKE) -f ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/build.make ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/depend
 	$(MAKE) -f ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/build.make ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target ivpcore"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=36 "Built target ivpcore"
 .PHONY : ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
 
 # Include target in all.
@@ -8734,7 +8808,7 @@ all: ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/rule
@@ -9109,7 +9183,7 @@ ivp/lib_logutils/preinstall:
 ivp/lib_logutils/CMakeFiles/logutils.dir/all:
 	$(MAKE) -f ivp/lib_logutils/CMakeFiles/logutils.dir/build.make ivp/lib_logutils/CMakeFiles/logutils.dir/depend
 	$(MAKE) -f ivp/lib_logutils/CMakeFiles/logutils.dir/build.make ivp/lib_logutils/CMakeFiles/logutils.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=38,39,40,41 "Built target logutils"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=39,40,41 "Built target logutils"
 .PHONY : ivp/lib_logutils/CMakeFiles/logutils.dir/all
 
 # Include target in all.
@@ -9119,7 +9193,7 @@ all: ivp/lib_logutils/CMakeFiles/logutils.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_logutils/CMakeFiles/logutils.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_logutils/CMakeFiles/logutils.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_logutils/CMakeFiles/logutils.dir/rule
@@ -9164,7 +9238,7 @@ ivp/lib_mbutil/preinstall:
 ivp/lib_mbutil/CMakeFiles/mbutil.dir/all:
 	$(MAKE) -f ivp/lib_mbutil/CMakeFiles/mbutil.dir/build.make ivp/lib_mbutil/CMakeFiles/mbutil.dir/depend
 	$(MAKE) -f ivp/lib_mbutil/CMakeFiles/mbutil.dir/build.make ivp/lib_mbutil/CMakeFiles/mbutil.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=42,43,44,45 "Built target mbutil"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=43,44,45 "Built target mbutil"
 .PHONY : ivp/lib_mbutil/CMakeFiles/mbutil.dir/all
 
 # Include target in all.
@@ -9174,7 +9248,7 @@ all: ivp/lib_mbutil/CMakeFiles/mbutil.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_mbutil/CMakeFiles/mbutil.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_mbutil/CMakeFiles/mbutil.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_mbutil/CMakeFiles/mbutil.dir/rule
@@ -9219,7 +9293,7 @@ ivp/lib_manifest/preinstall:
 ivp/lib_manifest/CMakeFiles/manifest.dir/all:
 	$(MAKE) -f ivp/lib_manifest/CMakeFiles/manifest.dir/build.make ivp/lib_manifest/CMakeFiles/manifest.dir/depend
 	$(MAKE) -f ivp/lib_manifest/CMakeFiles/manifest.dir/build.make ivp/lib_manifest/CMakeFiles/manifest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target manifest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=42 "Built target manifest"
 .PHONY : ivp/lib_manifest/CMakeFiles/manifest.dir/all
 
 # Include target in all.
@@ -9229,7 +9303,7 @@ all: ivp/lib_manifest/CMakeFiles/manifest.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_manifest/CMakeFiles/manifest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_manifest/CMakeFiles/manifest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_manifest/CMakeFiles/manifest.dir/rule
@@ -9393,7 +9467,7 @@ ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all: ivp/lib_mbutil/CMakeFile
 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
 	$(MAKE) -f ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/build.make ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/depend
 	$(MAKE) -f ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/build.make ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=13,14 "Built target dep_behaviors"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=14 "Built target dep_behaviors"
 .PHONY : ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 
 # Include target in all.
@@ -9403,7 +9477,7 @@ all: ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 33
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/rule
@@ -9458,7 +9532,7 @@ helm_test/CMakeFiles/test_ivp.dir/all: ivp/lib_mbutil/CMakeFiles/mbutil.dir/all
 helm_test/CMakeFiles/test_ivp.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/all
 	$(MAKE) -f helm_test/CMakeFiles/test_ivp.dir/build.make helm_test/CMakeFiles/test_ivp.dir/depend
 	$(MAKE) -f helm_test/CMakeFiles/test_ivp.dir/build.make helm_test/CMakeFiles/test_ivp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target test_ivp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=49 "Built target test_ivp"
 .PHONY : helm_test/CMakeFiles/test_ivp.dir/all
 
 # Include target in all.
@@ -9468,7 +9542,7 @@ all: helm_test/CMakeFiles/test_ivp.dir/all
 
 # Build rule for subdir invocation for target.
 helm_test/CMakeFiles/test_ivp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 32
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 30
 	$(MAKE) -f CMakeFiles/Makefile2 helm_test/CMakeFiles/test_ivp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_test/CMakeFiles/test_ivp.dir/rule
@@ -9529,7 +9603,7 @@ helm_app/CMakeFiles/pHelmIvP.dir/all: ivp/lib_dep_behaviors/CMakeFiles/dep_behav
 helm_app/CMakeFiles/pHelmIvP.dir/all: helm_app/CMakeFiles/helm_core.dir/all
 	$(MAKE) -f helm_app/CMakeFiles/pHelmIvP.dir/build.make helm_app/CMakeFiles/pHelmIvP.dir/depend
 	$(MAKE) -f helm_app/CMakeFiles/pHelmIvP.dir/build.make helm_app/CMakeFiles/pHelmIvP.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target pHelmIvP"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=46 "Built target pHelmIvP"
 .PHONY : helm_app/CMakeFiles/pHelmIvP.dir/all
 
 # Include target in all.
@@ -9539,7 +9613,7 @@ all: helm_app/CMakeFiles/pHelmIvP.dir/all
 
 # Build rule for subdir invocation for target.
 helm_app/CMakeFiles/pHelmIvP.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 37
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
 	$(MAKE) -f CMakeFiles/Makefile2 helm_app/CMakeFiles/pHelmIvP.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_app/CMakeFiles/pHelmIvP.dir/rule
@@ -9579,7 +9653,7 @@ helm_app/CMakeFiles/helm_core.dir/all: ivp/lib_turngeo/CMakeFiles/turngeo.dir/al
 helm_app/CMakeFiles/helm_core.dir/all: ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 	$(MAKE) -f helm_app/CMakeFiles/helm_core.dir/build.make helm_app/CMakeFiles/helm_core.dir/depend
 	$(MAKE) -f helm_app/CMakeFiles/helm_core.dir/build.make helm_app/CMakeFiles/helm_core.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=28 "Built target helm_core"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=29 "Built target helm_core"
 .PHONY : helm_app/CMakeFiles/helm_core.dir/all
 
 # Include target in all.
@@ -9589,7 +9663,7 @@ all: helm_app/CMakeFiles/helm_core.dir/all
 
 # Build rule for subdir invocation for target.
 helm_app/CMakeFiles/helm_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 37
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 33
 	$(MAKE) -f CMakeFiles/Makefile2 helm_app/CMakeFiles/helm_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_app/CMakeFiles/helm_core.dir/rule
@@ -9661,7 +9735,7 @@ all: ros_node/CMakeFiles/ros_helm_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_node/CMakeFiles/ros_helm_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 38
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
 	$(MAKE) -f CMakeFiles/Makefile2 ros_node/CMakeFiles/ros_helm_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_node/CMakeFiles/ros_helm_node.dir/rule
@@ -9712,7 +9786,7 @@ all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
 
 # Build rule for subdir invocation for target.
 ros_node/CMakeFiles/ros_helm_bridge.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 38
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
 	$(MAKE) -f CMakeFiles/Makefile2 ros_node/CMakeFiles/ros_helm_bridge.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_node/CMakeFiles/ros_helm_bridge.dir/rule
@@ -9827,7 +9901,7 @@ docking_nav/CMakeFiles/docking_nav_main_node.dir/all: helm_app/CMakeFiles/helm_c
 docking_nav/CMakeFiles/docking_nav_main_node.dir/all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
 	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_main_node.dir/build.make docking_nav/CMakeFiles/docking_nav_main_node.dir/depend
 	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_main_node.dir/build.make docking_nav/CMakeFiles/docking_nav_main_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_nav_main_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=15 "Built target docking_nav_main_node"
 .PHONY : docking_nav/CMakeFiles/docking_nav_main_node.dir/all
 
 # Include target in all.
@@ -9837,7 +9911,7 @@ all: docking_nav/CMakeFiles/docking_nav_main_node.dir/all
 
 # Build rule for subdir invocation for target.
 docking_nav/CMakeFiles/docking_nav_main_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 41
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 36
 	$(MAKE) -f CMakeFiles/Makefile2 docking_nav/CMakeFiles/docking_nav_main_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_nav/CMakeFiles/docking_nav_main_node.dir/rule
@@ -10291,7 +10365,7 @@ uuv_simulator/uuv_control/uuv_control_cascaded_pids/preinstall:
 uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/all:
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/build.make uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/build.make uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=52 "Built target uuv_control_cascaded_pid_gencfg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_control_cascaded_pid_gencfg"
 .PHONY : uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/all
 
 # Include target in all.
@@ -10301,7 +10375,7 @@ all: uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_control_cascaded_pids/CMakeFiles/uuv_control_cascaded_pid_gencfg.dir/rule
@@ -11094,7 +11168,7 @@ uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_traje
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control.dir/rule
@@ -11222,7 +11296,7 @@ uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_traje
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control_rostest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control_rostest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control_rostest.dir/rule
@@ -11287,7 +11361,7 @@ uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_traje
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control_rostest_test_test_python_api.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control_rostest_test_test_python_api.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_trajectory_control/CMakeFiles/_run_tests_uuv_trajectory_control_rostest_test_test_python_api.test.dir/rule
@@ -11622,7 +11696,7 @@ all: variable_extractor/CMakeFiles/variable_extractor.dir/all
 
 # Build rule for subdir invocation for target.
 variable_extractor/CMakeFiles/variable_extractor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 variable_extractor/CMakeFiles/variable_extractor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : variable_extractor/CMakeFiles/variable_extractor.dir/rule
@@ -11699,7 +11773,7 @@ all: variable_extractor/CMakeFiles/variable_extractor_node.dir/all
 
 # Build rule for subdir invocation for target.
 variable_extractor/CMakeFiles/variable_extractor_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 variable_extractor/CMakeFiles/variable_extractor_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : variable_extractor/CMakeFiles/variable_extractor_node.dir/rule
@@ -11754,7 +11828,7 @@ all: auh_controller_pid/CMakeFiles/PIDcontroller.dir/all
 
 # Build rule for subdir invocation for target.
 auh_controller_pid/CMakeFiles/PIDcontroller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 auh_controller_pid/CMakeFiles/PIDcontroller.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : auh_controller_pid/CMakeFiles/PIDcontroller.dir/rule
@@ -11844,7 +11918,7 @@ uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest_te
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest_test_test_urdf_files.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest_test_test_urdf_files.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest_test_test_urdf_files.test.dir/rule
@@ -11977,7 +12051,7 @@ uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions.dir/all: u
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions.dir/rule
@@ -12041,7 +12115,7 @@ uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest.di
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_descriptions/CMakeFiles/_run_tests_uuv_descriptions_rostest.dir/rule
@@ -12151,7 +12225,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_b
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/rule
@@ -12274,7 +12348,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_unde
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_underwater_object_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_underwater_object_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_underwater_object_ros_plugin.dir/rule
@@ -12397,7 +12471,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_fin_
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_fin_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 11
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_fin_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_fin_ros_plugin.dir/rule
@@ -12488,7 +12562,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_thru
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_thruster_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 12
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_thruster_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_thruster_ros_plugin.dir/rule
@@ -12529,7 +12603,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_join
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_joint_state_publisher.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_joint_state_publisher.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_joint_state_publisher.dir/rule
@@ -12592,7 +12666,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerat
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerations_test_plugin.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_dynamics.dir/all
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerations_test_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerations_test_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerations_test_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerations_test_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=51 "Built target uuv_accelerations_test_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_accelerations_test_plugin"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/uuv_accelerations_test_plugin.dir/all
 
 # Include target in all.
@@ -12665,7 +12739,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_batter
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_dynamics.dir/all
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target linear_battery_ros_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=37 "Built target linear_battery_ros_plugin"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/all
 
 # Include target in all.
@@ -12675,7 +12749,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_b
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/linear_battery_ros_plugin.dir/rule
@@ -12902,7 +12976,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_pose_gt_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_pose_gt_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_pose_gt_plugin.dir/rule
@@ -13020,7 +13094,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ro
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_model_plugin.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_model_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_model_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_model_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_model_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=70 "Built target uuv_gazebo_ros_base_model_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_gazebo_ros_base_model_plugin"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_model_plugin.dir/all
 
 # Include target in all.
@@ -13227,7 +13301,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_sensor_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_sensor_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_base_sensor_plugin.dir/rule
@@ -13355,7 +13429,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uu
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins_rostest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins_rostest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins_rostest.dir/rule
@@ -13505,7 +13579,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ro
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_cpc_plugin.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_cpc_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_cpc_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_cpc_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_cpc_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=71 "Built target uuv_gazebo_ros_cpc_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_gazebo_ros_cpc_plugin"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_cpc_plugin.dir/all
 
 # Include target in all.
@@ -13676,7 +13750,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_magnetometer_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_magnetometer_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_magnetometer_plugin.dir/rule
@@ -13965,7 +14039,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_subsea_pressure_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_subsea_pressure_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_subsea_pressure_plugin.dir/rule
@@ -14116,7 +14190,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ro
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_gazebo_ros_dvl_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=72 "Built target uuv_gazebo_ros_dvl_plugin"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/all
 
 # Include target in all.
@@ -14126,7 +14200,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 10
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_dvl_plugin.dir/rule
@@ -14286,7 +14360,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_so
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/rule
@@ -14318,7 +14392,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uu
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins.dir/rule
@@ -14447,7 +14521,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_imu_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_imu_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_imu_plugin.dir/rule
@@ -14576,7 +14650,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_rpt_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_rpt_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_rpt_plugin.dir/rule
@@ -14694,7 +14768,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ro
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_gps_plugin.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_gps_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_gps_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_gps_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_gps_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=72 "Built target uuv_gazebo_ros_gps_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_gazebo_ros_gps_plugin"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_gps_plugin.dir/all
 
 # Include target in all.
@@ -14822,7 +14896,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ro
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target uuv_gazebo_ros_camera_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=71 "Built target uuv_gazebo_ros_camera_plugin"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/all
 
 # Include target in all.
@@ -14832,7 +14906,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gaze
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/uuv_gazebo_ros_camera_plugin.dir/rule
@@ -14934,7 +15008,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uu
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins_rostest_test_test_urdf_files.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins_rostest_test_test_urdf_files.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/_run_tests_uuv_sensor_ros_plugins_rostest_test_test_urdf_files.test.dir/rule
@@ -15078,7 +15152,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_y_axis.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_y_axis.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_y_axis.test.dir/rule
@@ -15243,7 +15317,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_z_axis.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_z_axis.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_z_axis.test.dir/rule
@@ -15684,7 +15758,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest.dir/rule
@@ -15716,7 +15790,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager.dir/rule
@@ -15881,7 +15955,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thrusters.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thrusters.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thrusters.test.dir/rule
@@ -15914,7 +15988,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_x_axis.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_x_axis.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_allocator_x_axis.test.dir/rule
@@ -15947,7 +16021,7 @@ uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruste
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_manager_proportional_correct.test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_manager_proportional_correct.test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_control/uuv_thruster_manager/CMakeFiles/_run_tests_uuv_thruster_manager_rostest_test_test_thruster_manager_proportional_correct.test.dir/rule
