@@ -345,7 +345,7 @@ BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
     else
     {
       groot_publisher_ = std::make_unique<BT::PublisherZMQ>(
-          tree_, groot_publisher_port, groot_server_port);
+          tree_, 25, groot_publisher_port, groot_server_port);
       ROS_INFO_STREAM("[ros_behavior_tree] Groot ZMQ publisher enabled (pub="
                       << groot_publisher_port
                       << ", server=" << groot_server_port << ")");
