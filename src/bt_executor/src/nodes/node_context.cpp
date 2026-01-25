@@ -3,7 +3,7 @@
 #include <exception>
 
 #include "bt_executor/bt_context.hpp"
-#include "bt_executor/ros_io.hpp"
+#include "bt_executor/ros/ros_io.hpp"
 
 namespace bt_executor
 {

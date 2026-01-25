@@ -1,4 +1,4 @@
-#include "bt_executor/ros_io.hpp"
+#include "bt_executor/ros/ros_io.hpp"
 
 #include <XmlRpcValue.h>
 
@@ -6,7 +6,7 @@
 
 #include "bt_executor/adapters/docking_phase_manager.hpp"
 #include "bt_executor/adapters/helm_adapter.hpp"
-#include "bt_executor/utils.hpp"
+#include "bt_executor/utils/utils.hpp"
 
 namespace bt_executor
 {

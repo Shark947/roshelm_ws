@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "bt_executor/utils.hpp"
+#include "bt_executor/utils/utils.hpp"
 
 namespace bt_executor
 {

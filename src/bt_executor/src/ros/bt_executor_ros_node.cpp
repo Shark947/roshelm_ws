@@ -11,7 +11,7 @@
 #include "bt_executor/adapters/helm_adapter.hpp"
 #include "bt_executor/mission_state.hpp"
 #include "bt_executor/nav_state.hpp"
-#include "bt_executor/ros_io.hpp"
+#include "bt_executor/ros/ros_io.hpp"
 
 namespace bt_executor
 {
