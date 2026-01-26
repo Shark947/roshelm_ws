@@ -141,7 +141,7 @@ bool NavDataStore::sampleFresh(const BoolSample &sample,
 bool NavDataStore::getPreferredSample(const NavSample &nav_sample,
                                       const NavSample &ros_sample,
                                       const ros::Duration &timeout,
-                                      double &out)
+                                      double &out) 
 {
   if (sampleFresh(nav_sample, timeout))
   {
@@ -159,7 +159,7 @@ bool NavDataStore::getPreferredSample(const NavSample &nav_sample,
 bool NavDataStore::getPreferredSample(const BoolSample &nav_sample,
                                       const BoolSample &ros_sample,
                                       const ros::Duration &timeout,
-                                      bool &out)
+                                      bool &out) const
 {
   if (sampleTriggered(nav_sample, timeout, out))
     return true;

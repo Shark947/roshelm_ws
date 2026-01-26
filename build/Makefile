@@ -2573,19 +2573,6 @@ controller_manager/fast:
 .PHONY : controller_manager/fast
 
 #=============================================================================
-# Target rules for targets named behavior_tree_node
-
-# Build rule for target.
-behavior_tree_node: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 behavior_tree_node
-.PHONY : behavior_tree_node
-
-# fast build rule for target.
-behavior_tree_node/fast:
-	$(MAKE) -f ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build.make ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build
-.PHONY : behavior_tree_node/fast
-
-#=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_eus
 
 # Build rule for target.
@@ -3325,6 +3312,32 @@ docking_nav_main_node: cmake_check_build_system
 docking_nav_main_node/fast:
 	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_main_node.dir/build.make docking_nav/CMakeFiles/docking_nav_main_node.dir/build
 .PHONY : docking_nav_main_node/fast
+
+#=============================================================================
+# Target rules for targets named nav_publisher_node
+
+# Build rule for target.
+nav_publisher_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nav_publisher_node
+.PHONY : nav_publisher_node
+
+# fast build rule for target.
+nav_publisher_node/fast:
+	$(MAKE) -f ros_behavior_tree/CMakeFiles/nav_publisher_node.dir/build.make ros_behavior_tree/CMakeFiles/nav_publisher_node.dir/build
+.PHONY : nav_publisher_node/fast
+
+#=============================================================================
+# Target rules for targets named behavior_tree_node
+
+# Build rule for target.
+behavior_tree_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 behavior_tree_node
+.PHONY : behavior_tree_node
+
+# fast build rule for target.
+behavior_tree_node/fast:
+	$(MAKE) -f ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build.make ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/build
+.PHONY : behavior_tree_node/fast
 
 #=============================================================================
 # Target rules for targets named tf_generate_messages_nodejs
@@ -5214,7 +5227,6 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... controller_manager_node"
 	@echo "... controller_manager"
-	@echo "... behavior_tree_node"
 	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... sensor_msgs_generate_messages_nodejs"
@@ -5272,6 +5284,8 @@ help:
 	@echo "... ros_helm_node"
 	@echo "... ros_helm_bridge"
 	@echo "... docking_nav_main_node"
+	@echo "... nav_publisher_node"
+	@echo "... behavior_tree_node"
 	@echo "... tf_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_nodejs"
 	@echo "... topic_tools_generate_messages_py"
