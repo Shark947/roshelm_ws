@@ -128,6 +128,8 @@ ros_behavior_tree/
 - `trigger_hold_time`
 - `nav_log_period`
 - `latch_deploy`
+- `default_mode_on_deploy`
+- `default_mode_value`
 - `domain_course`, `domain_speed`, `domain_depth`
 - `desired_heading_topic`, `desired_speed_topic`, `desired_depth_topic`
 - `mission_topic`
@@ -143,6 +145,9 @@ ros_behavior_tree/
 当上游持续发布 `false` 时，单次 `true` 仍可在保持窗口内被行为树捕获。
 `latch_deploy` 用于将首次 `DEPLOY=true` 锁存为持续真值，适合仅发布一次
 部署触发的场景。
+`default_mode_on_deploy` 为 `true` 且配置了 `default_mode_value` 时，
+当收到 `DEPLOY=true` 会自动写入 `MODE=default_mode_value`，保持与
+`ros_helm` 方案一致，无需额外手动发布 `MODE`。
 `nav_log_period` 控制导航数据日志输出频率（秒），设置为 `<=0` 可关闭日志。
 
 导航数据会写入 `ros_behavior_tree/log/<timestamp>_log/` 中的 `NAV_*` 文件，
