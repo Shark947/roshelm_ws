@@ -564,7 +564,7 @@ void HelmInterface::onBoolCommand(const std::string &key,
 {
   if (!msg)
     return;
-  setFlagValue(key, msg->data);
+  setFlagValue(key, static_cast<bool>(msg->data));
 }
 
 void HelmInterface::onStringCommand(const std::string &key,
