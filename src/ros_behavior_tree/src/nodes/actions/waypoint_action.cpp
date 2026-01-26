@@ -78,7 +78,7 @@ bool WaypointAction::configureBehavior(const std::string &params)
     }
   }
   behavior_->onSetParamComplete();
-  last_total_hits_ = behavior_->totalHits();
+  last_cycle_count_ = behavior_->cycleCount();
   return true;
 }
 
@@ -131,40 +131,17 @@ void WaypointAction::publishEndFlagsIfNeeded(
     {
       helm_interface_->publishFlag(flag);
     }
-    last_total_hits_ = behavior_->totalHits();
+    last_cycle_count_ = behavior_->cycleCount();
     return;
   }
 
-  const unsigned int total_hits = behavior_->totalHits();
-  const unsigned int waypoint_count = behavior_->waypointCount();
-
-  if (total_hits < last_total_hits_)
-  {
-    if (waypoint_count > 0 && last_total_hits_ >= waypoint_count)
-    {
-      const auto &end_flags = behavior_->endFlags();
-      for (const auto &flag : end_flags)
-      {
-        helm_interface_->publishFlag(flag);
-      }
-    }
-    last_total_hits_ = total_hits;
-    return;
-  }
-  if (total_hits == last_total_hits_)
+  const unsigned int cycle_count = behavior_->cycleCount();
+  if (cycle_count == last_cycle_count_)
     return;
 
-  if (waypoint_count == 0)
+  if (cycle_count < last_cycle_count_)
   {
-    last_total_hits_ = total_hits;
-    return;
-  }
-
-  const unsigned int last_cycles = last_total_hits_ / waypoint_count;
-  const unsigned int current_cycles = total_hits / waypoint_count;
-  if (current_cycles <= last_cycles)
-  {
-    last_total_hits_ = total_hits;
+    last_cycle_count_ = cycle_count;
     return;
   }
 
@@ -173,7 +150,7 @@ void WaypointAction::publishEndFlagsIfNeeded(
   {
     helm_interface_->publishFlag(flag);
   }
-  last_total_hits_ = total_hits;
+  last_cycle_count_ = cycle_count;
 }
 
 }  // namespace ros_behavior_tree
