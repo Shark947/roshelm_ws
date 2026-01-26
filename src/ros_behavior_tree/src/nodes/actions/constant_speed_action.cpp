@@ -59,17 +59,6 @@ bool ConstantSpeedAction::configureBehavior(const std::string &params)
   const auto parsed = parseParams(params);
   for (const auto &entry : parsed)
   {
-    if (entry.first == "name")
-    {
-      if (!behavior_->setBehaviorName(entry.second))
-      {
-        ROS_WARN_STREAM(
-            "[ros_behavior_tree] Failed to set ConstantSpeed name param: "
-            << entry.first << "=" << entry.second);
-      }
-      continue;
-    }
-
     if (behavior_->IvPBehavior::setParam(entry.first, entry.second))
       continue;
 
