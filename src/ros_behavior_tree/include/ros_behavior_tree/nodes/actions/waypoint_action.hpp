@@ -42,6 +42,7 @@ private:
 
   std::unique_ptr<WaypointBehavior> behavior_;
   std::string cached_params_;
+  std::string last_runnable_state_;
 };
 
 }  // namespace ros_behavior_tree

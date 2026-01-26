@@ -58,6 +58,7 @@ public:
   void updateReturn(bool value, const ros::Time &stamp, bool nav_style);
   void updateSpeedTrigger(bool value, const ros::Time &stamp, bool nav_style);
   void setTriggerHold(const ros::Duration &hold);
+  void setDeployLatch(bool enabled);
 
   bool hasFreshData(const ros::Duration &timeout) const;
   bool preferredHeading(double &out, const ros::Duration &timeout) const;
@@ -90,6 +91,8 @@ private:
                        bool &out) const;
 
   ros::Duration trigger_hold_{0.0};
+  bool latch_deploy_{false};
+  bool deploy_latched_{false};
 };
 
 class HelmInterface;

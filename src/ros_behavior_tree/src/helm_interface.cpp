@@ -249,6 +249,16 @@ void HelmInterface::publishMissionComplete(const std::string &value)
   }
 }
 
+void HelmInterface::publishReturn(bool value)
+{
+  if (return_pub_)
+  {
+    std_msgs::Bool msg;
+    msg.data = value;
+    return_pub_.publish(msg);
+  }
+}
+
 void HelmInterface::rebuildBehaviorSet()
 {
   behavior_set_.clearBehaviors();

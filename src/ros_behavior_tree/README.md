@@ -83,10 +83,11 @@ ros_behavior_tree/
 节点会加载 BehaviorTree.CPP 的 XML 文件，当前提供两套示例：
 
 - `config/alpha.xml` 通过 `DeployTriggered`、`ReturnTriggered`、
-  `SpeedTriggered` 组合 `WaypointAction` 与 `ConstantSpeedAction`，复刻
-  `alpha.bhv` 的行为树逻辑，并在返航结束时发布 `MISSION=complete`。
-  返航分支具有最高优先级；在非返航状态下，航点巡航与恒速控制会并行运行，
-  以便在发布 `SPD` 触发时保持恒速行为不中断巡航。
+  `SpeedTriggered` 组合 `WaypointAction`、`PublishReturnAction` 与
+  `ConstantSpeedAction`，复刻 `alpha.bhv` 的行为树逻辑，航点巡航完成后自动
+  发布 `RETURN=true` 并在返航结束时发布 `MISSION=complete`。返航分支具有
+  最高优先级；在非返航状态下，航点巡航与恒速控制会并行运行，以便在发布
+  `SPD` 触发时保持恒速行为不中断巡航。
 - `config/test.xml` 仍保留用于验证 BT 运行时与 Groot 连接的最小树。
 
 `alpha.xml` 会通过 HelmEngine 求解并发布 `DESIRED_*`（映射为
@@ -108,6 +109,7 @@ ros_behavior_tree/
 - `nav_timeout`
 - `trigger_hold_time`
 - `nav_log_period`
+- `latch_deploy`
 - `domain_course`, `domain_speed`, `domain_depth`
 - `desired_heading_topic`, `desired_speed_topic`, `desired_depth_topic`
 - `mission_topic`
@@ -119,6 +121,8 @@ ros_behavior_tree/
 
 `trigger_hold_time` 用于触发类布尔话题（`DEPLOY/RETURN/SPD`）的保持时间，
 当上游持续发布 `false` 时，单次 `true` 仍可在保持窗口内被行为树捕获。
+`latch_deploy` 用于将首次 `DEPLOY=true` 锁存为持续真值，适合仅发布一次
+部署触发的场景。
 `nav_log_period` 控制导航数据日志输出频率（秒），设置为 `<=0` 可关闭日志。
 
 导航数据会写入 `ros_behavior_tree/log/<timestamp>_log/` 中的 `NAV_*` 文件，

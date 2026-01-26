@@ -29,6 +29,7 @@ public:
   bool solveForBehavior(IvPBehavior &behavior);
   void deactivateBehavior(IvPBehavior &behavior);
   void publishMissionComplete(const std::string &value);
+  void publishReturn(bool value);
 
   const IvPDomain &domain() const { return domain_; }
   std::map<std::string, double> desiredValues() const;
