@@ -28,7 +28,7 @@ private:
   bool ensureBehavior();
   bool configureBehavior(const std::string &params);
   BT::NodeStatus runBehavior();
-  void publishEndFlagsIfNeeded();
+  void publishEndFlagsIfNeeded(const std::string &runnable_state);
 
   HelmInterface *helm_interface_{nullptr};
   class WaypointBehavior : public BHV_Waypoint
