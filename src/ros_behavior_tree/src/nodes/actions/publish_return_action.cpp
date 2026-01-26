@@ -15,7 +15,7 @@ PublishReturnAction::PublishReturnAction(const std::string &name,
 
 BT::PortsList PublishReturnAction::providedPorts()
 {
-  return {BT::InputPort<bool>("return_value", true)};
+  return {BT::InputPort<bool>("return_value", true, "Return value to publish")};
 }
 
 BT::NodeStatus PublishReturnAction::tick()
