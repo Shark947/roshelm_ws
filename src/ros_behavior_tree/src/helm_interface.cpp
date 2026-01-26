@@ -155,8 +155,12 @@ bool HelmInterface::solveForBehavior(IvPBehavior &behavior)
   if (!helm_engine_)
     return false;
 
-  behavior_active_[&behavior] = true;
-  behavior_set_dirty_ = true;
+  auto active_it = behavior_active_.find(&behavior);
+  if (active_it == behavior_active_.end() || !active_it->second)
+  {
+    behavior_active_[&behavior] = true;
+    behavior_set_dirty_ = true;
+  }
 
   if (!updateInfoBuffer())
     return false;
