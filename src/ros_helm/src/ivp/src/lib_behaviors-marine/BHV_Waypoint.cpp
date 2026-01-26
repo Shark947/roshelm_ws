@@ -1293,4 +1293,3 @@ bool BHV_Waypoint::setEndSpeed(string str)
 
   return(true);
 }
-
