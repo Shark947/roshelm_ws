@@ -51,7 +51,7 @@ private:
       return m_waypoint_engine.size();
     }
 
-    unsigned int cycleCount() const
+    unsigned int cycleCount()
     {
       return m_waypoint_engine.getCycleCount();
     }
