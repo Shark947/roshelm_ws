@@ -124,15 +124,24 @@ void WaypointAction::publishEndFlagsIfNeeded()
     return;
 
   const unsigned int total_hits = behavior_->totalHits();
+  const unsigned int waypoint_count = behavior_->waypointCount();
+
   if (total_hits < last_total_hits_)
   {
+    if (waypoint_count > 0 && last_total_hits_ >= waypoint_count)
+    {
+      const auto &end_flags = behavior_->endFlags();
+      for (const auto &flag : end_flags)
+      {
+        helm_interface_->publishFlag(flag);
+      }
+    }
     last_total_hits_ = total_hits;
     return;
   }
   if (total_hits == last_total_hits_)
     return;
 
-  const unsigned int waypoint_count = behavior_->waypointCount();
   if (waypoint_count == 0)
   {
     last_total_hits_ = total_hits;

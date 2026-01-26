@@ -2,10 +2,11 @@
 <root main_tree_to_execute="MainTree">
   <BehaviorTree ID="MainTree">
     <Fallback name="alpha_root">
+      <Script code="survey_waypoint_name='waypt_survey';survey_waypoint_pwt=100;survey_waypoint_perpetual=true;survey_waypoint_updates='WPT_UPDATE';survey_waypoint_endflag1='RETURN=true';survey_waypoint_speed_alt=1;survey_waypoint_use_alt_speed=true;survey_waypoint_lead=8;survey_waypoint_lead_damper=1;survey_waypoint_lead_to_start=true;survey_waypoint_speed=0.5;survey_waypoint_capture_line=true;survey_waypoint_capture_radius=5.0;survey_waypoint_slip_radius=15.0;survey_waypoint_efficiency_measure='all';survey_waypoint_polygon='15,-10:15,-40:38,-40:45,-25:38,-10';survey_waypoint_order='normal';survey_waypoint_repeat=0;return_waypoint_name='waypt_return';return_waypoint_pwt=100;return_waypoint_perpetual=true;return_waypoint_updates='RETURN_UPDATE';return_waypoint_endflag1='RETURN=false';return_waypoint_endflag2='DEPLOY=false';return_waypoint_endflag3='MISSION=complete';return_waypoint_speed=0.5;return_waypoint_capture_radius=2.0;return_waypoint_slip_radius=8.0;return_waypoint_points='0,0';constant_speed_name='const_speed';constant_speed_pwt=200;constant_speed_perpetual=true;constant_speed_updates='SPEED_UPDATE';constant_speed_speed=0.5;constant_speed_duration=10;constant_speed_duration_reset='CONST_SPD_RESET=true'" />
       <Sequence name="return_sequence">
         <DeployTriggered />
         <ReturnTriggered />
-        <WaypointAction params="name=waypt_return;pwt=100;perpetual=true;updates=RETURN_UPDATE;endflag=RETURN=false;endflag=DEPLOY=false;endflag=MISSION=complete;speed=0.5;capture_radius=2.0;slip_radius=8.0;points=0,0" />
+        <WaypointAction params="name={return_waypoint_name};pwt={return_waypoint_pwt};perpetual={return_waypoint_perpetual};updates={return_waypoint_updates};endflag={return_waypoint_endflag1};endflag={return_waypoint_endflag2};endflag={return_waypoint_endflag3};speed={return_waypoint_speed};capture_radius={return_waypoint_capture_radius};slip_radius={return_waypoint_slip_radius};points={return_waypoint_points}" />
         <MissionCompleteAction mission_value="complete" />
       </Sequence>
       <Parallel name="survey_parallel" success_threshold="2" failure_threshold="2">
@@ -14,13 +15,13 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <WaypointAction params="name=waypt_survey;pwt=100;perpetual=true;updates=WPT_UPDATE;endflag=RETURN=true;speed_alt=1;use_alt_speed=true;lead=8;lead_damper=1;lead_to_start=true;speed=0.5;capture_line=true;capture_radius=5.0;slip_radius=15.0;efficiency_measure=all;polygon=15,-10:15,-40:38,-40:45,-25:38,-10;order=normal;repeat=0" />
+          <WaypointAction params="name={survey_waypoint_name};pwt={survey_waypoint_pwt};perpetual={survey_waypoint_perpetual};updates={survey_waypoint_updates};endflag={survey_waypoint_endflag1};speed_alt={survey_waypoint_speed_alt};use_alt_speed={survey_waypoint_use_alt_speed};lead={survey_waypoint_lead};lead_damper={survey_waypoint_lead_damper};lead_to_start={survey_waypoint_lead_to_start};speed={survey_waypoint_speed};capture_line={survey_waypoint_capture_line};capture_radius={survey_waypoint_capture_radius};slip_radius={survey_waypoint_slip_radius};efficiency_measure={survey_waypoint_efficiency_measure};polygon={survey_waypoint_polygon};order={survey_waypoint_order};repeat={survey_waypoint_repeat}" />
           <PublishReturnAction return_value="true" />
         </Sequence>
         <Sequence name="const_speed_sequence">
           <DeployTriggered />
           <SpeedTriggered />
-          <ConstantSpeedAction params="name=const_speed;pwt=200;perpetual=true;updates=SPEED_UPDATE;speed=0.5;duration=10;duration_reset=CONST_SPD_RESET=true" />
+          <ConstantSpeedAction params="name={constant_speed_name};pwt={constant_speed_pwt};perpetual={constant_speed_perpetual};updates={constant_speed_updates};speed={constant_speed_speed};duration={constant_speed_duration};duration_reset={constant_speed_duration_reset}" />
         </Sequence>
       </Parallel>
     </Fallback>
