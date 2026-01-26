@@ -52,16 +52,16 @@
       <SubTree ID="InitParams" name="init_params" __shared_blackboard="true"/>
 
       <Fallback name="docking_root">
-        <Sequence name="lift_sequence">
+        <ReactiveSequence name="lift_sequence">
           <DeployTriggered />
           <Inverter>
             <ReturnTriggered />
           </Inverter>
           <FlagStringCondition var="MODE" value="LIFT"/>
           <GoToDepthAction params="{gotodepth_lift_params}"/>
-        </Sequence>
+        </ReactiveSequence>
 
-        <Sequence name="survey_sequence">
+        <ReactiveSequence name="survey_sequence">
           <DeployTriggered />
           <Inverter>
             <ReturnTriggered />
@@ -72,9 +72,9 @@
             <ConstantDepthAction params="{survey_const_depth_params}"/>
             <WaypointAction params="{survey_waypoint_params}"/>
           </Parallel>
-        </Sequence>
+        </ReactiveSequence>
 
-        <Sequence name="return_sequence">
+        <ReactiveSequence name="return_sequence">
           <DeployTriggered />
           <Inverter>
             <ReturnTriggered />
@@ -85,9 +85,9 @@
             <ConstantDepthAction params="{return_const_depth_params}"/>
             <WaypointAction params="{return_waypoint_params}"/>
           </Parallel>
-        </Sequence>
+        </ReactiveSequence>
 
-        <Sequence name="dock_sequence">
+        <ReactiveSequence name="dock_sequence">
           <DeployTriggered />
           <Inverter>
             <ReturnTriggered />
@@ -106,18 +106,18 @@
               </Sequence>
             </Fallback>
           </Parallel>
-        </Sequence>
+        </ReactiveSequence>
 
-        <Sequence name="gotodetect_sequence">
+        <ReactiveSequence name="gotodetect_sequence">
           <DeployTriggered />
           <Inverter>
             <ReturnTriggered />
           </Inverter>
           <FlagStringCondition var="MODE" value="GOTODETECT"/>
           <GoToDepthAction params="{gotodepth_detect_params}"/>
-        </Sequence>
+        </ReactiveSequence>
 
-        <Sequence name="detect_sequence">
+        <ReactiveSequence name="detect_sequence">
           <DeployTriggered />
           <Inverter>
             <ReturnTriggered />
@@ -128,7 +128,7 @@
             <ConstantDepthAction params="{detect_const_depth_params}"/>
             <WaypointAction params="{detect_waypoint_params}"/>
           </Parallel>
-        </Sequence>
+        </ReactiveSequence>
       </Fallback>
     </Sequence>
   </BehaviorTree>
