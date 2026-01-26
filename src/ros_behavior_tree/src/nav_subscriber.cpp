@@ -112,6 +112,13 @@ NavDataSubscriber::NavDataSubscriber(ros::NodeHandle &nh,
         store.updateReturn(msg->data, stamp, false);
         store.updateReturn(msg->data, stamp, true);
       });
+  speed_trigger_sub_ = nh.subscribe<std_msgs::Bool>(
+      topics.speed_trigger, 10,
+      [&store](const std_msgs::Bool::ConstPtr &msg) {
+        const ros::Time stamp = ros::Time::now();
+        store.updateSpeedTrigger(msg->data, stamp, false);
+        store.updateSpeedTrigger(msg->data, stamp, true);
+      });
 }
 
 }  // namespace ros_behavior_tree

@@ -3,6 +3,7 @@
 #include <ros/package.h>
 
 #include "ros_behavior_tree/bt/register_nodes.hpp"
+#include "ros_behavior_tree/helm_interface.hpp"
 
 namespace ros_behavior_tree
 {
@@ -95,6 +96,15 @@ void NavDataStore::updateReturn(bool value, const ros::Time &stamp,
   data.return_home.value = value;
   data.return_home.stamp = stamp;
   data.return_home.has_value = true;
+}
+
+void NavDataStore::updateSpeedTrigger(bool value, const ros::Time &stamp,
+                                      bool nav_style)
+{
+  NavData &data = nav_style ? nav_data_ : ros_data_;
+  data.speed_trigger.value = value;
+  data.speed_trigger.stamp = stamp;
+  data.speed_trigger.has_value = true;
 }
 
 bool NavDataStore::sampleFresh(const NavSample &sample,
@@ -222,6 +232,13 @@ bool NavDataStore::preferredReturn(bool &out,
                             timeout, out);
 }
 
+bool NavDataStore::preferredSpeedTrigger(bool &out,
+                                         const ros::Duration &timeout) const
+{
+  return getPreferredSample(nav_data_.speed_trigger, ros_data_.speed_trigger,
+                            timeout, out);
+}
+
 void BehaviorTreeManager::tick()
 {
   if (!tree_loaded_)
@@ -251,6 +268,13 @@ BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
   {
     auto blackboard = BT::Blackboard::create();
     blackboard->set("nav_store", store_);
+    helm_interface_ = std::make_shared<HelmInterface>(nh_, store_);
+    if (!helm_interface_->initialize())
+    {
+      ROS_ERROR_STREAM("[ros_behavior_tree] Failed to initialize Helm interface");
+    }
+    blackboard->set("helm_interface", helm_interface_.get());
+    blackboard->set("ros_node", &nh_);
     tree_ = factory_.createTreeFromFile(bt_xml, blackboard);
     tree_loaded_ = true;
   }

@@ -38,6 +38,7 @@ struct NavData
   NavSample y;
   BoolSample deploy;
   BoolSample return_home;
+  BoolSample speed_trigger;
 };
 
 class NavDataStore
@@ -53,6 +54,7 @@ public:
   void updateY(double value, const ros::Time &stamp, bool nav_style);
   void updateDeploy(bool value, const ros::Time &stamp, bool nav_style);
   void updateReturn(bool value, const ros::Time &stamp, bool nav_style);
+  void updateSpeedTrigger(bool value, const ros::Time &stamp, bool nav_style);
 
   bool hasFreshData(const ros::Duration &timeout) const;
   bool preferredHeading(double &out, const ros::Duration &timeout) const;
@@ -65,6 +67,7 @@ public:
   bool preferredY(double &out, const ros::Duration &timeout) const;
   bool preferredDeploy(bool &out, const ros::Duration &timeout) const;
   bool preferredReturn(bool &out, const ros::Duration &timeout) const;
+  bool preferredSpeedTrigger(bool &out, const ros::Duration &timeout) const;
 
 private:
   NavData ros_data_;
@@ -82,6 +85,8 @@ private:
                                  bool &out);
 };
 
+class HelmInterface;
+
 class BehaviorTreeManager
 {
 public:
@@ -94,6 +99,7 @@ private:
   BT::BehaviorTreeFactory factory_;
   BT::Tree tree_;
   std::unique_ptr<BT::PublisherZMQ> groot_publisher_;
+  std::shared_ptr<class HelmInterface> helm_interface_;
   bool tree_loaded_{false};
 };
 

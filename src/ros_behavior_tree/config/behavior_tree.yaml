@@ -1,9 +1,19 @@
 vehicle_name: auh
-bt_xml: "$(find ros_behavior_tree)/config/test.xml"
+bt_xml: "$(find ros_behavior_tree)/config/alpha.xml"
 loop_frequency: 5.0
 groot_enable: true
 groot_publisher_port: 1666
 groot_server_port: 1667
+nav_timeout: 0.0
+
+domain_course: "0:359:360"
+domain_speed: "0:4:41"
+domain_depth: "0:1000:1001"
+
+desired_heading_topic: /auh/desired_heading
+desired_speed_topic: /auh/desired_speed
+desired_depth_topic: /auh/desired_depth
+mission_topic: /auh/MISSION
 
 # ROS-style topics
 ros_heading_topic: /auh/current_heading
@@ -16,6 +26,7 @@ ros_x_topic: /auh/current_x
 ros_y_topic: /auh/current_y
 deploy_topic: /auh/DEPLOY
 return_topic: /auh/RETURN
+speed_trigger_topic: /auh/SPD
 
 # NAV/MOOS-style topics
 nav_heading_topic: /auh/NAV_HEADING

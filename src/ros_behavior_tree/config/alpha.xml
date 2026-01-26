@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Fallback name="alpha_root">
+      <Sequence name="return_sequence">
+        <DeployTriggered />
+        <ReturnTriggered />
+        <WaypointAction params="name=waypt_return;pwt=100;perpetual=true;updates=RETURN_UPDATE;speed=0.5;capture_radius=2.0;slip_radius=8.0;points=0,0" />
+        <MissionCompleteAction mission_value="complete" />
+      </Sequence>
+      <Sequence name="survey_sequence">
+        <DeployTriggered />
+        <Inverter>
+          <ReturnTriggered />
+        </Inverter>
+        <WaypointAction params="name=waypt_survey;pwt=100;perpetual=true;updates=WPT_UPDATE;speed_alt=1;use_alt_speed=true;lead=8;lead_damper=1;lead_to_start=true;speed=0.5;capture_line=true;capture_radius=5.0;slip_radius=15.0;efficiency_measure=all;polygon=15,-10:15,-40:38,-40:45,-25:38,-10;order=normal;repeat=0" />
+      </Sequence>
+      <Sequence name="const_speed_sequence">
+        <DeployTriggered />
+        <SpeedTriggered />
+        <ConstantSpeedAction params="name=const_speed;pwt=200;perpetual=true;updates=SPEED_UPDATE;speed=0.5;duration=10;duration_reset=CONST_SPD_RESET=true" />
+      </Sequence>
+    </Fallback>
+  </BehaviorTree>
+</root>

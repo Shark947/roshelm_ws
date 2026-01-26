@@ -23,6 +23,7 @@ struct NavTopics
   std::string ros_y;
   std::string deploy;
   std::string return_home;
+  std::string speed_trigger;
 
   std::string nav_heading;
   std::string nav_speed;
@@ -60,6 +61,7 @@ private:
   ros::Subscriber nav_y_sub_;
   ros::Subscriber deploy_sub_;
   ros::Subscriber return_sub_;
+  ros::Subscriber speed_trigger_sub_;
 };
 
 }  // namespace ros_behavior_tree
