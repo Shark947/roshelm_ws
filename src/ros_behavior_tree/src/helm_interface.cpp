@@ -114,6 +114,9 @@ bool HelmInterface::updateInfoBuffer()
   double depth = 0.0;
   double x = 0.0;
   double y = 0.0;
+  double yaw = 0.0;
+  double pitch = 0.0;
+  double roll = 0.0;
 
   if (!store_->preferredHeading(heading, timeout) ||
       !store_->preferredSpeed(speed, timeout) ||
@@ -136,6 +139,13 @@ bool HelmInterface::updateInfoBuffer()
   info_buffer_.setValue("NAV_DEPTH", depth, now.toSec());
   info_buffer_.setValue("NAV_X", x, now.toSec());
   info_buffer_.setValue("NAV_Y", y, now.toSec());
+
+  if (store_->preferredYaw(yaw, timeout))
+    info_buffer_.setValue("NAV_YAW", yaw, now.toSec());
+  if (store_->preferredPitch(pitch, timeout))
+    info_buffer_.setValue("NAV_PITCH", pitch, now.toSec());
+  if (store_->preferredRoll(roll, timeout))
+    info_buffer_.setValue("NAV_ROLL", roll, now.toSec());
 
   return true;
 }
