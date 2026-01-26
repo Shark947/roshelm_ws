@@ -27,6 +27,7 @@ public:
 
   bool initialize();
   bool solveForBehavior(IvPBehavior &behavior);
+  void deactivateBehavior(IvPBehavior &behavior);
   void publishMissionComplete(const std::string &value);
 
   const IvPDomain &domain() const { return domain_; }
@@ -36,6 +37,7 @@ private:
   bool updateInfoBuffer();
   bool parseDomain(const std::string &name, const std::string &value);
   void publishDesired(const HelmReport &report);
+  void rebuildBehaviorSet();
 
   ros::NodeHandle nh_;
   const NavDataStore *store_{nullptr};
@@ -45,7 +47,8 @@ private:
   LedgerSnap ledger_snap_;
   std::unique_ptr<HelmEngine> helm_engine_;
   BehaviorSet behavior_set_;
-  IvPBehavior *active_behavior_{nullptr};
+  std::map<IvPBehavior *, bool> behavior_active_;
+  bool behavior_set_dirty_{false};
 
   ros::Publisher desired_heading_pub_;
   ros::Publisher desired_speed_pub_;
