@@ -48,6 +48,8 @@ public:
                       defaultTopic(vehicle_name_, "DEPLOY"));
     private_nh_.param("return_topic", topics.return_home,
                       defaultTopic(vehicle_name_, "RETURN"));
+    private_nh_.param("speed_trigger_topic", topics.speed_trigger,
+                      defaultTopic(vehicle_name_, "SPD"));
 
     private_nh_.param("nav_heading_topic", topics.nav_heading,
                       defaultTopic(vehicle_name_, "NAV_HEADING"));
@@ -76,7 +78,8 @@ public:
                     << " x=" << topics.ros_x
                     << " y=" << topics.ros_y
                     << " deploy=" << topics.deploy
-                    << " return=" << topics.return_home);
+                    << " return=" << topics.return_home
+                    << " speed_trigger=" << topics.speed_trigger);
     ROS_INFO_STREAM("[ros_behavior_tree] NAV topics: heading=" << topics.nav_heading
                     << " speed=" << topics.nav_speed
                     << " depth=" << topics.nav_depth

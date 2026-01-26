@@ -11,7 +11,9 @@ ros_behavior_tree/
 ├── package.xml
 ├── README.md
 ├── config/
-│   └── behavior_tree.yaml
+│   ├── alpha.xml
+│   ├── behavior_tree.yaml
+│   └── test.xml
 ├── include/
 │   └── ros_behavior_tree/
 │       ├── bt/
@@ -20,10 +22,15 @@ ros_behavior_tree/
 │       ├── nav_subscriber.hpp
 │       └── nodes/
 │           ├── actions/
-│           │   └── dummy_action.hpp
+│           │   ├── constant_speed_action.hpp
+│           │   ├── dummy_action.hpp
+│           │   ├── mission_complete_action.hpp
+│           │   └── waypoint_action.hpp
 │           └── conditions/
 │               └── common/
-│                   └── deploy_triggered.hpp
+│                   ├── deploy_triggered.hpp
+│                   ├── return_triggered.hpp
+│                   └── speed_triggered.hpp
 ├── launch/
 │   └── behavior_tree.launch
 └── src/
@@ -31,13 +38,19 @@ ros_behavior_tree/
     ├── bt/
     │   └── register_nodes.cpp
     ├── bt_nodes.cpp
+    ├── helm_interface.cpp
     ├── nav_subscriber.cpp
     └── nodes/
         ├── actions/
-        │   └── dummy_action.cpp
+        │   ├── constant_speed_action.cpp
+        │   ├── dummy_action.cpp
+        │   ├── mission_complete_action.cpp
+        │   └── waypoint_action.cpp
         └── conditions/
             └── common/
-                └── deploy_triggered.cpp
+                ├── deploy_triggered.cpp
+                ├── return_triggered.cpp
+                └── speed_triggered.cpp
 ```
 
 ## 数据来源
@@ -49,22 +62,25 @@ ros_behavior_tree/
 - **NAV/MOOS 风格话题**：`/<vehicle>/NAV_HEADING`, `/NAV_SPEED`, `/NAV_DEPTH`,
   `/NAV_YAW`, `/NAV_PITCH`, `/NAV_ROLL`, `/NAV_X`, `/NAV_Y`
 
-部署/返航话题在两套数据中共用：`/<vehicle>/DEPLOY` 与 `/<vehicle>/RETURN`。
+部署/返航与恒速触发话题在两套数据中共用：`/<vehicle>/DEPLOY`、`/<vehicle>/RETURN`、
+`/<vehicle>/SPD`。
 
 默认值与 `ros_helm` 的 ROS bridge 配置中话题命名保持一致。若重映射话题，请同步调整参数。
 
 ## 行为树流程
 
-节点会加载 BehaviorTree.CPP 的 XML 文件，并提供一个简易树用于在 Groot 中验证：
+节点会加载 BehaviorTree.CPP 的 XML 文件，当前提供两套示例：
 
-- 默认的 `config/test.xml` 包含一个 `DeployTriggered` 条件节点和一个
-  `DummyAction` 行为节点。
-- 当 `/auh/DEPLOY`（或配置的 `deploy_topic`）被发布 `data: true` 时，
-  `DeployTriggered` 返回 **SUCCESS**，`DummyAction` 会先 **RUNNING** 一段
-  时间后再返回 **SUCCESS**。
-- 若 `DeployTriggered` 失败，序列节点会立刻返回失败，整个树直接失败。
+- `config/alpha.xml` 通过 `DeployTriggered`、`ReturnTriggered`、
+  `SpeedTriggered` 组合 `WaypointAction` 与 `ConstantSpeedAction`，复刻
+  `alpha.bhv` 的行为树逻辑，并在返航结束时发布 `MISSION=complete`。
+- `config/test.xml` 仍保留用于验证 BT 运行时与 Groot 连接的最小树。
 
-可以用该树验证 ROS 节点、BT 运行时与 Groot ZMQ 连接是否正确。
+`alpha.xml` 会通过 HelmEngine 求解并发布 `DESIRED_*`（映射为
+`desired_heading`/`desired_speed`/`desired_depth`）话题，并保持与
+`ros_helm` 的坐标系转换一致。
+
+可以用 `test.xml` 验证 ROS 节点、BT 运行时与 Groot ZMQ 连接是否正确。
 
 ## 配置
 
@@ -76,7 +92,12 @@ ros_behavior_tree/
 - `groot_enable`
 - `groot_publisher_port`
 - `groot_server_port`
+- `nav_timeout`
+- `domain_course`, `domain_speed`, `domain_depth`
+- `desired_heading_topic`, `desired_speed_topic`, `desired_depth_topic`
+- `mission_topic`
 - `ros_*_topic`, `nav_*_topic`, `deploy_topic`, `return_topic`
+- `speed_trigger_topic`
 
 > 注意：`groot_publisher_port` 与 `groot_server_port` 必须不同；若相同将禁用
 > Groot ZMQ 发布器并输出错误日志。
