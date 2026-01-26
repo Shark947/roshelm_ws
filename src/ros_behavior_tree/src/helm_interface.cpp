@@ -155,19 +155,19 @@ bool HelmInterface::solveForBehavior(IvPBehavior &behavior)
   if (!helm_engine_)
     return false;
 
+  auto active_it = behavior_active_.find(&behavior);
+  if (active_it == behavior_active_.end() || !active_it->second)
+  {
+    behavior_active_[&behavior] = true;
+    behavior_set_dirty_ = true;
+  }
+
   if (!updateInfoBuffer())
     return false;
 
-  if (active_behavior_ != &behavior)
-  {
-    behavior_set_.clearBehaviors();
-    behavior_set_.addBehavior(&behavior);
-    behavior.setInfoBuffer(&info_buffer_);
-    behavior.setLedgerSnap(&ledger_snap_);
-    behavior_set_.connectInfoBuffer(&info_buffer_);
-    behavior_set_.connectLedgerSnap(&ledger_snap_);
-    active_behavior_ = &behavior;
-  }
+  if (behavior_set_dirty_)
+    rebuildBehaviorSet();
+
   behavior_set_.setCurrTime(info_buffer_.getCurrTime());
 
   const HelmReport report =
@@ -175,6 +175,16 @@ bool HelmInterface::solveForBehavior(IvPBehavior &behavior)
                                           info_buffer_.getCurrTime());
   publishDesired(report);
   return true;
+}
+
+void HelmInterface::deactivateBehavior(IvPBehavior &behavior)
+{
+  auto it = behavior_active_.find(&behavior);
+  if (it != behavior_active_.end() && it->second)
+  {
+    it->second = false;
+    behavior_set_dirty_ = true;
+  }
 }
 
 std::map<std::string, double> HelmInterface::desiredValues() const
@@ -237,6 +247,22 @@ void HelmInterface::publishMissionComplete(const std::string &value)
     msg.data = value;
     mission_pub_.publish(msg);
   }
+}
+
+void HelmInterface::rebuildBehaviorSet()
+{
+  behavior_set_.clearBehaviors();
+  for (const auto &entry : behavior_active_)
+  {
+    if (!entry.second)
+      continue;
+    entry.first->setInfoBuffer(&info_buffer_);
+    entry.first->setLedgerSnap(&ledger_snap_);
+    behavior_set_.addBehavior(entry.first);
+  }
+  behavior_set_.connectInfoBuffer(&info_buffer_);
+  behavior_set_.connectLedgerSnap(&ledger_snap_);
+  behavior_set_dirty_ = false;
 }
 
 }  // namespace ros_behavior_tree

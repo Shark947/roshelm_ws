@@ -35,6 +35,8 @@ BT::NodeStatus WaypointAction::onRunning()
 void WaypointAction::onHalted()
 {
   cached_params_.clear();
+  if (helm_interface_ && behavior_)
+    helm_interface_->deactivateBehavior(*behavior_);
 }
 
 bool WaypointAction::ensureBehavior()
@@ -100,7 +102,10 @@ BT::NodeStatus WaypointAction::runBehavior()
 
   const std::string runnable_state = behavior_->isRunnable();
   if (runnable_state == "completed")
+  {
+    helm_interface_->deactivateBehavior(*behavior_);
     return BT::NodeStatus::SUCCESS;
+  }
 
   return BT::NodeStatus::RUNNING;
 }
