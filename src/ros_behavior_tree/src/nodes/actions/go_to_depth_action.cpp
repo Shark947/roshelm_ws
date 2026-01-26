@@ -105,7 +105,9 @@ BT::NodeStatus GoToDepthAction::runBehavior()
 
   behavior_active_ = true;
   const std::string runnable_state = behavior_->isRunnable();
-  if (runnable_state == "completed")
+  const bool completed_or_triggered =
+      (runnable_state == "completed") || behavior_->consumeCompletionRequest();
+  if (completed_or_triggered)
   {
     if (!end_flags_published_)
     {

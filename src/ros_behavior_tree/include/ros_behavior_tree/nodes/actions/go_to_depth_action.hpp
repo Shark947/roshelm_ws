@@ -35,6 +35,12 @@ private:
   public:
     explicit GoToDepthBehavior(IvPDomain domain) : BHV_GoToDepth(domain) {}
 
+    void setComplete(std::string post_mortem = "") override
+    {
+      completion_requested_ = true;
+      BHV_GoToDepth::setComplete(post_mortem);
+    }
+
     bool setBehaviorNamePublic(const std::string &name)
     {
       return setBehaviorName(name);
@@ -44,6 +50,17 @@ private:
     {
       return m_end_flags;
     }
+
+    bool consumeCompletionRequest()
+    {
+      if (!completion_requested_)
+        return false;
+      completion_requested_ = false;
+      return true;
+    }
+
+  private:
+    bool completion_requested_{false};
   };
 
   std::unique_ptr<GoToDepthBehavior> behavior_;
