@@ -23,6 +23,7 @@ struct BoolSample
 {
   bool value{false};
   ros::Time stamp;
+  ros::Time last_true_stamp;
   bool has_value{false};
 };
 
@@ -55,6 +56,7 @@ public:
   void updateDeploy(bool value, const ros::Time &stamp, bool nav_style);
   void updateReturn(bool value, const ros::Time &stamp, bool nav_style);
   void updateSpeedTrigger(bool value, const ros::Time &stamp, bool nav_style);
+  void setTriggerHold(const ros::Duration &hold);
 
   bool hasFreshData(const ros::Duration &timeout) const;
   bool preferredHeading(double &out, const ros::Duration &timeout) const;
@@ -79,10 +81,14 @@ private:
                                  const NavSample &ros_sample,
                                  const ros::Duration &timeout,
                                  double &out);
-  static bool getPreferredSample(const BoolSample &nav_sample,
-                                 const BoolSample &ros_sample,
-                                 const ros::Duration &timeout,
-                                 bool &out);
+  bool getPreferredSample(const BoolSample &nav_sample,
+                          const BoolSample &ros_sample,
+                          const ros::Duration &timeout,
+                          bool &out) const;
+  bool sampleTriggered(const BoolSample &sample, const ros::Duration &timeout,
+                       bool &out) const;
+
+  ros::Duration trigger_hold_{0.0};
 };
 
 class HelmInterface;

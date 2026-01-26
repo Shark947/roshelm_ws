@@ -1,6 +1,8 @@
 vehicle_name: auh
 bt_xml: "$(find ros_behavior_tree)/config/test.xml"
 loop_frequency: 5.0
+trigger_hold_time: 1.0
+nav_log_period: 5.0
 groot_enable: true
 groot_publisher_port: 1666
 groot_server_port: 1667

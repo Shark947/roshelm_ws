@@ -101,6 +101,8 @@ ros_behavior_tree/
 - `groot_publisher_port`
 - `groot_server_port`
 - `nav_timeout`
+- `trigger_hold_time`
+- `nav_log_period`
 - `domain_course`, `domain_speed`, `domain_depth`
 - `desired_heading_topic`, `desired_speed_topic`, `desired_depth_topic`
 - `mission_topic`
@@ -109,6 +111,13 @@ ros_behavior_tree/
 
 > 注意：`groot_publisher_port` 与 `groot_server_port` 必须不同；若相同将禁用
 > Groot ZMQ 发布器并输出错误日志。
+
+`trigger_hold_time` 用于触发类布尔话题（`DEPLOY/RETURN/SPD`）的保持时间，
+当上游持续发布 `false` 时，单次 `true` 仍可在保持窗口内被行为树捕获。
+`nav_log_period` 控制导航数据日志输出频率（秒），设置为 `<=0` 可关闭日志。
+
+导航数据会写入 `ros_behavior_tree/log/<timestamp>_log/` 中的 `NAV_*` 文件，
+并在控制台输出对应调试信息。
 
 ## 运行
 
