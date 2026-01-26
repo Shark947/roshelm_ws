@@ -1,5 +1,7 @@
 #include "ros_behavior_tree/helm_interface.hpp"
 
+#include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <sstream>
 
@@ -28,6 +30,23 @@ double wrapHeading(double heading)
   if (wrapped < 0.0)
     wrapped += 360.0;
   return wrapped;
+}
+
+bool parseBoolString(const std::string &value, bool &out)
+{
+  std::string lowered = value;
+  std::transform(lowered.begin(), lowered.end(), lowered.begin(), ::tolower);
+  if (lowered == "true" || lowered == "1")
+  {
+    out = true;
+    return true;
+  }
+  if (lowered == "false" || lowered == "0")
+  {
+    out = false;
+    return true;
+  }
+  return false;
 }
 }  // namespace
 
@@ -249,6 +268,108 @@ void HelmInterface::publishMissionComplete(const std::string &value)
   }
 }
 
+void HelmInterface::publishFlag(const VarDataPair &flag)
+{
+  const std::string &var = flag.get_var();
+  if (var.empty())
+    return;
+  if (var == "RETURN")
+  {
+    bool value = false;
+    if (flag.get_sdata_set())
+    {
+      if (!parseBoolString(flag.get_sdata(), value))
+        return;
+    }
+    else if (flag.get_ddata_set())
+    {
+      value = (flag.get_ddata() != 0.0);
+    }
+    else
+    {
+      return;
+    }
+    publishReturn(value);
+    return;
+  }
+  if (var == "DEPLOY")
+  {
+    if (!deploy_pub_)
+      return;
+    bool value = false;
+    if (flag.get_sdata_set())
+    {
+      if (!parseBoolString(flag.get_sdata(), value))
+        return;
+    }
+    else if (flag.get_ddata_set())
+    {
+      value = (flag.get_ddata() != 0.0);
+    }
+    else
+    {
+      return;
+    }
+    std_msgs::Bool msg;
+    msg.data = value;
+    deploy_pub_.publish(msg);
+    return;
+  }
+  if (var == "MISSION")
+  {
+    if (!mission_pub_)
+      return;
+    std_msgs::String msg;
+    if (flag.get_sdata_set())
+    {
+      msg.data = flag.get_sdata();
+    }
+    else if (flag.get_ddata_set())
+    {
+      std::ostringstream stream;
+      stream << flag.get_ddata();
+      msg.data = stream.str();
+    }
+    else
+    {
+      return;
+    }
+    mission_pub_.publish(msg);
+    return;
+  }
+
+  if (flag.get_sdata_set())
+  {
+    bool bool_value = false;
+    if (parseBoolString(flag.get_sdata(), bool_value))
+    {
+      auto &pub = publisherForFlag(var, "bool", flag_bool_pubs_);
+      std_msgs::Bool msg;
+      msg.data = bool_value;
+      if (pub)
+        pub.publish(msg);
+    }
+    else
+    {
+      auto &pub = publisherForFlag(var, "string", flag_string_pubs_);
+      std_msgs::String msg;
+      msg.data = flag.get_sdata();
+      if (pub)
+        pub.publish(msg);
+    }
+    return;
+  }
+  if (flag.get_ddata_set())
+  {
+    auto &pub = publisherForFlag(var, "double", flag_double_pubs_);
+    std_msgs::Float64 msg;
+    msg.data = flag.get_ddata();
+    if (pub)
+      pub.publish(msg);
+    return;
+  }
+}
+
 void HelmInterface::publishReturn(bool value)
 {
   if (return_pub_)
@@ -257,6 +378,42 @@ void HelmInterface::publishReturn(bool value)
     msg.data = value;
     return_pub_.publish(msg);
   }
+}
+
+std::string HelmInterface::topicForFlag(const std::string &var) const
+{
+  if (var.empty())
+    return var;
+  if (!var.empty() && var.front() == '/')
+    return var;
+  if (vehicle_name_.empty())
+    return var;
+  return "/" + vehicle_name_ + "/" + var;
+}
+
+ros::Publisher &HelmInterface::publisherForFlag(
+    const std::string &var,
+    const std::string &type,
+    std::map<std::string, ros::Publisher> &cache)
+{
+  auto it = cache.find(var);
+  if (it != cache.end())
+    return it->second;
+
+  const std::string topic = topicForFlag(var);
+  if (type == "bool")
+  {
+    auto result = cache.emplace(var, nh_.advertise<std_msgs::Bool>(topic, 10, true));
+    return result.first->second;
+  }
+  if (type == "double")
+  {
+    auto result = cache.emplace(var, nh_.advertise<std_msgs::Float64>(topic, 10, true));
+    return result.first->second;
+  }
+
+  auto result = cache.emplace(var, nh_.advertise<std_msgs::String>(topic, 10, true));
+  return result.first->second;
 }
 
 void HelmInterface::rebuildBehaviorSet()

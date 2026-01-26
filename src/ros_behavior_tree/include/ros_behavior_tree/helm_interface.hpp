@@ -16,6 +16,7 @@
 #include "IvPDomain.h"
 #include "InfoBuffer.h"
 #include "LedgerSnap.h"
+#include "VarDataPair.h"
 
 namespace ros_behavior_tree
 {
@@ -29,6 +30,7 @@ public:
   bool solveForBehavior(IvPBehavior &behavior);
   void deactivateBehavior(IvPBehavior &behavior);
   void publishMissionComplete(const std::string &value);
+  void publishFlag(const VarDataPair &flag);
   void publishReturn(bool value);
 
   const IvPDomain &domain() const { return domain_; }
@@ -38,6 +40,10 @@ private:
   bool updateInfoBuffer();
   bool parseDomain(const std::string &name, const std::string &value);
   void publishDesired(const HelmReport &report);
+  std::string topicForFlag(const std::string &var) const;
+  ros::Publisher &publisherForFlag(const std::string &var,
+                                   const std::string &type,
+                                   std::map<std::string, ros::Publisher> &cache);
   void rebuildBehaviorSet();
 
   ros::NodeHandle nh_;
@@ -57,6 +63,9 @@ private:
   ros::Publisher deploy_pub_;
   ros::Publisher return_pub_;
   ros::Publisher mission_pub_;
+  std::map<std::string, ros::Publisher> flag_string_pubs_;
+  std::map<std::string, ros::Publisher> flag_double_pubs_;
+  std::map<std::string, ros::Publisher> flag_bool_pubs_;
 
   ros::Time start_time_;
   double nav_timeout_{0.0};
