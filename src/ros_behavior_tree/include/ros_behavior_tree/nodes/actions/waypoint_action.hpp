@@ -51,6 +51,11 @@ private:
       return m_waypoint_engine.size();
     }
 
+    unsigned int cycleCount() const
+    {
+      return m_waypoint_engine.getCycleCount();
+    }
+
     const std::vector<VarDataPair> &endFlags() const
     {
       return m_end_flags;
@@ -60,7 +65,7 @@ private:
   std::unique_ptr<WaypointBehavior> behavior_;
   std::string cached_params_;
   std::string last_runnable_state_;
-  unsigned int last_total_hits_{0};
+  unsigned int last_cycle_count_{0};
 };
 
 }  // namespace ros_behavior_tree

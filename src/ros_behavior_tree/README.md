@@ -86,8 +86,8 @@ ros_behavior_tree/
   `SpeedTriggered` 组合 `WaypointAction` 与 `ConstantSpeedAction`，复刻
   `alpha.bhv` 的行为树逻辑。航点巡航/返航行为保持 `perpetual=true`，
   并在 `WaypointAction` 内部模拟 `endflag`：当航点巡航完成一次遍历时会
-  发布 `RETURN=true`，返航完成时发布 `RETURN=false`、`DEPLOY=false`
-  与 `MISSION=complete`。`endflag` 也支持发布任意自定义变量，默认映射为
+  （依据航点引擎的 cycle 计数）发布 `RETURN=true`，返航完成时发布
+  `RETURN=false`、`DEPLOY=false` 与 `MISSION=complete`。`endflag` 也支持发布任意自定义变量，默认映射为
   `/<vehicle>/<VAR>` 话题。返航分支具有最高优先级；在非返航状态下，
   航点巡航与恒速控制会并行运行，以便在发布 `SPD` 触发时保持恒速行为
   不中断巡航。
