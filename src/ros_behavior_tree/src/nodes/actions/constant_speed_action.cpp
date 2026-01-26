@@ -4,8 +4,6 @@
 
 #include <ros/ros.h>
 
-#include "BHV_ConstantSpeed.h"
-
 namespace ros_behavior_tree
 {
 
@@ -46,7 +44,7 @@ bool ConstantSpeedAction::ensureBehavior()
 
   if (!behavior_)
   {
-    behavior_.reset(new BHV_ConstantSpeed(helm_interface_->domain()));
+    behavior_.reset(new ConstantSpeedBehavior(helm_interface_->domain()));
   }
   return true;
 }
@@ -59,6 +57,15 @@ bool ConstantSpeedAction::configureBehavior(const std::string &params)
   const auto parsed = parseParams(params);
   for (const auto &entry : parsed)
   {
+    if (entry.first == "name")
+    {
+      if (!behavior_->setBehaviorNamePublic(entry.second))
+      {
+        ROS_WARN_STREAM("[ros_behavior_tree] Failed to set ConstantSpeed name: "
+                        << entry.second);
+      }
+      continue;
+    }
     if (behavior_->IvPBehavior::setParam(entry.first, entry.second))
       continue;
 

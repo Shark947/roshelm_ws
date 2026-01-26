@@ -7,7 +7,7 @@
 
 #include "ros_behavior_tree/helm_interface.hpp"
 
-class BHV_Waypoint;
+#include "BHV_Waypoint.h"
 
 namespace ros_behavior_tree
 {
@@ -29,7 +29,18 @@ private:
   BT::NodeStatus runBehavior();
 
   HelmInterface *helm_interface_{nullptr};
-  std::unique_ptr<BHV_Waypoint> behavior_;
+  class WaypointBehavior : public BHV_Waypoint
+  {
+  public:
+    explicit WaypointBehavior(IvPDomain domain) : BHV_Waypoint(domain) {}
+
+    bool setBehaviorNamePublic(const std::string &name)
+    {
+      return setBehaviorName(name);
+    }
+  };
+
+  std::unique_ptr<WaypointBehavior> behavior_;
   std::string cached_params_;
 };
 

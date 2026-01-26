@@ -12,7 +12,8 @@ ros_behavior_tree/
 ├── README.md
 ├── config/
 │   ├── alpha.xml
-│   ├── behavior_tree.yaml
+│   ├── behavior_tree_alpha.yaml
+│   ├── behavior_tree_test.yaml
 │   └── test.xml
 ├── include/
 │   └── ros_behavior_tree/
@@ -35,6 +36,7 @@ ros_behavior_tree/
 │   └── behavior_tree.launch
 └── src/
     ├── behavior_tree_node.cpp
+    ├── nav_publisher_node.cpp
     ├── bt/
     │   └── register_nodes.cpp
     ├── bt_nodes.cpp
@@ -65,6 +67,10 @@ ros_behavior_tree/
 部署/返航与恒速触发话题在两套数据中共用：`/<vehicle>/DEPLOY`、`/<vehicle>/RETURN`、
 `/<vehicle>/SPD`。
 
+当只接入 `current_vx/current_vy/current_yaw/current_z` 时，需要额外生成
+`current_speed/current_heading/current_depth`。默认 launch 会启动一个轻量级
+`nav_publisher_node` 来完成这一转换。
+
 默认值与 `ros_helm` 的 ROS bridge 配置中话题命名保持一致。若重映射话题，请同步调整参数。
 
 ## 行为树流程
@@ -84,7 +90,7 @@ ros_behavior_tree/
 
 ## 配置
 
-默认参数见 `config/behavior_tree.yaml`：
+默认参数见 `config/behavior_tree_alpha.yaml`：
 
 - `vehicle_name`
 - `loop_frequency`
@@ -107,3 +113,8 @@ ros_behavior_tree/
 ```bash
 roslaunch ros_behavior_tree behavior_tree.launch
 ```
+
+该 launch 同时启动 `nav_publisher_node`，用于从
+`/<vehicle>/current_vx`、`/<vehicle>/current_vy`、`/<vehicle>/current_yaw`、
+`/<vehicle>/current_z` 生成 `current_speed/current_heading/current_depth`。
+若系统已提供这些话题，可在自定义 launch 中移除该节点。
