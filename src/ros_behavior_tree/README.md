@@ -147,7 +147,9 @@ ros_behavior_tree/
 部署触发的场景。
 `default_mode_on_deploy` 为 `true` 且配置了 `default_mode_value` 时，
 当收到 `DEPLOY=true` 会自动写入 `MODE=default_mode_value`，保持与
-`ros_helm` 方案一致，无需额外手动发布 `MODE`。
+`ros_helm` 方案一致，无需额外手动发布 `MODE`。若希望仅发布
+`/<vehicle>/DEPLOY` 即触发默认模式，请确保 `bool_command_topics`
+包含 `DEPLOY` 并指向该话题（如 `behavior_tree_docking.yaml` 所示）。
 `nav_log_period` 控制导航数据日志输出频率（秒），设置为 `<=0` 可关闭日志。
 
 导航数据会写入 `ros_behavior_tree/log/<timestamp>_log/` 中的 `NAV_*` 文件，
