@@ -130,9 +130,10 @@ public:
 private:
   bool setupLogDirectory()
   {
-    static const std::array<std::string, 8> kLogKeys = {
+    static const std::array<std::string, 11> kLogKeys = {
         "NAV_X", "NAV_Y", "NAV_HEADING", "NAV_DEPTH",
-        "NAV_SPEED", "NAV_YAW", "NAV_PITCH", "NAV_ROLL"};
+        "NAV_SPEED", "NAV_YAW", "NAV_PITCH", "NAV_ROLL",
+        "DESIRED_HEADING", "DESIRED_SPEED", "DESIRED_DEPTH"};
 
     const std::string package_path = ros::package::getPath("ros_behavior_tree");
     const std::string base_dir = package_path.empty() ? "log"
@@ -229,9 +230,42 @@ private:
     log_value("NAV_X", has_x, x);
     log_value("NAV_Y", has_y, y);
 
+    const std::map<std::string, double> desired_values =
+        manager_ ? manager_->desiredValues() : std::map<std::string, double>{};
+    auto log_desired = [&](const std::string &key) {
+      auto it = desired_values.find(key);
+      if (it == desired_values.end())
+        return;
+      log_value(key, true, it->second);
+    };
+    log_desired("DESIRED_HEADING");
+    log_desired("DESIRED_SPEED");
+    log_desired("DESIRED_DEPTH");
+
+    auto format_values = [&](const std::map<std::string, double> &values,
+                             const std::string &prefix) {
+      std::ostringstream stream;
+      stream << std::fixed << std::setprecision(3);
+      bool first = true;
+      for (const auto &entry : values)
+      {
+        if (!prefix.empty() && entry.first.rfind(prefix, 0) != 0)
+          continue;
+        if (!first)
+          stream << ", ";
+        stream << entry.first << "=" << entry.second;
+        first = false;
+      }
+      return stream.str();
+    };
+
     std::ostringstream status;
     status << std::fixed << std::setprecision(3);
     status << "[ros_behavior_tree] nav_log t=" << now.toSec();
+    const std::string desired_text =
+        format_values(desired_values, "DESIRED_");
+    status << " DESIRED={" << (desired_text.empty() ? "none" : desired_text)
+           << "}";
     if (has_heading)
       status << " NAV_HEADING=" << heading;
     if (has_speed)

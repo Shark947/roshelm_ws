@@ -5,6 +5,7 @@
 #include <std_msgs/Float64.h>
 #include <std_msgs/String.h>
 
+#include <map>
 #include <memory>
 #include <string>
 
@@ -29,6 +30,7 @@ public:
   void publishMissionComplete(const std::string &value);
 
   const IvPDomain &domain() const { return domain_; }
+  std::map<std::string, double> desiredValues() const;
 
 private:
   bool updateInfoBuffer();
@@ -62,6 +64,7 @@ private:
   std::string return_topic_;
   std::string mission_topic_;
   std::string vehicle_name_;
+  std::map<std::string, double> desired_values_;
 };
 
 }  // namespace ros_behavior_tree
