@@ -9,6 +9,8 @@
 
 namespace
 {
+constexpr double kPi = 3.14159265358979323846;
+
 double normalizeHeadingDeg(double heading_deg)
 {
   double normalized = std::fmod(heading_deg, 360.0);
@@ -84,16 +86,19 @@ public:
 private:
   void vxCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
   {
+    updateCurrentSpeed(msg, true);
     handleVelocity(msg, true);
   }
 
   void vyCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
   {
+    updateCurrentSpeed(msg, false);
     handleVelocity(msg, false);
   }
 
   void yawCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
   {
+    publishCurrentHeading(msg);
     handleAttitude(msg, AttitudeKey::kYaw);
   }
 
@@ -179,6 +184,47 @@ private:
     kRoll
   };
 
+  void updateCurrentSpeed(const common_msgs::Float64Stamped::ConstPtr &msg,
+                          bool is_vx)
+  {
+    if (is_vx)
+    {
+      have_vx_ = true;
+      last_vx_ = msg->data;
+      last_vx_stamp_ = msg->header.stamp;
+    }
+    else
+    {
+      have_vy_ = true;
+      last_vy_ = msg->data;
+      last_vy_stamp_ = msg->header.stamp;
+    }
+
+    if (!have_vx_ || !have_vy_)
+      return;
+
+    common_msgs::Float64Stamped out;
+    out.header.stamp = msg->header.stamp;
+    if (!last_vx_stamp_.isZero() && !last_vy_stamp_.isZero())
+    {
+      out.header.stamp = last_vx_stamp_ > last_vy_stamp_
+                             ? last_vx_stamp_
+                             : last_vy_stamp_;
+    }
+    out.data = std::hypot(last_vx_, last_vy_);
+    speed_pub_.publish(out);
+  }
+
+  void publishCurrentHeading(
+      const common_msgs::Float64Stamped::ConstPtr &msg)
+  {
+    const double heading_deg = normalizeHeadingDeg(msg->data * 180.0 / kPi);
+    common_msgs::Float64Stamped out;
+    out.header.stamp = msg->header.stamp;
+    out.data = heading_deg;
+    heading_pub_.publish(out);
+  }
+
   void handleVelocity(const common_msgs::Float64Stamped::ConstPtr &msg,
                       bool is_vx)
   {
@@ -244,7 +290,6 @@ private:
     common_msgs::Float64Stamped out;
     out.header.stamp = stamp;
     out.data = std::hypot(vx, vy);
-    speed_pub_.publish(out);
     nav_speed_pub_.publish(out);
   }
 
@@ -390,7 +435,6 @@ private:
     common_msgs::Float64Stamped heading_msg;
     heading_msg.header.stamp = stamp;
     heading_msg.data = nav_heading;
-    heading_pub_.publish(heading_msg);
     nav_heading_pub_.publish(heading_msg);
   }
 
@@ -422,6 +466,13 @@ private:
   SpeedCache speed_cache_;
   std::mutex attitude_mutex_;
   AttitudeCache attitude_cache_;
+
+  bool have_vx_{false};
+  bool have_vy_{false};
+  double last_vx_{0.0};
+  double last_vy_{0.0};
+  ros::Time last_vx_stamp_;
+  ros::Time last_vy_stamp_;
 };
 }  // namespace
 
