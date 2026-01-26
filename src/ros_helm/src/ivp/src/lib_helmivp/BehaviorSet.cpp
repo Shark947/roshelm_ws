@@ -109,6 +109,7 @@ void BehaviorSet::clearBehaviors()
 {
   m_bhv_entry.clear();
   m_bhv_names.clear();
+  m_total_behaviors_ever = 0;
 }
 
 
