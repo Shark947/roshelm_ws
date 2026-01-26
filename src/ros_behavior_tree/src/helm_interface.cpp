@@ -109,6 +109,9 @@ bool HelmInterface::initialize()
             std::string("/" + vehicle_name_ + "/RETURN"));
   nh_.param("mission_topic", mission_topic_,
             std::string("/" + vehicle_name_ + "/MISSION"));
+  nh_.param("default_mode_on_deploy", default_mode_on_deploy_, false);
+  nh_.param("default_mode_value", default_mode_value_,
+            std::string("LIFT"));
 
   std::string course_domain;
   std::string speed_domain;
@@ -565,6 +568,11 @@ void HelmInterface::onBoolCommand(const std::string &key,
   if (!msg)
     return;
   setFlagValue(key, static_cast<bool>(msg->data));
+  if (default_mode_on_deploy_ && key == "DEPLOY" && msg->data)
+  {
+    if (!default_mode_value_.empty())
+      setFlagValue("MODE", default_mode_value_);
+  }
 }
 
 void HelmInterface::onStringCommand(const std::string &key,

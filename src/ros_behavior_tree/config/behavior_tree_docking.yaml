@@ -8,6 +8,8 @@ nav_timeout: 0.0
 trigger_hold_time: 1.0
 latch_deploy: true
 nav_log_period: 5.0
+default_mode_on_deploy: true
+default_mode_value: LIFT
 
 domain_course: "0:359:360"
 domain_speed: "0:4:41"

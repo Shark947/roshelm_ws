@@ -111,6 +111,8 @@ private:
 
   ros::Time start_time_;
   double nav_timeout_{0.0};
+  bool default_mode_on_deploy_{false};
+  std::string default_mode_value_{"LIFT"};
 
   std::string desired_heading_topic_;
   std::string desired_speed_topic_;
