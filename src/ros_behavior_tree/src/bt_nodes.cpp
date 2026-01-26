@@ -286,6 +286,13 @@ void BehaviorTreeManager::tick()
   tree_.tickRoot();
 }
 
+std::map<std::string, double> BehaviorTreeManager::desiredValues() const
+{
+  if (!helm_interface_)
+    return {};
+  return helm_interface_->desiredValues();
+}
+
 BehaviorTreeManager::BehaviorTreeManager(const ros::NodeHandle &nh,
                                          const NavDataStore *store)
     : nh_(nh), store_(store)

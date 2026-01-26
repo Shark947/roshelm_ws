@@ -119,7 +119,7 @@ ros_behavior_tree/
 `nav_log_period` 控制导航数据日志输出频率（秒），设置为 `<=0` 可关闭日志。
 
 导航数据会写入 `ros_behavior_tree/log/<timestamp>_log/` 中的 `NAV_*` 文件，
-并在控制台输出对应调试信息。
+`DESIRED_*` 目标输出也会同步写入对应日志文件，并在控制台输出调试信息。
 
 ## 运行
 

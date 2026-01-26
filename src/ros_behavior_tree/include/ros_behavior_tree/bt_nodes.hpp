@@ -6,6 +6,7 @@
 #include <common_msgs/Float64Stamped.h>
 #include <ros/ros.h>
 
+#include <map>
 #include <memory>
 #include <string>
 
@@ -98,6 +99,7 @@ class BehaviorTreeManager
 public:
   BehaviorTreeManager(const ros::NodeHandle &nh, const NavDataStore *store);
   void tick();
+  std::map<std::string, double> desiredValues() const;
 
 private:
   ros::NodeHandle nh_;

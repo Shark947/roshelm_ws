@@ -167,8 +167,14 @@ bool HelmInterface::solveForBehavior(IvPBehavior &behavior)
   return true;
 }
 
+std::map<std::string, double> HelmInterface::desiredValues() const
+{
+  return desired_values_;
+}
+
 void HelmInterface::publishDesired(const HelmReport &report)
 {
+  std::map<std::string, double> desired_snapshot;
   auto publish_scalar = [&](const std::string &key, ros::Publisher &pub,
                             bool rotate_heading) {
     if (!report.hasDecision(key))
@@ -179,11 +185,26 @@ void HelmInterface::publishDesired(const HelmReport &report)
       msg.data = wrapHeading(90.0 - msg.data);
     if (pub)
       pub.publish(msg);
+    desired_snapshot[key] = msg.data;
   };
 
   publish_scalar("course", desired_heading_pub_, true);
   publish_scalar("speed", desired_speed_pub_, false);
   publish_scalar("depth", desired_depth_pub_, false);
+
+  desired_values_.clear();
+  if (!desired_snapshot.empty())
+  {
+    auto heading = desired_snapshot.find("course");
+    if (heading != desired_snapshot.end())
+      desired_values_["DESIRED_HEADING"] = heading->second;
+    auto speed = desired_snapshot.find("speed");
+    if (speed != desired_snapshot.end())
+      desired_values_["DESIRED_SPEED"] = speed->second;
+    auto depth = desired_snapshot.find("depth");
+    if (depth != desired_snapshot.end())
+      desired_values_["DESIRED_DEPTH"] = depth->second;
+  }
 }
 
 void HelmInterface::publishMissionComplete(const std::string &value)
