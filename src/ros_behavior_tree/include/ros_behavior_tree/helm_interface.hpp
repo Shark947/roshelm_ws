@@ -6,6 +6,10 @@
 #include <string>
 #include <vector>
 
+#include <std_msgs/Bool.h>
+#include <std_msgs/Float64.h>
+#include <std_msgs/String.h>
+
 #include "ros_behavior_tree/bt_nodes.hpp"
 
 #include "BehaviorSet.h"

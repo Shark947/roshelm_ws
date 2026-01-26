@@ -16,7 +16,7 @@ FlagBoolCondition::FlagBoolCondition(const std::string &name,
 BT::PortsList FlagBoolCondition::providedPorts()
 {
   return {BT::InputPort<std::string>("var"),
-          BT::InputPort<bool>("value", true)};
+          BT::InputPort<bool>("value", true, "expected bool value")};
 }
 
 BT::NodeStatus FlagBoolCondition::tick()
