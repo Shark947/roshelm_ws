@@ -17,6 +17,14 @@
     <param name="debug" value="false" />
   </node>
 
+  <!-- 生成 current_speed/current_heading/current_depth + NAV_* -->
+  <node pkg="ros_behavior_tree"
+        type="nav_publisher_node"
+        name="nav_publisher_node"
+        output="screen">
+    <param name="vehicle_name" value="auh" />
+  </node>
+
   <!-- 启动控制器管理器 -->
   <node pkg="controller_manager"
         type="controller_manager_node"
