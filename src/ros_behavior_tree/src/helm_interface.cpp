@@ -35,7 +35,9 @@ double wrapHeading(double heading)
 bool parseBoolString(const std::string &value, bool &out)
 {
   std::string lowered = value;
-  std::transform(lowered.begin(), lowered.end(), lowered.begin(), ::tolower);
+  std::transform(lowered.begin(), lowered.end(), lowered.begin(),
+                 [](unsigned char character)
+                 { return static_cast<char>(std::tolower(character)); });
   if (lowered == "true" || lowered == "1")
   {
     out = true;
