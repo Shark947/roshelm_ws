@@ -34,8 +34,9 @@ BT::NodeStatus WaypointAction::onRunning()
 
 void WaypointAction::onHalted()
 {
-  cached_params_.clear();
-  last_runnable_state_.clear();
+  // Preserve cached params/state across halts so the behavior does not
+  // reinitialize each tick in reactive trees. This avoids resetting waypoint
+  // progress and prevents repeated "state changed" log spam.
 }
 
 bool WaypointAction::ensureBehavior()
