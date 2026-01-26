@@ -5,6 +5,8 @@ groot_enable: true
 groot_publisher_port: 1666
 groot_server_port: 1667
 nav_timeout: 0.0
+trigger_hold_time: 1.0
+nav_log_period: 5.0
 
 domain_course: "0:359:360"
 domain_speed: "0:4:41"

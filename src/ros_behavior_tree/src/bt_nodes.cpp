@@ -86,6 +86,8 @@ void NavDataStore::updateDeploy(bool value, const ros::Time &stamp,
   NavData &data = nav_style ? nav_data_ : ros_data_;
   data.deploy.value = value;
   data.deploy.stamp = stamp;
+  if (value)
+    data.deploy.last_true_stamp = stamp;
   data.deploy.has_value = true;
 }
 
@@ -95,6 +97,8 @@ void NavDataStore::updateReturn(bool value, const ros::Time &stamp,
   NavData &data = nav_style ? nav_data_ : ros_data_;
   data.return_home.value = value;
   data.return_home.stamp = stamp;
+  if (value)
+    data.return_home.last_true_stamp = stamp;
   data.return_home.has_value = true;
 }
 
@@ -104,7 +108,14 @@ void NavDataStore::updateSpeedTrigger(bool value, const ros::Time &stamp,
   NavData &data = nav_style ? nav_data_ : ros_data_;
   data.speed_trigger.value = value;
   data.speed_trigger.stamp = stamp;
+  if (value)
+    data.speed_trigger.last_true_stamp = stamp;
   data.speed_trigger.has_value = true;
+}
+
+void NavDataStore::setTriggerHold(const ros::Duration &hold)
+{
+  trigger_hold_ = hold;
 }
 
 bool NavDataStore::sampleFresh(const NavSample &sample,
@@ -150,16 +161,45 @@ bool NavDataStore::getPreferredSample(const BoolSample &nav_sample,
                                       const ros::Duration &timeout,
                                       bool &out)
 {
-  if (sampleFresh(nav_sample, timeout))
+  if (sampleTriggered(nav_sample, timeout, out))
+    return true;
+  if (sampleTriggered(ros_sample, timeout, out))
+    return true;
+  return false;
+}
+
+bool NavDataStore::sampleTriggered(const BoolSample &sample,
+                                   const ros::Duration &timeout,
+                                   bool &out) const
+{
+  if (!sample.has_value)
+    return false;
+
+  if (sample.value && sampleFresh(sample, timeout))
   {
-    out = nav_sample.value;
+    out = true;
     return true;
   }
-  if (sampleFresh(ros_sample, timeout))
+
+  if (!trigger_hold_.isZero() && !sample.last_true_stamp.isZero())
   {
-    out = ros_sample.value;
+    const ros::Time now = ros::Time::now();
+    ros::Duration window = trigger_hold_;
+    if (!timeout.isZero() && timeout < window)
+      window = timeout;
+    if ((now - sample.last_true_stamp) <= window)
+    {
+      out = true;
+      return true;
+    }
+  }
+
+  if (sampleFresh(sample, timeout))
+  {
+    out = sample.value;
     return true;
   }
+
   return false;
 }
 
