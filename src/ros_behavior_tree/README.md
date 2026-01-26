@@ -67,9 +67,11 @@ ros_behavior_tree/
 部署/返航与恒速触发话题在两套数据中共用：`/<vehicle>/DEPLOY`、`/<vehicle>/RETURN`、
 `/<vehicle>/SPD`。
 
-当只接入 `current_vx/current_vy/current_yaw/current_z` 时，需要额外生成
+当只接入 `current_vx/current_vy/current_z/current_yaw` 等基础量时，需要额外生成
 `current_speed/current_heading/current_depth`。默认 launch 会启动一个轻量级
-`nav_publisher_node` 来完成这一转换。
+`nav_publisher_node` 来完成这一转换，并同步发布派生的
+`NAV_SPEED/NAV_HEADING/NAV_DEPTH/NAV_YAW/NAV_PITCH/NAV_ROLL/NAV_X/NAV_Y`，
+便于下游组件直接订阅 NAV 风格话题。
 
 默认值与 `ros_helm` 的 ROS bridge 配置中话题命名保持一致。若重映射话题，请同步调整参数。
 
@@ -116,5 +118,5 @@ roslaunch ros_behavior_tree behavior_tree.launch
 
 该 launch 同时启动 `nav_publisher_node`，用于从
 `/<vehicle>/current_vx`、`/<vehicle>/current_vy`、`/<vehicle>/current_yaw`、
-`/<vehicle>/current_z` 生成 `current_speed/current_heading/current_depth`。
-若系统已提供这些话题，可在自定义 launch 中移除该节点。
+`/<vehicle>/current_z` 等话题生成 `current_speed/current_heading/current_depth`，
+并同步发布 `NAV_*` 话题。若系统已提供这些话题，可在自定义 launch 中移除该节点。

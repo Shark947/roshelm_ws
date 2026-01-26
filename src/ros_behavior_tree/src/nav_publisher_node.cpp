@@ -41,8 +41,16 @@ public:
         base + "vy", 10, &NavPublisher::vyCallback, this);
     yaw_sub_ = nh_.subscribe<common_msgs::Float64Stamped>(
         base + "yaw", 10, &NavPublisher::yawCallback, this);
+    pitch_sub_ = nh_.subscribe<common_msgs::Float64Stamped>(
+        base + "pitch", 10, &NavPublisher::pitchCallback, this);
+    roll_sub_ = nh_.subscribe<common_msgs::Float64Stamped>(
+        base + "roll", 10, &NavPublisher::rollCallback, this);
     z_sub_ = nh_.subscribe<common_msgs::Float64Stamped>(
         base + "z", 10, &NavPublisher::zCallback, this);
+    x_sub_ = nh_.subscribe<common_msgs::Float64Stamped>(
+        base + "x", 10, &NavPublisher::xCallback, this);
+    y_sub_ = nh_.subscribe<common_msgs::Float64Stamped>(
+        base + "y", 10, &NavPublisher::yCallback, this);
 
     speed_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
         base + "speed", 10);
@@ -50,6 +58,22 @@ public:
         base + "heading", 10);
     depth_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
         base + "depth", 10);
+    nav_speed_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_SPEED", 10);
+    nav_heading_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_HEADING", 10);
+    nav_depth_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_DEPTH", 10);
+    nav_yaw_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_YAW", 10);
+    nav_pitch_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_PITCH", 10);
+    nav_roll_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_ROLL", 10);
+    nav_x_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_X", 10);
+    nav_y_pub_ = nh_.advertise<common_msgs::Float64Stamped>(
+        "/" + vehicle_name_ + "/NAV_Y", 10);
 
     ROS_INFO_STREAM("[ros_behavior_tree] nav publisher started for vehicle: "
                     << vehicle_name_);
@@ -81,6 +105,22 @@ private:
     out.header.stamp = msg->header.stamp;
     out.data = heading_deg;
     heading_pub_.publish(out);
+    nav_heading_pub_.publish(out);
+
+    common_msgs::Float64Stamped nav_yaw = *msg;
+    nav_yaw_pub_.publish(nav_yaw);
+  }
+
+  void pitchCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
+  {
+    common_msgs::Float64Stamped nav_pitch = *msg;
+    nav_pitch_pub_.publish(nav_pitch);
+  }
+
+  void rollCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
+  {
+    common_msgs::Float64Stamped nav_roll = *msg;
+    nav_roll_pub_.publish(nav_roll);
   }
 
   void zCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
@@ -89,6 +129,17 @@ private:
     out.header.stamp = msg->header.stamp;
     out.data = -msg->data;
     depth_pub_.publish(out);
+    nav_depth_pub_.publish(out);
+  }
+
+  void xCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
+  {
+    nav_x_pub_.publish(*msg);
+  }
+
+  void yCallback(const common_msgs::Float64Stamped::ConstPtr &msg)
+  {
+    nav_y_pub_.publish(*msg);
   }
 
   void publishSpeed(const ros::Time &stamp)
@@ -105,6 +156,7 @@ private:
     }
     out.data = std::hypot(last_vx_, last_vy_);
     speed_pub_.publish(out);
+    nav_speed_pub_.publish(out);
   }
 
   ros::NodeHandle nh_;
@@ -113,11 +165,23 @@ private:
   ros::Subscriber vx_sub_;
   ros::Subscriber vy_sub_;
   ros::Subscriber yaw_sub_;
+  ros::Subscriber pitch_sub_;
+  ros::Subscriber roll_sub_;
   ros::Subscriber z_sub_;
+  ros::Subscriber x_sub_;
+  ros::Subscriber y_sub_;
 
   ros::Publisher speed_pub_;
   ros::Publisher heading_pub_;
   ros::Publisher depth_pub_;
+  ros::Publisher nav_speed_pub_;
+  ros::Publisher nav_heading_pub_;
+  ros::Publisher nav_depth_pub_;
+  ros::Publisher nav_yaw_pub_;
+  ros::Publisher nav_pitch_pub_;
+  ros::Publisher nav_roll_pub_;
+  ros::Publisher nav_x_pub_;
+  ros::Publisher nav_y_pub_;
 
   double last_vx_{0.0};
   double last_vy_{0.0};
