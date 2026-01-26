@@ -83,14 +83,14 @@ ros_behavior_tree/
 节点会加载 BehaviorTree.CPP 的 XML 文件，当前提供两套示例：
 
 - `config/alpha.xml` 通过 `DeployTriggered`、`ReturnTriggered`、
-  `SpeedTriggered` 组合 `WaypointAction`、`PublishReturnAction` 与
-  `ConstantSpeedAction`，复刻 `alpha.bhv` 的行为树逻辑。航点巡航/返航行为
-  保持 `perpetual=true`，并在 `WaypointAction` 内部模拟 `endflag`：当航点
-  巡航完成一次遍历时会发布 `RETURN=true`，返航完成时发布
-  `RETURN=false`、`DEPLOY=false` 与 `MISSION=complete`。`endflag` 也支持
-  发布任意自定义变量，默认映射为 `/<vehicle>/<VAR>` 话题。返航分支具有最
-  高优先级；在非返航状态下，航点巡航与恒速控制会并行运行，以便在发布
-  `SPD` 触发时保持恒速行为不中断巡航。
+  `SpeedTriggered` 组合 `WaypointAction` 与 `ConstantSpeedAction`，复刻
+  `alpha.bhv` 的行为树逻辑。航点巡航/返航行为保持 `perpetual=true`，
+  并在 `WaypointAction` 内部模拟 `endflag`：当航点巡航完成一次遍历时会
+  发布 `RETURN=true`，返航完成时发布 `RETURN=false`、`DEPLOY=false`
+  与 `MISSION=complete`。`endflag` 也支持发布任意自定义变量，默认映射为
+  `/<vehicle>/<VAR>` 话题。返航分支具有最高优先级；在非返航状态下，
+  航点巡航与恒速控制会并行运行，以便在发布 `SPD` 触发时保持恒速行为
+  不中断巡航。
 - `config/test.xml` 仍保留用于验证 BT 运行时与 Groot 连接的最小树。
 
 `alpha.xml` 会通过 HelmEngine 求解并发布 `DESIRED_*`（映射为

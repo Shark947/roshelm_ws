@@ -35,7 +35,6 @@
               <ReturnTriggered />
             </Inverter>
             <WaypointAction params="{survey_params}" />
-            <PublishReturnAction return_value="true" />
           </Sequence>
 
           <Sequence name="const_speed_sequence">

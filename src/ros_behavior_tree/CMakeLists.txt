@@ -34,7 +34,6 @@ add_executable(behavior_tree_node
   src/nodes/actions/constant_speed_action.cpp
   src/nodes/actions/dummy_action.cpp
   src/nodes/actions/mission_complete_action.cpp
-  src/nodes/actions/publish_return_action.cpp
   src/nodes/actions/waypoint_action.cpp
   src/nodes/conditions/common/deploy_triggered.cpp
   src/nodes/conditions/common/return_triggered.cpp
