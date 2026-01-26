@@ -82,6 +82,8 @@ ros_behavior_tree/
 - `config/alpha.xml` 通过 `DeployTriggered`、`ReturnTriggered`、
   `SpeedTriggered` 组合 `WaypointAction` 与 `ConstantSpeedAction`，复刻
   `alpha.bhv` 的行为树逻辑，并在返航结束时发布 `MISSION=complete`。
+  返航分支具有最高优先级；在非返航状态下，航点巡航与恒速控制会并行运行，
+  以便在发布 `SPD` 触发时保持恒速行为不中断巡航。
 - `config/test.xml` 仍保留用于验证 BT 运行时与 Groot 连接的最小树。
 
 `alpha.xml` 会通过 HelmEngine 求解并发布 `DESIRED_*`（映射为
