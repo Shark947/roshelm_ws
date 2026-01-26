@@ -573,7 +573,7 @@ all: common_msgs/CMakeFiles/common_msgs_generate_messages.dir/all
 
 # Build rule for subdir invocation for target.
 common_msgs/CMakeFiles/common_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 common_msgs/CMakeFiles/common_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : common_msgs/CMakeFiles/common_msgs_generate_messages.dir/rule
@@ -734,7 +734,7 @@ common_msgs/CMakeFiles/common_msgs_gencpp.dir/all: common_msgs/CMakeFiles/common
 
 # Build rule for subdir invocation for target.
 common_msgs/CMakeFiles/common_msgs_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 common_msgs/CMakeFiles/common_msgs_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : common_msgs/CMakeFiles/common_msgs_gencpp.dir/rule
@@ -794,12 +794,12 @@ common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all: common_msgs/CM
 common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all: common_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/build.make common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) -f common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/build.make common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target common_msgs_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=12 "Built target common_msgs_generate_messages_cpp"
 .PHONY : common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : common_msgs/CMakeFiles/common_msgs_generate_messages_cpp.dir/rule
@@ -1186,7 +1186,7 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/all: docking_
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_gennodejs.dir/rule
@@ -1250,7 +1250,7 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_gencpp.dir/all: docking_opt
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_gencpp.dir/rule
@@ -1311,12 +1311,12 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/al
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all: docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/all
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/depend
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_optical_msgs_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=17 "Built target docking_optical_msgs_generate_messages_py"
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_py.dir/rule
@@ -1357,7 +1357,7 @@ all: docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages.dir/rule
@@ -1484,12 +1484,12 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.di
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all: docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/all
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=17 "Built target docking_optical_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_optical_msgs_generate_messages_nodejs"
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_nodejs.dir/rule
@@ -1518,12 +1518,12 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/a
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/all: docking_optical_msgs/CMakeFiles/_docking_optical_msgs_generate_messages_check_deps_OpticalFeedback.dir/all
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) -f docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/build.make docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_optical_msgs_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=16 "Built target docking_optical_msgs_generate_messages_cpp"
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_generate_messages_cpp.dir/rule
@@ -1555,7 +1555,7 @@ docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/all: docking_opti
 
 # Build rule for subdir invocation for target.
 docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_optical_msgs/CMakeFiles/docking_optical_msgs_genpy.dir/rule
@@ -6978,7 +6978,7 @@ controller_manager/preinstall:
 controller_manager/CMakeFiles/controller_manager_node.dir/all: controller_manager/CMakeFiles/controller_manager.dir/all
 	$(MAKE) -f controller_manager/CMakeFiles/controller_manager_node.dir/build.make controller_manager/CMakeFiles/controller_manager_node.dir/depend
 	$(MAKE) -f controller_manager/CMakeFiles/controller_manager_node.dir/build.make controller_manager/CMakeFiles/controller_manager_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=14 "Built target controller_manager_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target controller_manager_node"
 .PHONY : controller_manager/CMakeFiles/controller_manager_node.dir/all
 
 # Include target in all.
@@ -6988,7 +6988,7 @@ all: controller_manager/CMakeFiles/controller_manager_node.dir/all
 
 # Build rule for subdir invocation for target.
 controller_manager/CMakeFiles/controller_manager_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 controller_manager/CMakeFiles/controller_manager_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : controller_manager/CMakeFiles/controller_manager_node.dir/rule
@@ -7556,7 +7556,7 @@ clean: ros_moos_bridge/CMakeFiles/actionlib_msgs_generate_messages_py.dir/clean
 ros_moos_bridge/CMakeFiles/bridge_node.dir/all:
 	$(MAKE) -f ros_moos_bridge/CMakeFiles/bridge_node.dir/build.make ros_moos_bridge/CMakeFiles/bridge_node.dir/depend
 	$(MAKE) -f ros_moos_bridge/CMakeFiles/bridge_node.dir/build.make ros_moos_bridge/CMakeFiles/bridge_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=12 "Built target bridge_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target bridge_node"
 .PHONY : ros_moos_bridge/CMakeFiles/bridge_node.dir/all
 
 # Include target in all.
@@ -7566,7 +7566,7 @@ all: ros_moos_bridge/CMakeFiles/bridge_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_moos_bridge/CMakeFiles/bridge_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 	$(MAKE) -f CMakeFiles/Makefile2 ros_moos_bridge/CMakeFiles/bridge_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_moos_bridge/CMakeFiles/bridge_node.dir/rule
@@ -8111,7 +8111,7 @@ all: ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors/CMakeFiles/behaviors.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors/CMakeFiles/behaviors.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors/CMakeFiles/behaviors.dir/rule
@@ -8221,7 +8221,7 @@ all: ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 27
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 28
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors-marine/CMakeFiles/behaviors-marine.dir/rule
@@ -8395,7 +8395,7 @@ all: ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 30
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_behaviors-colregs/CMakeFiles/behaviors-colregs.dir/rule
@@ -8513,7 +8513,7 @@ all: ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_helmivp/CMakeFiles/helmivp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 22
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 23
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_helmivp/CMakeFiles/helmivp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_helmivp/CMakeFiles/helmivp.dir/rule
@@ -8559,7 +8559,7 @@ ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all: ivp/lib_ivpsolve/CMakeFiles/ivpsol
 ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all: ivp/lib_ivpcore/CMakeFiles/ivpcore.dir/all
 	$(MAKE) -f ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/build.make ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/depend
 	$(MAKE) -f ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/build.make ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=33,34,35,36 "Built target ivpbuild"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=32,33,34,35,36 "Built target ivpbuild"
 .PHONY : ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
 
 # Include target in all.
@@ -8569,7 +8569,7 @@ all: ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_ivpbuild/CMakeFiles/ivpbuild.dir/rule
@@ -9403,7 +9403,7 @@ all: ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 
 # Build rule for subdir invocation for target.
 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 30
 	$(MAKE) -f CMakeFiles/Makefile2 ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ivp/lib_dep_behaviors/CMakeFiles/dep_behaviors.dir/rule
@@ -9468,7 +9468,7 @@ all: helm_test/CMakeFiles/test_ivp.dir/all
 
 # Build rule for subdir invocation for target.
 helm_test/CMakeFiles/test_ivp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 29
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 30
 	$(MAKE) -f CMakeFiles/Makefile2 helm_test/CMakeFiles/test_ivp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_test/CMakeFiles/test_ivp.dir/rule
@@ -9539,7 +9539,7 @@ all: helm_app/CMakeFiles/pHelmIvP.dir/all
 
 # Build rule for subdir invocation for target.
 helm_app/CMakeFiles/pHelmIvP.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 33
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
 	$(MAKE) -f CMakeFiles/Makefile2 helm_app/CMakeFiles/pHelmIvP.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_app/CMakeFiles/pHelmIvP.dir/rule
@@ -9589,7 +9589,7 @@ all: helm_app/CMakeFiles/helm_core.dir/all
 
 # Build rule for subdir invocation for target.
 helm_app/CMakeFiles/helm_core.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 33
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
 	$(MAKE) -f CMakeFiles/Makefile2 helm_app/CMakeFiles/helm_core.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : helm_app/CMakeFiles/helm_core.dir/rule
@@ -9661,7 +9661,7 @@ all: ros_node/CMakeFiles/ros_helm_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_node/CMakeFiles/ros_helm_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 35
 	$(MAKE) -f CMakeFiles/Makefile2 ros_node/CMakeFiles/ros_helm_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_node/CMakeFiles/ros_helm_node.dir/rule
@@ -9712,7 +9712,7 @@ all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
 
 # Build rule for subdir invocation for target.
 ros_node/CMakeFiles/ros_helm_bridge.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 35
 	$(MAKE) -f CMakeFiles/Makefile2 ros_node/CMakeFiles/ros_helm_bridge.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_node/CMakeFiles/ros_helm_bridge.dir/rule
@@ -9827,7 +9827,7 @@ docking_nav/CMakeFiles/docking_nav_main_node.dir/all: helm_app/CMakeFiles/helm_c
 docking_nav/CMakeFiles/docking_nav_main_node.dir/all: ros_node/CMakeFiles/ros_helm_bridge.dir/all
 	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_main_node.dir/build.make docking_nav/CMakeFiles/docking_nav_main_node.dir/depend
 	$(MAKE) -f docking_nav/CMakeFiles/docking_nav_main_node.dir/build.make docking_nav/CMakeFiles/docking_nav_main_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=16 "Built target docking_nav_main_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target docking_nav_main_node"
 .PHONY : docking_nav/CMakeFiles/docking_nav_main_node.dir/all
 
 # Include target in all.
@@ -9837,7 +9837,7 @@ all: docking_nav/CMakeFiles/docking_nav_main_node.dir/all
 
 # Build rule for subdir invocation for target.
 docking_nav/CMakeFiles/docking_nav_main_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 36
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 38
 	$(MAKE) -f CMakeFiles/Makefile2 docking_nav/CMakeFiles/docking_nav_main_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : docking_nav/CMakeFiles/docking_nav_main_node.dir/rule
@@ -9954,7 +9954,7 @@ all: ros_behavior_tree/CMakeFiles/nav_publisher_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_behavior_tree/CMakeFiles/nav_publisher_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 35
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 37
 	$(MAKE) -f CMakeFiles/Makefile2 ros_behavior_tree/CMakeFiles/nav_publisher_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_behavior_tree/CMakeFiles/nav_publisher_node.dir/rule
@@ -10051,7 +10051,7 @@ all: ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all
 
 # Build rule for subdir invocation for target.
 ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 36
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 38
 	$(MAKE) -f CMakeFiles/Makefile2 ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : ros_behavior_tree/CMakeFiles/behavior_tree_node.dir/rule
@@ -11836,7 +11836,7 @@ all: variable_extractor/CMakeFiles/variable_extractor.dir/all
 
 # Build rule for subdir invocation for target.
 variable_extractor/CMakeFiles/variable_extractor.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 variable_extractor/CMakeFiles/variable_extractor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : variable_extractor/CMakeFiles/variable_extractor.dir/rule
@@ -11913,7 +11913,7 @@ all: variable_extractor/CMakeFiles/variable_extractor_node.dir/all
 
 # Build rule for subdir invocation for target.
 variable_extractor/CMakeFiles/variable_extractor_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 variable_extractor/CMakeFiles/variable_extractor_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : variable_extractor/CMakeFiles/variable_extractor_node.dir/rule
@@ -11968,7 +11968,7 @@ all: auh_controller_pid/CMakeFiles/PIDcontroller.dir/all
 
 # Build rule for subdir invocation for target.
 auh_controller_pid/CMakeFiles/PIDcontroller.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 auh_controller_pid/CMakeFiles/PIDcontroller.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : auh_controller_pid/CMakeFiles/PIDcontroller.dir/rule
@@ -12355,7 +12355,7 @@ uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_batter
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_plugins/CMakeFiles/uuv_dynamics.dir/all
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/build.make uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target custom_battery_consumer_ros_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=14 "Built target custom_battery_consumer_ros_plugin"
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/all
 
 # Include target in all.
@@ -12365,7 +12365,7 @@ all: uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_b
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_gazebo_plugins/uuv_gazebo_ros_plugins/CMakeFiles/custom_battery_consumer_ros_plugin.dir/rule
@@ -14490,7 +14490,7 @@ uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_r
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/nodelet_generate_messages_lisp.dir/all
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/depend
 	$(MAKE) -f uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/build.make uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num=32 "Built target image_sonar_ros_plugin"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xing/roshelm_ws/build/CMakeFiles --progress-num= "Built target image_sonar_ros_plugin"
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/all
 
 # Include target in all.
@@ -14500,7 +14500,7 @@ all: uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_so
 
 # Build rule for subdir invocation for target.
 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xing/roshelm_ws/build/CMakeFiles 0
 .PHONY : uuv_simulator/uuv_sensor_plugins/uuv_sensor_ros_plugins/CMakeFiles/image_sonar_ros_plugin.dir/rule

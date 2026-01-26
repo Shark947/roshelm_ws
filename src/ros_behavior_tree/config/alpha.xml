@@ -7,7 +7,7 @@
                      value="name=waypt_return;pwt=100;perpetual=true;updates=RETURN_UPDATE;endflag=RETURN=false;endflag=DEPLOY=false;endflag=MISSION=complete;speed=0.5;capture_radius=2.0;slip_radius=8.0;points=0,0"/>
 
       <SetBlackboard output_key="survey_params"
-                     value="name=waypt_survey;pwt=100;perpetual=true;updates=WPT_UPDATE;endflag=RETURN=true;speed_alt=1;use_alt_speed=true;lead=8;lead_damper=1;lead_to_start=true;speed=0.5;capture_line=true;capture_radius=5.0;slip_radius=15.0;efficiency_measure=all;polygon=15,-10:15,-40:38,-40:45,-25:38,-10;order=normal;repeat=0"/>
+                     value="name=waypt_survey;pwt=100;perpetual=true;updates=WPT_UPDATE;endflag=RETURN=true;speed_alt=1;use_alt_speed=true;lead=8;lead_damper=1;lead_to_start=false;speed=0.5;capture_line=true;capture_radius=5.0;slip_radius=15.0;efficiency_measure=all;polygon=15,-10:15,-40:38,-40:45,-25:38,-10;order=normal;repeat=0"/>
 
       <SetBlackboard output_key="const_speed_params"
                      value="name=const_speed;pwt=200;perpetual=true;updates=SPEED_UPDATE;speed=0.5;duration=10;duration_reset=CONST_SPD_RESET=true"/>
