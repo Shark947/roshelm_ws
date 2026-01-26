@@ -108,8 +108,10 @@ ros_behavior_tree/
   在 LIFT/SURVEY/RETURNING/CLOSETODOCKING/DOCKING/GOTODETECT/DETECTING 等阶段
   组合 `GoToDepthAction`、`ConstantDepthAction`、`ConstantHeadingAction`、
   `StationKeepAction`、`WaypointAction` 与 `ConstantSpeedAction`，复刻
-  `docking.bhv` 的入坞流程。`DOCKDEPTH_UPDATE` 与 `DOCKHDG_UPDATES` 等更新
-  变量由 ROS 话题注入至 Helm 信息缓冲区，并保持与 `ros_helm` 的指令语义一致。
+  `docking.bhv` 的入坞流程。`GoToDepthAction` 会在行为调用 `setComplete`
+  （即便 `perpetual=true`）时发布 `endflag`，以匹配 MOOS/IvP 在完成事件时
+  触发结束标志的语义。`DOCKDEPTH_UPDATE` 与 `DOCKHDG_UPDATES` 等更新变量
+  由 ROS 话题注入至 Helm 信息缓冲区，并保持与 `ros_helm` 的指令语义一致。
 
 可以用 `test.xml` 验证 ROS 节点、BT 运行时与 Groot ZMQ 连接是否正确。
 
