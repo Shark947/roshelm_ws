@@ -78,6 +78,7 @@ bool WaypointAction::configureBehavior(const std::string &params)
     }
   }
   behavior_->onSetParamComplete();
+  last_total_hits_ = behavior_->totalHits();
   return true;
 }
 
@@ -100,6 +101,8 @@ BT::NodeStatus WaypointAction::runBehavior()
   if (!helm_interface_->solveForBehavior(*behavior_))
     return BT::NodeStatus::FAILURE;
 
+  publishEndFlagsIfNeeded();
+
   const std::string runnable_state = behavior_->isRunnable();
   if (runnable_state != last_runnable_state_)
   {
@@ -113,6 +116,43 @@ BT::NodeStatus WaypointAction::runBehavior()
   }
 
   return BT::NodeStatus::RUNNING;
+}
+
+void WaypointAction::publishEndFlagsIfNeeded()
+{
+  if (!behavior_ || !helm_interface_)
+    return;
+
+  const unsigned int total_hits = behavior_->totalHits();
+  if (total_hits < last_total_hits_)
+  {
+    last_total_hits_ = total_hits;
+    return;
+  }
+  if (total_hits == last_total_hits_)
+    return;
+
+  const unsigned int waypoint_count = behavior_->waypointCount();
+  if (waypoint_count == 0)
+  {
+    last_total_hits_ = total_hits;
+    return;
+  }
+
+  const unsigned int last_cycles = last_total_hits_ / waypoint_count;
+  const unsigned int current_cycles = total_hits / waypoint_count;
+  if (current_cycles <= last_cycles)
+  {
+    last_total_hits_ = total_hits;
+    return;
+  }
+
+  const auto &end_flags = behavior_->endFlags();
+  for (const auto &flag : end_flags)
+  {
+    helm_interface_->publishFlag(flag);
+  }
+  last_total_hits_ = total_hits;
 }
 
 }  // namespace ros_behavior_tree
