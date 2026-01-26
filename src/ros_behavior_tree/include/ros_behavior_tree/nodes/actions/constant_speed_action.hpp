@@ -7,7 +7,7 @@
 
 #include "ros_behavior_tree/helm_interface.hpp"
 
-class BHV_ConstantSpeed;
+#include "BHV_ConstantSpeed.h"
 
 namespace ros_behavior_tree
 {
@@ -30,7 +30,20 @@ private:
   BT::NodeStatus runBehavior();
 
   HelmInterface *helm_interface_{nullptr};
-  std::unique_ptr<BHV_ConstantSpeed> behavior_;
+  class ConstantSpeedBehavior : public BHV_ConstantSpeed
+  {
+  public:
+    explicit ConstantSpeedBehavior(IvPDomain domain) : BHV_ConstantSpeed(domain)
+    {
+    }
+
+    bool setBehaviorNamePublic(const std::string &name)
+    {
+      return setBehaviorName(name);
+    }
+  };
+
+  std::unique_ptr<ConstantSpeedBehavior> behavior_;
   std::string cached_params_;
 };
 

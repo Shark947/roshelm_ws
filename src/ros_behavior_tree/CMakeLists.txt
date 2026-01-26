@@ -49,7 +49,17 @@ target_link_libraries(behavior_tree_node
   zmq
 )
 
-install(TARGETS behavior_tree_node
+add_executable(nav_publisher_node
+  src/nav_publisher_node.cpp
+)
+
+add_dependencies(nav_publisher_node ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(nav_publisher_node
+  ${catkin_LIBRARIES}
+)
+
+install(TARGETS behavior_tree_node nav_publisher_node
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

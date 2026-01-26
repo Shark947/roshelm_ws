@@ -1,7 +1,11 @@
 <launch>
-  <arg name="config" default="$(find ros_behavior_tree)/config/behavior_tree.yaml" />
+  <arg name="config" default="$(find ros_behavior_tree)/config/behavior_tree_alpha.yaml" />
 
   <node pkg="ros_behavior_tree" type="behavior_tree_node" name="ros_behavior_tree" output="screen">
+    <rosparam command="load" file="$(arg config)" />
+  </node>
+
+  <node pkg="ros_behavior_tree" type="nav_publisher_node" name="ros_behavior_tree_nav" output="screen">
     <rosparam command="load" file="$(arg config)" />
   </node>
 </launch>
