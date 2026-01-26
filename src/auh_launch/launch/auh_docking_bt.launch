@@ -85,7 +85,5 @@
         type="docking_nav_main_node"
         name="docking_nav"
         output="screen">
-    <!-- 使用 /docking/mode 作为外部模式输入，避免 BT 回传旧 mode_state 导致模式回切 -->
-    <param name="mode_state_topic" value="/docking/mode" />
   </node>
 </launch>

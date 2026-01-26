@@ -34,11 +34,9 @@ BT::NodeStatus StationKeepAction::onRunning()
 
 void StationKeepAction::onHalted()
 {
-  cached_params_.clear();
   if (behavior_active_ && helm_interface_ && behavior_)
     helm_interface_->deactivateBehavior(*behavior_);
   behavior_active_ = false;
-  end_flags_published_ = false;
 }
 
 bool StationKeepAction::ensureBehavior()

@@ -31,7 +31,7 @@
                      value="name=bhv_depth;pwt=100;duration=no-time-limit;updates=DOCKDEPTH_UPDATE;depth=0;peakwidth=1;basewidth=1.5;summitdelta=20"/>
 
       <SetBlackboard output_key="dock_heading_params"
-                     value="name=const_hdg;pwt=1;perpetual=true;duration=no-time-limit;updates=DOCKHDG_UPDATES;basewidth=10;duration=0;heading=90;heading_mismatch_var=HDG_DIFF;peakwidth=10;summitdelta=25"/>
+                     value="name=const_hdg;pwt=1;perpetual=true;duration=no-time-limit;updates=DOCKHDG_UPDATES;basewidth=10;heading=90;heading_mismatch_var=HDG_DIFF;peakwidth=10;summitdelta=25"/>
 
       <SetBlackboard output_key="gotodepth_detect_params"
                      value="name=gotodepth_detect;pwt=100;perpetual=true;updates=GOTO_DEPTH_DETECT_UPDATES;runflag=CONSTHEIGHT=true;runflag=DET_LIGPOWER=true;runflag=DET_CAMSONPOWER=true;endflag=GOTO_DEPTH=false;endflag=MODE=DETECTING;capture_delta=0.5;depth=74,30;repeat=0"/>
@@ -95,16 +95,17 @@
           <ModeCondition value="DOCKING"/>
           <Parallel name="dock_parallel" success_threshold="2" failure_threshold="2">
             <ConstantDepthAction params="{dock_depth_params}"/>
-            <Fallback name="dock_station_or_heading">
-              <Sequence name="station_keep_sequence">
+            <ReactiveFallback name="dock_station_or_heading">
+              <ReactiveSequence name="station_keep_sequence">
                 <StationingCondition value="true"/>
                 <StationKeepAction params="{station_keep_params}"/>
-              </Sequence>
-              <Sequence name="heading_sequence">
+              </ReactiveSequence>
+
+              <ReactiveSequence name="heading_sequence">
                 <StationingCondition value="false"/>
                 <ConstantHeadingAction params="{dock_heading_params}"/>
-              </Sequence>
-            </Fallback>
+              </ReactiveSequence>
+            </ReactiveFallback>
           </Parallel>
         </ReactiveSequence>
 

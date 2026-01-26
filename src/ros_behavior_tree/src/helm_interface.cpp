@@ -624,7 +624,30 @@ ros::Publisher &HelmInterface::publisherForFlag(
   if (it != cache.end())
     return it->second;
 
-  const std::string topic = topicForFlag(var);
+  // Prefer configured command topics (from YAML) when publishing flags.
+  std::string topic;
+  if (type == "bool")
+  {
+    auto jt = bool_command_topics_.find(var);
+    if (jt != bool_command_topics_.end() && !jt->second.empty())
+      topic = jt->second;
+  }
+  else if (type == "string")
+  {
+    auto jt = string_command_topics_.find(var);
+    if (jt != string_command_topics_.end() && !jt->second.empty())
+      topic = jt->second;
+  }
+  else if (type == "double")
+  {
+    auto jt = double_command_topics_.find(var);
+    if (jt != double_command_topics_.end() && !jt->second.empty())
+      topic = jt->second;
+  }
+
+  if (topic.empty())
+    topic = topicForFlag(var);
+
   if (type == "bool")
   {
     auto result = cache.emplace(var, nh_.advertise<std_msgs::Bool>(topic, 10, true));
@@ -639,6 +662,7 @@ ros::Publisher &HelmInterface::publisherForFlag(
   auto result = cache.emplace(var, nh_.advertise<std_msgs::String>(topic, 10, true));
   return result.first->second;
 }
+
 
 void HelmInterface::rebuildBehaviorSet()
 {
