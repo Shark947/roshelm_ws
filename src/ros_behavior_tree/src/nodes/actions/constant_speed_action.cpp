@@ -35,8 +35,6 @@ BT::NodeStatus ConstantSpeedAction::onRunning()
 void ConstantSpeedAction::onHalted()
 {
   cached_params_.clear();
-  if (helm_interface_ && behavior_)
-    helm_interface_->deactivateBehavior(*behavior_);
 }
 
 bool ConstantSpeedAction::ensureBehavior()
