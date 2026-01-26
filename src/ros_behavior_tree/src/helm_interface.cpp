@@ -109,9 +109,8 @@ bool HelmInterface::initialize()
             std::string("/" + vehicle_name_ + "/RETURN"));
   nh_.param("mission_topic", mission_topic_,
             std::string("/" + vehicle_name_ + "/MISSION"));
-  nh_.param("default_mode_on_deploy", default_mode_on_deploy_, false);
-  nh_.param("default_mode_value", default_mode_value_,
-            std::string("LIFT"));
+  nh_.getParam("default_mode_on_deploy", default_mode_on_deploy_);
+  nh_.getParam("default_mode_value", default_mode_value_);
 
   std::string course_domain;
   std::string speed_domain;
@@ -461,6 +460,7 @@ void HelmInterface::publishFlag(const VarDataPair &flag)
     bool bool_value = false;
     if (parseBoolString(flag.get_sdata(), bool_value))
     {
+      setFlagValue(var, bool_value);
       auto &pub = publisherForFlag(var, "bool", flag_bool_pubs_);
       std_msgs::Bool msg;
       msg.data = bool_value;
@@ -469,6 +469,7 @@ void HelmInterface::publishFlag(const VarDataPair &flag)
     }
     else
     {
+      setFlagValue(var, flag.get_sdata());
       auto &pub = publisherForFlag(var, "string", flag_string_pubs_);
       std_msgs::String msg;
       msg.data = flag.get_sdata();
@@ -479,6 +480,7 @@ void HelmInterface::publishFlag(const VarDataPair &flag)
   }
   if (flag.get_ddata_set())
   {
+    setFlagValue(var, flag.get_ddata());
     auto &pub = publisherForFlag(var, "double", flag_double_pubs_);
     std_msgs::Float64 msg;
     msg.data = flag.get_ddata();
