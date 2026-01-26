@@ -89,6 +89,8 @@ void NavDataStore::updateDeploy(bool value, const ros::Time &stamp,
   if (value)
     data.deploy.last_true_stamp = stamp;
   data.deploy.has_value = true;
+  if (value && latch_deploy_)
+    deploy_latched_ = true;
 }
 
 void NavDataStore::updateReturn(bool value, const ros::Time &stamp,
@@ -116,6 +118,13 @@ void NavDataStore::updateSpeedTrigger(bool value, const ros::Time &stamp,
 void NavDataStore::setTriggerHold(const ros::Duration &hold)
 {
   trigger_hold_ = hold;
+}
+
+void NavDataStore::setDeployLatch(bool enabled)
+{
+  latch_deploy_ = enabled;
+  if (!enabled)
+    deploy_latched_ = false;
 }
 
 bool NavDataStore::sampleFresh(const NavSample &sample,
@@ -262,6 +271,11 @@ bool NavDataStore::preferredY(double &out,
 bool NavDataStore::preferredDeploy(bool &out,
                                    const ros::Duration &timeout) const
 {
+  if (latch_deploy_ && deploy_latched_)
+  {
+    out = true;
+    return true;
+  }
   return getPreferredSample(nav_data_.deploy, ros_data_.deploy, timeout, out);
 }
 

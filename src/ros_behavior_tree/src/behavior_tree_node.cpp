@@ -42,6 +42,9 @@ public:
     double trigger_hold_time = 0.0;
     private_nh_.param("trigger_hold_time", trigger_hold_time, 1.0);
     store_.setTriggerHold(ros::Duration(trigger_hold_time));
+    bool latch_deploy = false;
+    private_nh_.param("latch_deploy", latch_deploy, false);
+    store_.setDeployLatch(latch_deploy);
 
     NavTopics topics;
     private_nh_.param("ros_heading_topic", topics.ros_heading,

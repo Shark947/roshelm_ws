@@ -3,6 +3,7 @@
 #include "ros_behavior_tree/nodes/actions/constant_speed_action.hpp"
 #include "ros_behavior_tree/nodes/actions/dummy_action.hpp"
 #include "ros_behavior_tree/nodes/actions/mission_complete_action.hpp"
+#include "ros_behavior_tree/nodes/actions/publish_return_action.hpp"
 #include "ros_behavior_tree/nodes/actions/waypoint_action.hpp"
 #include "ros_behavior_tree/nodes/conditions/common/deploy_triggered.hpp"
 #include "ros_behavior_tree/nodes/conditions/common/return_triggered.hpp"
@@ -23,6 +24,8 @@ void RegisterAlphaActions(BT::BehaviorTreeFactory &factory)
       "ConstantSpeedAction");
   factory.registerNodeType<ros_behavior_tree::MissionCompleteAction>(
       "MissionCompleteAction");
+  factory.registerNodeType<ros_behavior_tree::PublishReturnAction>(
+      "PublishReturnAction");
 }
 
 void RegisterCommonConditions(BT::BehaviorTreeFactory &factory)

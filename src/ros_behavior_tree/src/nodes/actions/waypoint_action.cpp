@@ -35,6 +35,7 @@ BT::NodeStatus WaypointAction::onRunning()
 void WaypointAction::onHalted()
 {
   cached_params_.clear();
+  last_runnable_state_.clear();
 }
 
 bool WaypointAction::ensureBehavior()
@@ -99,9 +100,14 @@ BT::NodeStatus WaypointAction::runBehavior()
     return BT::NodeStatus::FAILURE;
 
   const std::string runnable_state = behavior_->isRunnable();
+  if (runnable_state != last_runnable_state_)
+  {
+    ROS_INFO_STREAM("[ros_behavior_tree] WaypointAction state changed: "
+                    << runnable_state);
+    last_runnable_state_ = runnable_state;
+  }
   if (runnable_state == "completed")
   {
-    helm_interface_->deactivateBehavior(*behavior_);
     return BT::NodeStatus::SUCCESS;
   }
 
