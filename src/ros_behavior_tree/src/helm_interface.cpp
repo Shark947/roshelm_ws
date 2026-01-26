@@ -5,8 +5,39 @@
 #include <cmath>
 #include <sstream>
 
+#include <XmlRpcValue.h>
+
 namespace
 {
+bool loadCommandTopics(const ros::NodeHandle &nh,
+                       const std::string &param_name,
+                       std::map<std::string, std::string> &topics)
+{
+  XmlRpc::XmlRpcValue raw_value;
+  if (!nh.getParam(param_name, raw_value))
+    return true;
+
+  if (raw_value.getType() != XmlRpc::XmlRpcValue::TypeStruct)
+  {
+    ROS_ERROR_STREAM("[ros_behavior_tree] " << param_name
+                                            << " must be a map of key: topic");
+    return false;
+  }
+
+  topics.clear();
+  for (auto it = raw_value.begin(); it != raw_value.end(); ++it)
+  {
+    if (it->second.getType() != XmlRpc::XmlRpcValue::TypeString)
+    {
+      ROS_ERROR_STREAM("[ros_behavior_tree] " << param_name << "[" << it->first
+                                              << "] must be a string");
+      return false;
+    }
+    topics[it->first] = static_cast<std::string>(it->second);
+  }
+  return true;
+}
+
 bool parseDomainValue(const std::string &value, double &low, double &high,
                       unsigned int &points)
 {
@@ -86,6 +117,17 @@ bool HelmInterface::initialize()
   nh_.param("domain_speed", speed_domain, std::string("0:4:41"));
   nh_.param("domain_depth", depth_domain, std::string("0:1000:1001"));
 
+  if (!loadCommandTopics(nh_, "bool_command_topics", bool_command_topics_) ||
+      !loadCommandTopics(nh_, "string_command_topics",
+                         string_command_topics_) ||
+      !loadCommandTopics(nh_, "double_command_topics",
+                         double_command_topics_) ||
+      !loadCommandTopics(nh_, "mode_state_topics", mode_state_topics_))
+  {
+    ROS_ERROR_STREAM("[ros_behavior_tree] Failed to parse command topics");
+    return false;
+  }
+
   if (!parseDomain("course", course_domain) ||
       !parseDomain("speed", speed_domain) ||
       !parseDomain("depth", depth_domain))
@@ -109,6 +151,45 @@ bool HelmInterface::initialize()
   deploy_pub_ = nh_.advertise<std_msgs::Bool>(deploy_topic_, 10, true);
   return_pub_ = nh_.advertise<std_msgs::Bool>(return_topic_, 10, true);
   mission_pub_ = nh_.advertise<std_msgs::String>(mission_topic_, 10, true);
+
+  for (const auto &entry : mode_state_topics_)
+  {
+    mode_state_pubs_[entry.first] =
+        nh_.advertise<std_msgs::String>(entry.second, 10, true);
+  }
+
+  for (const auto &entry : bool_command_topics_)
+  {
+    if (entry.second.empty())
+      continue;
+    command_subs_.push_back(nh_.subscribe<std_msgs::Bool>(
+        entry.second, 10,
+        [this, key = entry.first](const std_msgs::Bool::ConstPtr &msg) {
+          this->onBoolCommand(key, msg);
+        }));
+  }
+
+  for (const auto &entry : string_command_topics_)
+  {
+    if (entry.second.empty())
+      continue;
+    command_subs_.push_back(nh_.subscribe<std_msgs::String>(
+        entry.second, 10,
+        [this, key = entry.first](const std_msgs::String::ConstPtr &msg) {
+          this->onStringCommand(key, msg);
+        }));
+  }
+
+  for (const auto &entry : double_command_topics_)
+  {
+    if (entry.second.empty())
+      continue;
+    command_subs_.push_back(nh_.subscribe<std_msgs::Float64>(
+        entry.second, 10,
+        [this, key = entry.first](const std_msgs::Float64::ConstPtr &msg) {
+          this->onDoubleCommand(key, msg);
+        }));
+  }
 
   return true;
 }
@@ -168,6 +249,8 @@ bool HelmInterface::updateInfoBuffer()
   if (store_->preferredRoll(roll, timeout))
     info_buffer_.setValue("NAV_ROLL", roll, now.toSec());
 
+  updateExternalInfoBuffer();
+
   return true;
 }
 
@@ -211,6 +294,36 @@ void HelmInterface::deactivateBehavior(IvPBehavior &behavior)
 std::map<std::string, double> HelmInterface::desiredValues() const
 {
   return desired_values_;
+}
+
+bool HelmInterface::queryString(const std::string &var, std::string &out) const
+{
+  bool ok = false;
+  out = info_buffer_.sQuery(var, ok);
+  return ok;
+}
+
+bool HelmInterface::queryDouble(const std::string &var, double &out) const
+{
+  bool ok = false;
+  out = info_buffer_.dQuery(var, ok);
+  return ok;
+}
+
+bool HelmInterface::queryBool(const std::string &var, bool &out) const
+{
+  double value = 0.0;
+  if (queryDouble(var, value))
+  {
+    out = (value != 0.0);
+    return true;
+  }
+  std::string text;
+  if (queryString(var, text))
+  {
+    return parseBoolString(text, out);
+  }
+  return false;
 }
 
 void HelmInterface::publishDesired(const HelmReport &report)
@@ -380,6 +493,105 @@ void HelmInterface::publishReturn(bool value)
     msg.data = value;
     return_pub_.publish(msg);
   }
+}
+
+void HelmInterface::updateExternalInfoBuffer()
+{
+  const ros::Time now = ros::Time::now();
+  const ros::Duration timeout(nav_timeout_);
+
+  for (const auto &entry : external_bools_)
+  {
+    if (!entry.second.has_value)
+      continue;
+    if (!timeout.isZero() && (now - entry.second.stamp) > timeout)
+      continue;
+    info_buffer_.setValue(entry.first, entry.second.value ? 1.0 : 0.0,
+                          entry.second.stamp.toSec());
+  }
+
+  for (const auto &entry : external_doubles_)
+  {
+    if (!entry.second.has_value)
+      continue;
+    if (!timeout.isZero() && (now - entry.second.stamp) > timeout)
+      continue;
+    info_buffer_.setValue(entry.first, entry.second.value,
+                          entry.second.stamp.toSec());
+  }
+
+  for (const auto &entry : external_strings_)
+  {
+    if (!entry.second.has_value)
+      continue;
+    if (!timeout.isZero() && (now - entry.second.stamp) > timeout)
+      continue;
+    info_buffer_.setValue(entry.first, entry.second.value,
+                          entry.second.stamp.toSec());
+  }
+}
+
+void HelmInterface::setFlagValue(const std::string &var, const std::string &value)
+{
+  ExternalString &entry = external_strings_[var];
+  entry.value = value;
+  entry.stamp = ros::Time::now();
+  entry.has_value = true;
+  info_buffer_.setValue(var, value, entry.stamp.toSec());
+  publishModeState(var, value);
+}
+
+void HelmInterface::setFlagValue(const std::string &var, double value)
+{
+  ExternalDouble &entry = external_doubles_[var];
+  entry.value = value;
+  entry.stamp = ros::Time::now();
+  entry.has_value = true;
+  info_buffer_.setValue(var, value, entry.stamp.toSec());
+}
+
+void HelmInterface::setFlagValue(const std::string &var, bool value)
+{
+  ExternalBool &entry = external_bools_[var];
+  entry.value = value;
+  entry.stamp = ros::Time::now();
+  entry.has_value = true;
+  info_buffer_.setValue(var, value ? 1.0 : 0.0, entry.stamp.toSec());
+}
+
+void HelmInterface::onBoolCommand(const std::string &key,
+                                  const std_msgs::Bool::ConstPtr &msg)
+{
+  if (!msg)
+    return;
+  setFlagValue(key, msg->data);
+}
+
+void HelmInterface::onStringCommand(const std::string &key,
+                                    const std_msgs::String::ConstPtr &msg)
+{
+  if (!msg)
+    return;
+  setFlagValue(key, msg->data);
+}
+
+void HelmInterface::onDoubleCommand(const std::string &key,
+                                    const std_msgs::Float64::ConstPtr &msg)
+{
+  if (!msg)
+    return;
+  setFlagValue(key, msg->data);
+}
+
+void HelmInterface::publishModeState(const std::string &key,
+                                     const std::string &value)
+{
+  auto it = mode_state_pubs_.find(key);
+  if (it == mode_state_pubs_.end())
+    return;
+  std_msgs::String msg;
+  msg.data = value;
+  it->second.publish(msg);
 }
 
 std::string HelmInterface::topicForFlag(const std::string &var) const

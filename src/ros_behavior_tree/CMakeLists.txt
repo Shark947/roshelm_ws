@@ -31,11 +31,17 @@ add_executable(behavior_tree_node
   src/bt_nodes.cpp
   src/helm_interface.cpp
   src/nav_subscriber.cpp
+  src/nodes/actions/constant_depth_action.cpp
+  src/nodes/actions/constant_heading_action.cpp
   src/nodes/actions/constant_speed_action.cpp
   src/nodes/actions/dummy_action.cpp
+  src/nodes/actions/go_to_depth_action.cpp
   src/nodes/actions/mission_complete_action.cpp
+  src/nodes/actions/station_keep_action.cpp
   src/nodes/actions/waypoint_action.cpp
   src/nodes/conditions/common/deploy_triggered.cpp
+  src/nodes/conditions/common/flag_bool_condition.cpp
+  src/nodes/conditions/common/flag_string_condition.cpp
   src/nodes/conditions/common/return_triggered.cpp
   src/nodes/conditions/common/speed_triggered.cpp
 )

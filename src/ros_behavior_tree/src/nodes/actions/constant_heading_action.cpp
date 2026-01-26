@@ -1,4 +1,4 @@
-#include "ros_behavior_tree/nodes/actions/constant_speed_action.hpp"
+#include "ros_behavior_tree/nodes/actions/constant_heading_action.hpp"
 
 #include "ros_behavior_tree/nodes/actions/behavior_action_utils.hpp"
 
@@ -7,8 +7,8 @@
 namespace ros_behavior_tree
 {
 
-ConstantSpeedAction::ConstantSpeedAction(const std::string &name,
-                                         const BT::NodeConfiguration &config)
+ConstantHeadingAction::ConstantHeadingAction(
+    const std::string &name, const BT::NodeConfiguration &config)
     : BT::StatefulActionNode(name, config)
 {
   if (config.blackboard)
@@ -17,22 +17,22 @@ ConstantSpeedAction::ConstantSpeedAction(const std::string &name,
   }
 }
 
-BT::PortsList ConstantSpeedAction::providedPorts()
+BT::PortsList ConstantHeadingAction::providedPorts()
 {
   return {BT::InputPort<std::string>("params")};
 }
 
-BT::NodeStatus ConstantSpeedAction::onStart()
+BT::NodeStatus ConstantHeadingAction::onStart()
 {
   return runBehavior();
 }
 
-BT::NodeStatus ConstantSpeedAction::onRunning()
+BT::NodeStatus ConstantHeadingAction::onRunning()
 {
   return runBehavior();
 }
 
-void ConstantSpeedAction::onHalted()
+void ConstantHeadingAction::onHalted()
 {
   cached_params_.clear();
   if (behavior_active_ && helm_interface_ && behavior_)
@@ -41,19 +41,19 @@ void ConstantSpeedAction::onHalted()
   end_flags_published_ = false;
 }
 
-bool ConstantSpeedAction::ensureBehavior()
+bool ConstantHeadingAction::ensureBehavior()
 {
   if (!helm_interface_)
     return false;
 
   if (!behavior_)
   {
-    behavior_.reset(new ConstantSpeedBehavior(helm_interface_->domain()));
+    behavior_.reset(new ConstantHeadingBehavior(helm_interface_->domain()));
   }
   return true;
 }
 
-bool ConstantSpeedAction::configureBehavior(const std::string &params)
+bool ConstantHeadingAction::configureBehavior(const std::string &params)
 {
   if (!behavior_)
     return false;
@@ -65,8 +65,9 @@ bool ConstantSpeedAction::configureBehavior(const std::string &params)
     {
       if (!behavior_->setBehaviorNamePublic(entry.second))
       {
-        ROS_WARN_STREAM("[ros_behavior_tree] Failed to set ConstantSpeed name: "
-                        << entry.second);
+        ROS_WARN_STREAM(
+            "[ros_behavior_tree] Failed to set ConstantHeading name: "
+            << entry.second);
       }
       continue;
     }
@@ -76,7 +77,7 @@ bool ConstantSpeedAction::configureBehavior(const std::string &params)
     if (!behavior_->setParam(entry.first, entry.second))
     {
       ROS_WARN_STREAM(
-          "[ros_behavior_tree] Failed to set ConstantSpeed param: "
+          "[ros_behavior_tree] Failed to set ConstantHeading param: "
           << entry.first << "=" << entry.second);
     }
   }
@@ -84,7 +85,7 @@ bool ConstantSpeedAction::configureBehavior(const std::string &params)
   return true;
 }
 
-BT::NodeStatus ConstantSpeedAction::runBehavior()
+BT::NodeStatus ConstantHeadingAction::runBehavior()
 {
   if (!helm_interface_)
     return BT::NodeStatus::FAILURE;
