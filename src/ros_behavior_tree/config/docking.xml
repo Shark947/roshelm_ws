@@ -57,7 +57,7 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <FlagStringCondition var="MODE" value="LIFT"/>
+          <ModeCondition value="LIFT"/>
           <GoToDepthAction params="{gotodepth_lift_params}"/>
         </ReactiveSequence>
 
@@ -66,7 +66,7 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <FlagStringCondition var="MODE" value="SURVEY"/>
+          <ModeCondition value="SURVEY"/>
           <Parallel name="survey_parallel" success_threshold="3" failure_threshold="3">
             <ConstantSpeedAction params="{survey_const_speed_params}"/>
             <ConstantDepthAction params="{survey_const_depth_params}"/>
@@ -79,7 +79,7 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <FlagStringCondition var="MODE" value="CLOSETODOCKING|RETURNING"/>
+          <ModeCondition value="CLOSETODOCKING|RETURNING"/>
           <Parallel name="return_parallel" success_threshold="3" failure_threshold="3">
             <ConstantSpeedAction params="{return_const_speed_params}"/>
             <ConstantDepthAction params="{return_const_depth_params}"/>
@@ -92,16 +92,16 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <FlagStringCondition var="MODE" value="DOCKING"/>
+          <ModeCondition value="DOCKING"/>
           <Parallel name="dock_parallel" success_threshold="2" failure_threshold="2">
             <ConstantDepthAction params="{dock_depth_params}"/>
             <Fallback name="dock_station_or_heading">
               <Sequence name="station_keep_sequence">
-                <FlagBoolCondition var="STATIONING" value="true"/>
+                <StationingCondition value="true"/>
                 <StationKeepAction params="{station_keep_params}"/>
               </Sequence>
               <Sequence name="heading_sequence">
-                <FlagBoolCondition var="STATIONING" value="false"/>
+                <StationingCondition value="false"/>
                 <ConstantHeadingAction params="{dock_heading_params}"/>
               </Sequence>
             </Fallback>
@@ -113,7 +113,7 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <FlagStringCondition var="MODE" value="GOTODETECT"/>
+          <ModeCondition value="GOTODETECT"/>
           <GoToDepthAction params="{gotodepth_detect_params}"/>
         </ReactiveSequence>
 
@@ -122,7 +122,7 @@
           <Inverter>
             <ReturnTriggered />
           </Inverter>
-          <FlagStringCondition var="MODE" value="DETECTING"/>
+          <ModeCondition value="DETECTING"/>
           <Parallel name="detect_parallel" success_threshold="3" failure_threshold="3">
             <ConstantSpeedAction params="{detect_const_speed_params}"/>
             <ConstantDepthAction params="{detect_const_depth_params}"/>

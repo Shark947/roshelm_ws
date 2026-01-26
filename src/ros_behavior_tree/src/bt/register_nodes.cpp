@@ -11,8 +11,10 @@
 #include "ros_behavior_tree/nodes/conditions/common/deploy_triggered.hpp"
 #include "ros_behavior_tree/nodes/conditions/common/flag_bool_condition.hpp"
 #include "ros_behavior_tree/nodes/conditions/common/flag_string_condition.hpp"
+#include "ros_behavior_tree/nodes/conditions/common/mode_condition.hpp"
 #include "ros_behavior_tree/nodes/conditions/common/return_triggered.hpp"
 #include "ros_behavior_tree/nodes/conditions/common/speed_triggered.hpp"
+#include "ros_behavior_tree/nodes/conditions/docking/stationing_condition.hpp"
 
 namespace ros_behavior_tree
 {
@@ -47,6 +49,7 @@ void RegisterCommonConditions(BT::BehaviorTreeFactory &factory)
 {
   factory.registerNodeType<ros_behavior_tree::DeployTriggered>(
       "DeployTriggered");
+  factory.registerNodeType<ros_behavior_tree::ModeCondition>("ModeCondition");
   factory.registerNodeType<ros_behavior_tree::ReturnTriggered>(
       "ReturnTriggered");
   factory.registerNodeType<ros_behavior_tree::SpeedTriggered>(
@@ -60,6 +63,8 @@ void RegisterAlphaConditions(BT::BehaviorTreeFactory &factory)
 
 void RegisterDockingConditions(BT::BehaviorTreeFactory &factory)
 {
+  factory.registerNodeType<ros_behavior_tree::StationingCondition>(
+      "StationingCondition");
   factory.registerNodeType<ros_behavior_tree::FlagBoolCondition>(
       "FlagBoolCondition");
   factory.registerNodeType<ros_behavior_tree::FlagStringCondition>(

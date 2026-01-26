@@ -108,7 +108,11 @@ ros_behavior_tree/
   在 LIFT/SURVEY/RETURNING/CLOSETODOCKING/DOCKING/GOTODETECT/DETECTING 等阶段
   组合 `GoToDepthAction`、`ConstantDepthAction`、`ConstantHeadingAction`、
   `StationKeepAction`、`WaypointAction` 与 `ConstantSpeedAction`，复刻
-  `docking.bhv` 的入坞流程。`GoToDepthAction` 会在行为调用 `setComplete`
+  `docking.bhv` 的入坞流程。通用的 `ModeCondition` 与入坞专用的
+  `StationingCondition` 分别读取 Helm 信息缓冲区中的 `MODE` 与
+  `STATIONING`，让行为树保持与 `docking.bhv` 相同的模式切换判定逻辑。
+  `GoToDepthAction` 会在行为调用
+  `setComplete`
   （即便 `perpetual=true`）时发布 `endflag`，以匹配 MOOS/IvP 在完成事件时
   触发结束标志的语义。入坞序列使用 `ReactiveSequence`，确保 `MODE` 或
   `STATIONING` 变化时能及时停止旧行为并切换到新阶段，避免旧的定深/航点

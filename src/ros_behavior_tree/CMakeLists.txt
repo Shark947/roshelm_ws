@@ -42,8 +42,10 @@ add_executable(behavior_tree_node
   src/nodes/conditions/common/deploy_triggered.cpp
   src/nodes/conditions/common/flag_bool_condition.cpp
   src/nodes/conditions/common/flag_string_condition.cpp
+  src/nodes/conditions/common/mode_condition.cpp
   src/nodes/conditions/common/return_triggered.cpp
   src/nodes/conditions/common/speed_triggered.cpp
+  src/nodes/conditions/docking/stationing_condition.cpp
 )
 
 add_dependencies(behavior_tree_node ${catkin_EXPORTED_TARGETS})
