@@ -101,9 +101,8 @@ BT::NodeStatus WaypointAction::runBehavior()
   if (!helm_interface_->solveForBehavior(*behavior_))
     return BT::NodeStatus::FAILURE;
 
-  publishEndFlagsIfNeeded();
-
   const std::string runnable_state = behavior_->isRunnable();
+  publishEndFlagsIfNeeded(runnable_state);
   if (runnable_state != last_runnable_state_)
   {
     ROS_INFO_STREAM("[ros_behavior_tree] WaypointAction state changed: "
@@ -118,10 +117,23 @@ BT::NodeStatus WaypointAction::runBehavior()
   return BT::NodeStatus::RUNNING;
 }
 
-void WaypointAction::publishEndFlagsIfNeeded()
+void WaypointAction::publishEndFlagsIfNeeded(
+    const std::string &runnable_state)
 {
   if (!behavior_ || !helm_interface_)
     return;
+
+  if (runnable_state == "completed" &&
+      last_runnable_state_ != "completed")
+  {
+    const auto &end_flags = behavior_->endFlags();
+    for (const auto &flag : end_flags)
+    {
+      helm_interface_->publishFlag(flag);
+    }
+    last_total_hits_ = behavior_->totalHits();
+    return;
+  }
 
   const unsigned int total_hits = behavior_->totalHits();
   const unsigned int waypoint_count = behavior_->waypointCount();
