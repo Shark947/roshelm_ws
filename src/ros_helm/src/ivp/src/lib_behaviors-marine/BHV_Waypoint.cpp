@@ -190,6 +190,9 @@ void BHV_Waypoint::onSetParamComplete()
 
 bool BHV_Waypoint::setParam(string param, string param_val) 
 {
+  if(IvPBehavior::setParam(param, param_val))
+    return(true);
+
   double dval = atof(param_val.c_str());
   string param_val_lower = tolower(param_val);
 
@@ -1293,4 +1296,3 @@ bool BHV_Waypoint::setEndSpeed(string str)
 
   return(true);
 }
-
