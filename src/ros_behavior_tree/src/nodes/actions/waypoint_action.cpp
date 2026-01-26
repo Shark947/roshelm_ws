@@ -37,8 +37,9 @@ void WaypointAction::onHalted()
   // Preserve cached params/state across halts so the behavior does not
   // reinitialize each tick in reactive trees. This avoids resetting waypoint
   // progress and prevents repeated "state changed" log spam.
-  if (helm_interface_ && behavior_)
+  if (behavior_active_ && helm_interface_ && behavior_)
     helm_interface_->deactivateBehavior(*behavior_);
+  behavior_active_ = false;
 }
 
 bool WaypointAction::ensureBehavior()
@@ -103,6 +104,7 @@ BT::NodeStatus WaypointAction::runBehavior()
   if (!helm_interface_->solveForBehavior(*behavior_))
     return BT::NodeStatus::FAILURE;
 
+  behavior_active_ = true;
   const std::string runnable_state = behavior_->isRunnable();
   publishEndFlagsIfNeeded(runnable_state);
   if (runnable_state != last_runnable_state_)
