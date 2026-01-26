@@ -7,17 +7,17 @@
 
 #include "ros_behavior_tree/helm_interface.hpp"
 
-#include "BHV_ConstantSpeed.h"
+#include "BHV_StationKeep.h"
 #include "VarDataPair.h"
 
 namespace ros_behavior_tree
 {
 
-class ConstantSpeedAction : public BT::StatefulActionNode
+class StationKeepAction : public BT::StatefulActionNode
 {
 public:
-  ConstantSpeedAction(const std::string &name,
-                      const BT::NodeConfiguration &config);
+  StationKeepAction(const std::string &name,
+                    const BT::NodeConfiguration &config);
 
   static BT::PortsList providedPorts();
 
@@ -31,12 +31,10 @@ private:
   BT::NodeStatus runBehavior();
 
   HelmInterface *helm_interface_{nullptr};
-  class ConstantSpeedBehavior : public BHV_ConstantSpeed
+  class StationKeepBehavior : public BHV_StationKeep
   {
   public:
-    explicit ConstantSpeedBehavior(IvPDomain domain) : BHV_ConstantSpeed(domain)
-    {
-    }
+    explicit StationKeepBehavior(IvPDomain domain) : BHV_StationKeep(domain) {}
 
     bool setBehaviorNamePublic(const std::string &name)
     {
@@ -49,7 +47,7 @@ private:
     }
   };
 
-  std::unique_ptr<ConstantSpeedBehavior> behavior_;
+  std::unique_ptr<StationKeepBehavior> behavior_;
   std::string cached_params_;
   bool behavior_active_{false};
   bool end_flags_published_{false};

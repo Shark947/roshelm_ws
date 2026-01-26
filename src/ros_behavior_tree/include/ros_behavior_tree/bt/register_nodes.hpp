@@ -7,6 +7,7 @@ namespace ros_behavior_tree
 
 void RegisterCommonActions(BT::BehaviorTreeFactory &factory);
 void RegisterAlphaActions(BT::BehaviorTreeFactory &factory);
+void RegisterDockingActions(BT::BehaviorTreeFactory &factory);
 void RegisterCommonConditions(BT::BehaviorTreeFactory &factory);
 void RegisterAlphaConditions(BT::BehaviorTreeFactory &factory);
 void RegisterDockingConditions(BT::BehaviorTreeFactory &factory);

@@ -12,7 +12,9 @@ ros_behavior_tree/
 ├── README.md
 ├── config/
 │   ├── alpha.xml
+│   ├── docking.xml
 │   ├── behavior_tree_alpha.yaml
+│   ├── behavior_tree_docking.yaml
 │   ├── behavior_tree_test.yaml
 │   └── test.xml
 ├── include/
@@ -23,13 +25,19 @@ ros_behavior_tree/
 │       ├── nav_subscriber.hpp
 │       └── nodes/
 │           ├── actions/
+│           │   ├── constant_depth_action.hpp
+│           │   ├── constant_heading_action.hpp
 │           │   ├── constant_speed_action.hpp
 │           │   ├── dummy_action.hpp
+│           │   ├── go_to_depth_action.hpp
 │           │   ├── mission_complete_action.hpp
+│           │   ├── station_keep_action.hpp
 │           │   └── waypoint_action.hpp
 │           └── conditions/
 │               └── common/
 │                   ├── deploy_triggered.hpp
+│                   ├── flag_bool_condition.hpp
+│                   ├── flag_string_condition.hpp
 │                   ├── return_triggered.hpp
 │                   └── speed_triggered.hpp
 ├── launch/
@@ -93,15 +101,22 @@ ros_behavior_tree/
   不中断巡航。
 - `config/test.xml` 仍保留用于验证 BT 运行时与 Groot 连接的最小树。
 
-`alpha.xml` 会通过 HelmEngine 求解并发布 `DESIRED_*`（映射为
-`desired_heading`/`desired_speed`/`desired_depth`）话题，并保持与
-`ros_helm` 的坐标系转换一致。
+  `alpha.xml` 会通过 HelmEngine 求解并发布 `DESIRED_*`（映射为
+  `desired_heading`/`desired_speed`/`desired_depth`）话题，并保持与
+  `ros_helm` 的坐标系转换一致。
+- `config/docking.xml` 使用 `MODE` 与 `STATIONING` 等指令话题驱动入坞行为：
+  在 LIFT/SURVEY/RETURNING/CLOSETODOCKING/DOCKING/GOTODETECT/DETECTING 等阶段
+  组合 `GoToDepthAction`、`ConstantDepthAction`、`ConstantHeadingAction`、
+  `StationKeepAction`、`WaypointAction` 与 `ConstantSpeedAction`，复刻
+  `docking.bhv` 的入坞流程。`DOCKDEPTH_UPDATE` 与 `DOCKHDG_UPDATES` 等更新
+  变量由 ROS 话题注入至 Helm 信息缓冲区，并保持与 `ros_helm` 的指令语义一致。
 
 可以用 `test.xml` 验证 ROS 节点、BT 运行时与 Groot ZMQ 连接是否正确。
 
 ## 配置
 
-默认参数见 `config/behavior_tree_alpha.yaml`：
+默认参数见 `config/behavior_tree_alpha.yaml` 与
+`config/behavior_tree_docking.yaml`：
 
 - `vehicle_name`
 - `loop_frequency`
@@ -118,6 +133,8 @@ ros_behavior_tree/
 - `mission_topic`
 - `ros_*_topic`, `nav_*_topic`, `deploy_topic`, `return_topic`
 - `speed_trigger_topic`
+- `bool_command_topics`, `string_command_topics`, `double_command_topics`
+- `mode_state_topics`
 
 > 注意：`groot_publisher_port` 与 `groot_server_port` 必须不同；若相同将禁用
 > Groot ZMQ 发布器并输出错误日志。

@@ -7,17 +7,17 @@
 
 #include "ros_behavior_tree/helm_interface.hpp"
 
-#include "BHV_ConstantSpeed.h"
+#include "BHV_ConstantHeading.h"
 #include "VarDataPair.h"
 
 namespace ros_behavior_tree
 {
 
-class ConstantSpeedAction : public BT::StatefulActionNode
+class ConstantHeadingAction : public BT::StatefulActionNode
 {
 public:
-  ConstantSpeedAction(const std::string &name,
-                      const BT::NodeConfiguration &config);
+  ConstantHeadingAction(const std::string &name,
+                        const BT::NodeConfiguration &config);
 
   static BT::PortsList providedPorts();
 
@@ -31,10 +31,11 @@ private:
   BT::NodeStatus runBehavior();
 
   HelmInterface *helm_interface_{nullptr};
-  class ConstantSpeedBehavior : public BHV_ConstantSpeed
+  class ConstantHeadingBehavior : public BHV_ConstantHeading
   {
   public:
-    explicit ConstantSpeedBehavior(IvPDomain domain) : BHV_ConstantSpeed(domain)
+    explicit ConstantHeadingBehavior(IvPDomain domain)
+        : BHV_ConstantHeading(domain)
     {
     }
 
@@ -49,7 +50,7 @@ private:
     }
   };
 
-  std::unique_ptr<ConstantSpeedBehavior> behavior_;
+  std::unique_ptr<ConstantHeadingBehavior> behavior_;
   std::string cached_params_;
   bool behavior_active_{false};
   bool end_flags_published_{false};

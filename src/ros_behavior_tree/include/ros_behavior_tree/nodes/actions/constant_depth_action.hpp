@@ -7,16 +7,16 @@
 
 #include "ros_behavior_tree/helm_interface.hpp"
 
-#include "BHV_ConstantSpeed.h"
+#include "BHV_ConstantDepth.h"
 #include "VarDataPair.h"
 
 namespace ros_behavior_tree
 {
 
-class ConstantSpeedAction : public BT::StatefulActionNode
+class ConstantDepthAction : public BT::StatefulActionNode
 {
 public:
-  ConstantSpeedAction(const std::string &name,
+  ConstantDepthAction(const std::string &name,
                       const BT::NodeConfiguration &config);
 
   static BT::PortsList providedPorts();
@@ -31,10 +31,11 @@ private:
   BT::NodeStatus runBehavior();
 
   HelmInterface *helm_interface_{nullptr};
-  class ConstantSpeedBehavior : public BHV_ConstantSpeed
+  class ConstantDepthBehavior : public BHV_ConstantDepth
   {
   public:
-    explicit ConstantSpeedBehavior(IvPDomain domain) : BHV_ConstantSpeed(domain)
+    explicit ConstantDepthBehavior(IvPDomain domain)
+        : BHV_ConstantDepth(domain)
     {
     }
 
@@ -49,7 +50,7 @@ private:
     }
   };
 
-  std::unique_ptr<ConstantSpeedBehavior> behavior_;
+  std::unique_ptr<ConstantDepthBehavior> behavior_;
   std::string cached_params_;
   bool behavior_active_{false};
   bool end_flags_published_{false};
