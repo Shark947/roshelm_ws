@@ -66,6 +66,7 @@ private:
   std::string cached_params_;
   std::string last_runnable_state_;
   unsigned int last_cycle_count_{0};
+  bool behavior_active_{false};
 };
 
 }  // namespace ros_behavior_tree

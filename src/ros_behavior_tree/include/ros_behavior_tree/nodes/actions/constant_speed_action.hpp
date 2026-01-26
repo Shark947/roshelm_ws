@@ -45,6 +45,7 @@ private:
 
   std::unique_ptr<ConstantSpeedBehavior> behavior_;
   std::string cached_params_;
+  bool behavior_active_{false};
 };
 
 }  // namespace ros_behavior_tree

@@ -35,6 +35,9 @@ BT::NodeStatus ConstantSpeedAction::onRunning()
 void ConstantSpeedAction::onHalted()
 {
   cached_params_.clear();
+  if (behavior_active_ && helm_interface_ && behavior_)
+    helm_interface_->deactivateBehavior(*behavior_);
+  behavior_active_ = false;
 }
 
 bool ConstantSpeedAction::ensureBehavior()
@@ -99,10 +102,12 @@ BT::NodeStatus ConstantSpeedAction::runBehavior()
   if (!helm_interface_->solveForBehavior(*behavior_))
     return BT::NodeStatus::FAILURE;
 
+  behavior_active_ = true;
   const std::string runnable_state = behavior_->isRunnable();
   if (runnable_state == "completed")
   {
     helm_interface_->deactivateBehavior(*behavior_);
+    behavior_active_ = false;
     return BT::NodeStatus::SUCCESS;
   }
 
