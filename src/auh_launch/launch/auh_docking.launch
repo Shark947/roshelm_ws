@@ -37,7 +37,7 @@
         type="controller_manager_node"
         name="controller_manager_node"
         output="log">
-    <param name="controllers_config" value="$(find controller_manager)/config/controllers.yaml" />
+    <param name="controllers_config" value="$(find controller_manager)/config/docking.yaml" />
   </node>
 
   <!-- 4) Spawn SDS 静态障碍物 -->
