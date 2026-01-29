@@ -7,7 +7,7 @@ groot_server_port: 1667
 nav_timeout: 0.0
 trigger_hold_time: 1.0
 latch_deploy: true
-nav_log_period: 5.0
+nav_log_period: 0.05
 default_mode_on_deploy: true
 default_mode_value: LIFT
 

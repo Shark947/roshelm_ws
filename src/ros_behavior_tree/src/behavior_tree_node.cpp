@@ -37,7 +37,7 @@ public:
   {
     private_nh_.param("vehicle_name", vehicle_name_, std::string("auh"));
     private_nh_.param("loop_frequency", loop_frequency_, 5.0);
-    private_nh_.param("nav_log_period", nav_log_period_, 5.0);
+    private_nh_.param("nav_log_period", nav_log_period_, 0.05);
 
     double trigger_hold_time = 0.0;
     private_nh_.param("trigger_hold_time", trigger_hold_time, 1.0);
@@ -292,7 +292,7 @@ private:
   ros::NodeHandle private_nh_;
   std::string vehicle_name_;
   double loop_frequency_{5.0};
-  double nav_log_period_{5.0};
+  double nav_log_period_{0.05};
 
   NavDataStore store_;
   std::shared_ptr<NavDataSubscriber> nav_subscriber_;
